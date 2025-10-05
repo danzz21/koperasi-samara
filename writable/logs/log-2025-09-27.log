@@ -1,0 +1,378 @@
+DEBUG - 2025-09-27 14:15:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-27 14:38:14 --> mysqli_sql_exception: Unknown column 'no_hp' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\RegisterController.php(72): CodeIgniter\Model->insert(Array)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#15 {main}
+CRITICAL - 2025-09-27 14:38:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'no_hp' in 'field list'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (:nama_lengkap:, :no_ktp:, :no_hp:, :email:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :status:, :tanggal_daftar:, :foto_ktp:, :foto_diri:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\RegisterController.php(72): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:38:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'no_hp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (\'Muhammad Ridho\', \'3275080703070006\', \'345234342\', \'rid@gmail.com\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'aktif\', \'2025-09-27\', \'uploads/ktp_1758983893.png\', \'uploads/diri_1758983893.png\', \'2025-09-27 14:38:13\', \'2025-09-27 14:38:13\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (\'Muhammad Ridho\', \'3275080703070006\', \'345234342\', \'rid@gmail.com\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'aktif\', \'2025-09-27\', \'uploads/ktp_1758983893.png\', \'uploads/diri_1758983893.png\', \'2025-09-27 14:38:13\', \'2025-09-27 14:38:13\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (:nama_lengkap:, :no_ktp:, :no_hp:, :email:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :status:, :tanggal_daftar:, :foto_ktp:, :foto_diri:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\RegisterController.php(72): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:38:14 --> [Caused by] mysqli_sql_exception: Unknown column 'no_hp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (\'Muhammad Ridho\', \'3275080703070006\', \'345234342\', \'rid@gmail.com\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'aktif\', \'2025-09-27\', \'uploads/ktp_1758983893.png\', \'uploads/diri_1758983893.png\', \'2025-09-27 14:38:13\', \'2025-09-27 14:38:13\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (\'Muhammad Ridho\', \'3275080703070006\', \'345234342\', \'rid@gmail.com\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'aktif\', \'2025-09-27\', \'uploads/ktp_1758983893.png\', \'uploads/diri_1758983893.png\', \'2025-09-27 14:38:13\', \'2025-09-27 14:38:13\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (\'Muhammad Ridho\', \'3275080703070006\', \'345234342\', \'rid@gmail.com\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'aktif\', \'2025-09-27\', \'uploads/ktp_1758983893.png\', \'uploads/diri_1758983893.png\', \'2025-09-27 14:38:13\', \'2025-09-27 14:38:13\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`nama_lengkap`, `no_ktp`, `no_hp`, `email`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `status`, `tanggal_daftar`, `foto_ktp`, `foto_diri`, `created_at`, `updated_at`) VALUES (:nama_lengkap:, :no_ktp:, :no_hp:, :email:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :status:, :tanggal_daftar:, :foto_ktp:, :foto_diri:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\RegisterController.php(72): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+ERROR - 2025-09-27 14:44:43 --> mysqli_sql_exception: Unknown column 'foto_ktp' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\RegisterController.php(82): CodeIgniter\Model->insert(Array)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#15 {main}
+CRITICAL - 2025-09-27 14:44:43 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'foto_ktp' in 'field list'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\RegisterController.php(82): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:44:43 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'foto_ktp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (34, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984283.png\', \'uploads/diri_1758984283.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:44:43\', \'2025-09-27 14:44:43\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (34, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984283.png\', \'uploads/diri_1758984283.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:44:43\', \'2025-09-27 14:44:43\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\RegisterController.php(82): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:44:43 --> [Caused by] mysqli_sql_exception: Unknown column 'foto_ktp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (34, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984283.png\', \'uploads/diri_1758984283.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:44:43\', \'2025-09-27 14:44:43\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (34, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984283.png\', \'uploads/diri_1758984283.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:44:43\', \'2025-09-27 14:44:43\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (34, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984283.png\', \'uploads/diri_1758984283.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:44:43\', \'2025-09-27 14:44:43\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\RegisterController.php(82): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+ERROR - 2025-09-27 14:48:42 --> mysqli_sql_exception: Unknown column 'foto_ktp' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\RegisterController.php(82): CodeIgniter\Model->insert(Array)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#15 {main}
+CRITICAL - 2025-09-27 14:48:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'foto_ktp' in 'field list'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\RegisterController.php(82): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:48:42 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'foto_ktp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (35, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984522.png\', \'uploads/diri_1758984522.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:48:42\', \'2025-09-27 14:48:42\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (35, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984522.png\', \'uploads/diri_1758984522.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:48:42\', \'2025-09-27 14:48:42\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\RegisterController.php(82): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:48:42 --> [Caused by] mysqli_sql_exception: Unknown column 'foto_ktp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (35, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984522.png\', \'uploads/diri_1758984522.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:48:42\', \'2025-09-27 14:48:42\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (35, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984522.png\', \'uploads/diri_1758984522.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:48:42\', \'2025-09-27 14:48:42\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (35, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984522.png\', \'uploads/diri_1758984522.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:48:42\', \'2025-09-27 14:48:42\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\RegisterController.php(82): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+ERROR - 2025-09-27 14:53:40 --> mysqli_sql_exception: Unknown column 'foto_ktp' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\RegisterController.php(77): CodeIgniter\Model->insert(Array)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#15 {main}
+CRITICAL - 2025-09-27 14:53:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'foto_ktp' in 'field list'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\RegisterController.php(77): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:53:40 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'foto_ktp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (36, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984820.png\', \'uploads/diri_1758984820.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:53:40\', \'2025-09-27 14:53:40\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (36, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984820.png\', \'uploads/diri_1758984820.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:53:40\', \'2025-09-27 14:53:40\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\RegisterController.php(77): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 14:53:40 --> [Caused by] mysqli_sql_exception: Unknown column 'foto_ktp' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (36, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984820.png\', \'uploads/diri_1758984820.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:53:40\', \'2025-09-27 14:53:40\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (36, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984820.png\', \'uploads/diri_1758984820.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:53:40\', \'2025-09-27 14:53:40\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (36, \'Muhammad Ridho\', \'3275080703070006\', \'L\', \'kang galon\', \'Jl aja dulu\', \'08439849328\', \'DanzzBroo\', \'uploads/ktp_1758984820.png\', \'uploads/diri_1758984820.png\', \'aktif\', \'2025-09-27\', \'2025-09-27 14:53:40\', \'2025-09-27 14:53:40\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `foto_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :foto_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\RegisterController.php(77): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-27 14:57:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 14:57:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:01:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-27 15:01:52 --> mysqli_sql_exception: Duplicate entry '' for key 'nomor_anggota' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\AdminDashboard.php(96): CodeIgniter\Model->insert(Array)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('34')
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#15 {main}
+CRITICAL - 2025-09-27 15:01:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '' for key 'nomor_anggota'
+[Method: GET, Route: admin/verify/34]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(96): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('34')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 15:01:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '' for key 'nomor_anggota'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (\'34\', \'Muhammad Ridho\', \'\', NULL, \'aktif\', \'2025-09-27\', NULL, NULL, NULL, NULL, NULL, \'2025-09-27 15:01:52\', \'2025-09-27 15:01:52\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (\'34\', \'Muhammad Ridho\', \'\', NULL, \'aktif\', \'2025-09-27\', NULL, NULL, NULL, NULL, NULL, \'2025-09-27 15:01:52\', \'2025-09-27 15:01:52\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AdminDashboard.php(96): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('34')
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-27 15:01:52 --> [Caused by] mysqli_sql_exception: Duplicate entry '' for key 'nomor_anggota'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (\'34\', \'Muhammad Ridho\', \'\', NULL, \'aktif\', \'2025-09-27\', NULL, NULL, NULL, NULL, NULL, \'2025-09-27 15:01:52\', \'2025-09-27 15:01:52\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (\'34\', \'Muhammad Ridho\', \'\', NULL, \'aktif\', \'2025-09-27\', NULL, NULL, NULL, NULL, NULL, \'2025-09-27 15:01:52\', \'2025-09-27 15:01:52\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (\'34\', \'Muhammad Ridho\', \'\', NULL, \'aktif\', \'2025-09-27\', NULL, NULL, NULL, NULL, NULL, \'2025-09-27 15:01:52\', \'2025-09-27 15:01:52\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `no_ktp`, `foto_diri`, `status`, `tanggal_daftar`, `jenis_kelamin`, `pekerjaan`, `alamat`, `no_rek`, `atasnama_rekening`, `created_at`, `updated_at`) VALUES (:id_anggota:, :nama_lengkap:, :no_ktp:, :foto_diri:, :status:, :tanggal_daftar:, :jenis_kelamin:, :pekerjaan:, :alamat:, :no_rek:, :atasnama_rekening:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AdminDashboard.php(96): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('34')
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-27 15:08:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:08:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:08:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:09:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:14:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:14:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:14:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:14:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:14:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:15:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:15:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:15:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:16:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-27 15:25:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

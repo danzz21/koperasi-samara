@@ -1,0 +1,743 @@
+DEBUG - 2025-09-04 09:51:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-04 09:51:16 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi\app\Controllers\Auth.php(32): CodeIgniter\BaseModel->first()
+#7 C:\Users\PTDRa\Documents\PKL\koperasi\system\CodeIgniter.php(933): App\Controllers\Auth->doLogin()
+#8 C:\Users\PTDRa\Documents\PKL\koperasi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#9 C:\Users\PTDRa\Documents\PKL\koperasi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\PTDRa\Documents\PKL\koperasi\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\PTDRa\Documents\PKL\koperasi\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\PTDRa\Documents\PKL\koperasi\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\PTDRa\Documents\PKL\koperasi\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\Users\PTDRa\Documents\PKL\koperasi\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\PTDRa\Documents\PKL\koperasi\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi\app\Controllers\Auth.php(32): CodeIgniter\BaseModel->first()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi\system\CodeIgniter.php(933): App\Controllers\Auth->doLogin()
+#7 C:\Users\PTDRa\Documents\PKL\koperasi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#8 C:\Users\PTDRa\Documents\PKL\koperasi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\Users\PTDRa\Documents\PKL\koperasi\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 C:\Users\PTDRa\Documents\PKL\koperasi\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\Users\PTDRa\Documents\PKL\koperasi\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#13 {main}
+CRITICAL - 2025-09-04 09:51:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: POST, Route: auth/doLogin]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Auth.php(32): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->doLogin()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+DEBUG - 2025-09-04 09:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:51:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:51:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:51:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:52:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:52:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:52:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:52:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 09:56:14 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+DEBUG - 2025-09-04 09:57:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:58:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:58:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:58:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 09:58:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:08:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:09:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:09:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:12:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:13:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:13:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:15:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:18:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 10:18:21 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard/index.php"
+[Method: GET, Route: admin]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dashboard/index.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard/index', [], true)
+ 3 APPPATH\Controllers\AdminDashboard.php(10): view('dashboard/index')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+DEBUG - 2025-09-04 10:19:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:19:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 10:23:55 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:26:46 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+DEBUG - 2025-09-04 10:27:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 10:27:20 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:28:19 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2, 'default_value')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:29:23 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2, '')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:29:24 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2, '')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:30:16 --> Error: Cannot access protected property CodeIgniter\HTTP\IncomingRequest::$uri
+[Method: GET, Route: /]
+in APPPATH\Controllers\Auth.php on line 13.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:31:07 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:31:34 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+CRITICAL - 2025-09-04 10:31:35 --> CodeIgniter\HTTP\Exceptions\HTTPException: Request URI segment is out of range: "2"
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\URI.php on line 574.
+ 1 SYSTEMPATH\HTTP\URI.php(574): CodeIgniter\HTTP\Exceptions\HTTPException::forURISegmentOutOfRange(2)
+ 2 APPPATH\Controllers\Auth.php(13): CodeIgniter\HTTP\URI->getSegment(2)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Auth->login()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi\\public\\index.php')
+DEBUG - 2025-09-04 10:32:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:32:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:33:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:33:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:33:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 10:33:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:30:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-04 14:33:14 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#3 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#4 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#5 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#6 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#7 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-09-04 14:33:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'koperasi_samara'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`nama_lengkap`, `email`, `username`, `password`, `nomor_ktp`, `nomor_hp`, `nomor_hp_keluarga`, `foto`, `role`, `created_at`) VALUES (:nama_lengkap:, :email:, :username:, :password:, :nomor_ktp:, :nomor_hp:, :nomor_hp_keluarga:, :foto:, :role:, :created_at:)', [...], false)
+ 3 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 4 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 5 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\RegisterController.php(31): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 14:38:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-04 14:41:44 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#3 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#4 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#5 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#6 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#7 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-09-04 14:41:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'koperasi_samara'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`nama_lengkap`, `email`, `username`, `password`, `nomor_ktp`, `nomor_hp`, `nomor_hp_keluarga`, `foto`, `role`, `created_at`) VALUES (:nama_lengkap:, :email:, :username:, :password:, :nomor_ktp:, :nomor_hp:, :nomor_hp_keluarga:, :foto:, :role:, :created_at:)', [...], false)
+ 3 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 4 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 5 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\RegisterController.php(31): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+ERROR - 2025-09-04 14:42:21 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#3 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#4 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#5 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#6 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#7 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-09-04 14:42:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'koperasi_samara'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`nama_lengkap`, `email`, `username`, `password`, `nomor_ktp`, `nomor_hp`, `nomor_hp_keluarga`, `foto`, `role`, `created_at`) VALUES (:nama_lengkap:, :email:, :username:, :password:, :nomor_ktp:, :nomor_hp:, :nomor_hp_keluarga:, :foto:, :role:, :created_at:)', [...], false)
+ 3 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 4 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 5 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\RegisterController.php(31): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+ERROR - 2025-09-04 14:43:11 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#3 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#4 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#5 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#6 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#7 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-09-04 14:43:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'koperasi_samara'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`nama_lengkap`, `email`, `username`, `password`, `nomor_ktp`, `nomor_hp`, `nomor_hp_keluarga`, `foto`, `role`, `created_at`) VALUES (:nama_lengkap:, :email:, :username:, :password:, :nomor_ktp:, :nomor_hp:, :nomor_hp_keluarga:, :foto:, :role:, :created_at:)', [...], false)
+ 3 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 4 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 5 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\RegisterController.php(31): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+ERROR - 2025-09-04 14:43:45 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#3 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#4 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#5 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#6 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#7 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-09-04 14:43:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'koperasi_samara'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`nama_lengkap`, `email`, `username`, `password`, `nomor_ktp`, `nomor_hp`, `nomor_hp_keluarga`, `foto`, `role`, `created_at`) VALUES (:nama_lengkap:, :email:, :username:, :password:, :nomor_ktp:, :nomor_hp:, :nomor_hp_keluarga:, :foto:, :role:, :created_at:)', [...], false)
+ 3 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 4 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 5 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\RegisterController.php(31): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 14:45:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-04 14:45:46 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'koperasi_samara', 3306, '', 0)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#10 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'koperasi_samara' in C:\xampp\htdocs\koperasi 3\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\koperasi 3\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\koperasi 3\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#3 C:\xampp\htdocs\koperasi 3\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#4 C:\xampp\htdocs\koperasi 3\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#5 C:\xampp\htdocs\koperasi 3\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#6 C:\xampp\htdocs\koperasi 3\app\Controllers\RegisterController.php(31): CodeIgniter\Model->insert(Array)
+#7 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+#8 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+#9 C:\xampp\htdocs\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\koperasi 3\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-09-04 14:45:46 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'koperasi_samara'
+[Method: POST, Route: register/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`nama_lengkap`, `email`, `username`, `password`, `nomor_ktp`, `nomor_hp`, `nomor_hp_keluarga`, `foto`, `role`, `created_at`) VALUES (:nama_lengkap:, :email:, :username:, :password:, :nomor_ktp:, :nomor_hp:, :nomor_hp_keluarga:, :foto:, :role:, :created_at:)', [...], false)
+ 3 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 4 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 5 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], true)
+ 6 APPPATH\Controllers\RegisterController.php(31): CodeIgniter\Model->insert([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\RegisterController->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\RegisterController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 14:48:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:49:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:50:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:50:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:51:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:52:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:52:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:52:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:52:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:53:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:53:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:53:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:53:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 14:54:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:02:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:03:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:05:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:07:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:07:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:07:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:09:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:09:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:09:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:09:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:09:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:10:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:10:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:10:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:10:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:10:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:10:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:11:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:11:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:13:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:14:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:14:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:18:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:18:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:18:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:18:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:35:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:35:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:35:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 15:35:30 --> ErrorException: Undefined variable $pendingCount
+[Method: GET, Route: admin]
+in APPPATH\Views\dashboard_admin\index.php on line 75.
+ 1 APPPATH\Views\dashboard_admin\index.php(75): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pendingCount', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\dashboard_admin\\index.php', 75)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\dashboard_admin\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/index', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(10): view('dashboard_admin/index')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 15:39:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:39:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:39:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:39:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:39:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:46:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:46:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:47:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:47:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:49:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:49:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 15:49:21 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: GET, Route: admin/verify/5]
+in SYSTEMPATH\BaseModel.php on line 1008.
+ 1 SYSTEMPATH\BaseModel.php(1008): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(860): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\AdminDashboard.php(85): CodeIgniter\Model->update('5', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('5')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 15:49:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:49:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:49:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:49:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:50:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 15:50:19 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+[Method: GET, Route: admin/verify/8]
+in SYSTEMPATH\BaseModel.php on line 1008.
+ 1 SYSTEMPATH\BaseModel.php(1008): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(860): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\AdminDashboard.php(85): CodeIgniter\Model->update('8', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('8')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 15:54:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:54:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 15:54:56 --> ErrorException: Undefined property: App\Controllers\AdminDashboard::$userModel
+[Method: GET, Route: admin/verify/8]
+in APPPATH\Controllers\AdminDashboard.php on line 84.
+ 1 APPPATH\Controllers\AdminDashboard.php(84): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\AdminDashboard::$userModel', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 84)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('8')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 15:54:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:55:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:55:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 15:55:07 --> ErrorException: Undefined property: App\Controllers\AdminDashboard::$userModel
+[Method: GET, Route: admin/reject/8]
+in APPPATH\Controllers\AdminDashboard.php on line 93.
+ 1 APPPATH\Controllers\AdminDashboard.php(93): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\AdminDashboard::$userModel', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 93)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reject('8')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 15:55:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-04 15:55:14 --> ErrorException: Undefined property: App\Controllers\AdminDashboard::$userModel
+[Method: GET, Route: admin/verify/8]
+in APPPATH\Controllers\AdminDashboard.php on line 84.
+ 1 APPPATH\Controllers\AdminDashboard.php(84): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\AdminDashboard::$userModel', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 84)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->verify('8')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-04 15:59:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:59:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:59:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 15:59:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:00:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:00:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:00:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:00:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:00:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:00:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:05:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:05:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:09:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:09:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-04 16:09:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

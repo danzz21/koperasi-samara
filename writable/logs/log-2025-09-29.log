@@ -1,0 +1,556 @@
+DEBUG - 2025-09-29 09:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:19:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:20:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:21:18 --> ErrorException: Undefined array key "nama_lengkap"
+[Method: GET, Route: admin/get-simpanan-list]
+in APPPATH\Controllers\AdminDashboard.php on line 229.
+ 1 APPPATH\Controllers\AdminDashboard.php(229): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nama_lengkap"', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 229)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:21:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:21:43 --> ErrorException: Undefined array key "nama_lengkap"
+[Method: GET, Route: admin/get-simpanan-list]
+in APPPATH\Controllers\AdminDashboard.php on line 229.
+ 1 APPPATH\Controllers\AdminDashboard.php(229): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nama_lengkap"', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 229)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:21:43 --> ErrorException: Undefined array key "nama_lengkap"
+[Method: GET, Route: admin/get-simpanan-list]
+in APPPATH\Controllers\AdminDashboard.php on line 229.
+ 1 APPPATH\Controllers\AdminDashboard.php(229): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nama_lengkap"', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 229)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:21:43 --> ErrorException: Undefined array key "nama_lengkap"
+[Method: GET, Route: admin/get-simpanan-list]
+in APPPATH\Controllers\AdminDashboard.php on line 229.
+ 1 APPPATH\Controllers\AdminDashboard.php(229): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nama_lengkap"', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 229)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:21:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:21:44 --> ErrorException: Undefined array key "nama_lengkap"
+[Method: GET, Route: admin/get-simpanan-list]
+in APPPATH\Controllers\AdminDashboard.php on line 229.
+ 1 APPPATH\Controllers\AdminDashboard.php(229): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nama_lengkap"', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 229)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:21:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:22:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:25:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:25:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:25:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:26:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:28:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:28:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:28:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:28:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:28:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:29:41 --> ErrorException: Undefined array key "nama_lengkap"
+[Method: GET, Route: admin/get-simpanan-list]
+in APPPATH\Controllers\AdminDashboard.php on line 229.
+ 1 APPPATH\Controllers\AdminDashboard.php(229): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "nama_lengkap"', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Controllers\\AdminDashboard.php', 229)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:29:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:29:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:30:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:40:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:40:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:40:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:40:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:41:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-29 09:41:42 --> ErrorException: Undefined variable $anggota
+[Method: GET, Route: anggota/simpanan]
+in APPPATH\Views\simpanan.php on line 18.
+ 1 APPPATH\Views\simpanan.php(18): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $anggota', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Views\\simpanan.php', 18)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Views\\simpanan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('simpanan', [], true)
+ 5 APPPATH\Controllers\Simpanan.php(37): view('simpanan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Simpanan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Simpanan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 09:43:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:44:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:45:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:46:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:46:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:47:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:48:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:48:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:48:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:48:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:51:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:51:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:51:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 09:51:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:45:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:46:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:46:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:46:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:49:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:50:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 14:50:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:04:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:07:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-29 15:07:50 --> mysqli_sql_exception: Table 'koperasi_samara.pinjaman' doesn't exist in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\AdminDashboard.php(49): CodeIgniter\Database\BaseBuilder->countAllResults()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->index()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#12 {main}
+CRITICAL - 2025-09-29 15:07:50 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'koperasi_samara.pinjaman' doesn't exist
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = :status:', [...], false)
+ 2 APPPATH\Controllers\AdminDashboard.php(49): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:07:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'koperasi_samara.pinjaman' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = \'pending\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = :status:', [...], false)
+ 4 APPPATH\Controllers\AdminDashboard.php(49): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:07:50 --> [Caused by] mysqli_sql_exception: Table 'koperasi_samara.pinjaman' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = \'pending\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = \'pending\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `pinjaman`
+WHERE `status` = :status:', [...], false)
+ 5 APPPATH\Controllers\AdminDashboard.php(49): CodeIgniter\Database\BaseBuilder->countAllResults()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 15:11:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:11:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:18:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-29 15:18:30 --> mysqli_sql_exception: Unknown column 'qard.id' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.`...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#12 {main}
+CRITICAL - 2025-09-29 15:18:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'qard.id' in 'field list'
+[Method: GET, Route: admin/pending-pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 2 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:18:30 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'qard.id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 4 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:18:30 --> [Caused by] mysqli_sql_exception: Unknown column 'qard.id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 5 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 15:19:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-29 15:19:45 --> mysqli_sql_exception: Unknown column 'qard.jumlah' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.`...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#12 {main}
+CRITICAL - 2025-09-29 15:19:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'qard.jumlah' in 'field list'
+[Method: GET, Route: admin/pending-pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 2 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:19:45 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'qard.jumlah' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 4 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:19:45 --> [Caused by] mysqli_sql_exception: Unknown column 'qard.jumlah' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 5 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 15:20:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-29 15:20:29 --> mysqli_sql_exception: Unknown column 'qard.jumlah' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.`...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3\app\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#12 {main}
+CRITICAL - 2025-09-29 15:20:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'qard.jumlah' in 'field list'
+[Method: GET, Route: admin/pending-pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 2 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:20:29 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'qard.jumlah' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 4 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+CRITICAL - 2025-09-29 15:20:29 --> [Caused by] mysqli_sql_exception: Unknown column 'qard.jumlah' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = \'pending\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.`id_qard` as `id_pinjaman`, "Qard" as `jenis`, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `qard`.`tanggal`, `qard`.`jumlah`, `qard`.`status`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`status` = :qard.status:', [...], false)
+ 5 APPPATH\Controllers\AdminPinjaman.php(15): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPinjaman->pendingPinjaman()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPinjaman))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-09-29 15:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:31:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:31:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:32:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:32:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:32:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:32:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:32:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:36:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:41:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:44:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:47:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:47:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:48:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:48:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:48:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:49:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:49:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:50:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:50:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:50:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:50:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-29 15:50:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
