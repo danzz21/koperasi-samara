@@ -32,6 +32,7 @@
           <p class="text-sm font-medium text-gray-800">Admin Koperasi</p>
           <p class="text-xs text-gray-600">Administrator</p>
         </div>
+        <button id="logoutButton" onclick="location.href='<?php echo site_url('/logout'); ?>'" class="ml-4 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">Logout</button>
       </div>
     </div>
   </div>

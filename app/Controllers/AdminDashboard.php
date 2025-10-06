@@ -492,6 +492,7 @@ $totalMudharabah = $db->table('mudharabah')
     public function simpanAnggota()
     {
         try {
+
             $id_anggota = 'ID-' . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
             while ($this->anggotaModel->where('id_anggota', $id_anggota)->first()) {
                 $id_anggota = 'ID-' . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
@@ -517,11 +518,25 @@ $totalMudharabah = $db->table('mudharabah')
                 $fotoKtpName = $foto_ktp->getRandomName();
                 $foto_ktp->move(WRITEPATH.'uploads', $fotoKtpName);
             }
+            // Insert to user table
+            $dataUser = [
+                'nama_lengkap' => $nama,
+                'email' => $email,
+                'username' => $username,
+                'password' => $password,
+                'nomor_ktp' => $no_ktp,
+                'no_telp' => $no_hp,
+                'foto' => $fotoDiriName,
+                'role' => 'anggota',
+                'status' => 'verified', 
+            ];
+            $this->userModel->insert($dataUser);
+            $dataUser['id'] = $this->userModel->getInsertID();
 
-            // Data untuk tabel anggota
+            // Insert while getting the new ID from userModel
             $dataAnggota = [
-                'id_anggota' => $id_anggota,
-                'nomor_anggota' => $id_anggota, // Sementara samakan dengan id_anggota
+                'id_anggota' => $dataUser['id'],
+                'nomor_anggota' => $id_anggota,
                 'nama_lengkap' => $nama,
                 'email' => $email,
                 'username' => $username,
