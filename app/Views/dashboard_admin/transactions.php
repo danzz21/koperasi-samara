@@ -100,80 +100,57 @@
   </div>
 
   <!-- Modal Pemasukan -->
-  <div id="incomeModal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-xl animate-fade-in">
-      <h3 class="text-lg font-bold text-gray-800 mb-4">Tambah Pemasukan</h3>
-      <form id="formPemasukan" action="<?= site_url('admin/dashboard_admin/transactions/simpan') ?>" method="post">
-        <?= csrf_field() ?>
-        <input type="hidden" name="jenis" value="Pemasukan">
+<div id="incomeModal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-xl animate-fade-in">
+    <h3 class="text-lg font-bold text-gray-800 mb-4">Tambah Pemasukan</h3>
+   <form action="<?= site_url('admin/dashboard_admin/transactions/simpan') ?>" method="post">
+    <?= csrf_field() ?>
+  <input type="hidden" name="jenis" value="Pemasukan">
 
-        <div class="mb-4">
-          <label class="block mb-1 text-sm text-gray-700">Deskripsi</label>
-          <input type="text" name="deskripsi" class="w-full px-3 py-2 border rounded-lg" required />
-        </div>
-
-        <div class="mb-4">
-          <label class="block mb-1 text-sm text-gray-700">Kategori</label>
-          <select name="kategori" class="w-full px-3 py-2 border rounded-lg" required>
-            <option value="">-- Pilih Kategori --</option>
-            <option>Bagi Hasil</option>
-            <option>Jasa Administrasi</option>
-            <option>Lain-lain</option>
-          </select>
-        </div>
-
-        <div class="mb-4">
-          <label class="block mb-1 text-sm text-gray-700">Jumlah</label>
-          <input type="number" name="jumlah" class="w-full px-3 py-2 border rounded-lg" required />
-        </div>
-
-        <div class="flex justify-end space-x-3 pt-2">
-          <button type="button" onclick="closeModal('incomeModal')" class="px-4 py-2 bg-gray-200 rounded-lg">Batal</button>
-          <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg">Simpan</button>
-        </div>
-      </form>
-    </div>
+  <div class="mb-4">
+    <label class="block mb-1 text-sm text-gray-700">Deskripsi</label>
+    <input type="text" name="deskripsi" class="w-full px-3 py-2 border rounded-lg" required />
   </div>
 
-  <!-- Script untuk Modal dan Form -->
-  <script>
-    // Tampilkan modal saat tombol diklik
-    document.getElementById("btnPemasukan").addEventListener("click", function () {
-      document.getElementById("incomeModal").classList.remove("hidden");
-    });
+  <div class="mb-4">
+    <label class="block mb-1 text-sm text-gray-700">Kategori</label>
+    <select name="kategori" class="w-full px-3 py-2 border rounded-lg" required>
+      <option value="">-- Pilih Kategori --</option>
+      <option>Bagi Hasil</option>
+      <option>Jasa Administrasi</option>
+      <option>Lain-lain</option>
+    </select>
+  </div>
 
-    // Fungsi untuk menutup modal
-    function closeModal(id) {
-      document.getElementById(id).classList.add("hidden");
-    }
+  <div class="mb-4">
+    <label class="block mb-1 text-sm text-gray-700">Jumlah</label>
+    <input type="number" name="jumlah" class="w-full px-3 py-2 border rounded-lg" required />
+  </div>
 
-    // Submit form via AJAX
-    document.getElementById("formPemasukan").addEventListener("submit", function (e) {
-      e.preventDefault();
+  <div class="flex justify-end space-x-3 pt-2">
+    <button type="button" onclick="closeModal('incomeModal')" class="px-4 py-2 bg-gray-200 rounded-lg">Batal</button>
+    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg">Simpan</button>
+  </div>
+</form>
 
-      const form = this;
-      const formData = new FormData(form);
+  </div>
+</div>
 
-      fetch(form.action, {
-        method: "POST",
-        body: formData
-      })
-      .then(res => res.json())
-      .then(res => {
-        if (res.status === "success") {
-          alert(res.message);
-          closeModal("incomeModal");
-          form.reset();
-          location.reload();
-        } else {
-          alert("Gagal: " + res.message);
-        }
-      })
-      .catch(err => {
-        alert("Terjadi kesalahan: " + err);
-      });
-    });
-  </script>
+<script>
+const csrfName = '<?= csrf_token() ?>';
+const csrfHash = '<?= csrf_hash() ?>';
+
+// Tampilkan modal
+document.getElementById("btnPemasukan").addEventListener("click", () => {
+    document.getElementById("incomeModal").classList.remove("hidden");
+});
+
+// Tutup modal
+function closeModal(id) {
+    document.getElementById(id).classList.add("hidden");
+}
+</script>
+
 
 </body>
 </html>

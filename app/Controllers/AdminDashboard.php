@@ -477,8 +477,6 @@ $totalMudharabah = $db->table('mudharabah')
 }
 
 
-
-
     // Autocomplete anggota untuk input simpanan
     public function searchAnggotaNama()
     {
@@ -491,6 +489,62 @@ $totalMudharabah = $db->table('mudharabah')
         return $this->response->setJSON($anggota);
     }
 
+    public function simpanAnggota()
+    {
+        try {
+            $id_anggota = 'ID-' . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+            while ($this->anggotaModel->where('id_anggota', $id_anggota)->first()) {
+                $id_anggota = 'ID-' . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
+            }
+            $nama = $this->request->getPost('nama_lengkap');
+            $email = $this->request->getPost('email');
+            $username = $this->request->getPost('username');
+            $password = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
+            $no_ktp = $this->request->getPost('no_ktp');
+            $no_hp = $this->request->getPost('no_telp');
+            $foto_diri = $this->request->getFile('foto_diri');
+            $foto_ktp = $this->request->getFile('foto_ktp');
+
+            // Handle file upload (optional)
+            $fotoDiriName = null;
+            if ($foto_diri && $foto_diri->isValid()) {
+                $fotoDiriName = $foto_diri->getRandomName();
+                $foto_diri->move(WRITEPATH.'uploads', $fotoDiriName);
+            }
+
+            $fotoKtpName = null;
+            if ($foto_ktp && $foto_ktp->isValid()) {
+                $fotoKtpName = $foto_ktp->getRandomName();
+                $foto_ktp->move(WRITEPATH.'uploads', $fotoKtpName);
+            }
+
+            // Data untuk tabel anggota
+            $dataAnggota = [
+                'id_anggota' => $id_anggota,
+                'nama_lengkap' => $nama,
+                'email' => $email,
+                'username' => $username,
+                'password' => $password,
+                'no_ktp' => $no_ktp,
+                'no_hp' => $no_hp,
+                'foto_diri' => $fotoDiriName,
+                'foto_ktp' => $fotoKtpName,
+                'tanggal_daftar' => date('Y-m-d'),
+                'status' => 'aktif'
+            ];
+
+            $anggotaId = $this->anggotaModel->insert($dataAnggota, true);
+
+            if ($anggotaId) {
+                return redirect()->back()->with('success', 'Anggota berhasil ditambahkan.');
+            } else {
+                return redirect()->back()->with('error', 'Gagal menambahkan anggota.');
+            }
+
+        } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 
 
     // =========================
@@ -645,36 +699,26 @@ return view('layouts/header', ['title' => 'Manajemen Pembiayaan'])
          . view('dashboard_admin/transactions', $data)
          . view('layouts/footer');
 }
+
 public function simpanTransaksi()
-{
-    if ($this->request->getMethod() !== 'post') {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid request method.']);
+    {
+
+        $data = [
+            'deskripsi' => $this->request->getPost('deskripsi'),
+            'kategori'  => $this->request->getPost('kategori'),
+            'jumlah'    => $this->request->getPost('jumlah'),
+            'jenis'     => $this->request->getPost('jenis'),
+            'tanggal'   => date('Y-m-d H:i:s')
+        ];
+
+        $model = new TransaksiModel();
+
+        if($model->insert($data)){
+            return redirect()->back()->with('success', 'Transaksi berhasil disimpan.');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan transaksi.');
+        }
     }
-
-    $data = $this->request->getPost();
-
-    // Validasi sederhana
-    if (empty($data['deskripsi']) || empty($data['kategori']) || empty($data['jumlah'])) {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Semua field wajib diisi.']);
-    }
-
-    // Simpan ke database - misalnya model TransaksiModel
-    $model = new \App\Models\TransaksiModel();
-
-    $simpan = $model->insert([
-        'tanggal'   => date('Y-m-d'),
-        'deskripsi' => $data['deskripsi'],
-        'kategori'  => $data['kategori'],
-        'jumlah'    => $data['jumlah'],
-        'jenis'     => $data['jenis'] ?? 'Pemasukan',
-    ]);
-
-    if ($simpan) {
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Transaksi berhasil disimpan.']);
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menyimpan transaksi.']);
-    }
-}
 
 
 

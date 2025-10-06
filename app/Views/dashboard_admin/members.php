@@ -1,3 +1,14 @@
+<?php if (session()->getFlashdata('success')): ?>
+  <div class="bg-green-100 text-green-700 px-4 py-2 rounded mb-4">
+    <?= session()->getFlashdata('success') ?>
+  </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+  <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
+    <?= session()->getFlashdata('error') ?>
+  </div>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

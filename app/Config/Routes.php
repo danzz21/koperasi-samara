@@ -50,7 +50,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('/', 'AdminDashboard::index');
     $routes->get('dashboard', 'AdminDashboard::index');
     $routes->get('dashboard_admin/members', 'AdminDashboard::members');
-    $routes->post('dashboard_admin/simpan', 'AdminDashboard::simpan');
+    $routes->post('dashboard_admin/simpan', 'AdminDashboard::simpanAnggota');
+    $routes->post('dashboard_admin/transactions/simpan', 'AdminDashboard::simpanTransaksi');
     $routes->get('search-anggota', 'AdminDashboard::searchAnggota'); //
     $routes->get('dashboard_admin/savings', 'AdminDashboard::savings');
     $routes->get('dashboard_admin/financing', 'AdminDashboard::financing');
@@ -62,12 +63,10 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('verify/(:num)', 'AdminDashboard::verify/$1');
     $routes->get('reject/(:num)', 'AdminDashboard::reject/$1');
 
-$routes->post('admin/dashboard_admin/transactions/simpan', 'Transaksi::simpanTransaksi');
-
 
 
     // Pinjaman Routes
-    $routes->get('pending-pinjaman', 'AdminDashboard::pendingLoans');
+$routes->get('pending-pinjaman', 'AdminDashboard::pendingLoans');
 $routes->get('pinjaman/verifikasi/(:segment)/(:num)', 'AdminDashboard::verifikasiPinjaman/$1/$2');
 $routes->get('pinjaman/tolak/(:segment)/(:num)', 'AdminDashboard::tolakPinjaman/$1/$2');
 
