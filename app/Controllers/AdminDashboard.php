@@ -521,6 +521,7 @@ $totalMudharabah = $db->table('mudharabah')
             // Data untuk tabel anggota
             $dataAnggota = [
                 'id_anggota' => $id_anggota,
+                'nomor_anggota' => $id_anggota, // Sementara samakan dengan id_anggota
                 'nama_lengkap' => $nama,
                 'email' => $email,
                 'username' => $username,
