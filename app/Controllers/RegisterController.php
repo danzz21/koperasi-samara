@@ -15,19 +15,20 @@ class RegisterController extends BaseController
     {
         $userModel = new UserModel();
 
-        $data = [
-            'nama_lengkap'      => $this->request->getPost('nama_lengkap'),
-            'email'             => $this->request->getPost('email'),
-            'username'          => $this->request->getPost('username'),
-            'password'          => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'nomor_ktp'         => $this->request->getPost('no_ktp'),
-            'nomor_hp'          => $this->request->getPost('no_hp'),
-            'nomor_hp_keluarga' => $this->request->getPost('no_hp_keluarga'),
-            'foto'              => $this->request->getPost('foto_diri'),
-            'role'              => 'anggota',
-            'status'            => 'pending', // 👈 default pending
-            'created_at'        => date('Y-m-d H:i:s'),
-        ];
+$data = [
+    'nama_lengkap'      => $this->request->getPost('nama_lengkap'),
+    'email'             => $this->request->getPost('email'),
+    'username'          => $this->request->getPost('username'),
+    'password'          => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+    'nomor_ktp'         => $this->request->getPost('no_ktp'),
+    'nomor_hp'          => $this->request->getPost('no_hp'),
+    'nomor_hp_keluarga' => $this->request->getPost('no_hp_keluarga'),
+    'foto'              => $this->request->getPost('foto_diri'),
+    'foto_ktp'          => $this->request->getPost('foto_ktp'), // 👈 Tambahan ini
+    'role'              => 'anggota',
+    'status'            => 'pending',
+    'created_at'        => date('Y-m-d H:i:s'),
+];
 
         if ($userModel->insert($data)) {
             return redirect()->to('/login')->with('success', 'Registrasi berhasil, silakan tunggu verifikasi admin.');

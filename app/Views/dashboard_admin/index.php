@@ -21,7 +21,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-emerald-700 text-sm font-medium">Total Anggota Aktif</p>
-                <p class="text-3xl font-bold text-emerald-900"><?= number_format($totalAnggota) ?></p>
+                <p class="text-2xl font-bold text-emerald-900"><?= number_format($totalAnggota) ?></p>
             </div>
             <i class="fas fa-users text-4xl text-emerald-500"></i>
         </div>
@@ -32,7 +32,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-blue-700 text-sm font-medium">Total Simpanan</p>
-                <p class="text-3xl font-bold text-blue-900">Rp <?= number_format($totalSimpanan, 0, ',', '.') ?></p>
+                <p class="text-2xl font-bold text-blue-900">Rp <?= number_format($totalSimpanan, 0, ',', '.') ?></p>
             </div>
             <i class="fas fa-circle-dollar-to-slot text-4xl text-blue-500"></i>
         </div>
@@ -43,7 +43,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-purple-700 text-sm font-medium">Pembiayaan Berjalan</p>
-                <p class="text-3xl font-bold text-purple-900">Rp <?= number_format($totalPembiayaan, 0, ',', '.') ?></p>
+                <p class="text-2xl font-bold text-purple-900">Rp <?= number_format($totalPembiayaan, 0, ',', '.') ?></p>
             </div>
             <i class="fas fa-hand-holding-usd text-4xl text-purple-500"></i>
         </div>
@@ -54,7 +54,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-orange-700 text-sm font-medium">Pendapatan Bulanan</p>
-                <p class="text-3xl font-bold text-orange-900">Rp <?= number_format($totalMargin, 0, ',', '.') ?></p>
+                <p class="text-2xl font-bold text-orange-900">Rp <?= number_format($totalMargin, 0, ',', '.') ?></p>
             </div>
             <i class="fas fa-chart-line text-4xl text-orange-500"></i>
         </div>
@@ -134,44 +134,44 @@
     <!-- Script untuk Chart -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const ctx = document.getElementById('growthChart').getContext('2d');
-            const growthChart = new Chart(ctx, {
-                type: 'line',
-                    data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-                    datasets: [
-                        {
-                            label: 'Simpanan',
-                            data: [1000000, 1200000, 1400000, 1600000, 1900000, 2300000],
-                            borderColor: 'green',
-                            backgroundColor: 'rgba(0, 128, 0, 0.1)',
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Pembiayaan',
-                            data: [800000, 950000, 1100000, 1250000, 1500000, 1800000],
-                            borderColor: 'blue',
-                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
-                            tension: 0.3
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        const growthChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?= $chartLabels ?>,
+                datasets: [
+                    {
+                        label: 'Simpanan',
+                        data: <?= $chartSimpanan ?>,
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(0, 128, 0, 0.1)',
+                        tension: 0.3
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                    {
+                        label: 'Pembiayaan',
+                        data: <?= $chartPembiayaan ?>,
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            });
+            }
         });
+    });
     </script>
 </body>
 </html>

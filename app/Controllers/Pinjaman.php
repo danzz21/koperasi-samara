@@ -18,14 +18,15 @@ class Pinjaman extends BaseController
 
         return view('pinjaman', [
             'nama' => $nama,
-            'nomor_anggota' => $nomor_anggota
+            'nomor_anggota' => $nomor_anggota,
+            'anggota' => $anggota
         ]);
     }
 
     public function ajukan()
     {
         $jenis = $this->request->getPost('jenis');
-        $jumlah = $this->request->getPost('jumlah');
+        $jumlah = preg_replace('/[^0-9]/', '', $this->request->getPost('jumlah'));
         $lama_cicilan = $this->request->getPost('lama_cicilan');
         $id_anggota = session()->get('id');
         $tanggal = date('Y-m-d');

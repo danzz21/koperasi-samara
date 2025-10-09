@@ -82,6 +82,14 @@ video {
   box-shadow: 0 0 6px rgba(0,0,0,0.2);
   transform: scaleX(-1); /* flip horizontal supaya gak mirror */
 }
+#ktpCamera,
+#ktpPreview 
+{
+  width: 100%;
+  max-width: 250px; /* Samain dengan foto diri */
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
   </style>
 </head>
 <body>
@@ -107,12 +115,22 @@ video {
 
  <!-- Kamera Langsung -->
 <div class="camera-container">
-  <button type="button" id="openCamera">Buka Kamera</button>
+  <button type="button" id="openCamera">Foto Diri</button>
   <video id="camera" autoplay playsinline style="display:none;"></video>
   <canvas id="canvas" style="display:none;"></canvas>
   <button type="button" id="takePhoto" style="display:none;">Ambil Foto</button>
   <img id="preview" style="display:none; margin-top:10px; border-radius:8px;">
   <input type="hidden" name="foto_diri" id="foto_diri">
+</div>
+
+<!-- Foto KTP -->
+<div class="camera-container">
+  <button type="button" id="openKtpCamera">Foto KTP</button>
+  <video id="ktpCamera" autoplay playsinline style="display:none;"></video>
+  <canvas id="ktpCanvas" style="display:none;"></canvas>
+  <button type="button" id="takeKtpPhoto" style="display:none;">Ambil Foto KTP</button>
+  <img id="ktpPreview" style="display:none; margin-top:10px; border-radius:8px;">
+  <input type="hidden" name="foto_ktp" id="foto_ktp">
 </div>
 
   <input type="number" name="no_hp" placeholder="Nomor HP" required>
@@ -221,6 +239,51 @@ takePhotoBtn.addEventListener('click', () => {
   openCameraBtn.style.display = "inline-block"; // bisa buka kamera lagi kalau mau foto ulang
 });
 
+const ktpVideo = document.getElementById('ktpCamera');
+const ktpCanvas = document.getElementById('ktpCanvas');
+const openKtpCameraBtn = document.getElementById('openKtpCamera');
+const takeKtpPhotoBtn = document.getElementById('takeKtpPhoto');
+const ktpPreview = document.getElementById('ktpPreview');
+const ktpInput = document.getElementById('foto_ktp');
+const ktpCtx = ktpCanvas.getContext('2d');
+let ktpStream;
+
+// Buka kamera untuk foto KTP
+openKtpCameraBtn.addEventListener('click', () => {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(s => {
+      ktpStream = s;
+      ktpVideo.srcObject = ktpStream;
+      ktpVideo.style.display = "block";
+      takeKtpPhotoBtn.style.display = "inline-block";
+      openKtpCameraBtn.style.display = "none";
+    })
+    .catch(err => {
+      alert("Gagal akses kamera: " + err);
+    });
+});
+
+// Ambil foto KTP
+takeKtpPhotoBtn.addEventListener('click', () => {
+  ktpCanvas.width = ktpVideo.videoWidth;
+  ktpCanvas.height = ktpVideo.videoHeight;
+
+  ktpCtx.save();
+  ktpCtx.translate(ktpCanvas.width, 0);
+  ktpCtx.scale(-1, 1);
+  ktpCtx.drawImage(ktpVideo, 0, 0, ktpCanvas.width, ktpCanvas.height);
+  ktpCtx.restore();
+
+  const dataURL = ktpCanvas.toDataURL("image/png");
+  ktpPreview.src = dataURL;
+  ktpPreview.style.display = "block";
+  ktpInput.value = dataURL;
+
+  ktpStream.getTracks().forEach(track => track.stop());
+  ktpVideo.style.display = "none";
+  takeKtpPhotoBtn.style.display = "none";
+  openKtpCameraBtn.style.display = "inline-block";
+});
 </script>
 
 </body>

@@ -4,102 +4,489 @@
   <meta charset="UTF-8" />
   <title>Simpanan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Pakai style global kamu -->
-  <link rel="stylesheet" href="<?= base_url('assets/css/simpanan.css') ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    :root {
+      --primary: #10b981;
+      --primary-light: #34d399;
+      --primary-dark: #059669;
+      --secondary: #06b6d4;
+      --secondary-light: #22d3ee;
+      --accent: #0ea5e9;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --gray-light: #cbd5e1;
+      --border-radius: 20px;
+      --border-radius-sm: 12px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #f0fdf9 0%, #f0fdf4 100%);
+      color: var(--dark);
+      min-height: 100vh;
+      padding-bottom: 80px;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header-simpan {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 1.5rem 1rem;
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-info img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-name {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      color: white;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+      margin: 1.5rem 0;
+      color: var(--dark);
+    }
+
+    /* Tabs */
+    .tab-simpanan {
+      display: flex;
+      background: white;
+      margin: 0 1.5rem 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .tab-simpanan button {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      background: transparent;
+      color: var(--gray);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .tab-simpanan button.active {
+      color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .tab-simpanan button.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .tab-simpanan button:hover:not(.active) {
+      background: rgba(16, 185, 129, 0.05);
+      color: var(--primary-dark);
+    }
+
+    /* Content */
+    .tab-content {
+      display: none;
+      padding: 0 1.5rem;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kv {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .k {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .v {
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-lunas {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--primary);
+    }
+
+    .badge-belum {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+
+    .badge-ditolak {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
+    }
+
+    .badge-gaji {
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--secondary);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--gray-light);
+      margin: 1rem 0;
+    }
+
+    /* Bill Items */
+    .bill {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .bill:last-child {
+      border-bottom: none;
+    }
+
+    .bill-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--primary);
+    }
+
+    .bill-main {
+      flex: 1;
+    }
+
+    .bill-title {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .bill-sub {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .bill-amount {
+      text-align: right;
+    }
+
+    .nominal {
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    /* Button Setor */
+    .btn-setor {
+      width: calc(100% - 3rem);
+      margin: 0 1.5rem 1rem;
+      padding: 1rem;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-setor:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .note {
+      text-align: center;
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 1.5rem;
+      padding: 0 1.5rem;
+    }
+
+    /* Modal */
     .modal {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
 
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 30px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 400px;
-  position: relative;
-}
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
 
-.close {
-  color: #aaa;
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .close {
+      color: var(--gray);
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+    }
 
-.form-group {
-  margin-bottom: 15px;
-}
+    .close:hover {
+      color: var(--danger);
+    }
 
-.form-group label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 5px;
-}
+    .form-group {
+      margin-bottom: 1rem;
+    }
 
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+    .form-group label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
 
-.btn-submit {
-  background-color: #16a34a;
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius-sm);
+      transition: var(--transition);
+    }
 
-.btn-submit:hover {
-  background-color: #15803d;
-}
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
 
-.profile-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 20px;
-  margin-right: 10px;
-}
+    .btn-submit {
+      width: 100%;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: var(--border-radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
 
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+      z-index: 100;
+      border-radius: 25px 25px 0 0;
+    }
+
+    .bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--gray);
+      transition: var(--transition);
+      padding: 8px 12px;
+      border-radius: 16px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .bottom-nav a i {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .bottom-nav a p {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .bottom-nav a.active {
+      color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .header-simpan, .tab-simpanan, .tab-content {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+      }
+      
+      .btn-setor {
+        width: calc(100% - 2.4rem);
+        margin: 0 1.2rem 1rem;
+      }
+      
+      .page-title {
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="header-simpan">
     <div class="header-info">
-    <?php 
-      $firstLetter = strtoupper(substr($nama, 0, 1));
-      $colors = ['#16a34a', '#2563eb', '#dc2626', '#9333ea', '#f59e0b', '#0d9488', '#4b5563'];
-      $bgColor = $colors[crc32($nomor_anggota) % count($colors)];
-    ?>
-    <div class="profile-avatar" style="background:<?= $bgColor ?>;">
-      <?= $firstLetter ?>
-    </div>
+        <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
+          <img id="preview" src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
+        <?php else: ?>
+        <?php 
+          $firstLetter = strtoupper(substr($anggota['nama_lengkap'], 0, 1));
+          $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
+          $bgColor = $colors[crc32($anggota['nomor_anggota']) % count($colors)];
+        ?>
+        <div class="profile-avatar" style="background:<?= $bgColor ?>;">
+          <?= $firstLetter ?>
+        </div>
+      <?php endif; ?>
 
       <div>
         <div class="header-name"><?= htmlspecialchars($nama ?? '-') ?></div>
@@ -108,9 +495,8 @@
     </div>
     <i data-lucide="bell" class="icon"></i>
   </header>
+  
   <h2 class="page-title">Simpanan</h2>
-
-
 
   <!-- ===== Tabs ===== -->
   <div class="tab-simpanan">
@@ -122,7 +508,10 @@
   <!-- ===== POKOK ===== -->
   <section id="pokok" class="tab-content active">
     <div class="card">
-      <div class="card-title">Rangkuman Simpanan Pokok</div>
+      <div class="card-title">
+        <i data-lucide="landmark" width="20" height="20"></i>
+        Rangkuman Simpanan Pokok
+      </div>
       <div class="kv"><span class="k">Total Simpanan</span>
         <span class="v">
           Rp <?= number_format(array_sum(array_column($pokok, 'jumlah')), 0, ',', '.') ?>
@@ -151,7 +540,10 @@
     </div>
 
     <div class="card">
-      <div class="card-title">Jadwal Cicilan</div>
+      <div class="card-title">
+        <i data-lucide="calendar" width="20" height="20"></i>
+        Jadwal Cicilan
+      </div>
       <?php foreach ($pokok as $i => $item): ?>
         <div class="bill">
           <div class="bill-icon"><i class="fa-solid fa-calendar-day"></i></div>
@@ -177,7 +569,10 @@
   <!-- ===== WAJIB ===== -->
   <section id="wajib" class="tab-content">
     <div class="card">
-      <div class="card-title">Rangkuman Simpanan Wajib</div>
+      <div class="card-title">
+        <i data-lucide="calendar" width="20" height="20"></i>
+        Rangkuman Simpanan Wajib
+      </div>
       <div class="kv"><span class="k">Nominal / Bulan</span>
         <span class="v">
           Rp <?= count($wajib) > 0 ? number_format($wajib[0]['jumlah'], 0, ',', '.') : '0' ?>
@@ -190,7 +585,10 @@
     </div>
 
     <div class="card">
-      <div class="card-title">Status Bulanan</div>
+      <div class="card-title">
+        <i data-lucide="list-checks" width="20" height="20"></i>
+        Status Bulanan
+      </div>
       <?php foreach ($wajib as $item): ?>
         <div class="bill">
           <div class="bill-icon"><i class="fa-solid fa-calendar-week"></i></div>
@@ -213,31 +611,36 @@
     </div>
   </section>
 
-  <!-- ===== SUKARELA (Setor saja) ===== -->
+  <!-- ===== SUKARELA ===== -->
   <section id="sukarela" class="tab-content">
     <div class="card">
-      <div class="card-title">Simpanan Sukarela</div>
+      <div class="card-title">
+        <i data-lucide="gift" width="20" height="20"></i>
+        Simpanan Sukarela
+      </div>
       <?php
-  $sukarela_approved = array_filter($sukarela, fn($item) => $item['status'] === 'aktif');
-  $total_sukarela = array_sum(array_column($sukarela_approved, 'jumlah'));
-?>
-<div class="kv"><span class="k">Saldo Saat Ini</span>
-  <span class="v">
-    Rp <?= number_format($total_sukarela, 0, ',', '.') ?>
-  </span>
-</div>
-
+        $sukarela_approved = array_filter($sukarela, fn($item) => $item['status'] === 'aktif');
+        $total_sukarela = array_sum(array_column($sukarela_approved, 'jumlah'));
+      ?>
+      <div class="kv"><span class="k">Saldo Saat Ini</span>
+        <span class="v">
+          Rp <?= number_format($total_sukarela, 0, ',', '.') ?>
+        </span>
+      </div>
       <div class="kv"><span class="k">Keterangan</span>
         <span class="v" style="color:var(--gray-700);font-weight:600;">Setor kapan saja</span>
       </div>
     </div>
 
-    <!-- Hanya setor -->
+    <!-- Button Setor -->
     <button class="btn-setor"><i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan</button>
     <div class="note">Penarikan tidak tersedia untuk Simpanan Sukarela.</div>
 
     <div class="card">
-      <div class="card-title">Riwayat Setoran</div>
+      <div class="card-title">
+        <i data-lucide="history" width="20" height="20"></i>
+        Riwayat Setoran
+      </div>
       <?php foreach ($sukarela as $item): ?>
         <div class="bill">
           <div class="bill-icon" style="background:#f0fdf4;color:#16a34a;">
@@ -250,13 +653,12 @@
           <div class="bill-amount">
             <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
             <span class="badge 
-  <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-belum' : 'badge-ditolak') ?>">
-  <i class="fa-regular 
-     <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
-  </i>
-  <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Belum' : 'Ditolak') ?>
-</span>
-
+              <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-belum' : 'badge-ditolak') ?>">
+              <i class="fa-regular 
+                 <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
+              </i>
+              <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Belum' : 'Ditolak') ?>
+            </span>
           </div>
         </div>
       <?php endforeach; ?>
@@ -265,52 +667,53 @@
       <?php endif; ?>
     </div>
   </section>
-<!-- Modal Input Setoran Sukarela -->
-<div id="modalSukarela" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3>Setor Simpanan Sukarela</h3>
-    <form action="<?= base_url('anggota/simpanan/sukarela/store') ?>" method="POST" enctype="multipart/form-data">
 
-      <div class="form-group">
-        <label for="jumlah">Jumlah Setoran (Rp)</label>
-        <input type="number" name="jumlah" id="jumlah" required />
-      </div>
-      <div class="form-group">
-        <label for="bukti">Upload Bukti Transfer</label>
-        <input type="file" name="bukti" id="bukti" accept="image/*,application/pdf" required />
-      </div>
-      <button type="submit" class="btn-submit">Kirim Setoran</button>
-    </form>
+  <!-- Modal Input Setoran Sukarela -->
+  <div id="modalSukarela" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Sukarela</h3>
+      <form action="<?= base_url('anggota/simpanan/sukarela/store') ?>" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="jumlah">Jumlah Setoran (Rp)</label>
+          <input type="number" name="jumlah" id="jumlah" required />
+        </div>
+        <div class="form-group">
+          <label for="bukti">Upload Bukti Transfer</label>
+          <input type="file" name="bukti" id="bukti" accept="image/*,application/pdf" required />
+        </div>
+        <button type="submit" class="btn-submit">Kirim Setoran</button>
+      </form>
+    </div>
   </div>
-</div>
 
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav">
-      <a href="<?= base_url('anggota/dashboard') ?>">
-        <i data-lucide="home"></i>
-        <p>Beranda</p>
-      </a>
-      <a href="<?= base_url('anggota/simpanan') ?>" class="active">
-        <i data-lucide="wallet"></i>
-        <p>Simpan</p>
-      </a>
-      <a href="<?= base_url('anggota/pinjaman') ?>">
-        <i data-lucide="hand-coins"></i>
-        <p>Pinjam</p>
-      </a>
-      <a href="<?= base_url('anggota/profil') ?>">
-        <i data-lucide="user"></i>
-        <p>Profil</p>
-      </a>
-    </nav>
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="<?= base_url('anggota/dashboard') ?>">
+      <i data-lucide="home"></i>
+      <p>Beranda</p>
+    </a>
+    <a href="<?= base_url('anggota/simpanan') ?>" class="active">
+      <i data-lucide="wallet"></i>
+      <p>Simpan</p>
+    </a>
+    <a href="<?= base_url('anggota/pinjaman') ?>">
+      <i data-lucide="hand-coins"></i>
+      <p>Pinjam</p>
+    </a>
+    <a href="<?= base_url('anggota/cicilan') ?>">
+            <i data-lucide="calendar-check"></i>
+            <p>Cicilan</p>
+        </a>
+    <a href="<?= base_url('anggota/profil') ?>">
+      <i data-lucide="user"></i>
+      <p>Profil</p>
+    </a>
+  </nav>
 
-
-  <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();
-  </script>
-  <script>
+
     function showTab(name){
       // content
       document.querySelectorAll('.tab-content').forEach(el=>{
@@ -325,26 +728,24 @@
       if(name==='sukarela') document.getElementById('tab-sukarela').classList.add('active');
     }
 
-  // Modal logic
-  const modal = document.getElementById('modalSukarela');
-  const btn = document.querySelector('.btn-setor');
-  const span = document.querySelector('.close');
+    // Modal logic
+    const modal = document.getElementById('modalSukarela');
+    const btn = document.querySelector('.btn-setor');
+    const span = document.querySelector('.close');
 
-  btn.onclick = () => {
-    modal.style.display = "block";
-  }
+    btn.onclick = () => {
+      modal.style.display = "block";
+    }
 
-  span.onclick = () => {
-    modal.style.display = "none";
-  }
-
-  window.onclick = (event) => {
-    if (event.target == modal) {
+    span.onclick = () => {
       modal.style.display = "none";
     }
-  }
 
-
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   </script>
 </body>
 </html>

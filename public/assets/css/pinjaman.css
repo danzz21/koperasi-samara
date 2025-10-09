@@ -65,6 +65,8 @@ body {
   height: 48px;
   border-radius: 50%;
   border: 2px solid #fff;
+  object-fit: cover;
+  
 }
 
 .header-name {
@@ -84,7 +86,9 @@ body {
   font-weight: bold;
   font-size: 20px;
   margin-right: 10px;
+  object-fit: cover;
 }
+
 .page-title {
   text-align: center;
   margin: -60px 0 10px;

@@ -32,7 +32,8 @@ class AnggotaModel extends Model
     'tanggal_daftar',
     'status',
     'jenis_kelamin',
-    'pekerjaan'
+    'pekerjaan',
+    'photo'
 ];
 
 }

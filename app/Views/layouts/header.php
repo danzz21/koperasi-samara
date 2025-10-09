@@ -13,9 +13,10 @@
 <header class="bg-white shadow-lg border-b-4 border-emerald-500">
   <div class="flex items-center justify-between px-6 py-4">
     <div class="flex items-center space-x-4">
-      <div class="w-12 h-12 rounded-lg overflow-hidden">
-        <img src="<?= base_url('images/logo.jpeg') ?>" alt="Logo Koperasi" class="w-full h-full object-cover">
+      <div class="w-12 h-12 rounded-lg overflow-hidden transform scale-150">
+        <img src="<?= base_url('assets/images/logo.png') ?>" alt="Logo Koperasi" class="w-full h-full object-cover">
       </div>
+
       <div>
         <h1 class="text-2xl font-bold text-gray-800">Koperasi Syariah K-Samara</h1>
         <p class="text-sm text-gray-600">Dashboard Administrasi</p>
@@ -27,7 +28,7 @@
         <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs notification-badge">3</span>
       </div>
       <div class="flex items-center space-x-2">
-        <img src="" alt="Foto Admin" class="w-10 h-10 rounded-full">
+         <img src="<?= base_url('assets/images/danzz.png') ?>" alt="Foto Admin" class="w-full h-full object-cover">
         <div>
           <p class="text-sm font-medium text-gray-800">Admin Koperasi</p>
           <p class="text-xs text-gray-600">Administrator</p>

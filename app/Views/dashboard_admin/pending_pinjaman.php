@@ -23,19 +23,38 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($pending as $p): ?>
+        <?php if (!empty($pending)): ?>
+            <?php foreach($pending as $p): ?>
+                <tr>
+                    <td class="p-2 border"><?= esc($p['nama_lengkap'] ?? 'N/A') ?></td>
+                    <td class="p-2 border"><?= esc($p['nomor_anggota'] ?? 'N/A') ?></td>
+                    <td class="p-2 border"><?= ucfirst($p['jenis'] ?? '') ?></td>
+                    <td class="p-2 border"><?= date('d-m-Y', strtotime($p['tanggal'] ?? '')) ?></td>
+                    <td class="p-2 border">Rp <?= number_format($p['jml_pinjam'] ?? 0, 0, ',', '.') ?></td>
+                    <td class="p-2 border">
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded">
+                            <?= ucfirst($p['status'] ?? '') ?>
+                        </span>
+                    </td>
+                    <td class="p-2 border space-x-2">
+                        <!-- PERBAIKAN: Sesuaikan URL dengan routes yang ada -->
+                        <a href="<?= base_url("admin/pinjaman/verifikasi/{$p['jenis']}/{$p['id']}") ?>" 
+                           class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+                            Verifikasi
+                        </a>
+                        <a href="<?= base_url("admin/pinjaman/tolak/{$p['jenis']}/{$p['id']}") ?>" 
+                           class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                            Tolak
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
             <tr>
-                <td class="p-2 border"><?= esc($p['nama_lengkap']) ?></td>
-                <td class="p-2 border"><?= esc($p['nomor_anggota']) ?></td>
-                <td class="p-2 border"><?= ucfirst($p['jenis']) ?></td>
-                <td class="p-2 border"><?= date('d-m-Y', strtotime($p['tanggal'])) ?></td>
-                <td class="p-2 border">Rp <?= number_format($p['jml_pinjam'], 0, ',', '.') ?></td>
-                <td class="p-2 border"><?= ucfirst($p['status']) ?></td>
-                <td class="p-2 border space-x-2">
-                    <a href="<?= base_url("admin/pinjaman/verifikasi/{$p['jenis']}/{$p['id']}") ?>" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Verifikasi</a>
-                    <a href="<?= base_url("admin/pinjaman/tolak/{$p['jenis']}/{$p['id']}") ?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Tolak</a>
+                <td colspan="7" class="p-4 border text-center text-gray-500">
+                    Tidak ada data pinjaman pending
                 </td>
             </tr>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </tbody>
 </table>

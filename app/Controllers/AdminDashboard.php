@@ -2,35 +2,31 @@
 namespace App\Controllers;
 use App\Models\AnggotaModel;
 use App\Models\UserModel;
-use App\Models\TransaksiModel;
 
 class AdminDashboard extends BaseController
 {
     public function pendingLoans()
 {
     $db = \Config\Database::connect();
-
-    // Ambil data pending dari setiap jenis pinjaman
+    
     $qard = $db->table('qard')
     ->join('anggota', 'anggota.id_anggota = qard.id_anggota')
     ->where('qard.status', 'pending')
     ->select('qard.id_qard AS id, qard.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, qard.tanggal, qard.jml_pinjam, qard.status, "qard" as jenis')
     ->get()->getResultArray();
 
-$murabahah = $db->table('murabahah')
-    ->join('anggota', 'anggota.id_anggota = murabahah.id_anggota')
-    ->where('murabahah.status', 'pending')
-    ->select('murabahah.id_mr AS id, murabahah.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, murabahah.tanggal, murabahah.jml_pinjam, murabahah.status, "murabahah" as jenis')
-    ->get()->getResultArray();
+    $murabahah = $db->table('murabahah')
+        ->join('anggota', 'anggota.id_anggota = murabahah.id_anggota')
+        ->where('murabahah.status', 'pending')
+        ->select('murabahah.id_mr AS id, murabahah.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, murabahah.tanggal, murabahah.jml_pinjam, murabahah.status, "murabahah" as jenis')
+        ->get()->getResultArray();
 
-$mudharabah = $db->table('mudharabah')
-    ->join('anggota', 'anggota.id_anggota = mudharabah.id_anggota')
-    ->where('mudharabah.status', 'pending')
-    ->select('mudharabah.id_md AS id, mudharabah.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, mudharabah.tanggal, mudharabah.jml_pinjam, mudharabah.status, "mudharabah" as jenis')
-    ->get()->getResultArray();
+    $mudharabah = $db->table('mudharabah')
+        ->join('anggota', 'anggota.id_anggota = mudharabah.id_anggota')
+        ->where('mudharabah.status', 'pending')
+        ->select('mudharabah.id_md AS id, mudharabah.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, mudharabah.tanggal, mudharabah.jml_pinjam, mudharabah.status, "mudharabah" as jenis')
+        ->get()->getResultArray();
 
-
-    // Gabungkan semua data
     $pending = array_merge($qard, $murabahah, $mudharabah);
 
     return view('layouts/header', ['title' => 'Verifikasi Pinjaman'])
@@ -91,14 +87,11 @@ public function tolakPinjaman($jenis, $id)
 
     protected $userModel;
     protected $anggotaModel;
-    protected $transaksiModel;
-
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->anggotaModel = new AnggotaModel();
-         $this->transaksiModel = new \App\Models\TransaksiModel();
     }
 
     // API untuk live search anggota (tidak dipakai di input simpanan, tapi tetap ada)
@@ -159,20 +152,19 @@ public function tolakPinjaman($jenis, $id)
     // Hitung Pembiayaan Berjalan
     // =========================
     $totalQard = $db->table('qard')
-    ->where('status', 'aktif')
-    ->selectSum('jml_pinjam')
-    ->get()->getRow()->jml_pinjam ?? 0;
+        ->where('status', 'aktif')
+        ->selectSum('jml_pinjam')
+        ->get()->getRow()->jml_pinjam ?? 0;
 
-$totalMurabahah = $db->table('murabahah')
-    ->where('status', 'aktif')
-    ->selectSum('jml_pinjam')
-    ->get()->getRow()->jml_pinjam ?? 0;
+    $totalMurabahah = $db->table('murabahah')
+        ->where('status', 'aktif')
+        ->selectSum('jml_pinjam')
+        ->get()->getRow()->jml_pinjam ?? 0;
 
-$totalMudharabah = $db->table('mudharabah')
-    ->where('status', 'aktif')
-    ->selectSum('jml_pinjam')
-    ->get()->getRow()->jml_pinjam ?? 0;
-
+    $totalMudharabah = $db->table('mudharabah')
+        ->where('status', 'aktif')
+        ->selectSum('jml_pinjam')
+        ->get()->getRow()->jml_pinjam ?? 0;
 
     $totalPembiayaan = $totalQard + $totalMurabahah + $totalMudharabah;
 
@@ -217,16 +209,82 @@ $totalMudharabah = $db->table('mudharabah')
     $pendingMudharabah = $db->table('mudharabah')->where('status', 'pending')->countAllResults();
     $pendingPinjamanCount = $pendingQard + $pendingMurabahah + $pendingMudharabah;
 
+    // =========================
+    // DATA CHART
+    // =========================
+    // SIMPANAN (biarin tetep)
+$simpanan = $db->query("
+    SELECT bulan, SUM(total) AS total FROM (
+        SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total
+        FROM simpanan_pokok
+        WHERE YEAR(tanggal) = YEAR(CURDATE())
+        GROUP BY bulan
+        UNION ALL
+        SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total
+        FROM simpanan_sukarela
+        WHERE YEAR(tanggal) = YEAR(CURDATE())
+        GROUP BY bulan
+        UNION ALL
+        SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total
+        FROM simpanan_wajib
+        WHERE YEAR(tanggal) = YEAR(CURDATE())
+        GROUP BY bulan
+    ) AS gabungan
+    GROUP BY bulan
+    ORDER BY bulan
+
+")->getResultArray();
+
+// PEMBIAYAAN: gabungin 3 tabel jadi 1 hasil
+$pembiayaan = $db->query("
+    SELECT bulan, SUM(total) AS total FROM (
+        SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total
+        FROM mudharabah
+        WHERE YEAR(tanggal) = YEAR(CURDATE())
+        GROUP BY bulan
+        UNION ALL
+        SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total
+        FROM murabahah
+        WHERE YEAR(tanggal) = YEAR(CURDATE())
+        GROUP BY bulan
+        UNION ALL
+        SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total
+        FROM qard
+        WHERE YEAR(tanggal) = YEAR(CURDATE())
+        GROUP BY bulan
+    ) AS gabungan
+    GROUP BY bulan
+    ORDER BY bulan
+")->getResultArray();
+
+$labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+$simpananData = array_fill(0, 12, 0);
+$pembiayaanData = array_fill(0, 12, 0);
+
+foreach ($simpanan as $row) {
+    $simpananData[$row['bulan'] - 1] = (int)$row['total'];
+}
+foreach ($pembiayaan as $row) {
+    $pembiayaanData[$row['bulan'] - 1] = (int)$row['total'];
+}
+
+// Gabungkan semua data ke satu array
+$data = [
+    'totalAnggota'        => $totalAnggota,
+    'totalSimpanan'       => $totalSimpanan,
+    'totalPembiayaan'     => $totalPembiayaan,
+    'totalMargin'         => $totalMargin,
+    'pendingPinjamanCount'=> $pendingPinjamanCount,
+    'pendingSimpananCount'=> $pendingSimpananCount,
+    'pendingCount'        => $pendingCount,
+    'chartLabels'         => json_encode($labels),
+    'chartSimpanan'       => json_encode($simpananData),
+    'chartPembiayaan'     => json_encode($pembiayaanData),
+];
+
+
     return view('layouts/header', ['title' => 'Dashboard Admin'])
-        . view('dashboard_admin/index', [
-            'totalAnggota'        => $totalAnggota,
-            'totalSimpanan'       => $totalSimpanan,
-            'totalPembiayaan'     => $totalPembiayaan,
-            'totalMargin'         => $totalMargin,
-            'pendingPinjamanCount'=> $pendingPinjamanCount,
-            'pendingSimpananCount'=> $pendingSimpananCount,
-            'pendingCount'        => $pendingCount,
-        ])
+        . view('dashboard_admin/index', $data)
         . view('layouts/footer');
 }
 
@@ -321,37 +379,163 @@ $totalMudharabah = $db->table('mudharabah')
              . view('dashboard_admin/members', ['anggota' => $anggota, 'search' => $search])
              . view('layouts/footer');
     }
+   public function saveMember()
+{
+    try {
+        $request = $this->request;
+
+        // Ambil data dari form
+        $nama_lengkap = $request->getPost('nama_lengkap');
+        $email        = $request->getPost('email');
+        $username     = $request->getPost('username');
+        $password     = $request->getPost('password');
+        $no_ktp       = $request->getPost('no_ktp');
+        $no_telp      = $request->getPost('no_telp');
+        $alamat       = $request->getPost('alamat');
+
+        // Validasi required fields
+        if (empty($nama_lengkap) || empty($email) || empty($username) || empty($password)) {
+            return $this->response->setJSON([
+                'status' => 'error', 
+                'message' => 'Semua field wajib diisi!'
+            ]);
+        }
+
+        // Validasi KTP duplikat
+        $existing = $this->anggotaModel->where('no_ktp', $no_ktp)->first();
+        if ($existing) {
+            return $this->response->setJSON([
+                'status' => 'error', 
+                'message' => 'Anggota dengan No. KTP ini sudah terdaftar.'
+            ]);
+        }
+
+        // Validasi username/email duplikat di users
+        $existingUser = $this->userModel->where('username', $username)->orWhere('email', $email)->first();
+        if ($existingUser) {
+            return $this->response->setJSON([
+                'status' => 'error', 
+                'message' => 'Username atau email sudah digunakan.'
+            ]);
+        }
+
+        // Handle file upload
+        $fotoDiriName = 'default.png';
+        $fotoKtpName  = 'default.png';
+
+        $fotoDiri = $request->getFile('foto_diri');
+        if ($fotoDiri && $fotoDiri->isValid() && !$fotoDiri->hasMoved()) {
+            $fotoDiriName = $fotoDiri->getRandomName();
+            $fotoDiri->move(FCPATH . 'uploads/', $fotoDiriName);
+        }
+
+        $fotoKtp = $request->getFile('foto_ktp');
+        if ($fotoKtp && $fotoKtp->isValid() && !$fotoKtp->hasMoved()) {
+            $fotoKtpName = $fotoKtp->getRandomName();
+            $fotoKtp->move(FCPATH . 'uploads/', $fotoKtpName);
+        }
+
+        // 1️⃣ Simpan ke tabel users
+        $userData = [
+            'nama_lengkap' => $nama_lengkap,
+            'email'        => $email,
+            'username'     => $username,
+            'password'     => password_hash($password, PASSWORD_DEFAULT),
+            'role'         => 'anggota',
+            'no_ktp'       => $no_ktp,
+            'nomor_hp'     => $no_telp,
+            'status'       => 'verified',
+        ];
+
+        $this->userModel->insert($userData);
+        $userId = $this->userModel->getInsertID();
+
+        // 2️⃣ Simpan ke tabel anggota
+        $anggotaData = [
+            'id_anggota'        => $userId,
+            'nomor_anggota'     => 'AGT-' . date('Ymd') . '-' . $userId,
+            'nama_lengkap'      => $nama_lengkap,
+            'no_ktp'            => $no_ktp,
+            'alamat'            => $alamat,
+            'email'             => $email,
+            'status'            => 'aktif',
+            'foto_diri'         => $fotoDiriName,
+            'foto_ktp'          => $fotoKtpName,
+            'photo'             => $fotoDiriName,
+            'tanggal_daftar'    => date('Y-m-d'),
+        ];
+
+        $this->anggotaModel->insert($anggotaData);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Anggota berhasil ditambahkan!'
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error saveMember: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status' => 'error', 
+            'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+        ]);
+    }
+}
+
+
+
 
     // =========================
     // FITUR SIMPANAN
     // =========================
 
-   public function savings()
+  public function savings()
 {
     $db = \Config\Database::connect();
 
-    // Ambil semua data simpanan
-    $simpananPokok = $db->table('simpanan_pokok')
-    ->select('simpanan_pokok.*, anggota.nama_lengkap')
-    ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
-    ->get()->getResultArray();
+    try {
+        // Ambil semua data simpanan untuk statistik
+        $simpananPokok = $db->table('simpanan_pokok')
+            ->select('simpanan_pokok.*, anggota.nama_lengkap')
+            ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
+            ->get()->getResultArray();
 
-    $simpananWajib = $db->table('simpanan_wajib')
-    ->select('simpanan_wajib.*, anggota.nama_lengkap')
-    ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota')
-    ->get()->getResultArray();
-    $simpananSukarela = $db->table('simpanan_sukarela')
-    ->select('simpanan_sukarela.*, anggota.nama_lengkap')
-    ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota')
-    ->get()->getResultArray();
+        $simpananWajib = $db->table('simpanan_wajib')
+            ->select('simpanan_wajib.*, anggota.nama_lengkap')
+            ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota')
+            ->get()->getResultArray();
+            
+        $simpananSukarela = $db->table('simpanan_sukarela')
+            ->select('simpanan_sukarela.*, anggota.nama_lengkap')
+            ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota')
+            ->get()->getResultArray();
 
-    // Hitung total masing-masing
-    $totalPokok = array_sum(array_column($simpananPokok, 'jumlah'));
-    $totalWajib = array_sum(array_column($simpananWajib, 'jumlah'));
-    $totalSukarela = array_sum(array_column($simpananSukarela, 'jumlah'));
+        // Hitung total masing-masing
+        $totalPokok = array_sum(array_column($simpananPokok, 'jumlah')) ?? 0;
+        $totalWajib = array_sum(array_column($simpananWajib, 'jumlah')) ?? 0;
+        $totalSukarela = array_sum(array_column($simpananSukarela, 'jumlah')) ?? 0;
 
-    // Hitung total anggota unik untuk simpanan pokok
-    $anggotaPokok = count(array_unique(array_column($simpananPokok, 'id_anggota')));
+        // Hitung total anggota unik untuk simpanan pokok
+        $anggotaPokok = count(array_unique(array_column($simpananPokok, 'id_anggota'))) ?? 0;
+
+        // Ambil data anggota untuk filter
+        $anggotaList = $db->table('anggota')
+            ->select('id_anggota, nama_lengkap')
+            ->where('status', 'aktif')
+            ->get()->getResultArray();
+
+    } catch (\Exception $e) {
+        // Jika error, set default values
+        $totalPokok = 0;
+        $totalWajib = 0;
+        $totalSukarela = 0;
+        $anggotaPokok = 0;
+        $simpananPokok = [];
+        $simpananWajib = [];
+        $simpananSukarela = [];
+        $anggotaList = [];
+        
+        log_message('error', 'Error in savings method: ' . $e->getMessage());
+    }
 
     return view('layouts/header', ['title' => 'Manajemen Simpanan'])
         . view('dashboard_admin/savings', [
@@ -359,9 +543,10 @@ $totalMudharabah = $db->table('mudharabah')
             'totalWajib' => $totalWajib,
             'totalSukarela' => $totalSukarela,
             'anggotaPokok' => $anggotaPokok,
-            'pokok' => $simpananPokok,// <<< INI WAJIB DITAMBAHKAN
+            'pokok' => $simpananPokok,
             'wajib' => $simpananWajib,
-            'sukarela' => $simpananSukarela
+            'sukarela' => $simpananSukarela,
+            'anggotaList' => $anggotaList
         ])
         . view('layouts/footer');
 }
@@ -424,128 +609,84 @@ $totalMudharabah = $db->table('mudharabah')
 {
     $jenis = $this->request->getGet('jenis');
     $id_anggota = $this->request->getGet('id_anggota');
-    $anggotaModel = new \App\Models\AnggotaModel();
+    $db = \Config\Database::connect();
 
     $result = [];
 
-    // Jika "all", ambil semua jenis
-    if ($jenis === 'all') {
-        $models = [
-            'pokok' => new \App\Models\SimpananPokokModel(),
-            'wajib' => new \App\Models\SimpananWajibModel(),
-            'sukarela' => new \App\Models\SimpananSukarelaModel(),
-        ];
-        foreach ($models as $j => $model) {
-            $builder = $model->select('*, jumlah, tanggal, status');
+    try {
+        // Jika "all", ambil semua jenis
+        if ($jenis === 'all' || empty($jenis)) {
+            // Simpanan Pokok
+            $builderPokok = $db->table('simpanan_pokok')
+                ->select('simpanan_pokok.*, anggota.nama_lengkap, "pokok" as jenis')
+                ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota');
+            
+            if ($id_anggota && $id_anggota !== 'all') {
+                $builderPokok->where('simpanan_pokok.id_anggota', $id_anggota);
+            }
+            $pokok = $builderPokok->get()->getResultArray();
+
+            // Simpanan Wajib
+            $builderWajib = $db->table('simpanan_wajib')
+                ->select('simpanan_wajib.*, anggota.nama_lengkap, "wajib" as jenis')
+                ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota');
+            
+            if ($id_anggota && $id_anggota !== 'all') {
+                $builderWajib->where('simpanan_wajib.id_anggota', $id_anggota);
+            }
+            $wajib = $builderWajib->get()->getResultArray();
+
+            // Simpanan Sukarela
+            $builderSukarela = $db->table('simpanan_sukarela')
+                ->select('simpanan_sukarela.*, anggota.nama_lengkap, "sukarela" as jenis')
+                ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota');
+            
+            if ($id_anggota && $id_anggota !== 'all') {
+                $builderSukarela->where('simpanan_sukarela.id_anggota', $id_anggota);
+            }
+            $sukarela = $builderSukarela->get()->getResultArray();
+
+            $result = array_merge($pokok, $wajib, $sukarela);
+            
+        } else {
+            // Jika filter jenis tertentu
+            if ($jenis === 'pokok') {
+                $builder = $db->table('simpanan_pokok')
+                    ->select('simpanan_pokok.*, anggota.nama_lengkap, "pokok" as jenis')
+                    ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota');
+            } elseif ($jenis === 'wajib') {
+                $builder = $db->table('simpanan_wajib')
+                    ->select('simpanan_wajib.*, anggota.nama_lengkap, "wajib" as jenis')
+                    ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota');
+            } elseif ($jenis === 'sukarela') {
+                $builder = $db->table('simpanan_sukarela')
+                    ->select('simpanan_sukarela.*, anggota.nama_lengkap, "sukarela" as jenis')
+                    ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota');
+            } else {
+                return $this->response->setJSON([]);
+            }
+
             if ($id_anggota && $id_anggota !== 'all') {
                 $builder->where('id_anggota', $id_anggota);
             }
-            $data = $builder->orderBy('tanggal', 'DESC')->findAll();
-            foreach ($data as &$row) {
-                $anggota = $anggotaModel->find($row['id_anggota']);
-                $row['anggota'] = $anggota ? $anggota['nama_lengkap'] : '-';
-                $row['jenis'] = $j;
-            }
-            $result = array_merge($result, $data);
+            
+            $result = $builder->orderBy('tanggal', 'DESC')->get()->getResultArray();
         }
-        // Gabungkan semua data jadi satu array
-        return $this->response->setJSON($result);
-    }
 
-    // Jika filter jenis tertentu
-    if ($jenis === 'pokok') {
-        $model = new \App\Models\SimpananPokokModel();
-    } elseif ($jenis === 'wajib') {
-        $model = new \App\Models\SimpananWajibModel();
-    } elseif ($jenis === 'sukarela') {
-        $model = new \App\Models\SimpananSukarelaModel();
-    } else {
+        // Format tanggal
+        foreach ($result as &$row) {
+            if (isset($row['tanggal'])) {
+                $row['tanggal'] = date('d M Y', strtotime($row['tanggal']));
+            }
+        }
+
+        return $this->response->setJSON($result);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error getSimpananList: ' . $e->getMessage());
         return $this->response->setJSON([]);
     }
-
-    $builder = $model->select('*, jumlah, tanggal, status');
-    if ($id_anggota && $id_anggota !== 'all') {
-        $builder->where('id_anggota', $id_anggota);
-    }
-    $data = $builder->orderBy('tanggal', 'DESC')->findAll();
-    foreach ($data as &$row) {
-        $anggota = $anggotaModel->find($row['id_anggota']);
-        $row['anggota'] = $anggota ? $anggota['nama_lengkap'] : '-';
-        $row['jenis'] = $jenis;
-    }
-    return $this->response->setJSON($data);
 }
-
-
-    // Autocomplete anggota untuk input simpanan
-    public function searchAnggotaNama()
-    {
-        $q = $this->request->getGet('q');
-        $anggotaModel = new \App\Models\AnggotaModel();
-        $anggota = $anggotaModel
-            ->like('nama_lengkap', $q)
-            ->select('id_anggota as id, nama_lengkap as nama')
-            ->findAll(10);
-        return $this->response->setJSON($anggota);
-    }
-
-    public function simpanAnggota()
-    {
-        try {
-            $id_anggota = 'ID-' . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
-            while ($this->anggotaModel->where('id_anggota', $id_anggota)->first()) {
-                $id_anggota = 'ID-' . str_pad(mt_rand(1, 9999999), 7, '0', STR_PAD_LEFT);
-            }
-            $nama = $this->request->getPost('nama_lengkap');
-            $email = $this->request->getPost('email');
-            $username = $this->request->getPost('username');
-            $password = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
-            $no_ktp = $this->request->getPost('no_ktp');
-            $no_hp = $this->request->getPost('no_telp');
-            $foto_diri = $this->request->getFile('foto_diri');
-            $foto_ktp = $this->request->getFile('foto_ktp');
-
-            // Handle file upload (optional)
-            $fotoDiriName = null;
-            if ($foto_diri && $foto_diri->isValid()) {
-                $fotoDiriName = $foto_diri->getRandomName();
-                $foto_diri->move(WRITEPATH.'uploads', $fotoDiriName);
-            }
-
-            $fotoKtpName = null;
-            if ($foto_ktp && $foto_ktp->isValid()) {
-                $fotoKtpName = $foto_ktp->getRandomName();
-                $foto_ktp->move(WRITEPATH.'uploads', $fotoKtpName);
-            }
-
-            // Data untuk tabel anggota
-            $dataAnggota = [
-                'id_anggota' => $id_anggota,
-                'nama_lengkap' => $nama,
-                'email' => $email,
-                'username' => $username,
-                'password' => $password,
-                'no_ktp' => $no_ktp,
-                'no_hp' => $no_hp,
-                'foto_diri' => $fotoDiriName,
-                'foto_ktp' => $fotoKtpName,
-                'tanggal_daftar' => date('Y-m-d'),
-                'status' => 'aktif'
-            ];
-
-            $anggotaId = $this->anggotaModel->insert($dataAnggota, true);
-
-            if ($anggotaId) {
-                return redirect()->back()->with('success', 'Anggota berhasil ditambahkan.');
-            } else {
-                return redirect()->back()->with('error', 'Gagal menambahkan anggota.');
-            }
-
-        } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
-    }
-
 
     // =========================
     // MENU LAINNYA
@@ -656,71 +797,182 @@ return view('layouts/header', ['title' => 'Manajemen Pembiayaan'])
 
 
 }
+// Simpan pengajuan pembiayaan baru
+public function savePembiayaan()
+{
+    try {
+        $request = $this->request;
+        
+        $id_anggota = $request->getPost('id_anggota');
+        $akad = $request->getPost('akad');
+        $jml_pinjam = $request->getPost('jml_pinjam');
+        $tenor = $request->getPost('tenor'); // ini dari form input
+        $keperluan = $request->getPost('keperluan');
+        
+        // DEBUG DETAIL
+        log_message('debug', '=== SAVE PEMBIAYAAN DEBUG ===');
+        log_message('debug', 'id_anggota: ' . $id_anggota);
+        log_message('debug', 'akad: ' . $akad);
+        log_message('debug', 'jml_pinjam: ' . $jml_pinjam);
+        log_message('debug', 'tenor dari form: ' . $tenor); // debug tenor dari form
+
+        // Validasi data
+        if (empty($id_anggota) || empty($akad) || empty($jml_pinjam) || empty($tenor)) {
+            log_message('error', 'Data tidak lengkap - tenor: ' . $tenor);
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Data tidak lengkap. Pastikan tenor diisi.'
+            ]);
+        }
+
+        // CEK: Apakah anggota exists di database
+        $db = \Config\Database::connect();
+        
+        $anggota = $db->table('anggota')
+            ->where('id_anggota', $id_anggota)
+            ->orWhere('id', $id_anggota)
+            ->get()
+            ->getRow();
+        
+        if (!$anggota) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Anggota tidak ditemukan'
+            ]);
+        }
+
+        // PERBAIKAN: Gunakan jml_angsuran sesuai nama field di database
+        $data = [
+            'id_anggota' => $anggota->id_anggota,
+            'jml_pinjam' => str_replace('.', '', $jml_pinjam),
+            'jml_angsuran' => $tenor, // Simpan nilai tenor ke field jml_angsuran
+            'keperluan' => $keperluan,
+            'tgl_pengajuan' => date('Y-m-d H:i:s'),
+            'status' => 'aktif',
+            'tgl_disetujui' => date('Y-m-d H:i:s'),
+            'disetujui_oleh' => session()->get('user_id')
+        ];
+
+        log_message('debug', 'Data yang akan disimpan: ' . print_r($data, true));
+
+        // Simpan ke tabel sesuai akad
+        if ($akad === 'qard') {
+            $model = new \App\Models\QardModel();
+        } elseif ($akad === 'murabahah') {
+            $model = new \App\Models\MurabahahModel();
+        } elseif ($akad === 'mudharabah') {
+            $model = new \App\Models\MudharabahModel();
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Jenis akad tidak valid'
+            ]);
+        }
+
+        if ($model->insert($data)) {
+            $insertID = $model->getInsertID();
+            log_message('debug', 'Data berhasil disimpan dengan ID: ' . $insertID);
+            
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Pembiayaan berhasil diajukan dan langsung aktif'
+            ]);
+        } else {
+            $errors = $model->errors();
+            log_message('error', 'Gagal insert: ' . print_r($errors, true));
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Gagal menyimpan pembiayaan: ' . implode(', ', $errors)
+            ]);
+        }
+
+    } catch (\Exception $e) {
+        log_message('error', 'Exception savePembiayaan: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
+    }
+}
+
 
 
     public function transactions()
 {
+    // Ambil data dari database
     $db = \Config\Database::connect();
-
-    $bulan = date('m');
-    $tahun = date('Y');
-
+    
+    $bulan_ini = date('Y-m');
+    
     // Total pemasukan bulan ini
-    $pemasukan = $db->table('transaksi')
+    $total_pemasukan = $db->table('transaksi_umum')
+        ->where('jenis', 'pemasukan')
+        ->where('DATE_FORMAT(tanggal, "%Y-%m") =', $bulan_ini)
         ->selectSum('jumlah')
-        ->where('jenis', 'Pemasukan')
-        ->where('MONTH(tanggal)', $bulan)
-        ->where('YEAR(tanggal)', $tahun)
         ->get()
-        ->getRow()
-        ->jumlah ?? 0;
+        ->getRowArray();
 
     // Total pengeluaran bulan ini
-    $pengeluaran = $db->table('transaksi')
+    $total_pengeluaran = $db->table('transaksi_umum')
+        ->where('jenis', 'pengeluaran')
+        ->where('DATE_FORMAT(tanggal, "%Y-%m") =', $bulan_ini)
         ->selectSum('jumlah')
-        ->where('jenis', 'Pengeluaran')
-        ->where('MONTH(tanggal)', $bulan)
-        ->where('YEAR(tanggal)', $tahun)
         ->get()
-        ->getRow()
-        ->jumlah ?? 0;
+        ->getRowArray();
 
-    // Ambil semua transaksi (urut terbaru)
-    $transactions = $this->transaksiModel->orderBy('tanggal','DESC')->findAll();
+    // Riwayat transaksi
+    $riwayat = $db->table('transaksi_umum')
+        ->orderBy('tanggal', 'DESC')
+        ->orderBy('created_at', 'DESC')
+        ->get()
+        ->getResultArray();
 
     $data = [
         'title' => 'Transaksi Umum',
-        'transactions' => $transactions,
-        'pemasukan' => $pemasukan,
-        'pengeluaran' => $pengeluaran
+        'total_pemasukan' => $total_pemasukan['jumlah'] ?? 0,
+        'total_pengeluaran' => $total_pengeluaran['jumlah'] ?? 0,
+        'riwayat' => $riwayat
     ];
 
     return view('layouts/header', $data)
-         . view('dashboard_admin/transactions', $data)
+         . view('dashboard_admin/transactions')
          . view('layouts/footer');
 }
 
-public function simpanTransaksi()
-    {
-
+// Function untuk handle save transaksi (AJAX)
+public function saveTransaksi()
+{
+    try {
+        $request = $this->request;
+        
         $data = [
-            'deskripsi' => $this->request->getPost('deskripsi'),
-            'kategori'  => $this->request->getPost('kategori'),
-            'jumlah'    => $this->request->getPost('jumlah'),
-            'jenis'     => $this->request->getPost('jenis'),
-            'tanggal'   => date('Y-m-d H:i:s')
+            'deskripsi' => $request->getPost('deskripsi'),
+            'kategori' => $request->getPost('kategori'),
+            'jumlah' => str_replace('.', '', $request->getPost('jumlah')),
+            'jenis' => $request->getPost('jenis'),
+            'tanggal' => date('Y-m-d H:i:s')
         ];
 
-        $model = new TransaksiModel();
-
-        if($model->insert($data)){
-            return redirect()->back()->with('success', 'Transaksi berhasil disimpan.');
+        $db = \Config\Database::connect();
+        if ($db->table('transaksi_umum')->insert($data)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Transaksi berhasil disimpan'
+            ]);
         } else {
-            return redirect()->back()->with('error', 'Gagal menyimpan transaksi.');
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Gagal menyimpan transaksi'
+            ]);
         }
+
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
     }
-
-
+}
 
     public function reports()
     {
@@ -729,19 +981,508 @@ public function simpanTransaksi()
              . view('layouts/footer');
     }
 
-    public function settings()
-    {
-        return view('layouts/header', ['title' => 'Pengaturan'])
-             . view('dashboard_admin/settings')
-             . view('layouts/footer');
+   public function settings()
+{
+    $userModel = new UserModel();
+    $admins = $userModel->where('role', 'admin')->findAll();
+    
+    $data = [
+        'title' => 'Pengaturan',
+        'admins' => $admins
+    ];
+
+    return view('layouts/header', $data)
+         . view('dashboard_admin/settings')
+         . view('layouts/footer');
+}
+
+   public function getAdmins()
+{
+    try {
+        $userModel = new UserModel();
+        $admins = $userModel->where('role', 'admin')->findAll();
+        
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $admins
+        ]);
+        
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Error database: ' . $e->getMessage()
+        ]);
+    }
+}
+
+public function getAdmin($id)
+{
+    try {
+        $userModel = new UserModel();
+        $admin = $userModel->find($id);
+        
+        if (!$admin) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Admin tidak ditemukan'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $admin
+        ]);
+        
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
+    }
+}
+
+public function saveAdmin()
+{
+    // HAPUS validasi AJAX - biarkan semua request bisa akses
+    $userModel = new UserModel();
+    
+    $validation = \Config\Services::validation();
+    $validation->setRules([
+        'nama_lengkap' => 'required|min_length[3]',
+        'email' => 'required|valid_email',
+        'username' => 'required|min_length[3]',
+        'nomor_ktp' => 'required|min_length[16]',
+        'nomor_hp' => 'required',
+        'role' => 'required',
+        'status' => 'required'
+    ]);
+
+    if (!$validation->withRequest($this->request)->run()) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Validasi gagal',
+            'errors' => $validation->getErrors()
+        ]);
     }
 
-    public function extras()
-    {
-        return view('layouts/header', ['title' => 'Fitur Tambahan'])
-             . view('dashboard_admin/extras')
-             . view('layouts/footer');
+    $data = [
+        'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+        'email' => $this->request->getPost('email'),
+        'username' => $this->request->getPost('username'),
+        'nomor_ktp' => $this->request->getPost('nomor_ktp'),
+        'nomor_hp' => $this->request->getPost('nomor_hp'),
+        'nomor_hp_keluarga' => $this->request->getPost('nomor_hp_keluarga'),
+        'role' => $this->request->getPost('role'),
+        'status' => $this->request->getPost('status')
+    ];
+
+    // Jika password diisi, hash password
+    $password = $this->request->getPost('password');
+    if (!empty($password)) {
+        $data['password'] = password_hash($password, PASSWORD_DEFAULT);
     }
+
+    $id = $this->request->getPost('id');
+    
+    try {
+        if ($id) {
+            // Update existing admin
+            $userModel->update($id, $data);
+            $message = 'Admin berhasil diperbarui';
+        } else {
+            // Tambah admin baru
+            if (empty($password)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Password wajib diisi untuk admin baru'
+                ]);
+            }
+            $userModel->insert($data);
+            $message = 'Admin berhasil ditambahkan';
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => $message
+        ]);
+
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
+    }
+}
+
+public function deleteAdmin($id)
+{
+    // HAPUS validasi AJAX - biarkan semua request bisa akses
+    $userModel = new UserModel();
+    
+    try {
+        $userModel->delete($id);
+        
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Admin berhasil dihapus'
+        ]);
+
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
+    }
+}
+public function getAkadSettings()
+{
+    try {
+        // Data dummy akad - nanti bisa diganti dengan model database
+        $akadSettings = [
+            [
+                'id' => 1,
+                'name' => 'Murabahah',
+                'detail' => 'Margin: 10%',
+                'status' => 'active',
+                'color' => 'emerald',
+                'margin_rate' => 10,
+                'description' => 'Jual beli dengan harga pokok plus margin keuntungan'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Mudharabah',
+                'detail' => 'Bagi Hasil: 60:40',
+                'status' => 'active',
+                'color' => 'blue',
+                'profit_sharing' => '60:40',
+                'description' => 'Kerjasama bagi hasil antara pemilik modal dan pengelola'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Ijarah',
+                'detail' => 'Sewa: 8%',
+                'status' => 'active',
+                'color' => 'purple',
+                'rent_rate' => 8,
+                'description' => 'Sewa menyewa asset dengan imbalan sewa'
+            ]
+        ];
+        
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $akadSettings
+        ]);
+        
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
+    }
+}
+
+public function saveAkad()
+{
+    try {
+        $data = $this->request->getPost();
+        
+        // Simulasi penyimpanan data
+        // Di sini nanti bisa disimpan ke database
+        
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Pengaturan akad berhasil diperbarui'
+        ]);
+
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
+    }
+}
+    public function extras()
+{
+    return view('layouts/header', ['title' => 'Fitur Tambahan'])
+         . view('dashboard_admin/extras')
+         . view('layouts/footer');
+}
+
+// Tambahkan method-method berikut di Controller yang sama
+public function search()
+{
+    $keyword = $this->request->getGet('q');
+    
+    if (empty($keyword)) {
+        return $this->response->setJSON([
+            'members' => [],
+            'transactions' => []
+        ]);
+    }
+    
+    $db = \Config\Database::connect();
+    $results = [
+        'members' => [],
+        'transactions' => []
+    ];
+    
+    // Pencarian di tabel anggota (dari screenshot: ada typo 'angosta' seharusnya 'anggota')
+    try {
+        // Coba cari di tabel 'anggota' dulu
+        $tableName = 'anggota';
+        if (!$db->tableExists($tableName)) {
+            // Fallback ke 'angosta' jika 'anggota' tidak ada
+            $tableName = 'angosta';
+        }
+        
+        $builder = $db->table($tableName);
+        $builder->select('*');
+        $builder->groupStart();
+        $builder->like('nama_lengkap', $keyword);
+        $builder->orLike('email', $keyword);
+        $builder->orLike('nomor_angosta', $keyword);
+        $builder->orLike('no_ktp', $keyword);
+        $builder->orLike('no_rek', $keyword);
+        $builder->orLike('atasnama_rekening', $keyword);
+        $builder->orLike('alamat', $keyword);
+        $builder->groupEnd();
+        $builder->limit(5);
+        
+        $results['members'] = $builder->get()->getResultArray();
+    } catch (\Exception $e) {
+        log_message('error', 'Search anggota error: ' . $e->getMessage());
+        $results['members'] = [];
+    }
+    
+    // Pencarian di tabel transaksi (qard, murabahah, mudharabah)
+    try {
+        $transactionResults = [];
+        
+        // Cari di tabel qard
+        if ($db->tableExists('qard')) {
+            $builderQard = $db->table('qard');
+            $builderQard->select("*, 'QARD' as jenis_transaksi, jml_pinjam as jumlah");
+            $builderQard->groupStart();
+            $builderQard->like('id_qard', $keyword);
+            $builderQard->orLike('jml_pinjam', $keyword);
+            $builderQard->orLike('status', $keyword);
+            $builderQard->groupEnd();
+            $builderQard->limit(3);
+            $qardResults = $builderQard->get()->getResultArray();
+            $transactionResults = array_merge($transactionResults, $qardResults);
+        }
+        
+        // Cari di tabel murabahah
+        if ($db->tableExists('murabahah')) {
+            $builderMurabahah = $db->table('murabahah');
+            $builderMurabahah->select("*, 'MURABAHAH' as jenis_transaksi, jml_pinjam as jumlah");
+            $builderMurabahah->groupStart();
+            $builderMurabahah->like('id_murabahah', $keyword);
+            $builderMurabahah->orLike('jml_pinjam', $keyword);
+            $builderMurabahah->orLike('status', $keyword);
+            $builderMurabahah->groupEnd();
+            $builderMurabahah->limit(3);
+            $murabahahResults = $builderMurabahah->get()->getResultArray();
+            $transactionResults = array_merge($transactionResults, $murabahahResults);
+        }
+        
+        // Cari di tabel mudharabah
+        if ($db->tableExists('mudharabah')) {
+            $builderMudharabah = $db->table('mudharabah');
+            $builderMudharabah->select("*, 'MUDHARABAH' as jenis_transaksi, jml_pinjam as jumlah");
+            $builderMudharabah->groupStart();
+            $builderMudharabah->like('id_mudharabah', $keyword);
+            $builderMudharabah->orLike('jml_pinjam', $keyword);
+            $builderMudharabah->orLike('status', $keyword);
+            $builderMudharabah->groupEnd();
+            $builderMudharabah->limit(3);
+            $mudharabahResults = $builderMudharabah->get()->getResultArray();
+            $transactionResults = array_merge($transactionResults, $mudharabahResults);
+        }
+        
+        $results['transactions'] = $transactionResults;
+        
+    } catch (\Exception $e) {
+        log_message('error', 'Search transactions error: ' . $e->getMessage());
+        $results['transactions'] = [];
+    }
+    
+    return $this->response->setJSON($results);
+}
+
+public function exportData()
+{
+    $type = $this->request->getGet('type');
+    
+    // Load model
+    $model = new \App\Models\MemberModel(); // Ganti dengan model yang sesuai
+    
+    $data = $model->findAll();
+    
+    if ($type === 'excel') {
+        return $this->exportExcel($data);
+    } else {
+        return $this->exportCSV($data);
+    }
+}
+
+public function importData()
+{
+    $file = $this->request->getFile('file');
+    
+    if ($file->isValid() && !$file->hasMoved()) {
+        $extension = $file->getClientExtension();
+        
+        if (in_array($extension, ['csv', 'xlsx'])) {
+            $newName = $file->getRandomName();
+            $file->move(WRITEPATH . 'uploads', $newName);
+            
+            // Process import
+            $imported = $this->processImport(WRITEPATH . 'uploads/' . $newName, $extension);
+            
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Data berhasil diimport: ' . $imported . ' records'
+            ]);
+        }
+    }
+    
+    return $this->response->setJSON([
+        'success' => false,
+        'message' => 'Gagal mengimport data'
+    ]);
+}
+
+public function backupDatabase()
+{
+    // Backup database
+    $db = \Config\Database::connect();
+    $backup = \Config\Services::backup();
+    
+    $filename = 'backup-' . date('Y-m-d-H-i-s') . '.sql';
+    $backup->setFilename($filename);
+    
+    try {
+        $backup->backup();
+        
+        return $this->response->download(WRITEPATH . 'backups/' . $filename, null);
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Backup gagal: ' . $e->getMessage()
+        ]);
+    }
+}
+
+public function auditLog()
+{
+    $logModel = new \App\Models\AuditLogModel(); // Buat model ini
+    $logs = $logModel->orderBy('created_at', 'DESC')->findAll(50);
+    
+    return $this->response->setJSON($logs);
+}
+
+public function updateNotificationSettings()
+{
+    $whatsapp = $this->request->getPost('whatsapp');
+    $email = $this->request->getPost('email');
+    
+    // Simpan setting ke database atau file config
+    $settings = [
+        'whatsapp' => (bool)$whatsapp,
+        'email' => (bool)$email
+    ];
+    
+    // Save to file atau database
+    file_put_contents(WRITEPATH . 'config/notification.json', json_encode($settings));
+    
+    return $this->response->setJSON([
+        'success' => true,
+        'message' => 'Pengaturan notifikasi berhasil diupdate'
+    ]);
+}
+
+// Helper methods
+private function exportExcel($data)
+{
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    
+    // Header
+    $sheet->setCellValue('A1', 'No');
+    $sheet->setCellValue('B1', 'Nama');
+    // Tambahkan header lainnya...
+    
+    // Data
+    $row = 2;
+    foreach ($data as $item) {
+        $sheet->setCellValue('A' . $row, $row-1);
+        $sheet->setCellValue('B' . $row, $item['nama']);
+        // Tambahkan data lainnya...
+        $row++;
+    }
+    
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+    $filename = 'export-data-' . date('Y-m-d') . '.xlsx';
+    
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    
+    $writer->save('php://output');
+    exit;
+}
+
+private function exportCSV($data)
+{
+    $filename = 'export-data-' . date('Y-m-d') . '.csv';
+    
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    
+    $output = fopen('php://output', 'w');
+    
+    // Header
+    fputcsv($output, ['No', 'Nama', 'Email']); // Sesuaikan dengan kolom
+    
+    // Data
+    $no = 1;
+    foreach ($data as $item) {
+        fputcsv($output, [
+            $no++,
+            $item['nama'],
+            $item['email']
+            // Tambahkan field lainnya
+        ]);
+    }
+    
+    fclose($output);
+    exit;
+}
+
+private function processImport($filePath, $extension)
+{
+    $imported = 0;
+    
+    if ($extension === 'csv') {
+        // Process CSV
+        if (($handle = fopen($filePath, "r")) !== FALSE) {
+            $row = 0;
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if ($row > 0) { // Skip header
+                    // Process data
+                    $imported++;
+                }
+                $row++;
+            }
+            fclose($handle);
+        }
+    }
+    
+    // Hapus file temporary
+    unlink($filePath);
+    
+    return $imported;
+}
 
     public function detailAnggota($id)
     {

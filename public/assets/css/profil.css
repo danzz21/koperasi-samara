@@ -29,19 +29,42 @@
     }
     .header-profil p { font-size:13px;opacity:.9; }
 
-    .profile-avatar {
-      width: 90px; /* samain kaya img di css lama */
-      height: 90px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 32px; /* biar proporsional sama bulat */
-      margin: 0 auto 10px; /* auto biar center, bawah kasih jarak sama h2 */
+   .profile-avatar {
+      position: relative;
+      display: inline-block;
     }
+
+.profile-avatar img,
+.profile-avatar div {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  object-fit: cover;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #2c2c2c80;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  
+}
+
+input[type="file"] {
+  display: none;
+}
+
 
 
     /* Card info */
@@ -97,3 +120,43 @@
       color: #059669;
       font-weight: 700;
     }
+
+
+    .header-profil {
+  position: relative;
+  padding: 20px;
+  text-align: center;
+}
+
+.logout-form {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn h6{
+  margin-top: 4px;
+  font-size: 9px;
+}
+
+.btn-logout i {
+  width: 5px;
+  height: 5px;
+  stroke-width: 2;
+  margin-bottom: -3px;
+}
+
+
+

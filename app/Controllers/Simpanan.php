@@ -34,7 +34,7 @@ class Simpanan extends BaseController
         // Data profil anggota
         // Ambil data anggota berdasarkan id_anggota
         $anggota = $db->table('anggota')
-            ->select('id_anggota, nama_lengkap, nomor_anggota, foto_diri')
+            ->select('id_anggota, nama_lengkap, nomor_anggota, photo')
             ->where('id_anggota', $id_anggota) // <- ini yang dipake
             ->get()
             ->getRowArray();
@@ -46,6 +46,7 @@ class Simpanan extends BaseController
             'pokok'         => $pokok,
             'wajib'         => $wajib,
             'sukarela'      => $sukarela,
+            'anggota' => $anggota
         ]);
     }
 }

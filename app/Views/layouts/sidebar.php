@@ -25,7 +25,7 @@
       <li>
         <a href="<?= base_url('admin/dashboard_admin/financing') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
           <i class="fas fa-hand-holding-usd"></i>
-          <span>Manajemen Pembiayaan</span>
+          <span>Manajemen Pinjaman</span>
         </a>
       </li>
 

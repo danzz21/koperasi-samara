@@ -1,14 +1,3 @@
-<?php if (session()->getFlashdata('success')): ?>
-  <div class="bg-green-100 text-green-700 px-4 py-2 rounded mb-4">
-    <?= session()->getFlashdata('success') ?>
-  </div>
-<?php endif; ?>
-
-<?php if (session()->getFlashdata('error')): ?>
-  <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
-    <?= session()->getFlashdata('error') ?>
-  </div>
-<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,69 +84,66 @@
     </div>
 
     <!-- MODAL TAMBAH ANGGOTA -->
-    <div id="memberModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
-    <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
+    <!-- MODAL TAMBAH ANGGOTA -->
+<div id="memberModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
+    <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Tambah Anggota Baru</h3>
-        
-        <form action="<?= base_url('admin/dashboard_admin/simpan') ?>" method="post" enctype="multipart/form-data">
-
-
-            <!-- STEP 1 -->
-            <div id="step1" class="step">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                    <input type="text" name="nama_lengkap" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500" required />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500" required />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                    <input type="text" name="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500" required />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500" required />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">No. KTP</label>
-                    <input type="text" name="no_ktp" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500" required />
-                </div>
-                <div class="flex space-x-3 pt-4">
-                    <button type="button" onclick="closeModal('memberModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600">
-                        Batal
-                    </button>
-                    <button type="button" onclick="nextStep()" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700">
-                        Next
-                    </button>
-                </div>
+        <form id="formMember" class="space-y-4" enctype="multipart/form-data">
+            <!-- Tambahkan CSRF Token -->
+            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap *</label>
+                <input type="text" name="nama_lengkap" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <input type="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Username *</label>
+                <input type="text" name="username" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Password *</label>
+                <input type="password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">No. KTP *</label>
+                <input type="text" name="no_ktp" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">No. Telepon *</label>
+                <input type="text" name="no_telp" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Alamat *</label>
+                <textarea name="alamat" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" rows="3"></textarea>
             </div>
 
-            <!-- STEP 2 -->
-            <div id="step2" class="step hidden">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Foto Diri</label>
-                    <input type="file" name="foto_diri" accept="image/*" onchange="previewImage(event, 'previewDiri')" class="w-full border border-gray-300 rounded-md px-3 py-2" />
-                    <img id="previewDiri" class="mt-2 w-24 h-24 object-cover rounded-md hidden">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Foto KTP</label>
-                    <input type="file" name="foto_ktp" accept="image/*" onchange="previewImage(event, 'previewKtp')" class="w-full border border-gray-300 rounded-md px-3 py-2" />
-                    <img id="previewKtp" class="mt-2 w-24 h-24 object-cover rounded-md hidden">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">No. Telepon</label>
-                    <input type="text" name="no_telp" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500" />
-                </div>
-                <div class="flex space-x-3 pt-4">
-                    <button type="button" onclick="prevStep()" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600">
-                        Previous
-                    </button>
-                    <button type="submit" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700">
-                        Simpan
-                    </button>
-                </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Foto Diri</label>
+                <input type="file" name="foto_diri" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Foto KTP</label>
+                <input type="file" name="foto_ktp" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+
+            <div class="flex space-x-3 pt-4">
+                <button type="button" onclick="closeModal('memberModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
+                    Batal
+                </button>
+                <button type="submit" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition-colors">
+                    Simpan
+                </button>
             </div>
         </form>
     </div>
@@ -165,6 +151,8 @@
 
 
     <script>
+
+        
         function openModal(id) {
             document.getElementById(id).classList.remove("hidden");
             document.getElementById(id).classList.add("flex");
@@ -174,30 +162,46 @@
             document.getElementById(id).classList.add("hidden");
             document.getElementById(id).classList.remove("flex");
         }
- let currentStep = 1;
-    function nextStep() {
-        document.getElementById("step1").classList.add("hidden");
-        document.getElementById("step2").classList.remove("hidden");
-        currentStep = 2;
-    }
-    function prevStep() {
-        document.getElementById("step2").classList.add("hidden");
-        document.getElementById("step1").classList.remove("hidden");
-        currentStep = 1;
-    }
 
-    function previewImage(event, previewId) {
-        const file = event.target.files[0];
-        const preview = document.getElementById(previewId);
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.classList.remove("hidden");
-            }
-            reader.readAsDataURL(file);
+        document.getElementById('formMember').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    // Loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
+    submitBtn.disabled = true;
+
+    // PERBAIKI URL INI - sesuaikan dengan route yang ada
+    fetch('<?= base_url('admin/dashboard_admin/members/save') ?>', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
         }
-    }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Anggota berhasil ditambahkan!');
+            closeModal('memberModal');
+            location.reload();
+        } else {
+            alert(data.message || 'Gagal menyimpan data.');
+        }
+    })
+    .catch(err => {
+        console.error('Error:', err);
+        alert('Terjadi kesalahan jaringan. Silakan coba lagi.');
+    })
+    .finally(() => {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+});
         // Live search anggota
         const searchInput = document.getElementById('searchInput');
         const anggotaTableBody = document.getElementById('anggotaTableBody');

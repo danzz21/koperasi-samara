@@ -42,6 +42,7 @@ body {
   height: 48px;
   border-radius: 50%;
   border: 2px solid #fff;
+  object-fit: cover;
 }
 
 .header-name {
