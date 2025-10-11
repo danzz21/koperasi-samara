@@ -1,0 +1,37 @@
+DEBUG - 2025-10-11 14:34:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 14:35:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 14:35:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:05:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:05:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:05:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:05:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:06:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:06:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:09:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:09:15 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-11 15:09:15 --> ID Anggota: 40
+DEBUG - 2025-10-11 15:09:15 --> Qard Detail - ID: 14, Pinjam: 4000000.00, Terbayar: 800000.00, Tenor: 5
+DEBUG - 2025-10-11 15:09:15 --> hitungAngsuranBerjalanFix: Terbayar=800000, Pinjam=4000000, Tenor=5
+DEBUG - 2025-10-11 15:09:15 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=800000, Hasil=1
+DEBUG - 2025-10-11 15:09:15 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 800000, Bisa Bayar: Ya
+DEBUG - 2025-10-11 15:09:15 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-11 15:09:15 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-11 15:09:15 --> Data Qard lunas: 0
+DEBUG - 2025-10-11 15:09:15 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-11 15:09:15 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-11 15:09:15 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-11 15:10:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-11 15:10:29 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-11 15:10:29 --> ID Anggota: 40
+DEBUG - 2025-10-11 15:10:29 --> Qard Detail - ID: 14, Pinjam: 4000000.00, Terbayar: 800000.00, Tenor: 5
+DEBUG - 2025-10-11 15:10:29 --> hitungAngsuranBerjalanFix: Terbayar=800000, Pinjam=4000000, Tenor=5
+DEBUG - 2025-10-11 15:10:29 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=800000, Hasil=1
+DEBUG - 2025-10-11 15:10:29 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 800000, Bisa Bayar: Ya
+DEBUG - 2025-10-11 15:10:29 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-11 15:10:29 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-11 15:10:29 --> Data Qard lunas: 0
+DEBUG - 2025-10-11 15:10:29 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-11 15:10:29 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-11 15:10:29 --> Total semua pinjaman lunas: 0

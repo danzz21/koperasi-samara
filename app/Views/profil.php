@@ -29,7 +29,12 @@
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     }
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
     body {
       font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
       background: linear-gradient(135deg, #f0fdf9 0%, #f0fdf4 100%);

@@ -14,5 +14,7 @@ class SimpananPokokModel extends Model
         'jumlah',
         'tanggal',
         'status',
+        'created_at',
+        'updated_at',
     ];
 }

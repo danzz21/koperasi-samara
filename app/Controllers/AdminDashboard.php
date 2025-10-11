@@ -208,6 +208,7 @@ public function tolakPinjaman($jenis, $id)
     $pendingMurabahah = $db->table('murabahah')->where('status', 'pending')->countAllResults();
     $pendingMudharabah = $db->table('mudharabah')->where('status', 'pending')->countAllResults();
     $pendingPinjamanCount = $pendingQard + $pendingMurabahah + $pendingMudharabah;
+    $pendingPembayaranCount = $db->table('pembayaran_pending')->where('status', 'pending')->countAllResults();
 
     // =========================
     // DATA CHART
@@ -276,6 +277,7 @@ $data = [
     'totalMargin'         => $totalMargin,
     'pendingPinjamanCount'=> $pendingPinjamanCount,
     'pendingSimpananCount'=> $pendingSimpananCount,
+    'pendingPembayaranCount' => $pendingPembayaranCount,
     'pendingCount'        => $pendingCount,
     'chartLabels'         => json_encode($labels),
     'chartSimpanan'       => json_encode($simpananData),
@@ -1431,7 +1433,180 @@ private function exportExcel($data)
     $writer->save('php://output');
     exit;
 }
+public function pembayaranPending()
+{
+    $db = \Config\Database::connect();
+    
+    // ✅ GUNAKAN QUERY YANG LEBIH EXPLISIT
+    $pembayaran_pending = $db->table('pembayaran_pending')
+                            ->select('*') // Ambil semua kolom
+                            ->where('status', 'pending')
+                            ->orderBy('created_at', 'DESC')
+                            ->get()
+                            ->getResult();
 
+    // ✅ DEBUG: Log struktur data
+    if (!empty($pembayaran_pending)) {
+        $first_item = $pembayaran_pending[0];
+        $properties = [];
+        foreach ($first_item as $key => $value) {
+            $properties[] = $key;
+        }
+        log_message('debug', 'Properties available: ' . implode(', ', $properties));
+    }
+
+    $data = [
+        'title' => 'Pembayaran Pending - Admin',
+        'pembayaran_pending' => $pembayaran_pending,
+        'active_menu' => 'pembayaran-pending'
+    ];
+
+    return view('layouts/header', $data)
+         . view('dashboard_admin/pembayaran_pending')
+         . view('layouts/footer');
+}
+public function verifikasiPembayaran($id)
+{
+    try {
+        // Debug log
+        log_message('debug', 'Verifikasi pembayaran dipanggil, ID: ' . $id);
+        
+        // Validasi ID
+        if (empty($id) || $id == 0) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'ID pembayaran tidak valid'
+            ]);
+        }
+
+        $db = \Config\Database::connect();
+        
+        // Ambil data pembayaran pending
+        $pembayaran = $db->table('pembayaran_pending')
+                        ->where('id', $id)
+                        ->get()
+                        ->getRow();
+        
+        if (!$pembayaran) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Data pembayaran tidak ditemukan. ID: ' . $id
+            ]);
+        }
+
+        // ✅ UPDATE STATUS TANPA updated_at
+        $db->table('pembayaran_pending')
+           ->where('id', $id)
+           ->update([
+               'status' => 'diverifikasi'
+               // ❌ HAPUS updated_at karena kolom tidak ada
+           ]);
+
+        // Update jml_terbayar di tabel pinjaman sesuai jenis
+        $this->updatePinjamanTerbayar(
+            $pembayaran->jenis_pinjaman,
+            $pembayaran->id_pinjaman,
+            $pembayaran->jumlah_bayar
+        );
+
+        log_message('debug', 'Pembayaran berhasil diverifikasi: ' . $id);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Pembayaran berhasil diverifikasi'
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error verifikasiPembayaran: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+        ]);
+    }
+}
+
+public function tolakPembayaran($id)
+{
+    try {
+        if ($this->request->getMethod() !== 'post') {
+            return $this->response->setStatusCode(405)->setJSON([
+                'status' => 'error',
+                'message' => 'Method tidak diizinkan'
+            ]);
+        }
+
+        $alasan = $this->request->getPost('alasan');
+
+        $db = \Config\Database::connect();
+        
+        // ✅ UPDATE STATUS TANPA updated_at
+        $db->table('pembayaran_pending')
+           ->where('id', $id)
+           ->update([
+               'status' => 'ditolak',
+               'alasan_penolakan' => $alasan
+               // ❌ HAPUS updated_at karena kolom tidak ada
+           ]);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Pembayaran berhasil ditolak'
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error tolakPembayaran: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+        ]);
+    }
+}
+
+private function updatePinjamanTerbayar($jenis, $id_pinjaman, $jumlah_bayar)
+{
+    $db = \Config\Database::connect();
+    
+    switch ($jenis) {
+        case 'Qard':
+            $table = 'qard';
+            $id_field = 'id_qard';
+            break;
+        case 'Murabahah':
+            $table = 'murabahah';
+            $id_field = 'id_mr';
+            break;
+        case 'Mudharabah':
+            $table = 'mudharabah';
+            $id_field = 'id_md';
+            break;
+        default:
+            return;
+    }
+
+    // Ambil data pinjaman saat ini
+    $pinjaman = $db->table($table)
+                   ->where($id_field, $id_pinjaman)
+                   ->get()
+                   ->getRow();
+
+    if ($pinjaman) {
+        $terbayar_baru = ($pinjaman->jml_terbayar ?? 0) + $jumlah_bayar;
+        
+        $updateData = [
+            'jml_terbayar' => $terbayar_baru
+            // ❌ HAPUS updated_at karena mungkin tidak ada
+        ];
+
+        // Cek jika sudah lunas
+        if ($terbayar_baru >= $pinjaman->jml_pinjam) {
+            $updateData['status'] = 'lunas';
+        }
+
+        $db->table($table)
+           ->where($id_field, $id_pinjaman)
+           ->update($updateData);
+    }
+}
 private function exportCSV($data)
 {
     $filename = 'export-data-' . date('Y-m-d') . '.csv';
@@ -1485,13 +1660,117 @@ private function processImport($filePath, $extension)
 }
 
     public function detailAnggota($id)
-    {
-        $anggota = $this->anggotaModel->find($id);
-        if (!$anggota) {
-            return redirect()->to('/admin/members')->with('error', 'Data anggota tidak ditemukan');
-        }
-        return view('layouts/header', ['title' => 'Detail Anggota'])
-             . view('dashboard_admin/detail_anggota', ['anggota' => $anggota])
-             . view('layouts/footer');
+{
+    $anggota = $this->anggotaModel->find($id);
+    if (!$anggota) {
+        return redirect()->to('/admin/members')->with('error', 'Data anggota tidak ditemukan');
     }
+
+    // ===== MODEL =====
+    $simpananPokokModel = new \App\Models\SimpananPokokModel();
+    $simpananWajibModel = new \App\Models\SimpananWajibModel();
+    $simpananSukarelaModel = new \App\Models\SimpananSukarelaModel();
+
+    $qardModel = new \App\Models\QardModel();
+    $murabahahModel = new \App\Models\MurabahahModel();
+    $mudharabahModel = new \App\Models\MudharabahModel();
+
+    // ===== SIMPANAN =====
+    $totalPokok = $simpananPokokModel
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->selectSum('jumlah')
+        ->first()['jumlah'] ?? 0;
+
+    $totalWajib = $simpananWajibModel
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->selectSum('jumlah')
+        ->first()['jumlah'] ?? 0;
+
+    $totalSukarela = $simpananSukarelaModel
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->selectSum('jumlah')
+        ->first()['jumlah'] ?? 0;
+
+    $totalSimpanan = $totalPokok + $totalWajib + $totalSukarela;
+
+    // ===== PEMBIAYAAN (hanya yang aktif) =====
+    $totalQard = $qardModel
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->selectSum('jml_pinjam')
+        ->first()['jml_pinjam'] ?? 0;
+
+    $totalMurabahah = $murabahahModel
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->selectSum('jml_pinjam')
+        ->first()['jml_pinjam'] ?? 0;
+
+    $totalMudharabah = $mudharabahModel
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->selectSum('jml_pinjam')
+        ->first()['jml_pinjam'] ?? 0;
+
+    $totalPembiayaan = $totalQard + $totalMurabahah + $totalMudharabah;
+
+    // ===== SISA ANGSURAN (hanya dari mudharabah aktif) =====
+    $row = $mudharabahModel
+        ->selectSum('jml_angsuran')
+        ->selectSum('jml_terbayar')
+        ->where('id_anggota', $id)
+        ->where('status', 'aktif')
+        ->first();
+
+    $sisaAngsuran = ($row['jml_angsuran'] ?? 0) - ($row['jml_terbayar'] ?? 0);
+
+    // ===== BAGI HASIL (sementara nol, nanti bisa diambil dari tabel keuntungan) =====
+    $bagiHasil = 0;
+
+    // ===== KIRIM DATA KE VIEW =====
+    $data = [
+        'anggota' => $anggota,
+        'totalSimpanan' => $totalSimpanan,
+        'totalPembiayaan' => $totalPembiayaan,
+        'sisaAngsuran' => $sisaAngsuran,
+        'bagiHasil' => $bagiHasil,
+    ];
+
+// ===== TRANSAKSI SIMPANAN (gabungan semua jenis) =====
+$transaksiPokok = $simpananPokokModel
+    ->where('id_anggota', $id)
+    ->where('status', 'aktif')
+    ->select("jumlah, 'Simpanan Pokok' as jenis, tanggal, 'masuk' as tipe, 'berhasil' as status")
+    ->findAll();
+
+$transaksiWajib = $simpananWajibModel
+    ->where('id_anggota', $id)
+    ->where('status', 'aktif')
+    ->select("jumlah, 'Simpanan Wajib' as jenis, tanggal, 'masuk' as tipe, 'berhasil' as status")
+    ->findAll();
+
+$transaksiSukarela = $simpananSukarelaModel
+    ->where('id_anggota', $id)
+    ->where('status', 'aktif')
+    ->select("jumlah, 'Simpanan Sukarela' as jenis, tanggal, 'masuk' as tipe, 'berhasil' as status")
+    ->findAll();
+
+// Gabung semua transaksi simpanan
+$transaksi = array_merge($transaksiPokok, $transaksiWajib, $transaksiSukarela);
+
+// Urutkan berdasarkan tanggal terbaru
+usort($transaksi, function ($a, $b) {
+    return strtotime($b['tanggal']) - strtotime($a['tanggal']);
+});
+
+$data['transaksi'] = $transaksi;
+
+
+    return view('layouts/header', ['title' => 'Detail Anggota'])
+         . view('dashboard_admin/detail_anggota', $data)
+         . view('layouts/footer');
+}
 }

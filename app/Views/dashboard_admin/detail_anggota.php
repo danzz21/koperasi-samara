@@ -59,143 +59,142 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <!-- Header -->
-    <header class="gradient-bg text-white p-4 card-shadow">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <button onclick="window.location.href='<?= base_url('admin/dashboard') ?>'" 
-        class="flex items-center space-x-2 hover:bg-white/20 px-3 py-2 rounded-lg transition">
-    <i class="fas fa-arrow-left"></i>
-    <span>Kembali Ke Dashboard Admin</span>
-</button>
-
-
-            <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-2 bg-white/20 px-3 py-2 rounded-lg">
-                    <i class="fas fa-user-shield"></i>
-                    <span>Admin Panel</span>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div class="mb-6">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Detail Anggota</h2>
+        <p class="text-gray-600">Data-data anggota</p>
+    </div>
 
     <!-- Main Content -->
     <main class="max-w-6xl mx-auto p-6">
         <!-- Member Profile Section -->
-        <div class="bg-white rounded-2xl p-6 mb-8 card-shadow">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
-                <div class="flex items-center space-x-6">
-                    <div class="profile-photo w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                        <img src=".jpg" alt="Profile photo of Muhammad Ardan, a cooperative member wearing business attire" class="w-full h-full rounded-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                        <div class="w-full h-full rounded-full flex items-center justify-center text-2xl font-bold" style="display: none;">MA</div>
+<div class="bg-white rounded-2xl p-6 mb-8 card-shadow">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+        <div class="flex items-center space-x-6">
+            <!-- FOTO PROFIL -->
+            <div class="profile-photo w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold bg-emerald-600">
+                <?php if (!empty($anggota['foto_diri']) && file_exists(FCPATH . 'uploads/foto_diri/' . $anggota['foto_diri'])): ?>
+                    <img src="<?= base_url('uploads/foto_diri/' . $anggota['foto_diri']) ?>" 
+                         alt="Foto <?= esc($anggota['nama_lengkap']) ?>" 
+                         class="w-full h-full rounded-full object-cover" />
+                <?php else: ?>
+                    <div class="w-full h-full rounded-full flex items-center justify-center text-2xl font-bold text-white bg-emerald-500">
+                        <?= strtoupper(substr($anggota['nama_lengkap'], 0, 2)) ?>
                     </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-gray-800 mb-1">Muhammad Rizky    </h1>
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-1 sm:space-y-0 text-sm text-gray-600">
-                            <div class="flex items-center space-x-2">
-                                <i class="fas fa-id-card text-blue-500"></i>
-                                <span>No Anggota: <strong>KOP-2025-101</strong></span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <i class="fas fa-calendar text-green-500"></i>
-                                <span>Tanggal Bergabung: <strong>15 Januari 2025</strong></span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <span class="status-badge px-3 py-1 rounded-full text-white text-xs font-semibold">
-                                    Aktif
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-3">
-                    <button onclick="editMember()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition flex items-center space-x-2">
-                        <i class="fas fa-edit"></i>
-                        <span>EDIT</span>
-                    </button>
-                    <!-- Tombol Edit -->
+                <?php endif; ?>
+            </div>
 
-                    <button onclick="viewActivity()" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg transition flex items-center space-x-2">
-                        <i class="fas fa-chart-line"></i>
-                        <span>ACTIVITY</span>
-                    </button>
+            <!-- DATA ANGGOTA -->
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-1"><?= esc($anggota['nama_lengkap']) ?></h1>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-1 sm:space-y-0 text-sm text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-id-card text-blue-500"></i>
+                        <span>No Anggota: <strong><?= esc($anggota['id_anggota']) ?></strong></span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-calendar text-green-500"></i>
+                        <span>Tanggal Bergabung: 
+                            <strong><?= date('d F Y', strtotime($anggota['tanggal_daftar'])) ?></strong>
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <?php
+                            $status = strtolower($anggota['status'] ?? 'menunggu');
+                            $warna = match($status) {
+                                'aktif' => 'bg-green-500',
+                                'nonaktif' => 'bg-red-500',
+                                default => 'bg-yellow-500'
+                            };
+                        ?>
+                        <span class="status-badge px-3 py-1 rounded-full text-white text-xs font-semibold <?= $warna ?>">
+                            <?= ucfirst($status) ?>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- TOMBOL AKSI -->
+        <div class="flex space-x-3">
+            <button onclick="editMember(<?= $anggota['id_anggota'] ?>)" 
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition flex items-center space-x-2">
+                <i class="fas fa-edit"></i>
+                <span>EDIT</span>
+            </button>
+
+            <button onclick="viewActivity(<?= $anggota['id_anggota'] ?>)" 
+                    class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg transition flex items-center space-x-2">
+                <i class="fas fa-chart-line"></i>
+                <span>ACTIVITY</span>
+            </button>
+        </div>
+    </div>
+</div>
+
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="bg-yellow-100 p-3 rounded-xl">
-                        <i class="fas fa-piggy-bank text-yellow-600 text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm text-gray-500 mb-1">Total Simpanan</p>
-                        <p class="text-2xl font-bold text-gray-800">Rp 45,500,000</p>
-                    </div>
-                </div>
-                <div class="flex items-center text-sm">
-                    <span class="text-green-500 flex items-center">
-                        <i class="fas fa-arrow-up mr-1"></i>
-                        +12% dari bulan lalu
-                    </span>
-                </div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Total Simpanan -->
+    <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-yellow-100 p-3 rounded-xl">
+                <i class="fas fa-piggy-bank text-yellow-600 text-2xl"></i>
             </div>
-
-            <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="bg-blue-100 p-3 rounded-xl">
-                        <i class="fas fa-hand-holding-usd text-blue-600 text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm text-gray-500 mb-1">Total Pembiayaan</p>
-                        <p class="text-2xl font-bold text-gray-800">Rp 90,500,000</p>
-                    </div>
-                </div>
-                <div class="flex items-center text-sm">
-                    <span class="text-blue-500 flex items-center">
-                        <i class="fas fa-info-circle mr-1"></i>
-                        2 pembiayaan aktif
-                    </span>
-                </div>
-            </div>
-
-            <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="bg-red-100 p-3 rounded-xl">
-                        <i class="fas fa-clock text-red-600 text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm text-gray-500 mb-1">Sisa Angsuran</p>
-                        <p class="text-2xl font-bold text-gray-800">Rp 25,500,000</p>
-                    </div>
-                </div>
-                <div class="flex items-center text-sm">
-                    <span class="text-orange-500 flex items-center">
-                        <i class="fas fa-calendar-check mr-1"></i>
-                        18 bulan tersisa
-                    </span>
-                </div>
-            </div>
-
-            <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="bg-green-100 p-3 rounded-xl">
-                        <i class="fas fa-coins text-green-600 text-2xl"></i>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-sm text-gray-500 mb-1">Bagi Hasil</p>
-                        <p class="text-2xl font-bold text-gray-800">Rp 5,500,000</p>
-                    </div>
-                </div>
-                <div class="flex items-center text-sm">
-                    <span class="text-green-500 flex items-center">
-                        <i class="fas fa-percentage mr-1"></i>
-                        7.5% return tahunan
-                    </span>
-                </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-500 mb-1">Total Simpanan</p>
+                <p class="text-2xl font-bold text-gray-800">
+                    Rp <?= number_format($totalSimpanan ?? 0, 0, ',', '.') ?>
+                </p>
             </div>
         </div>
+    </div>
+
+    <!-- Total Pembiayaan -->
+    <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-blue-100 p-3 rounded-xl">
+                <i class="fas fa-hand-holding-usd text-blue-600 text-2xl"></i>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-500 mb-1">Total Pembiayaan</p>
+                <p class="text-2xl font-bold text-gray-800">
+                    Rp <?= number_format($totalPembiayaan ?? 0, 0, ',', '.') ?>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sisa Angsuran -->
+    <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-red-100 p-3 rounded-xl">
+                <i class="fas fa-clock text-red-600 text-2xl"></i>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-500 mb-1">Sisa Angsuran</p>
+                <p class="text-2xl font-bold text-gray-800">
+                    Rp <?= number_format($sisaAngsuran ?? 0, 0, ',', '.') ?>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bagi Hasil -->
+    <div class="stats-card bg-white rounded-2xl p-6 card-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="bg-green-100 p-3 rounded-xl">
+                <i class="fas fa-coins text-green-600 text-2xl"></i>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-500 mb-1">Bagi Hasil</p>
+                <p class="text-2xl font-bold text-gray-800">
+                    Rp <?= number_format($bagiHasil ?? 0, 0, ',', '.') ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <!-- Tabs and Content -->
         <div class="bg-white rounded-2xl card-shadow overflow-hidden">
@@ -241,23 +240,38 @@
                     </div>
                     
                     <div class="space-y-4" id="transaction-list">
-                        <div class="transaction-item border border-gray-200 rounded-lg p-4 hover:shadow-md">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-green-100 p-2 rounded-lg">
-                                        <i class="fas fa-plus text-green-600"></i>
+                        <div class="space-y-4">
+                            <?php if (!empty($transaksi)): ?>
+                                <?php foreach ($transaksi as $t): ?>
+                                    <div class="transaction-item border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all duration-150">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="bg-green-100 p-2 rounded-lg">
+                                                    <i class="fas fa-plus text-green-600"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-semibold text-gray-800">
+                                                        Setoran <?= esc($t['jenis']) ?>
+                                                    </p>
+                                                    <p class="text-sm text-gray-500">
+                                                        <?= date('d F Y • H:i', strtotime($t['tanggal'])) ?> WIB
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="font-bold text-green-600">
+                                                    +Rp <?= number_format($t['jumlah'], 0, ',', '.') ?>
+                                                </p>
+                                                <p class="text-sm text-gray-500"><?= ucfirst($t['status']) ?></p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-800">Setoran Simpanan Pokok</p>
-                                        <p class="text-sm text-gray-500">22 Januari 2025 • 10:30 WIB</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold amount-positive">+Rp 2,500,000</p>
-                                    <p class="text-sm text-gray-500">Berhasil</p>
-                                </div>
-                            </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p class="text-gray-500 text-center">Belum ada transaksi simpanan.</p>
+                            <?php endif; ?>
                         </div>
+
 
                         <div class="transaction-item border border-gray-200 rounded-lg p-4 hover:shadow-md">
                             <div class="flex items-center justify-between">

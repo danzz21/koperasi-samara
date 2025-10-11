@@ -36,4 +36,28 @@ class AnggotaModel extends Model
     'photo'
 ];
 
+    public function getAnggotaAktif()
+    {
+        return $this->where('status', 'aktif')->findAll();
+    }
+
+    public function getAnggotaPending()
+    {
+        return $this->where('status', 'pending')->findAll();
+    }
+
+    public function getByNomorAnggota($nomor_anggota)
+    {
+        return $this->where('nomor_anggota', $nomor_anggota)->first();
+    }
+
+    public function verifikasiAnggota($id_anggota)
+    {
+        return $this->update($id_anggota, ['status' => 'aktif']);
+    }
+
+    public function tolakAnggota($id_anggota)
+    {
+        return $this->update($id_anggota, ['status' => 'ditolak']);
+    }
 }

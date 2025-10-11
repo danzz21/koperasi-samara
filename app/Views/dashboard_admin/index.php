@@ -72,48 +72,51 @@
 
     <!-- Notifikasi Penting -->
     <div class="bg-white p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Notifikasi Penting</h3>
-        <div class="space-y-3">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Notifikasi Penting</h3>
+    <div class="space-y-3">
 
-            <!-- Anggota Baru Pending -->
-            <div class="flex items-center p-3 bg-green-50 border-l-4 border-green-500 rounded">
-                <i class="fas fa-user-plus text-green-500 mr-3"></i>
-                <div>
-                    <p class="font-medium text-green-800"><?= $pendingCount ?> Anggota Baru</p>
-                    <p class="text-sm text-green-600">Menunggu verifikasi</p>
-                    <a href="<?= base_url('admin/pending-members') ?>" class="text-blue-500 underline">Lihat Detail</a>
-                </div>
+        <!-- Anggota Baru Pending -->
+        <div class="flex items-center p-3 bg-green-50 border-l-4 border-green-500 rounded">
+            <i class="fas fa-user-plus text-green-500 mr-3"></i>
+            <div>
+                <p class="font-medium text-green-800"><?= $pendingCount ?> Anggota Baru</p>
+                <p class="text-sm text-green-600">Menunggu verifikasi</p>
+                <a href="<?= base_url('admin/pending-members') ?>" class="text-blue-500 underline">Lihat Detail</a>
             </div>
+        </div>
 
-            <!-- Simpanan Sukarela Pending -->
-            <div class="flex items-center p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded">
-                <i class="fas fa-hourglass-half text-yellow-500 mr-3"></i>
-                <div>
-                    <p class="font-medium text-yellow-800"><?= $pendingSimpananCount ?> Simpanan Sukarela Pending</p>
-                    <p class="text-sm text-yellow-600">Menunggu persetujuan admin</p>
-                    <a href="<?= base_url('admin/pending-sukarela') ?>" class="text-blue-500 underline">Lihat Detail</a>
-                </div>
+        <!-- Simpanan Sukarela Pending -->
+        <div class="flex items-center p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded">
+            <i class="fas fa-hourglass-half text-yellow-500 mr-3"></i>
+            <div>
+                <p class="font-medium text-yellow-800"><?= $pendingSimpananCount ?> Simpanan Sukarela Pending</p>
+                <p class="text-sm text-yellow-600">Menunggu persetujuan admin</p>
+                <a href="<?= base_url('admin/pending-sukarela') ?>" class="text-blue-500 underline">Lihat Detail</a>
             </div>
+        </div>
 
-            <!-- Pinjaman Pending -->
-            <div class="flex items-center p-3 bg-orange-50 border-l-4 border-orange-500 rounded">
-                <i class="fas fa-money-check-alt text-orange-500 mr-3"></i>
-                <div>
-                    <p class="font-medium text-orange-800"><?= $pendingPinjamanCount ?> Pinjaman Pending</p>
-                    <p class="text-sm text-orange-600">Belum disetujui oleh admin</p>
-                    <a href="<?= base_url('admin/pending-pinjaman') ?>" class="text-blue-500 underline">Lihat Detail</a>
-                </div>
+        <!-- Pinjaman Pending -->
+        <div class="flex items-center p-3 bg-orange-50 border-l-4 border-orange-500 rounded">
+            <i class="fas fa-money-check-alt text-orange-500 mr-3"></i>
+            <div>
+                <p class="font-medium text-orange-800"><?= $pendingPinjamanCount ?> Pinjaman Pending</p>
+                <p class="text-sm text-orange-600">Belum disetujui oleh admin</p>
+                <a href="<?= base_url('admin/pending-pinjaman') ?>" class="text-blue-500 underline">Lihat Detail</a>
             </div>
+        </div>
 
-            <!-- Opsional: Target Simpanan (Manual) -->
-            <div class="flex items-center p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
-                <i class="fas fa-coins text-blue-500 mr-3"></i>
-                <div>
-                    <p class="font-medium text-blue-800">Target Simpanan</p>
-                    <p class="text-sm text-blue-600">85% tercapai bulan ini</p>
-                    <!-- Opsional, bisa dinamis nanti -->
-                </div>
+        <!-- ✅ PEMBAYARAN CICILAN PENDING - STYLE KONSISTEN -->
+        <div class="flex items-center p-3 bg-purple-50 border-l-4 border-purple-500 rounded">
+            <i class="fas fa-credit-card text-purple-500 mr-3"></i>
+            <div>
+                <p class="font-medium text-purple-800"><?= $pendingPembayaranCount ?> Pembayaran Cicilan Pending</p>
+                <p class="text-sm text-purple-600">Menunggu verifikasi admin</p>
+                <a href="<?= base_url('admin/pembayaran-pending') ?>" class="text-blue-500 underline">Lihat Detail</a>
             </div>
+        </div>
+
+    </div>
+</div>
 
             <!-- Placeholder untuk pembiayaan jatuh tempo (jika mau implementasi) -->
             <!-- 

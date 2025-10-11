@@ -38,6 +38,8 @@ $routes->group('anggota', ['filter' => 'role:anggota'], function ($routes) {
     $routes->get('sim_sukarela', 'Sim_sukarela::index');
     $routes->post('simpanan/sukarela/store', 'SimpananSukarela::store');
 
+        $routes->get('cicilan', 'Cicilan::index');
+    $routes->post('cicilan/bayar', 'Cicilan::bayarCicilan');
     // Pinjaman jenis
     $routes->get('pin_alqordh', 'Pin_alqordh::index');
     $routes->get('pin_murobahah', 'Pin_murobahah::index');
@@ -61,6 +63,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('dashboard_admin/settings', 'AdminDashboard::settings');
     $routes->get('dashboard_admin/extras', 'AdminDashboard::extras');
     $routes->post('dashboard_admin/members/save', 'AdminDashboard::saveMember');
+    $routes->get('detail-anggota/(:num)', 'AdminDashboard::detailAnggota/$1');
 
     // Simpanan
     $routes->get('getSimpananList', 'AdminDashboard::getSimpananList');
@@ -80,6 +83,9 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('transactions', 'AdminDashboard::transactions');
     $routes->post('saveTransaksi', 'AdminDashboard::saveTransaksi');
 
+    $routes->get('pembayaran-pending', 'AdminDashboard::pembayaranPending');
+    $routes->post('pembayaran/verifikasi/(:num)', 'AdminDashboard::verifikasiPembayaran/$1');
+    $routes->post('pembayaran/tolak/(:num)', 'AdminDashboard::tolakPembayaran/$1');
     // Pinjaman
     $routes->get('pending-pinjaman', 'AdminDashboard::pendingLoans');
     $routes->get('pinjaman/verifikasi/(:segment)/(:num)', 'AdminDashboard::verifikasiPinjaman/$1/$2');

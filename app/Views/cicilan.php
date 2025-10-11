@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?= esc($title) ?> - Koperasi</title>
+    <meta name="csrf-token" content="<?= csrf_hash() ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -237,8 +238,8 @@
             padding: 1.5rem;
             border-bottom: 1px solid var(--gray-light);
             display: flex;
-            justify-content: between;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-start;
             transition: var(--transition);
         }
 
@@ -257,19 +258,22 @@
         .cicilan-title {
             font-weight: 600;
             color: var(--dark);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
         }
 
         .cicilan-detail {
             font-size: 14px;
             color: var(--gray);
             display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .cicilan-amount {
             font-weight: 700;
             font-size: 16px;
+            margin-bottom: 0.5rem;
         }
 
         .cicilan-status {
@@ -278,6 +282,7 @@
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .status-lunas {
@@ -291,6 +296,21 @@
         }
 
         .status-tertunda {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-pending {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-terverifikasi {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-ditolak {
             background: #fee2e2;
             color: #991b1b;
         }
@@ -312,6 +332,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -332,6 +353,11 @@
         .btn-outline:hover {
             background: var(--primary);
             color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 14px;
         }
 
         /* Bottom Nav */
@@ -376,6 +402,52 @@
             font-weight: 600;
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Info Anggota */
+        .info-anggota {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+        }
+
         /* Responsive */
         @media (max-width: 480px) {
             .header {
@@ -393,6 +465,12 @@
             
             .cicilan-item {
                 padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cicilan-status {
+                align-self: flex-start;
             }
             
             .action-buttons {
@@ -403,52 +481,55 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .cicilan-detail {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-<header class="header">
-    <div class="profile">
-        <?php 
-        // Gunakan foto_diri jika ada, jika tidak gunakan foto, jika tidak ada gunakan default
-        $foto_anggota = null;
-        if (!empty($anggota['foto_diri']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto_diri'])) {
-            $foto_anggota = $anggota['foto_diri'];
-        } elseif (!empty($anggota['foto']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto'])) {
-            $foto_anggota = $anggota['foto'];
-        }
-        ?>
-        
-        <?php if ($foto_anggota): ?>
-            <img id="preview" src="<?= base_url('uploads/profile/' . $foto_anggota) ?>" alt="Foto Profil">
-        <?php else: ?>
+    <header class="header">
+        <div class="profile">
             <?php 
-                // Pastikan $anggota ada dan memiliki nama_lengkap
-                $nama_lengkap = isset($anggota['nama_lengkap']) ? $anggota['nama_lengkap'] : 'Anggota';
-                $nomor_anggota = isset($anggota['nomor_anggota']) ? $anggota['nomor_anggota'] : 'ANG00001';
-                
-                $firstLetter = strtoupper(substr($nama_lengkap, 0, 1));
-                $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
-                $bgColor = $colors[crc32($nomor_anggota) % count($colors)];
+            $foto_anggota = null;
+            if (!empty($anggota['foto_diri']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto_diri'])) {
+                $foto_anggota = $anggota['foto_diri'];
+            } elseif (!empty($anggota['foto']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto'])) {
+                $foto_anggota = $anggota['foto'];
+            }
             ?>
-            <div class="profile-avatar" style="background:<?= $bgColor ?>;">
-                <?= $firstLetter ?>
+            
+            <?php if ($foto_anggota): ?>
+                <img id="preview" src="<?= base_url('uploads/profile/' . $foto_anggota) ?>" alt="Foto Profil">
+            <?php else: ?>
+                <?php 
+                    $nama_lengkap = isset($anggota['nama_lengkap']) ? $anggota['nama_lengkap'] : 'Anggota';
+                    $nomor_anggota = isset($anggota['nomor_anggota']) ? $anggota['nomor_anggota'] : 'ANG00001';
+                    
+                    $firstLetter = strtoupper(substr($nama_lengkap, 0, 1));
+                    $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
+                    $bgColor = $colors[crc32($nomor_anggota) % count($colors)];
+                ?>
+                <div class="profile-avatar" style="background:<?= $bgColor ?>;">
+                    <?= $firstLetter ?>
+                </div>
+            <?php endif; ?>
+            <div class="profile-info">
+                <div class="header-name"><?= esc(isset($anggota['nama_lengkap']) ? $anggota['nama_lengkap'] : 'Anggota') ?></div>
+                <div class="header-id">ID: <?= esc(isset($anggota['nomor_anggota']) ? $anggota['nomor_anggota'] : 'ANG00001') ?></div>
             </div>
-        <?php endif; ?>
-        <div class="profile-info">
-            <div class="header-name"><?= esc(isset($anggota['nama_lengkap']) ? $anggota['nama_lengkap'] : 'Anggota') ?></div>
-            <div class="header-id">ID: <?= esc(isset($anggota['nomor_anggota']) ? $anggota['nomor_anggota'] : 'ANG00001') ?></div>
         </div>
-    </div>
-    <div class="header-actions">
-        <div style="position: relative;">
-            <i data-lucide="bell" class="icon"></i>
-            <div class="notification-badge">3</div>
+        <div class="header-actions">
+            <div style="position: relative;">
+                <i data-lucide="bell" class="icon"></i>
+                <div class="notification-badge">3</div>
+            </div>
+            <i data-lucide="settings" class="icon"></i>
         </div>
-        <i data-lucide="settings" class="icon"></i>
-    </div>
-</header>
+    </header>
 
     <!-- Section Title -->
     <h3 class="section-title">
@@ -463,6 +544,20 @@
         <div class="summary-card">
             <h3>Ringkasan Cicilan</h3>
             <p>Total cicilan aktif dan riwayat pembayaran Anda</p>
+        </div>
+
+        <!-- Info Anggota -->
+        <div class="info-anggota">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h4 style="margin: 0; font-size: 16px;"><?= esc($anggota['nama_lengkap']) ?></h4>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">ID: <?= esc($anggota['nomor_anggota']) ?></p>
+                </div>
+                <div style="text-align: right;">
+                    <p style="margin: 0; font-size: 14px;">Total Semua Pinjaman</p>
+                    <h3 style="margin: 5px 0 0 0;">Rp <?= number_format($summary['total_qard'] + $summary['total_murabahah'] + $summary['total_mudharabah'], 0, ',', '.') ?></h3>
+                </div>
+            </div>
         </div>
 
         <!-- Info Cards -->
@@ -481,8 +576,20 @@
                     <i data-lucide="calendar"></i>
                     <h3>Jatuh Tempo</h3>
                 </div>
-                <div class="amount"><?= $summary['jatuh_tempo_terdekat'] ? date('d M Y', strtotime($summary['jatuh_tempo_terdekat'])) : '-' ?></div>
-                <div class="label">Cicilan berikutnya</div>
+                <div class="amount">
+                    <?php if ($summary['jatuh_tempo_terdekat']): ?>
+                        <?= date('d M', strtotime($summary['jatuh_tempo_terdekat'])) ?>
+                    <?php else: ?>
+                        -
+                    <?php endif; ?>
+                </div>
+                <div class="label">
+                    <?php if ($summary['jatuh_tempo_terdekat']): ?>
+                        Cicilan berikutnya
+                    <?php else: ?>
+                        Tidak ada jatuh tempo
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="info-card">
@@ -492,6 +599,36 @@
                 </div>
                 <div class="amount">Rp <?= number_format($summary['total_angsuran_bulanan'], 0, ',', '.') ?></div>
                 <div class="label">Per bulan</div>
+            </div>
+        </div>
+
+        <!-- Total Masing-masing Pinjaman -->
+        <div class="card-grid">
+            <div class="info-card">
+                <div class="card-header">
+                    <i data-lucide="trending-up"></i>
+                    <h3>Total Qard Saya</h3>
+                </div>
+                <div class="amount">Rp <?= number_format($summary['total_qard'], 0, ',', '.') ?></div>
+                <div class="label">Total pinjaman Qard aktif</div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <i data-lucide="shopping-cart"></i>
+                    <h3>Total Murabahah Saya</h3>
+                </div>
+                <div class="amount">Rp <?= number_format($summary['total_murabahah'], 0, ',', '.') ?></div>
+                <div class="label">Total pinjaman Murabahah aktif</div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <i data-lucide="bar-chart-3"></i>
+                    <h3>Total Mudharabah Saya</h3>
+                </div>
+                <div class="amount">Rp <?= number_format($summary['total_mudharabah'], 0, ',', '.') ?></div>
+                <div class="label">Total pinjaman Mudharabah aktif</div>
             </div>
         </div>
 
@@ -507,6 +644,85 @@
             </button>
         </div>
 
+        <!-- ✅ PEMBAYARAN MENUNGGU VERIFIKASI -->
+        <?php if (!empty($pembayaran_pending)): ?>
+            <h4 style="margin: 2rem 0 1rem 0; color: var(--dark);">Pembayaran Menunggu Verifikasi</h4>
+            <div class="cicilan-list">
+                <?php foreach ($pembayaran_pending as $pending): ?>
+                    <div class="cicilan-item">
+                        <div class="cicilan-info">
+                            <div class="cicilan-title">
+                                Pembayaran <?= is_array($pending) ? $pending['jenis_pinjaman'] : $pending->jenis_pinjaman ?> - Angsuran Ke-<?= is_array($pending) ? $pending['angsuran_ke'] : $pending->angsuran_ke ?>
+                            </div>
+                            <div class="cicilan-detail">
+                                <span>Jumlah: Rp <?= number_format(is_array($pending) ? $pending['jumlah_bayar'] : $pending->jumlah_bayar, 0, ',', '.') ?></span>
+                                <span>Tanggal: <?= date('d M Y', strtotime(is_array($pending) ? $pending['tanggal_bayar'] : $pending->tanggal_bayar)) ?></span>
+                                <?php 
+                                $bukti_bayar = is_array($pending) ? $pending['bukti_bayar'] : $pending->bukti_bayar;
+                                if ($bukti_bayar): ?>
+                                    <span>
+                                        <a href="<?= base_url('uploads/bukti_bayar/' . $bukti_bayar) ?>" target="_blank" style="color: var(--primary); text-decoration: none;">
+                                            Lihat Bukti
+                                        </a>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            <div style="font-size: 12px; color: var(--gray);">
+                                Diajukan: <?= date('d M Y H:i', strtotime(is_array($pending) ? $pending['created_at'] : $pending->created_at)) ?>
+                            </div>
+                        </div>
+                        <div class="cicilan-status status-pending">Menunggu Verifikasi</div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- ✅ RIWAYAT PEMBAYARAN YANG SUDAH DIPROSES -->
+        <?php if (!empty($riwayat_pembayaran)): ?>
+            <h4 style="margin: 2rem 0 1rem 0; color: var(--dark);">Riwayat Pembayaran</h4>
+            <div class="cicilan-list">
+                <?php foreach ($riwayat_pembayaran as $riwayat): ?>
+                    <div class="cicilan-item">
+                        <div class="cicilan-info">
+                            <div class="cicilan-title">
+                                Pembayaran <?= is_array($riwayat) ? $riwayat['jenis_pinjaman'] : $riwayat->jenis_pinjaman ?> - Angsuran Ke-<?= is_array($riwayat) ? $riwayat['angsuran_ke'] : $riwayat->angsuran_ke ?>
+                            </div>
+                            <div class="cicilan-detail">
+                                <span>Jumlah: Rp <?= number_format(is_array($riwayat) ? $riwayat['jumlah_bayar'] : $riwayat->jumlah_bayar, 0, ',', '.') ?></span>
+                                <span>Tanggal: <?= date('d M Y', strtotime(is_array($riwayat) ? $riwayat['tanggal_bayar'] : $riwayat->tanggal_bayar)) ?></span>
+                                <?php 
+                                $bukti_bayar = is_array($riwayat) ? $riwayat['bukti_bayar'] : $riwayat->bukti_bayar;
+                                if ($bukti_bayar): ?>
+                                    <span>
+                                        <a href="<?= base_url('uploads/bukti_bayar/' . $bukti_bayar) ?>" target="_blank" style="color: var(--primary); text-decoration: none;">
+                                            Lihat Bukti
+                                        </a>
+                                    </span>
+                                <?php endif; ?>
+                                <?php 
+                                $status = is_array($riwayat) ? $riwayat['status'] : $riwayat->status;
+                                $alasan_penolakan = is_array($riwayat) ? ($riwayat['alasan_penolakan'] ?? '') : ($riwayat->alasan_penolakan ?? '');
+                                if ($status === 'ditolak' && !empty($alasan_penolakan)): ?>
+                                    <span style="color: var(--danger);">
+                                        Alasan: <?= $alasan_penolakan ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            <div style="font-size: 12px; color: var(--gray);">
+                                Diajukan: <?= date('d M Y H:i', strtotime(is_array($riwayat) ? $riwayat['created_at'] : $riwayat->created_at)) ?>
+                                <?php if ($status !== 'pending'): ?>
+                                    | Diproses: <?= date('d M Y H:i', strtotime(is_array($riwayat) ? $riwayat['created_at'] : $riwayat->created_at)) ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="cicilan-status <?= $status === 'diverifikasi' ? 'status-terverifikasi' : 'status-ditolak' ?>">
+                            <?= $status === 'diverifikasi' ? 'Terverifikasi' : 'Ditolak' ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Daftar Cicilan Aktif -->
         <?php if (!empty($pinjaman_aktif)): ?>
             <h4 style="margin: 2rem 0 1rem 0; color: var(--dark);">Cicilan Aktif</h4>
@@ -514,12 +730,32 @@
                 <?php foreach ($pinjaman_aktif as $pinjaman): ?>
                     <div class="cicilan-item">
                         <div class="cicilan-info">
-                            <div class="cicilan-title">Pinjaman <?= $pinjaman->jenis ?></div>
+                            <div class="cicilan-title"><?= $pinjaman->nama_pinjaman ?></div>
                             <div class="cicilan-detail">
                                 <span>Angsuran: <?= $pinjaman->angsuran_berjalan ?? 0 ?>/<?= $pinjaman->tenor ?></span>
-                                <span>Jatuh Tempo: <?= date('d M Y', strtotime('+1 month')) ?></span>
+                                <span>Jatuh Tempo: <?= date('d M Y', strtotime($pinjaman->jatuh_tempo_berikutnya)) ?></span>
+                                <span>Total: Rp <?= number_format($pinjaman->total_pinjaman, 0, ',', '.') ?></span>
                             </div>
                             <div class="cicilan-amount">Rp <?= number_format($pinjaman->angsuran_per_bulan, 0, ',', '.') ?> / bulan</div>
+                            <div style="font-size: 12px; color: var(--gray); margin-top: 5px;">
+                                Pengajuan: <?= date('d M Y', strtotime($pinjaman->tanggal_pinjaman)) ?>
+                                | Terbayar: Rp <?= number_format($pinjaman->total_terbayar, 0, ',', '.') ?>
+                            </div>
+                            
+                            <!-- Tombol Bayar -->
+                            <?php if ($pinjaman->bisa_bayar): ?>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary btn-sm" 
+                                            onclick="bayarCicilan('<?= $pinjaman->jenis ?>', <?= $pinjaman->id ?>, <?= ($pinjaman->angsuran_berjalan ?? 0) + 1 ?>, <?= $pinjaman->angsuran_per_bulan ?>)">
+                                        <i data-lucide="credit-card"></i>
+                                        Bayar Angsuran Ke-<?= ($pinjaman->angsuran_berjalan ?? 0) + 1 ?>
+                                    </button>
+                                </div>
+                            <?php else: ?>
+                                <div style="margin-top: 10px; font-size: 14px; color: var(--success);">
+                                    <i data-lucide="check-circle"></i> Semua angsuran telah dibayar
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="cicilan-status status-proses">Berjalan</div>
                     </div>
@@ -541,7 +777,7 @@
                         <div class="cicilan-info">
                             <div class="cicilan-title">Pinjaman <?= $pinjaman->jenis ?></div>
                             <div class="cicilan-detail">
-                                <span>Lunas: <?= date('d M Y', strtotime($pinjaman->updated_at)) ?></span>
+                                <span>Lunas: <?= date('d M Y', strtotime($pinjaman->tanggal_lunas)) ?></span>
                                 <span>Durasi: <?= $pinjaman->tenor ?> bulan</span>
                             </div>
                             <div class="cicilan-amount">Rp <?= number_format($pinjaman->angsuran_per_bulan, 0, ',', '.') ?> / bulan</div>
@@ -552,6 +788,56 @@
             </div>
         <?php endif; ?>
     </div>
+
+    <!-- Modal Bayar Cicilan -->
+    <div id="modalBayar" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <i data-lucide="credit-card"></i>
+                Bayar Cicilan
+            </h3>
+            <form id="formBayar" enctype="multipart/form-data">
+                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                <input type="hidden" name="jenis_pinjaman" id="jenis_pinjaman">
+                <input type="hidden" name="id_pinjaman" id="id_pinjaman">
+                <input type="hidden" name="angsuran_ke" id="angsuran_ke">
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Jumlah Bayar</label>
+                    <!-- PERBAIKAN: Ganti type number dengan text untuk menghindari validasi browser -->
+                    <input type="text" 
+                           name="jumlah_bayar" 
+                           id="jumlah_bayar" 
+                           class="form-input" 
+                           placeholder="Contoh: 500000 atau 500.000"
+                           required
+                           oninput="formatAngka(this)">
+                    <small style="color: var(--gray);">Masukkan jumlah tanpa titik atau dengan titik sebagai pemisah ribuan</small>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Bukti Pembayaran</label>
+                    <input type="file" name="bukti_bayar" id="bukti_bayar" class="form-input" accept="image/*,.pdf" required>
+                    <small style="color: var(--gray);">Upload bukti transfer (JPG, PNG, PDF) - Maks 2MB</small>
+                </div>
+                
+                <div style="background: #f0fdf9; padding: 1rem; border-radius: var(--border-radius-sm); margin-bottom: 1rem;">
+                    <h4 style="margin: 0 0 0.5rem 0; font-size: 14px;">Informasi Pembayaran:</h4>
+                    <p style="margin: 0; font-size: 13px; color: var(--gray);" id="infoPembayaran"></p>
+                </div>
+                
+                <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                    <button type="button" onclick="tutupModal()" class="btn btn-outline" style="flex: 1;">Batal</button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        <i data-lucide="send"></i>
+                        Ajukan Pembayaran
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 
     <!-- Bottom Nav -->
     <nav class="bottom-nav">
@@ -596,35 +882,131 @@
             });
         });
 
-        // Fungsi untuk bayar cicilan
-        function bayarCicilan(jenis, pinjamanId, angsuranKe) {
-            if (confirm('Apakah Anda yakin ingin membayar cicilan ini?')) {
-                fetch('<?= base_url('anggota/cicilan/bayar') ?>', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        jenis_pinjaman: jenis,
-                        pinjaman_id: pinjamanId,
-                        angsuran_ke: angsuranKe
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('Pembayaran berhasil!');
-                        location.reload();
-                    } else {
-                        alert('Gagal melakukan pembayaran: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat melakukan pembayaran');
-                });
+        // Fungsi untuk format angka input
+        function formatAngka(input) {
+            // Hapus karakter non-digit
+            let value = input.value.replace(/[^\d]/g, '');
+            
+            // Format dengan titik sebagai pemisah ribuan
+            if (value.length > 3) {
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
+            
+            input.value = value;
         }
+
+        // Fungsi untuk buka modal bayar
+        function bayarCicilan(jenis, idPinjaman, angsuranKe, jumlah) {
+            document.getElementById('jenis_pinjaman').value = jenis;
+            document.getElementById('id_pinjaman').value = idPinjaman;
+            document.getElementById('angsuran_ke').value = angsuranKe;
+            
+            // Format jumlah untuk display
+            const jumlahFormatted = jumlah.toLocaleString('id-ID');
+            document.getElementById('infoPembayaran').textContent = 
+                `${jenis} - Angsuran Ke-${angsuranKe} - Rp ${jumlahFormatted}`;
+            
+            // Set nilai default untuk input jumlah bayar (tanpa format)
+            document.getElementById('jumlah_bayar').value = jumlah;
+            
+            document.getElementById('modalBayar').style.display = 'flex';
+        }
+
+        // Fungsi tutup modal
+        function tutupModal() {
+            document.getElementById('modalBayar').style.display = 'none';
+            document.getElementById('formBayar').reset();
+        }
+
+        // Handle form bayar
+        document.getElementById('formBayar').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Format ulang jumlah bayar sebelum submit (hapus titik)
+            const jumlahBayarInput = document.getElementById('jumlah_bayar');
+            let jumlahBayarValue = jumlahBayarInput.value.replace(/\./g, '');
+            
+            // Validasi jumlah bayar
+            if (!jumlahBayarValue || isNaN(jumlahBayarValue) || parseFloat(jumlahBayarValue) <= 0) {
+                alert('❌ Jumlah bayar harus lebih dari 0');
+                return;
+            }
+            
+            // Update nilai input dengan angka tanpa format
+            jumlahBayarInput.value = jumlahBayarValue;
+            
+            const formData = new FormData(this);
+            
+            // Tambahkan CSRF token secara manual
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || 
+                             document.querySelector('input[name="<?= csrf_token() ?>"]')?.value;
+            
+            if (csrfToken) {
+                formData.append('<?= csrf_token() ?>', csrfToken);
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Disable button dan show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i data-lucide="loader-2" class="animate-spin"></i> Mengajukan...';
+            
+            // URL yang benar
+            const url = '<?= base_url('anggota/cicilan/bayar') ?>';
+            console.log('Mengirim request ke:', url);
+            
+            fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.status === 'success') {
+                    alert('✅ ' + data.message);
+                    tutupModal();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Fetch Error:', error);
+                alert('❌ Terjadi kesalahan jaringan: ' + error.message);
+            })
+            .finally(() => {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                lucide.createIcons();
+            });
+        });
+
+        // Tutup modal ketika klik di luar
+        document.getElementById('modalBayar').addEventListener('click', function(e) {
+            if (e.target === this) {
+                tutupModal();
+            }
+        });
+
+        // Validasi file size
+        document.getElementById('bukti_bayar').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.size > 2 * 1024 * 1024) { // 2MB
+                alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                this.value = '';
+            }
+        });
     </script>
 </body>
 </html>
