@@ -1,0 +1,170 @@
+/* General */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f3f4f6;
+  color: #374151;
+  padding-bottom: 70px;
+}
+
+/* ===== HEADER ===== */
+.header{
+  background: linear-gradient(135deg, #198754, #20c997);
+  color: #fff;
+  padding: 24px 16px 80px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  object-fit: cover;
+}
+
+.profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+
+.header-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* Saldo Card */
+.saldo-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 22px;
+  margin: -40px 16px 0; /* supaya naik ke atas */
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.saldo-card .motif {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.saldo-card .motif img {
+  width: 80px;
+  opacity: 0.15;
+}
+
+.saldo-card .label {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.saldo-card .amount {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0d9488;
+  margin-top: 6px;
+}
+
+/* Menu */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px;
+  text-align: center;
+}
+
+.menu-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.menu-item p {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.menu-item i {
+  width: 15px;
+  height: 15px;
+}
+
+.menu-item a {
+  color: #2c3e50; /* warna ikon seragam */
+  width: 32px;
+  height: 32px;
+  text-decoration: none;
+}
+
+
+
+
+h3{
+  color: #6b7280;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-weight: bold;
+  padding: 16px;
+}
+
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.bottom-nav a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 12px;
+  padding: 6px 0;
+}
+
+.bottom-nav a i {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+/* Active menu */
+.bottom-nav a.active {
+  color: #059669;
+  font-weight: 700;
+}

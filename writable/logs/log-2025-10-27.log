@@ -1,0 +1,111 @@
+DEBUG - 2025-10-27 14:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:01:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:01:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:01:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:14:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:14:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:14:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:14:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:14:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:17:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:17:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:18:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:18:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:21:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:22:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:22:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:22:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:22:40 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-10-27 14:22:40 --> ID Anggota: 40
+DEBUG - 2025-10-27 14:22:40 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-10-27 14:22:40 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-10-27 14:22:40 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-27 14:22:40 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2025-10-27 14:22:40 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-27 14:22:40 --> Data Qard lunas: 0
+DEBUG - 2025-10-27 14:22:40 --> Data Murabahah lunas: 2
+DEBUG - 2025-10-27 14:22:40 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-27 14:22:40 --> Total semua pinjaman lunas: 2
+DEBUG - 2025-10-27 14:22:40 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-10-27 14:22:40 --> Total pinjaman aktif: 0
+DEBUG - 2025-10-27 14:22:40 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-10-27 14:22:40 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 736.
+ 1 APPPATH\Views\cicilan.php(736): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-27 14:22:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:22:57 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-27 14:22:57 --> Data Qard lunas: 0
+DEBUG - 2025-10-27 14:22:57 --> Data Murabahah lunas: 2
+DEBUG - 2025-10-27 14:22:57 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-27 14:22:57 --> Total semua pinjaman lunas: 2
+WARNING - 2025-10-27 14:22:57 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\riwayat_cicilan.php on line 394.
+ 1 APPPATH\Views\riwayat_cicilan.php(394): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Views\\riwayat_cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('riwayat_cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(567): view('riwayat_cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->riwayatCicilan()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-27 14:26:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-27 14:26:19 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-10-27 14:26:19 --> ID Anggota: 40
+DEBUG - 2025-10-27 14:26:19 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-10-27 14:26:19 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-10-27 14:26:19 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-27 14:26:19 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2025-10-27 14:26:19 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-27 14:26:19 --> Data Qard lunas: 0
+DEBUG - 2025-10-27 14:26:19 --> Data Murabahah lunas: 2
+DEBUG - 2025-10-27 14:26:19 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-27 14:26:19 --> Total semua pinjaman lunas: 2
+DEBUG - 2025-10-27 14:26:19 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-10-27 14:26:19 --> Total pinjaman aktif: 0
+DEBUG - 2025-10-27 14:26:19 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-10-27 14:26:20 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 736.
+ 1 APPPATH\Views\cicilan.php(736): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-27 14:26:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

@@ -1,0 +1,159 @@
+DEBUG - 2025-10-16 12:58:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:58:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:58:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:58:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:58:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 12:59:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:00:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:00:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:00:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:00:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:01:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:02:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:02:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:13:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:14:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:14:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:14:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:18:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:18:17 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:18:17 --> ID Anggota: 40
+DEBUG - 2025-10-16 13:18:17 --> Qard Detail - ID: 20, Pinjam: 500000.00, Terbayar: 0.00, Tenor: 10
+DEBUG - 2025-10-16 13:18:17 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=500000, Tenor=10
+DEBUG - 2025-10-16 13:18:17 --> Qard Data - Angsuran Berjalan: 0, Angsuran per Bulan: 50000, Bisa Bayar: Ya
+DEBUG - 2025-10-16 13:18:17 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-16 13:18:17 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:18:17 --> Data Qard lunas: 0
+DEBUG - 2025-10-16 13:18:17 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-16 13:18:17 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-16 13:18:17 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-16 13:18:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:18:45 --> === MEMULAI PROSES BAYAR CICILAN ===
+DEBUG - 2025-10-16 13:18:45 --> ID Anggota: 40
+DEBUG - 2025-10-16 13:18:45 --> POST Data: Array
+(
+    [csrf_test_name] => e4f73ae1a7a8b56f727ad2a18c6bdfe2
+    [jenis_pinjaman] => Qard
+    [id_pinjaman] => 20
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 500000
+)
+
+DEBUG - 2025-10-16 13:18:46 --> Jumlah bayar input: 500000, Formatted: 500000
+DEBUG - 2025-10-16 13:18:46 --> Data pembayaran: Array
+(
+    [id_anggota] => 40
+    [jenis_pinjaman] => Qard
+    [id_pinjaman] => 20
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 500000
+    [tanggal_bayar] => 2025-10-16 13:18:46
+    [status] => pending
+    [created_at] => 2025-10-16 13:18:46
+)
+
+DEBUG - 2025-10-16 13:18:46 --> Uploading file to: C:\Users\PTDRa\Documents\PKL\koperasi 3\public/uploads/bukti_bayar/1760620726_b76929ee15420b237408.jpg
+DEBUG - 2025-10-16 13:18:46 --> File uploaded successfully: 1760620726_b76929ee15420b237408.jpg
+DEBUG - 2025-10-16 13:18:46 --> Save result: Success
+DEBUG - 2025-10-16 13:18:46 --> Payment saved successfully, ID: 12
+DEBUG - 2025-10-16 13:18:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:18:49 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:18:49 --> ID Anggota: 40
+DEBUG - 2025-10-16 13:18:49 --> Qard Detail - ID: 20, Pinjam: 500000.00, Terbayar: 0.00, Tenor: 10
+DEBUG - 2025-10-16 13:18:49 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=500000, Tenor=10
+DEBUG - 2025-10-16 13:18:49 --> Qard Data - Angsuran Berjalan: 0, Angsuran per Bulan: 50000, Bisa Bayar: Ya
+DEBUG - 2025-10-16 13:18:49 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-16 13:18:49 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:18:49 --> Data Qard lunas: 0
+DEBUG - 2025-10-16 13:18:49 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-16 13:18:49 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-16 13:18:49 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-16 13:19:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:19:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:19:40 --> Properties available: id, id_anggota, jenis_pinjaman, id_pinjaman, angsuran_ke, jumlah_bayar, tanggal_bayar, bukti_bayar, status, created_at, updated_at
+DEBUG - 2025-10-16 13:20:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:20:14 --> Verifikasi pembayaran dipanggil, ID: 12
+DEBUG - 2025-10-16 13:20:14 --> Pembayaran berhasil diverifikasi: 12
+DEBUG - 2025-10-16 13:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:20:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:20:22 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:20:22 --> ID Anggota: 40
+DEBUG - 2025-10-16 13:20:22 --> Total semua pinjaman aktif: 0
+DEBUG - 2025-10-16 13:20:22 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:20:22 --> Data Qard lunas: 0
+DEBUG - 2025-10-16 13:20:22 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-16 13:20:22 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-16 13:20:22 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-16 13:20:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:20:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:21:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:21:49 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:21:49 --> ID Anggota: 40
+DEBUG - 2025-10-16 13:21:49 --> Total semua pinjaman aktif: 0
+DEBUG - 2025-10-16 13:21:49 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:21:49 --> Data Qard lunas: 0
+DEBUG - 2025-10-16 13:21:49 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-16 13:21:49 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-16 13:21:49 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-16 13:21:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:27:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:27:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:35:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:35:21 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:35:21 --> ID Anggota: 40
+DEBUG - 2025-10-16 13:35:21 --> Total semua pinjaman aktif: 0
+DEBUG - 2025-10-16 13:35:21 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-16 13:35:21 --> Data Qard lunas: 0
+DEBUG - 2025-10-16 13:35:21 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-16 13:35:21 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-16 13:35:21 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-16 13:35:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:35:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:36:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:36:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:50:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:50:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:50:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:51:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:51:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:52:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:52:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:54:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:55:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 13:55:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:03:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:03:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:04:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:04:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:05:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:05:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:05:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:07:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-16 14:07:17 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-16 14:07:17 --> ID Anggota: 44
+DEBUG - 2025-10-16 14:07:17 --> Total semua pinjaman aktif: 0
+DEBUG - 2025-10-16 14:07:17 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-16 14:07:17 --> Data Qard lunas: 0
+DEBUG - 2025-10-16 14:07:17 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-16 14:07:17 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-16 14:07:17 --> Total semua pinjaman lunas: 1

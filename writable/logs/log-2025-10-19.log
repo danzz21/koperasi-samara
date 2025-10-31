@@ -1,0 +1,665 @@
+DEBUG - 2025-10-19 00:05:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:05:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:05:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:08:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:08:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:10:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 00:10:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:33:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:36:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:36:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:36:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:36:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:36:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:39:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:39:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:39:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:39:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:44:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-19 09:44:59 --> ErrorException: Undefined variable $showTenorModal
+[Method: GET, Route: anggota/pinjaman]
+in APPPATH\Controllers\Pinjaman.php on line 26.
+ 1 APPPATH\Controllers\Pinjaman.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $showTenorModal', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Pinjaman.php', 26)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 09:45:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-19 09:45:04 --> ErrorException: Undefined variable $showTenorModal
+[Method: GET, Route: anggota/pinjaman]
+in APPPATH\Controllers\Pinjaman.php on line 26.
+ 1 APPPATH\Controllers\Pinjaman.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $showTenorModal', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Pinjaman.php', 26)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 09:45:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-19 09:45:41 --> ErrorException: Undefined array key "tenor"
+[Method: GET, Route: anggota/pinjaman]
+in APPPATH\Controllers\Pinjaman.php on line 17.
+ 1 APPPATH\Controllers\Pinjaman.php(17): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "tenor"', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Pinjaman.php', 17)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 09:45:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-19 09:45:45 --> ErrorException: Undefined array key "tenor"
+[Method: GET, Route: anggota/pinjaman]
+in APPPATH\Controllers\Pinjaman.php on line 17.
+ 1 APPPATH\Controllers\Pinjaman.php(17): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "tenor"', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Pinjaman.php', 17)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 09:47:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-19 09:47:40 --> ErrorException: Undefined property: App\Controllers\Pinjaman::$anggotaModel
+[Method: GET, Route: anggota/pinjaman]
+in APPPATH\Controllers\Pinjaman.php on line 17.
+ 1 APPPATH\Controllers\Pinjaman.php(17): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Pinjaman::$anggotaModel', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Pinjaman.php', 17)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 09:54:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-19 09:54:27 --> ErrorException: Undefined variable $id_anggota
+[Method: GET, Route: anggota/pinjaman]
+in APPPATH\Controllers\Pinjaman.php on line 26.
+ 1 APPPATH\Controllers\Pinjaman.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id_anggota', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Pinjaman.php', 26)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 09:57:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:57:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 09:57:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:01:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:01:07 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:01:07 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:01:07 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:01:07 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:01:07 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:01:07 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:01:07 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:01:07 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:01:07 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:01:07 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:01:07 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:01:07 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:01:07 --> ErrorException: Undefined variable $db
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Controllers\Cicilan.php on line 77.
+ 1 APPPATH\Controllers\Cicilan.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $db', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Cicilan.php', 77)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:02:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:02:52 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:02:52 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:02:52 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:02:52 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:02:52 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:02:52 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:02:52 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:02:52 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:02:52 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:02:52 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:02:52 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:02:52 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:02:52 --> ErrorException: Undefined variable $id
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Controllers\Cicilan.php on line 81.
+ 1 APPPATH\Controllers\Cicilan.php(81): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Cicilan.php', 81)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:02:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:02:55 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:02:55 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:02:55 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:02:55 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:02:55 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:02:55 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:02:55 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:02:55 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:02:55 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:02:55 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:02:55 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:02:55 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:02:55 --> ErrorException: Undefined variable $id
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Controllers\Cicilan.php on line 81.
+ 1 APPPATH\Controllers\Cicilan.php(81): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $id', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Controllers\\Cicilan.php', 81)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:03:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:03:11 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:03:11 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:03:11 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:03:11 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:03:11 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:03:11 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:03:11 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:03:11 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:03:11 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:03:11 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:03:11 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:03:11 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:03:11 --> ErrorException: Undefined variable $title
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:04:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:04:07 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:07 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:04:07 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:04:07 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:04:07 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:04:07 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:04:07 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:04:07 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:07 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:04:07 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:04:07 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:04:07 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:04:07 --> ErrorException: Undefined variable $title
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:04:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:04:11 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:11 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:04:11 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:04:11 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:04:11 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:04:11 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:04:11 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:04:11 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:11 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:04:11 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:04:11 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:04:11 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:04:11 --> ErrorException: Undefined variable $title
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:04:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:04:18 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:18 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:04:18 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:04:18 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:04:18 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:04:18 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:04:18 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:04:18 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:18 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:04:18 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:04:18 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:04:18 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:04:18 --> ErrorException: Undefined variable $title
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:04:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:04:23 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:23 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:04:23 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:04:23 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:04:23 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:04:23 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:04:23 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:04:23 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:04:23 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:04:23 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:04:23 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:04:23 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:04:23 --> ErrorException: Undefined variable $title
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:06:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:06:50 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:06:50 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:06:50 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:06:50 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:06:50 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:06:50 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:06:50 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:06:50 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:06:50 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:06:50 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:06:50 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:06:50 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:06:50 --> ErrorException: Undefined variable $anggota
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 553.
+ 1 APPPATH\Views\cicilan.php(553): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $anggota', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 553)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:06:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:06:54 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:06:54 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:06:54 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:06:54 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:06:54 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:06:54 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:06:54 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:06:54 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:06:54 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:06:54 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:06:54 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:06:54 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:06:54 --> ErrorException: Undefined variable $anggota
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 553.
+ 1 APPPATH\Views\cicilan.php(553): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $anggota', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 553)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:06:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:06:58 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:06:58 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:06:58 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:06:58 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:06:58 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:06:58 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:06:58 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:06:58 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:06:58 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:06:58 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:06:58 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:06:58 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:06:58 --> ErrorException: Undefined variable $anggota
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 553.
+ 1 APPPATH\Views\cicilan.php(553): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $anggota', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 553)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:08:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:08:08 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:08:08 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:08:08 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:08:08 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:08:08 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:08:08 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:08:08 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:08:08 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:08:08 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:08:08 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:08:08 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:08:08 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:08:08 --> ErrorException: Array to string conversion
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:08:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:08:11 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:08:11 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:08:11 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:08:11 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:08:11 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:08:11 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:08:11 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:08:11 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:08:11 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:08:11 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:08:11 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:08:11 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:08:11 --> ErrorException: Array to string conversion
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 6.
+ 1 APPPATH\Views\cicilan.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 6)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:08:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:08:27 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:08:27 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:08:27 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:08:27 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:08:27 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:08:27 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:08:27 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:08:27 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:08:27 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:08:27 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:08:27 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:08:27 --> Total semua pinjaman lunas: 0
+CRITICAL - 2025-10-19 10:08:27 --> ErrorException: Undefined variable $anggota
+[Method: GET, Route: anggota/cicilan]
+in APPPATH\Views\cicilan.php on line 553.
+ 1 APPPATH\Views\cicilan.php(553): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $anggota', 'C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php', 553)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\koperasi 3\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(100): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\koperasi 3\\public\\index.php')
+DEBUG - 2025-10-19 10:10:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:37 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:10:37 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:10:37 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:10:37 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:10:37 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:10:37 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:10:37 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:10:37 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:10:37 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:10:37 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:10:37 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:10:37 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:10:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:44 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:10:44 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:10:44 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:10:44 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:10:44 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:10:44 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:10:44 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:10:44 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:10:44 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:10:44 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:10:44 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:10:44 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:10:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:10:56 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:10:56 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:10:56 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:10:56 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:10:56 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:10:56 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:10:56 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:10:56 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:10:56 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:10:56 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:10:56 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:10:56 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:11:40 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:11:40 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:11:40 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:11:40 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:11:40 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:11:40 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:11:40 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:11:40 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:11:40 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:11:40 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:11:40 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:11:40 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:15:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:15:44 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:15:44 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:15:44 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:15:44 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:15:44 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:15:44 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:15:44 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:15:44 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:15:44 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:15:44 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:15:44 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:15:44 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:16:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:16:25 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:16:25 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:16:25 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:16:25 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:16:25 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:16:25 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:16:25 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:16:25 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:16:25 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:16:25 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:16:25 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:16:25 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:16:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:16:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:16:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:16:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:16:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:08 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:21:08 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:21:08 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:21:08 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:21:08 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:21:08 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:21:08 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:21:08 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:21:08 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:21:08 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:21:08 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:21:08 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:17 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:21:17 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:21:17 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:21:17 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:21:17 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:21:17 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:21:17 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:21:17 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:21:17 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:21:17 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:21:17 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:21:17 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:22:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:22:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:22:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:23:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:23:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:23:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:24:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:24:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:24:39 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:24:39 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:24:39 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:24:39 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:24:39 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:24:39 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:24:39 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:24:39 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:24:39 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:24:39 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:24:39 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:24:39 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:24:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:25:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:25:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:25:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:25:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:25:50 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:25:50 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:25:50 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:25:50 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:25:50 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:25:50 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:25:50 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:25:50 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:25:50 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:25:50 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:25:50 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:25:50 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:25:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:26:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-19 10:26:54 --> === MENGAMBIL PINJAMAN AKTIF DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:26:54 --> ID Anggota: 45
+DEBUG - 2025-10-19 10:26:54 --> Qard Detail - ID: 18, Pinjam: 4000000.00, Terbayar: 400000.00, Tenor: 10
+DEBUG - 2025-10-19 10:26:54 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2025-10-19 10:26:54 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2025-10-19 10:26:54 --> Qard Data - Angsuran Berjalan: 1, Angsuran per Bulan: 400000, Bisa Bayar: Ya
+DEBUG - 2025-10-19 10:26:54 --> Total semua pinjaman aktif: 1
+DEBUG - 2025-10-19 10:26:54 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-19 10:26:54 --> Data Qard lunas: 0
+DEBUG - 2025-10-19 10:26:54 --> Data Murabahah lunas: 0
+DEBUG - 2025-10-19 10:26:54 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-19 10:26:54 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-10-19 10:27:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

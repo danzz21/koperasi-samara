@@ -1,0 +1,84 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(120deg,#2ecc71,#27ae60);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 15px;
+}
+
+.box {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.box img {
+  width: 100px;
+  max-width: 40%;
+  margin-bottom: 15px;
+}
+
+.box h2 {
+  color: #14532d;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+/* Input, textarea, select */
+.box input,
+.box textarea,
+.box select {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.8rem 1rem;
+  margin: 10px 0;
+  border: 2px solid #2ecc71;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  resize: none; /* biar textarea gak bisa resize */
+}
+
+/* Tombol */
+.box button {
+  width: 100%;
+  padding: 0.9rem;
+  background: #14532d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.box button:hover {
+  background: #0d4221;
+}
+
+/* Responsif layar kecil */
+@media (max-width: 480px) {
+  .box {
+    padding: 20px 15px;
+  }
+  .box img {
+    width: 70px;
+  }
+  .box h2 {
+    font-size: 1.2rem;
+  }
+  .box input, 
+  .box textarea, 
+  .box select, 
+  .box button {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+}

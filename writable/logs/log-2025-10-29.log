@@ -1,0 +1,385 @@
+DEBUG - 2025-10-29 13:54:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:00:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:00:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:00:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:00:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:00:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:00:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:01:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:01:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:01:44 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-10-29 14:01:44 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:01:44 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:01:44 --> Jumlah Murabahah aktif ditemukan: 1
+DEBUG - 2025-10-29 14:01:44 --> 🔍 DETAIL MURABAHAH:
+DEBUG - 2025-10-29 14:01:44 -->   - ID: 15
+DEBUG - 2025-10-29 14:01:44 -->   - Jumlah Pinjam: 2000000.00
+DEBUG - 2025-10-29 14:01:44 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2025-10-29 14:01:44 -->   - Jumlah Angsuran: 8
+DEBUG - 2025-10-29 14:01:44 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=2000000, Tenor=8
+DEBUG - 2025-10-29 14:01:44 -->   - Angsuran Berjalan: 0
+DEBUG - 2025-10-29 14:01:44 -->   - Bisa Bayar: YA ✅
+DEBUG - 2025-10-29 14:01:44 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:01:44 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2025-10-29 14:01:44 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-29 14:01:44 --> Data Qard lunas: 0
+DEBUG - 2025-10-29 14:01:44 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-29 14:01:44 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-29 14:01:44 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-29 14:01:44 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-10-29 14:01:44 --> Total pinjaman aktif: 1
+DEBUG - 2025-10-29 14:01:44 --> Processing: murabahah - Pinjaman Murabahah, Bisa Bayar: Ya
+DEBUG - 2025-10-29 14:01:44 --> Jatuh tempo: 2025-11-28, Today: 2025-10-29
+DEBUG - 2025-10-29 14:01:44 --> Jatuh tempo terdekat diupdate: 2025-11-28
+DEBUG - 2025-10-29 14:01:44 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 250000
+    [jatuh_tempo_terdekat] => 2025-11-28
+    [total_qard] => 0
+    [total_murabahah] => 2000000
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-10-29 14:01:44 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 736.
+ 1 APPPATH\Views\cicilan.php(736): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Project\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Project\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-10-29 14:02:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:08 --> === MEMULAI PROSES BAYAR CICILAN ===
+DEBUG - 2025-10-29 14:02:08 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:02:08 --> POST Data: Array
+(
+    [csrf_test_name] => 5100c8ebd357ea5967df02fe51280138
+    [jenis_pinjaman] => murabahah
+    [id_pinjaman] => 15
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 250000
+)
+
+DEBUG - 2025-10-29 14:02:08 --> Jumlah bayar input: 250000, Formatted: 250000
+DEBUG - 2025-10-29 14:02:08 --> Data pembayaran: Array
+(
+    [id_anggota] => 48
+    [jenis_pinjaman] => murabahah
+    [id_pinjaman] => 15
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 250000
+    [tanggal_bayar] => 2025-10-29 14:02:08
+    [status] => pending
+    [created_at] => 2025-10-29 14:02:08
+)
+
+DEBUG - 2025-10-29 14:02:08 --> Uploading file to: C:\Project\koperasi 3 fixing\public/uploads/bukti_bayar/1761746528_cddffab15b86a405ab5d.png
+DEBUG - 2025-10-29 14:02:08 --> File uploaded successfully: 1761746528_cddffab15b86a405ab5d.png
+DEBUG - 2025-10-29 14:02:08 --> Save result: Success
+DEBUG - 2025-10-29 14:02:08 --> Payment saved successfully, ID: 18
+DEBUG - 2025-10-29 14:02:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:12 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-10-29 14:02:12 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:02:12 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:02:12 --> Jumlah Murabahah aktif ditemukan: 1
+DEBUG - 2025-10-29 14:02:12 --> 🔍 DETAIL MURABAHAH:
+DEBUG - 2025-10-29 14:02:12 -->   - ID: 15
+DEBUG - 2025-10-29 14:02:12 -->   - Jumlah Pinjam: 2000000.00
+DEBUG - 2025-10-29 14:02:12 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2025-10-29 14:02:12 -->   - Jumlah Angsuran: 8
+DEBUG - 2025-10-29 14:02:12 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=2000000, Tenor=8
+DEBUG - 2025-10-29 14:02:12 -->   - Angsuran Berjalan: 0
+DEBUG - 2025-10-29 14:02:12 -->   - Bisa Bayar: YA ✅
+DEBUG - 2025-10-29 14:02:12 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:02:12 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2025-10-29 14:02:12 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-29 14:02:12 --> Data Qard lunas: 0
+DEBUG - 2025-10-29 14:02:12 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-29 14:02:12 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-29 14:02:12 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-29 14:02:12 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-10-29 14:02:12 --> Total pinjaman aktif: 1
+DEBUG - 2025-10-29 14:02:12 --> Processing: murabahah - Pinjaman Murabahah, Bisa Bayar: Ya
+DEBUG - 2025-10-29 14:02:12 --> Jatuh tempo: 2025-11-28, Today: 2025-10-29
+DEBUG - 2025-10-29 14:02:12 --> Jatuh tempo terdekat diupdate: 2025-11-28
+DEBUG - 2025-10-29 14:02:12 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 250000
+    [jatuh_tempo_terdekat] => 2025-11-28
+    [total_qard] => 0
+    [total_murabahah] => 2000000
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-10-29 14:02:12 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 736.
+ 1 APPPATH\Views\cicilan.php(736): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Project\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Project\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-10-29 14:02:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:02:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:03:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:16:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:16:48 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2025-10-29 14:16:48 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:16:48 --> Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:16:48 --> Murabahah aktif ditemukan: 1
+DEBUG - 2025-10-29 14:16:48 --> Murabahah ID 15: jml_pinjam=2000000.00, jml_angsuran=8, jml_terbayar=0.00, angsuran_per_bulan=250000, tenor_dibayar=0, sisa=8
+DEBUG - 2025-10-29 14:16:48 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:16:48 --> Total sisa angsuran: 8
+DEBUG - 2025-10-29 14:16:48 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2025-10-29 14:17:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:28 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-10-29 14:17:28 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:17:28 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:17:28 --> Jumlah Murabahah aktif ditemukan: 1
+DEBUG - 2025-10-29 14:17:28 --> 🔍 DETAIL MURABAHAH:
+DEBUG - 2025-10-29 14:17:28 -->   - ID: 15
+DEBUG - 2025-10-29 14:17:28 -->   - Jumlah Pinjam: 2000000.00
+DEBUG - 2025-10-29 14:17:28 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2025-10-29 14:17:28 -->   - Jumlah Angsuran: 8
+DEBUG - 2025-10-29 14:17:28 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=2000000, Tenor=8
+DEBUG - 2025-10-29 14:17:28 -->   - Angsuran Berjalan: 0
+DEBUG - 2025-10-29 14:17:28 -->   - Bisa Bayar: YA ✅
+DEBUG - 2025-10-29 14:17:28 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:17:28 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2025-10-29 14:17:28 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-29 14:17:28 --> Data Qard lunas: 0
+DEBUG - 2025-10-29 14:17:28 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-29 14:17:28 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-29 14:17:28 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-29 14:17:28 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-10-29 14:17:28 --> Total pinjaman aktif: 1
+DEBUG - 2025-10-29 14:17:28 --> Processing: murabahah - Pinjaman Murabahah, Bisa Bayar: Ya
+DEBUG - 2025-10-29 14:17:28 --> Jatuh tempo: 2025-11-28, Today: 2025-10-29
+DEBUG - 2025-10-29 14:17:28 --> Jatuh tempo terdekat diupdate: 2025-11-28
+DEBUG - 2025-10-29 14:17:28 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 250000
+    [jatuh_tempo_terdekat] => 2025-11-28
+    [total_qard] => 0
+    [total_murabahah] => 2000000
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-10-29 14:17:28 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 736.
+ 1 APPPATH\Views\cicilan.php(736): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Project\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Project\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-10-29 14:17:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:44 --> === MEMULAI PROSES BAYAR CICILAN ===
+DEBUG - 2025-10-29 14:17:44 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:17:44 --> POST Data: Array
+(
+    [csrf_test_name] => 5100c8ebd357ea5967df02fe51280138
+    [jenis_pinjaman] => murabahah
+    [id_pinjaman] => 15
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 250000
+)
+
+DEBUG - 2025-10-29 14:17:44 --> Jumlah bayar input: 250000, Formatted: 250000
+DEBUG - 2025-10-29 14:17:44 --> Data pembayaran: Array
+(
+    [id_anggota] => 48
+    [jenis_pinjaman] => murabahah
+    [id_pinjaman] => 15
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 250000
+    [tanggal_bayar] => 2025-10-29 14:17:44
+    [status] => pending
+    [created_at] => 2025-10-29 14:17:44
+)
+
+DEBUG - 2025-10-29 14:17:44 --> Uploading file to: C:\Project\koperasi 3 fixing\public/uploads/bukti_bayar/1761747464_be220a3d5459fd77453c.jpg
+DEBUG - 2025-10-29 14:17:44 --> File uploaded successfully: 1761747464_be220a3d5459fd77453c.jpg
+DEBUG - 2025-10-29 14:17:44 --> Save result: Success
+DEBUG - 2025-10-29 14:17:44 --> Payment saved successfully, ID: 19
+DEBUG - 2025-10-29 14:17:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:48 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-10-29 14:17:48 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:17:48 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:17:48 --> Jumlah Murabahah aktif ditemukan: 1
+DEBUG - 2025-10-29 14:17:48 --> 🔍 DETAIL MURABAHAH:
+DEBUG - 2025-10-29 14:17:48 -->   - ID: 15
+DEBUG - 2025-10-29 14:17:48 -->   - Jumlah Pinjam: 2000000.00
+DEBUG - 2025-10-29 14:17:48 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2025-10-29 14:17:48 -->   - Jumlah Angsuran: 8
+DEBUG - 2025-10-29 14:17:48 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=2000000, Tenor=8
+DEBUG - 2025-10-29 14:17:48 -->   - Angsuran Berjalan: 0
+DEBUG - 2025-10-29 14:17:48 -->   - Bisa Bayar: YA ✅
+DEBUG - 2025-10-29 14:17:48 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:17:48 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2025-10-29 14:17:48 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-10-29 14:17:48 --> Data Qard lunas: 0
+DEBUG - 2025-10-29 14:17:48 --> Data Murabahah lunas: 1
+DEBUG - 2025-10-29 14:17:48 --> Data Mudharabah lunas: 0
+DEBUG - 2025-10-29 14:17:48 --> Total semua pinjaman lunas: 1
+DEBUG - 2025-10-29 14:17:48 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-10-29 14:17:48 --> Total pinjaman aktif: 1
+DEBUG - 2025-10-29 14:17:48 --> Processing: murabahah - Pinjaman Murabahah, Bisa Bayar: Ya
+DEBUG - 2025-10-29 14:17:48 --> Jatuh tempo: 2025-11-28, Today: 2025-10-29
+DEBUG - 2025-10-29 14:17:48 --> Jatuh tempo terdekat diupdate: 2025-11-28
+DEBUG - 2025-10-29 14:17:48 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 250000
+    [jatuh_tempo_terdekat] => 2025-11-28
+    [total_qard] => 0
+    [total_murabahah] => 2000000
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-10-29 14:17:48 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 736.
+ 1 APPPATH\Views\cicilan.php(736): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Project\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Project\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-10-29 14:17:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:17:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:08 --> Properties available: id, id_anggota, jenis_pinjaman, id_pinjaman, angsuran_ke, jumlah_bayar, tanggal_bayar, bukti_bayar, status, created_at, updated_at
+DEBUG - 2025-10-29 14:18:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:11 --> === VERIFIKASI PEMBAYARAN START ===
+DEBUG - 2025-10-29 14:18:11 --> Verifikasi pembayaran dipanggil, ID: 19
+DEBUG - 2025-10-29 14:18:11 --> Data pembayaran ditemukan: {"id":"19","id_anggota":"48","jenis_pinjaman":"Murabahah","id_pinjaman":"15","angsuran_ke":"1","jumlah_bayar":"250000.00","tanggal_bayar":"2025-10-29","bukti_bayar":"1761747464_be220a3d5459fd77453c.jpg","status":"pending","created_at":"2025-10-29 14:17:44","updated_at":"2025-10-29 21:17:44"}
+DEBUG - 2025-10-29 14:18:11 --> Update status pembayaran_pending result: SUCCESS
+DEBUG - 2025-10-29 14:18:11 --> Memanggil updatePinjamanTerbayar dengan params: jenis=Murabahah, id_pinjaman=15, jumlah=250000.00
+DEBUG - 2025-10-29 14:18:11 --> === UPDATE PINJAMAN TERBAYAR START ===
+DEBUG - 2025-10-29 14:18:11 --> Jenis: Murabahah, ID Pinjaman: 15, Jumlah Bayar: 250000.00
+DEBUG - 2025-10-29 14:18:11 --> Table: murabahah, ID Field: id_mr
+DEBUG - 2025-10-29 14:18:11 --> Data pinjaman ditemukan: {"id_mr":"15","id_anggota":"48","tanggal":"2025-10-28","jml_pinjam":"2000000.00","jml_angsuran":"8","deskripsi":"laptop untuk kerja diluar","jml_terbayar":"0.00","status":"aktif","sisa_tenor":"0","keperluan":null,"tgl_pengajuan":null,"tgl_disetujui":null}
+DEBUG - 2025-10-29 14:18:11 --> Terbayar lama: 0.00, Terbayar baru: 250000, Jml Pinjam: 2000000.00
+DEBUG - 2025-10-29 14:18:11 --> Update data: {"jml_terbayar":250000}
+DEBUG - 2025-10-29 14:18:11 --> Update result: SUCCESS
+DEBUG - 2025-10-29 14:18:11 --> === UPDATE PINJAMAN TERBAYAR END ===
+DEBUG - 2025-10-29 14:18:11 --> Pembayaran berhasil diverifikasi: 19
+DEBUG - 2025-10-29 14:18:11 --> === VERIFIKASI PEMBAYARAN END ===
+DEBUG - 2025-10-29 14:18:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:12 --> Properties available: id, id_anggota, jenis_pinjaman, id_pinjaman, angsuran_ke, jumlah_bayar, tanggal_bayar, bukti_bayar, status, created_at, updated_at
+DEBUG - 2025-10-29 14:18:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:14 --> === VERIFIKASI PEMBAYARAN START ===
+DEBUG - 2025-10-29 14:18:14 --> Verifikasi pembayaran dipanggil, ID: 18
+DEBUG - 2025-10-29 14:18:14 --> Data pembayaran ditemukan: {"id":"18","id_anggota":"48","jenis_pinjaman":"Murabahah","id_pinjaman":"15","angsuran_ke":"1","jumlah_bayar":"250000.00","tanggal_bayar":"2025-10-29","bukti_bayar":"1761746528_cddffab15b86a405ab5d.png","status":"pending","created_at":"2025-10-29 14:02:08","updated_at":"2025-10-29 21:02:08"}
+DEBUG - 2025-10-29 14:18:14 --> Update status pembayaran_pending result: SUCCESS
+DEBUG - 2025-10-29 14:18:14 --> Memanggil updatePinjamanTerbayar dengan params: jenis=Murabahah, id_pinjaman=15, jumlah=250000.00
+DEBUG - 2025-10-29 14:18:14 --> === UPDATE PINJAMAN TERBAYAR START ===
+DEBUG - 2025-10-29 14:18:14 --> Jenis: Murabahah, ID Pinjaman: 15, Jumlah Bayar: 250000.00
+DEBUG - 2025-10-29 14:18:14 --> Table: murabahah, ID Field: id_mr
+DEBUG - 2025-10-29 14:18:14 --> Data pinjaman ditemukan: {"id_mr":"15","id_anggota":"48","tanggal":"2025-10-28","jml_pinjam":"2000000.00","jml_angsuran":"8","deskripsi":"laptop untuk kerja diluar","jml_terbayar":"250000.00","status":"aktif","sisa_tenor":"0","keperluan":null,"tgl_pengajuan":null,"tgl_disetujui":null}
+DEBUG - 2025-10-29 14:18:14 --> Terbayar lama: 250000.00, Terbayar baru: 500000, Jml Pinjam: 2000000.00
+DEBUG - 2025-10-29 14:18:14 --> Update data: {"jml_terbayar":500000}
+DEBUG - 2025-10-29 14:18:14 --> Update result: SUCCESS
+DEBUG - 2025-10-29 14:18:14 --> === UPDATE PINJAMAN TERBAYAR END ===
+DEBUG - 2025-10-29 14:18:14 --> Pembayaran berhasil diverifikasi: 18
+DEBUG - 2025-10-29 14:18:14 --> === VERIFIKASI PEMBAYARAN END ===
+DEBUG - 2025-10-29 14:18:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:18:20 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2025-10-29 14:18:20 --> ID Anggota: 48
+DEBUG - 2025-10-29 14:18:20 --> Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:18:20 --> Murabahah aktif ditemukan: 1
+DEBUG - 2025-10-29 14:18:20 --> Murabahah ID 15: jml_pinjam=2000000.00, jml_angsuran=8, jml_terbayar=500000.00, angsuran_per_bulan=250000, tenor_dibayar=2, sisa=6
+DEBUG - 2025-10-29 14:18:20 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:18:20 --> Total sisa angsuran: 6
+DEBUG - 2025-10-29 14:18:20 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2025-10-29 14:28:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:31:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:31:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:31:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:31:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:31:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:12 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2025-10-29 14:32:12 --> ID Anggota: 40
+DEBUG - 2025-10-29 14:32:12 --> Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:32:12 --> Murabahah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:32:12 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:32:12 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2025-10-29 14:32:12 --> Total sisa angsuran: 0
+DEBUG - 2025-10-29 14:32:12 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2025-10-29 14:32:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:32:51 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2025-10-29 14:32:51 --> ID Anggota: 55
+DEBUG - 2025-10-29 14:32:51 --> Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:32:51 --> Murabahah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:32:51 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:32:51 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2025-10-29 14:32:51 --> Total sisa angsuran: 0
+DEBUG - 2025-10-29 14:32:51 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2025-10-29 14:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:33:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:33:00 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2025-10-29 14:33:00 --> ID Anggota: 46
+DEBUG - 2025-10-29 14:33:00 --> Qard aktif ditemukan: 0
+DEBUG - 2025-10-29 14:33:00 --> Murabahah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:33:00 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2025-10-29 14:33:00 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2025-10-29 14:33:00 --> Total sisa angsuran: 0
+DEBUG - 2025-10-29 14:33:00 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2025-10-29 14:33:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-29 14:33:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
