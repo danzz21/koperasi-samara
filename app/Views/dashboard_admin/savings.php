@@ -138,6 +138,11 @@
             <input id="jumlahInput" name="jumlah" type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md" min="1" required>
         </div>
 
+        <!-- Info Status Pokok -->
+        <div id="pokokInfo" class="hidden">
+            <div id="pokokDetail"></div>
+        </div>
+
         <div class="flex space-x-3 pt-4">
             <button type="button" onclick="closeModal('savingsModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600">Batal</button>
             <button type="submit" id="simpanBtn" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700">Simpan</button>
@@ -147,89 +152,6 @@
     </div>
 
 <script>
-
-
-// === LOGIKA BARU UNTUK FORM ===
-document.addEventListener('DOMContentLoaded', () => {
-  const jenisSelect = document.getElementById('jenisSelect');
-  const tenorGroup = document.getElementById('tenorGroup');
-  const tenorSelect = document.getElementById('tenorSelect');
-  const semuaBtn = document.getElementById('semuaAnggotaBtn');
-  const jumlahInput = document.getElementById('jumlahInput');
-  const anggotaSearch = document.getElementById('anggotaSearch');
-  const anggotaSelect = document.getElementById('anggotaSelect');
-  const anggotaInfo = document.getElementById('anggotaInfo');
-
-  // Event saat pilih jenis simpanan
-  jenisSelect.addEventListener('change', () => {
-    const jenis = jenisSelect.value;
-    resetDynamicFields();
-
-    if (jenis === 'pokok') {
-      tenorGroup.classList.remove('hidden');
-      semuaBtn.classList.remove('hidden');
-      jumlahInput.disabled = true;
-    } 
-    else if (jenis === 'wajib') {
-      tenorGroup.classList.add('hidden');
-      semuaBtn.classList.remove('hidden');
-      jumlahInput.value = 50000;
-      jumlahInput.disabled = false;
-    } 
-    else if (jenis === 'sukarela') {
-      tenorGroup.classList.add('hidden');
-      semuaBtn.classList.add('hidden');
-      jumlahInput.value = '';
-      jumlahInput.disabled = false;
-    }
-  });
-
-  // Event saat pilih tenor di simpanan pokok
-  tenorSelect.addEventListener('change', () => {
-    const tenor = parseInt(tenorSelect.value);
-    if (!isNaN(tenor) && tenor > 0) {
-      jumlahInput.value = 500000 / tenor;
-    }
-  });
-
-  // Klik tombol semua anggota
-//   semuaBtn.addEventListener('click', () => {
-//     const jenis = jenisSelect.value;
-//     const tenor = tenorSelect.value;
-    
-//     if (jenis === 'pokok') {
-//       if (!tenor) {
-//         alert('Pilih tenor dulu!');
-//         return;
-//       }
-//       anggotaSelect.value = 'tenor_' + tenor;
-//       anggotaSearch.value = 'Semua anggota (tenor ' + tenor + ')';
-//       anggotaSearch.disabled = true;
-//       anggotaInfo.innerHTML = `Semua anggota dengan tenor ${tenor} bulan akan terpilih.`;
-//       anggotaInfo.classList.remove('hidden');
-//     } 
-//     else if (jenis === 'wajib') {
-//       anggotaSelect.value = 'all';
-//       anggotaSearch.value = 'Semua anggota';
-//       anggotaSearch.disabled = true;
-//       anggotaInfo.innerHTML = `Semua anggota akan terpilih.`;
-//       anggotaInfo.classList.remove('hidden');
-//     }
-//   });
-
-  // Reset dinamis
-  function resetDynamicFields() {
-    tenorSelect.value = '';
-    tenorGroup.classList.add('hidden');
-    anggotaSelect.value = '';
-    anggotaSearch.value = '';
-    anggotaSearch.disabled = false;
-    anggotaInfo.innerHTML = '';
-    anggotaInfo.classList.add('hidden');
-    jumlahInput.value = '';
-    jumlahInput.disabled = false;
-  }
-});
 // Global variables
 let isSubmitting = false;
 
@@ -321,6 +243,7 @@ function checkSimpananPokok() {
     const jenis = document.getElementById('jenisSelect').value;
     const idAnggota = document.getElementById('anggotaSelect').value;
     const jumlahInput = document.getElementById('jumlahInput');
+    const simpanBtn = document.getElementById('simpanBtn');
     
     if (jenis === 'pokok' && idAnggota && idAnggota !== 'all') {
         // Cek status simpanan pokok anggota
@@ -329,7 +252,6 @@ function checkSimpananPokok() {
             .then(data => {
                 const pokokInfo = document.getElementById('pokokInfo');
                 const pokokDetail = document.getElementById('pokokDetail');
-                const simpanBtn = document.getElementById('simpanBtn');
                 
                 if (data.success) {
                     pokokInfo.classList.remove('hidden');
@@ -389,6 +311,65 @@ function checkSimpananPokok() {
         document.getElementById('simpanBtn').disabled = false;
         document.getElementById('jumlahInput').disabled = false;
         document.getElementById('jumlahInput').removeAttribute('max');
+    } else if ((jenis === 'wajib' || jenis === 'sukarela') && idAnggota && idAnggota !== 'all') {
+        // Cek apakah anggota sudah lunas simpanan pokok untuk simpanan wajib/sukarela
+        fetch(`<?= base_url('admin/checkSimpananPokok/') ?>${idAnggota}`)
+            .then(res => res.json())
+            .then(data => {
+                const pokokInfo = document.getElementById('pokokInfo');
+                const pokokDetail = document.getElementById('pokokDetail');
+                
+                if (data.success) {
+                    pokokInfo.classList.remove('hidden');
+                    
+                    if (!data.isLunas) {
+                        // Belum lunas, tidak bisa input wajib/sukarela
+                        pokokInfo.className = 'bg-red-50 border border-red-200 rounded-md p-3';
+                        pokokDetail.innerHTML = `
+                            <div class="text-red-700">
+                                <strong><i class="fas fa-exclamation-triangle mr-1"></i>TIDAK DAPAT INPUT SIMPANAN ${jenis.toUpperCase()}!</strong><br>
+                                • Total simpanan pokok: ${formatRupiah(data.total)}<br>
+                                • Batas minimal: Rp 500.000<br>
+                                • <strong>Harus lunasi simpanan pokok terlebih dahulu!</strong>
+                            </div>
+                        `;
+                        simpanBtn.disabled = true;
+                        jumlahInput.disabled = true;
+                    } else {
+                        // Sudah lunas, bisa input wajib/sukarela
+                        pokokInfo.className = 'bg-green-50 border border-green-200 rounded-md p-3';
+                        pokokDetail.innerHTML = `
+                            <div class="text-green-700">
+                                <strong><i class="fas fa-check-circle mr-1"></i>SIAP INPUT SIMPANAN ${jenis.toUpperCase()}</strong><br>
+                                • Simpanan pokok sudah lunas: ${formatRupiah(data.total)}<br>
+                                • Dapat melanjutkan ke simpanan ${jenis}
+                            </div>
+                        `;
+                        simpanBtn.disabled = false;
+                        jumlahInput.disabled = false;
+                        jumlahInput.removeAttribute('max');
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Error checking simpanan pokok:', err);
+            });
+    } else if ((jenis === 'wajib' || jenis === 'sukarela') && idAnggota === 'all') {
+        // Untuk semua anggota pada simpanan wajib/sukarela
+        const pokokInfo = document.getElementById('pokokInfo');
+        const pokokDetail = document.getElementById('pokokDetail');
+        pokokInfo.classList.remove('hidden');
+        pokokInfo.className = 'bg-yellow-50 border border-yellow-200 rounded-md p-3';
+        pokokDetail.innerHTML = `
+            <div class="text-yellow-700">
+                <strong><i class="fas fa-info-circle mr-1"></i>Input untuk Semua Anggota:</strong><br>
+                • Simpanan ${jenis} akan diinput hanya untuk anggota yang sudah lunas simpanan pokok<br>
+                • Anggota yang belum lunas akan dilewati secara otomatis
+            </div>
+        `;
+        document.getElementById('simpanBtn').disabled = false;
+        document.getElementById('jumlahInput').disabled = false;
+        document.getElementById('jumlahInput').removeAttribute('max');
     } else {
         resetPokokInfo();
         document.getElementById('simpanBtn').disabled = false;
@@ -412,7 +393,7 @@ function setupJumlahValidation() {
             
             if (currentJumlah > maxJumlah && maxJumlah > 0) {
                 this.value = maxJumlah;
-                alert(`Jumlah tidak boleh melebihi sisa simpanan pokok: ${formatRupiah(maxJumlah)}`);
+                showNotification('warning', 'Peringatan', `Jumlah tidak boleh melebihi sisa simpanan pokok: ${formatRupiah(maxJumlah)}`);
             }
         }
     });
@@ -430,6 +411,13 @@ function setupAnggotaSearch() {
 
     // Toggle semua anggota
     semuaBtn.addEventListener('click', function() {
+        const jenis = document.getElementById('jenisSelect').value;
+        
+        if (!jenis) {
+            showNotification('warning', 'Peringatan', 'Pilih jenis simpanan terlebih dahulu!');
+            return;
+        }
+        
         if (hidden.value === 'all') {
             hidden.value = '';
             input.value = '';
@@ -450,7 +438,13 @@ function setupAnggotaSearch() {
             semuaBtn.classList.remove('bg-blue-100', 'text-blue-700');
             semuaBtn.classList.add('bg-emerald-600', 'text-white');
             if (anggotaInfo) {
-                anggotaInfo.innerHTML = 'Simpanan akan diinput untuk semua anggota yang belum lunas';
+                let infoText = 'Simpanan akan diinput untuk semua anggota';
+                if (jenis === 'pokok') {
+                    infoText += ' yang belum lunas';
+                } else if (jenis === 'wajib' || jenis === 'sukarela') {
+                    infoText += ' yang sudah lunas simpanan pokok';
+                }
+                anggotaInfo.innerHTML = infoText;
                 anggotaInfo.classList.remove('hidden');
             }
         }
@@ -528,6 +522,90 @@ function setupAnggotaSearch() {
             results.classList.add('hidden');
         }
     });
+}
+
+// Function untuk menampilkan notifikasi keren
+function showNotification(type, title, message, duration = 5000) {
+    // Hapus notifikasi sebelumnya
+    const existingNotification = document.getElementById('customNotification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
+    // Warna berdasarkan type
+    const colors = {
+        success: {
+            bg: '#10b981',
+            icon: '✅',
+            border: '#059669'
+        },
+        error: {
+            bg: '#ef4444',
+            icon: '❌',
+            border: '#dc2626'
+        },
+        warning: {
+            bg: '#f59e0b',
+            icon: '⚠️',
+            border: '#d97706'
+        },
+        info: {
+            bg: '#3b82f6',
+            icon: 'ℹ️',
+            border: '#2563eb'
+        }
+    };
+
+    const color = colors[type] || colors.info;
+
+    // Buat element notifikasi
+    const notification = document.createElement('div');
+    notification.id = 'customNotification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${color.bg};
+        color: white;
+        padding: 0;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        z-index: 10000;
+        min-width: 400px;
+        max-width: 500px;
+        border-left: 4px solid ${color.border};
+        animation: slideInRight 0.3s ease-out;
+        font-family: 'Inter', sans-serif;
+    `;
+
+    notification.innerHTML = `
+        <div style="display: flex; align-items: flex-start; padding: 20px; position: relative;">
+            <div style="font-size: 24px; margin-right: 15px; margin-top: 2px;">${color.icon}</div>
+            <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 16px; margin-bottom: 5px; color: white;">${title}</div>
+                <div style="font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.9);">${message}</div>
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-left: 10px; transition: background 0.3s;">
+                <i class="fas fa-times"></i>
+            </button>
+            <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: rgba(255,255,255,0.5); width: 100%; animation: progressBar ${duration}ms linear; border-radius: 0 0 12px 12px;"></div>
+        </div>
+    `;
+
+    // Tambahkan ke body
+    document.body.appendChild(notification);
+
+    // Auto remove setelah duration
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.style.animation = 'slideOutRight 0.3s ease-in';
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 300);
+        }
+    }, duration);
 }
 
 // Load data simpanan
@@ -624,7 +702,7 @@ function setupFormSubmit() {
         e.preventDefault();
         
         if (isSubmitting) {
-            console.log('Already submitting, please wait...');
+            showNotification('warning', 'Peringatan', 'Sedang memproses data sebelumnya...');
             return;
         }
         
@@ -643,12 +721,12 @@ function setupFormSubmit() {
         
         // Validasi
         if (!data.id_anggota || !data.jenis || !data.jumlah) {
-            alert('Harap lengkapi semua field!');
+            showNotification('error', 'Gagal!', 'Harap lengkapi semua field!');
             return;
         }
 
         if (parseInt(data.jumlah) <= 0) {
-            alert('Jumlah simpanan harus lebih dari 0!');
+            showNotification('error', 'Gagal!', 'Jumlah simpanan harus lebih dari 0!');
             return;
         }
 
@@ -669,17 +747,25 @@ function setupFormSubmit() {
         })
         .then(result => {
             console.log('Response:', result);
+            
+            // Tampilkan notifikasi berdasarkan response
             if (result.success) {
-                alert(result.message || 'Simpanan berhasil disimpan!');
-                closeModal('savingsModal');
-                loadSimpanan();
+                showNotification(result.type || 'success', 
+                    result.type === 'success' ? 'Berhasil!' : 'Peringatan', 
+                    result.message, 8000);
+                
+                // Tutup modal setelah sukses
+                setTimeout(() => {
+                    closeModal('savingsModal');
+                    loadSimpanan(); // Refresh data tabel
+                }, 1000);
             } else {
-                alert('Gagal menyimpan: ' + (result.message || 'Unknown error'));
+                showNotification(result.type || 'error', 'Gagal!', result.message, 6000);
             }
         })
         .catch(err => {
             console.error('Fetch error:', err);
-            alert('Error: ' + err.message);
+            showNotification('error', 'Error!', 'Terjadi kesalahan: ' + err.message);
         })
         .finally(() => {
             // Reset submitting state
@@ -708,6 +794,21 @@ document.addEventListener('DOMContentLoaded', function() {
     if (filterAnggota) filterAnggota.addEventListener('change', loadSimpanan);
     if (jenisSelect) {
         jenisSelect.addEventListener('change', function() {
+            const tenorGroup = document.getElementById('tenorGroup');
+            const semuaBtn = document.getElementById('semuaAnggotaBtn');
+            
+            if (this.value === 'pokok') {
+                tenorGroup.classList.remove('hidden');
+                semuaBtn.classList.remove('hidden');
+            } else {
+                tenorGroup.classList.add('hidden');
+                if (this.value === 'wajib') {
+                    semuaBtn.classList.remove('hidden');
+                } else {
+                    semuaBtn.classList.add('hidden');
+                }
+            }
+            
             checkSimpananPokok();
         });
     }
@@ -723,6 +824,42 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Savings page initialized');
 });
+
+// Tambahkan CSS untuk animasi
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes progressBar {
+        from {
+            width: 100%;
+        }
+        to {
+            width: 0%;
+        }
+    }
+`;
+document.head.appendChild(style);
 </script>
 </body>
 </html>

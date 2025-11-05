@@ -1,5 +1,3 @@
-<?= $this->include('layouts/header') ?>
-
 
 <!DOCTYPE html>
 <html lang="id">
@@ -39,8 +37,8 @@
         <td style="padding: 12px;"><?= date('d-m-Y', strtotime($p['tanggal'])) ?></td>
         <td style="padding: 12px;">Rp <?= number_format($p['jumlah'], 0, ',', '.') ?></td>
         <td style="padding: 12px;">
-          <?php if ($p['bukti']): ?>
-            <a href="<?= base_url($p['bukti']) ?>" target="_blank" 
+          <?php if (!empty($p['bukti'])): ?>
+            <a href="javascript:void(0)" onclick="showImageModal('<?= base_url('uploads/' . $p['bukti']) ?>')"
                style="color: #007bff; text-decoration: none; font-weight: bold;">Lihat Bukti</a>
           <?php else: ?>
             <span style="color: gray;">Tidak ada</span>
@@ -65,3 +63,29 @@
 
 </body>
 </html>
+
+<!-- Modal untuk menampilkan gambar bukti transfer -->
+<div id="imageModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 90%; max-height: 90%;">
+        <img id="modalImage" src="" alt="Bukti Transfer" style="max-width: 100%; max-height: 100%; display: block;">
+        <button onclick="closeImageModal()" style="position: absolute; top: -10px; right: -10px; background: red; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 18px;">×</button>
+    </div>
+</div>
+
+<script>
+function showImageModal(imageSrc) {
+    document.getElementById('modalImage').src = imageSrc;
+    document.getElementById('imageModal').style.display = 'block';
+}
+
+function closeImageModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}
+
+// Klik di luar modal untuk menutup
+document.getElementById('imageModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeImageModal();
+    }
+});
+</script>

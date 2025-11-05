@@ -317,8 +317,24 @@ $data = [
     public function pendingMembers()
     {
         $pending = $this->userModel->where('role', 'anggota')
-                                   ->where('status', 'pending')
-                                   ->findAll();
+                                    ->where('status', 'pending')
+                                    ->findAll();
+
+        // Ambil data foto dari session untuk setiap user pending
+        foreach ($pending as &$user) {
+            $sessionKey = 'register_data_' . $user['id'];
+            $registerData = session()->get($sessionKey);
+
+            if ($registerData) {
+                $user['foto_diri'] = $registerData['foto_diri'] ?? '';
+                $user['foto_ktp'] = $registerData['foto_ktp'] ?? '';
+                $user['foto_diri_ktp'] = $registerData['foto_diri_ktp'] ?? '';
+            } else {
+                $user['foto_diri'] = '';
+                $user['foto_ktp'] = '';
+                $user['foto_diri_ktp'] = '';
+            }
+        }
 
         return view('layouts/header', ['title' => 'Verifikasi Anggota'])
             . view('dashboard_admin/pending_members', ['anggota' => $pending])
@@ -1661,22 +1677,6 @@ public function search()
     return $this->response->setJSON($results);
 }
 
-public function exportData()
-{
-    $type = $this->request->getGet('type');
-    
-    // Load model
-    $model = new \App\Models\MemberModel(); // Ganti dengan model yang sesuai
-    
-    $data = $model->findAll();
-    
-    if ($type === 'excel') {
-        return $this->exportExcel($data);
-    } else {
-        return $this->exportCSV($data);
-    }
-}
-
 public function importData()
 {
     $file = $this->request->getFile('file');
@@ -1753,35 +1753,6 @@ public function updateNotificationSettings()
     ]);
 }
 
-// Helper methods
-private function exportExcel($data)
-{
-    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet();
-    
-    // Header
-    $sheet->setCellValue('A1', 'No');
-    $sheet->setCellValue('B1', 'Nama');
-    // Tambahkan header lainnya...
-    
-    // Data
-    $row = 2;
-    foreach ($data as $item) {
-        $sheet->setCellValue('A' . $row, $row-1);
-        $sheet->setCellValue('B' . $row, $item['nama']);
-        // Tambahkan data lainnya...
-        $row++;
-    }
-    
-    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-    $filename = 'export-data-' . date('Y-m-d') . '.xlsx';
-    
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename="' . $filename . '"');
-    
-    $writer->save('php://output');
-    exit;
-}
 public function pembayaranPending()
 {
     $db = \Config\Database::connect();
@@ -2452,46 +2423,96 @@ public function bayarAngsuran()
 
 public function getDetailAngsuran()
 {
-    // Load models
-    $qardModel = new QardModel();
-    $murabahahModel = new MurabahahModel();
-    $mudharabahModel = new MudharabahModel();
+// Load models
+$qardModel = new QardModel();
+$murabahahModel = new MurabahahModel();
+$mudharabahModel = new MudharabahModel();
 
-    // Ambil data dari GET request
-    $jenis = $this->request->getGet('jenis');
-    $id = $this->request->getGet('id');
+// Ambil data dari GET request
+$jenis = $this->request->getGet('jenis');
+$id = $this->request->getGet('id');
 
-    switch ($jenis) {
-        case 'qard':
-            $data = $qardModel->find($id);
-            break;
-        case 'murabahah':
-            $data = $murabahahModel->find($id);
-            break;
-        case 'mudharabah':
-            $data = $mudharabahModel->find($id);
-            break;
-        default:
-            return $this->response->setJSON(['error' => 'Jenis tidak valid']);
+switch ($jenis) {
+    case 'qard':
+        $data = $qardModel->find($id);
+        break;
+    case 'murabahah':
+        $data = $murabahahModel->find($id);
+        break;
+    case 'mudharabah':
+        $data = $mudharabahModel->find($id);
+        break;
+    default:
+        return $this->response->setJSON(['error' => 'Jenis tidak valid']);
+}
+
+if ($data) {
+    $total_pinjaman = $data['jml_pinjam'] ?? 0;
+    $terbayar = $data['jml_terbayar'] ?? 0;
+    $sisa = $total_pinjaman - $terbayar;
+    $tenor_dibayar = $data['tenor_dibayar'] ?? 0;
+    $total_tenor = $data['jml_angsuran'] ?? 0;
+
+    return $this->response->setJSON([
+        'success' => true,
+        'data' => $data,
+        'sisa_pembayaran' => $sisa,
+        'tenor_dibayar' => $tenor_dibayar,
+        'jml_angsuran' => $total_tenor
+    ]);
+}
+
+return $this->response->setJSON(['error' => 'Data tidak ditemukan']);
+}
+
+// =========================
+// PENDING SUKARELA
+// =========================
+
+public function pendingSukarela()
+{
+    $db = \Config\Database::connect();
+
+    $pending = $db->table('simpanan_sukarela')
+        ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota')
+        ->where('simpanan_sukarela.status', 'pending')
+        ->select('simpanan_sukarela.*, anggota.nama_lengkap, anggota.nomor_anggota')
+        ->orderBy('simpanan_sukarela.tanggal', 'DESC')
+        ->get()->getResultArray();
+
+    return view('layouts/header', ['title' => 'Pending Sukarela'])
+        . view('dashboard_admin/pending_sukarela', ['pending' => $pending])
+        . view('layouts/footer');
+}
+
+public function approveSukarela($id)
+{
+    $db = \Config\Database::connect();
+
+    $updated = $db->table('simpanan_sukarela')
+        ->where('id_ss', $id)
+        ->update(['status' => 'aktif']);
+
+    if ($updated) {
+        return redirect()->back()->with('success', 'Setoran sukarela berhasil disetujui.');
+    } else {
+        return redirect()->back()->with('error', 'Gagal menyetujui setoran sukarela.');
     }
+}
 
-    if ($data) {
-        $total_pinjaman = $data['jml_pinjam'] ?? 0;
-        $terbayar = $data['jml_terbayar'] ?? 0;
-        $sisa = $total_pinjaman - $terbayar;
-        $tenor_dibayar = $data['tenor_dibayar'] ?? 0;
-        $total_tenor = $data['jml_angsuran'] ?? 0;
-        
-        return $this->response->setJSON([
-            'success' => true,
-            'data' => $data,
-            'sisa_pembayaran' => $sisa,
-            'tenor_dibayar' => $tenor_dibayar,
-            'jml_angsuran' => $total_tenor
-        ]);
+public function rejectSukarela($id)
+{
+    $db = \Config\Database::connect();
+
+    $updated = $db->table('simpanan_sukarela')
+        ->where('id_ss', $id)
+        ->update(['status' => 'ditolak']);
+
+    if ($updated) {
+        return redirect()->back()->with('success', 'Setoran sukarela berhasil ditolak.');
+    } else {
+        return redirect()->back()->with('error', 'Gagal menolak setoran sukarela.');
     }
-
-    return $this->response->setJSON(['error' => 'Data tidak ditemukan']);
 }
 
 }

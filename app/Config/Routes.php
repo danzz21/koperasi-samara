@@ -119,9 +119,9 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('pinjaman/tolak/(:segment)/(:num)', 'AdminDashboard::tolakPinjaman/$1/$2');
 
     // Simpanan Sukarela
-    $routes->get('pending-sukarela', 'AdminSimpanan::pending');
-    $routes->get('approve-sukarela/(:num)', 'AdminSimpanan::approve/$1');
-    $routes->get('reject-sukarela/(:num)', 'AdminSimpanan::reject/$1');
+    $routes->get('pending-sukarela', 'AdminDashboard::pendingSukarela');
+    $routes->get('approve-sukarela/(:num)', 'AdminDashboard::approveSukarela/$1');
+    $routes->get('reject-sukarela/(:num)', 'AdminDashboard::rejectSukarela/$1');
 
     // Settings
     $routes->get('/admin/settings', 'AdminDashboard::settings');

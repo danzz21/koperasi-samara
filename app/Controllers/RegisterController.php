@@ -59,23 +59,38 @@ class RegisterController extends BaseController
             if ($userModel->insert($data)) {
                 // Dapatkan ID user yang baru dibuat
                 $userId = $userModel->getInsertID();
-                
+
+                // Simpan foto ke file dan dapatkan filename
+                $fotoDiriFilename = '';
+                $fotoKtpFilename = '';
+                $fotoDiriKtpFilename = '';
+
+                if (!empty($this->request->getPost('foto_diri'))) {
+                    $fotoDiriFilename = $this->saveBase64Image($this->request->getPost('foto_diri'), 'diri_' . time() . '_' . $userId . '.png');
+                }
+                if (!empty($this->request->getPost('foto_ktp'))) {
+                    $fotoKtpFilename = $this->saveBase64Image($this->request->getPost('foto_ktp'), 'ktp_' . time() . '_' . $userId . '.png');
+                }
+                if (!empty($this->request->getPost('foto_diri_ktp'))) {
+                    $fotoDiriKtpFilename = $this->saveBase64Image($this->request->getPost('foto_diri_ktp'), 'diri_ktp_' . time() . '_' . $userId . '.png');
+                }
+
                 // Simpan data lengkap ke session untuk nanti di verifikasi admin
-                $registerData = [
-                    'user_id'           => $userId,
-                    'nama_lengkap'      => $this->request->getPost('nama_lengkap'),
-                    'email'             => $this->request->getPost('email'),
-                    'no_ktp'            => $this->request->getPost('no_ktp'),
-                    'foto_ktp'          => $this->request->getPost('foto_ktp'),
-                    'foto_diri'         => $this->request->getPost('foto_diri'),
-                    'foto_diri_ktp'     => $this->request->getPost('foto_diri_ktp'),
-                    'jenis_bank'        => $this->request->getPost('jenis_bank'),
-                    'atasnama_rekening' => $this->request->getPost('atasnama_rekening'),
-                    'no_rek'            => $this->request->getPost('no_rekening'),
-                    'alamat'            => $this->request->getPost('alamat'),
-                    'jenis_kelamin'     => $this->request->getPost('jenis_kelamin'),
-                    'pekerjaan'         => $this->request->getPost('pekerjaan'),
-                ];
+                  $registerData = [
+                      'user_id'           => $userId,
+                      'nama_lengkap'      => $this->request->getPost('nama_lengkap'),
+                      'email'             => $this->request->getPost('email'),
+                      'no_ktp'            => $this->request->getPost('no_ktp'),
+                      'foto_ktp'          => $fotoKtpFilename,
+                      'foto_diri'         => $fotoDiriFilename,
+                      'foto_diri_ktp'     => $fotoDiriKtpFilename,
+                      'jenis_bank'        => $this->request->getPost('jenis_bank'),
+                      'atasnama_rekening' => $this->request->getPost('atasnama_rekening'),
+                      'no_rek'            => $this->request->getPost('no_rekening'),
+                      'alamat'            => $this->request->getPost('alamat'),
+                      'jenis_kelamin'     => $this->request->getPost('jenis_kelamin'),
+                      'pekerjaan'         => $this->request->getPost('pekerjaan'),
+                  ];
 
                 // Simpan ke session
                 session()->set('register_data_' . $userId, $registerData);
@@ -87,5 +102,30 @@ class RegisterController extends BaseController
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('errors', ['Terjadi kesalahan: ' . $e->getMessage()]);
         }
+    }
+
+    private function saveBase64Image($base64Data, $filename)
+    {
+        // Pastikan folder writable/uploads ada
+        $uploadPath = FCPATH . 'writable/uploads/';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0755, true);
+        }
+
+        // Decode base64
+        $imageData = explode(',', $base64Data);
+        if (count($imageData) < 2) {
+            return false;
+        }
+
+        $decodedData = base64_decode($imageData[1]);
+
+        // Simpan file
+        $filePath = $uploadPath . $filename;
+        if (file_put_contents($filePath, $decodedData)) {
+            return $filename;
+        }
+
+        return false;
     }
 }

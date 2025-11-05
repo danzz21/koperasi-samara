@@ -76,4 +76,6 @@ class SimpananPokokModel extends Model
         }
         return false;
     }
+
+    
 }

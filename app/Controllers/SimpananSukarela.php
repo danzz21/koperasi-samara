@@ -26,14 +26,14 @@ class SimpananSukarela extends BaseController
 
         if ($file && $file->isValid() && !$file->hasMoved()) {
             $newName = $file->getRandomName();
-            $file->move('uploads/bukti_sukarela/', $newName);
+            $file->move(FCPATH . 'uploads/', $newName);
         }
 
         $model = new SimpananSukarelaModel();
         $model->insert([
             'id_anggota' => $id,
             'jumlah'     => $this->request->getPost('jumlah'),
-            'bukti'      => $newName,
+            'bukti' => $newName,
             'tanggal'    => date('Y-m-d'),
             'status'     => 'pending',
             'keterangan' => 'Menunggu verifikasi admin'
