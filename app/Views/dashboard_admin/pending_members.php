@@ -46,7 +46,7 @@
             <a href="#" onclick="showImageModal('<?= base_url('writable/uploads/' . $a['foto_diri_ktp']) ?>', 'Foto Diri + KTP - <?= $a['nama_lengkap'] ?>')" style="color: #007bff; text-decoration: none; font-weight: bold;">👁️ Lihat</a>
           <?php else: ?>
             <span style="color: #999;">Tidak ada</span>
-          <?php endif; ?>
+          <?php endif; ?>  
         </td>
         <td style="padding: 12px; text-align:center;">
           <a href="<?= base_url('admin/verify/'.$a['id']) ?>"

@@ -1,0 +1,201 @@
+DEBUG - 2025-11-12 12:53:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:02:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:02:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:02:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:02:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:02:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-12 13:02:45 --> ErrorException: Undefined variable $shu
+[Method: GET, Route: admin/dashboard_admin/reports]
+in APPPATH\Views\dashboard_admin\reports.php on line 52.
+ 1 APPPATH\Views\dashboard_admin\reports.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $shu', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php', 52)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/reports', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(1441): view('dashboard_admin/reports')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-12 13:05:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-12 13:05:01 --> ErrorException: Undefined variable $shu
+[Method: GET, Route: admin/dashboard_admin/reports]
+in APPPATH\Views\dashboard_admin\reports.php on line 52.
+ 1 APPPATH\Views\dashboard_admin\reports.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $shu', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php', 52)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/reports', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(1441): view('dashboard_admin/reports')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-12 13:05:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-12 13:05:40 --> ErrorException: Undefined variable $shu
+[Method: GET, Route: admin/dashboard_admin/reports]
+in APPPATH\Views\dashboard_admin\reports.php on line 59.
+ 1 APPPATH\Views\dashboard_admin\reports.php(59): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $shu', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php', 59)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/reports', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(1441): view('dashboard_admin/reports')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-12 13:07:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-12 13:07:23 --> ErrorException: Undefined variable $shu
+[Method: GET, Route: admin/dashboard_admin/reports]
+in APPPATH\Views\dashboard_admin\reports.php on line 52.
+ 1 APPPATH\Views\dashboard_admin\reports.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $shu', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php', 52)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/reports', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(1441): view('dashboard_admin/reports')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-12 13:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-12 13:08:07 --> ErrorException: Undefined variable $shu
+[Method: GET, Route: admin/dashboard_admin/reports]
+in APPPATH\Views\dashboard_admin\reports.php on line 52.
+ 1 APPPATH\Views\dashboard_admin\reports.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $shu', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php', 52)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\reports.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/reports', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(1441): view('dashboard_admin/reports')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-12 13:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-12 13:10:58 --> ErrorException: Trait "App\Controllers\App\Models\ShuModel" not found
+[Method: GET, Route: admin/dashboard_admin/reports]
+in APPPATH\Controllers\AdminDashboard.php on line 9.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+DEBUG - 2025-11-12 13:11:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-12 13:11:16 --> mysqli_sql_exception: Unknown column 'jumlah' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT SUM(`jum...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`jum...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`jum...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`jum...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\app\Models\ShuModel.php(23): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\app\Models\ShuModel.php(62): App\Models\ShuModel->getMarginMurabahah(2024)
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\app\Controllers\AdminDashboard.php(1444): App\Models\ShuModel->getSHU(2024)
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#14 {main}
+CRITICAL - 2025-11-12 13:11:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'jumlah' in 'field list'
+[Method: GET, Route: admin/dashboard_admin/reports]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = :YEAR(tanggal):', [...], false)
+ 2 APPPATH\Models\ShuModel.php(23): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\ShuModel.php(62): App\Models\ShuModel->getMarginMurabahah(2024)
+ 4 APPPATH\Controllers\AdminDashboard.php(1444): App\Models\ShuModel->getSHU(2024)
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+CRITICAL - 2025-11-12 13:11:16 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'jumlah' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = 2024')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = 2024')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = :YEAR(tanggal):', [...], false)
+ 4 APPPATH\Models\ShuModel.php(23): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\ShuModel.php(62): App\Models\ShuModel->getMarginMurabahah(2024)
+ 6 APPPATH\Controllers\AdminDashboard.php(1444): App\Models\ShuModel->getSHU(2024)
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+CRITICAL - 2025-11-12 13:11:16 --> [Caused by] mysqli_sql_exception: Unknown column 'jumlah' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = 2024', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = 2024')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = 2024')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`jumlah`) AS `total`
+FROM `murabahah`
+WHERE YEAR(tanggal) = :YEAR(tanggal):', [...], false)
+ 5 APPPATH\Models\ShuModel.php(23): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\ShuModel.php(62): App\Models\ShuModel->getMarginMurabahah(2024)
+ 7 APPPATH\Controllers\AdminDashboard.php(1444): App\Models\ShuModel->getSHU(2024)
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->reports()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-12 13:13:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:16:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:21:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:21:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:25:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:27:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:30:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:31:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:31:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:32:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:37:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:37:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:37:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:37:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:37:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:38:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:39:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:41:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:42:08 --> Approve Simpanan Pokok dipanggil, ID: 47
+DEBUG - 2025-11-12 13:42:08 --> Data ditemukan: 1
+DEBUG - 2025-11-12 13:42:08 --> Update berhasil: Ya
+DEBUG - 2025-11-12 13:42:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:42:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:42:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:42:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-12 13:42:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

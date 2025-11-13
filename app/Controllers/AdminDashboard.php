@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\AnggotaModel;
 use App\Models\UserModel;
 use App\Models\QardModel;
+use App\Models\ShuModel;
 use App\Models\MurabahahModel;
 use App\Models\MudharabahModel;
 
@@ -224,6 +225,7 @@ public function tolakPinjaman($jenis, $id)
     // Pending (yang udah ada)
     // =========================
     $pendingSimpananCount = $db->table('simpanan_sukarela')->where('status', 'pending')->countAllResults();
+    $pendingSimpananPokokCount = $db->table('simpanan_pokok')->where('status', 'pending')->countAllResults(); // TAMBAHKAN INI
     $pendingCount = $this->userModel->where('role', 'anggota')
                                     ->where('status', 'pending')
                                     ->countAllResults();
@@ -294,18 +296,19 @@ foreach ($pembiayaan as $row) {
 
 // Gabungkan semua data ke satu array
 $data = [
-    'totalAnggota'        => $totalAnggota,
-    'totalSimpanan'       => $totalSimpanan,
-    'totalPembiayaan'     => $totalPembiayaan,
-    'totalMargin'         => $totalMargin,
-    'pendingPinjamanCount'=> $pendingPinjamanCount,
-    'pendingSimpananCount'=> $pendingSimpananCount,
-    'pendingPembayaranCount' => $pendingPembayaranCount,
-    'pendingCount'        => $pendingCount,
-    'chartLabels'         => json_encode($labels),
-    'chartSimpanan'       => json_encode($simpananData),
-    'chartPembiayaan'     => json_encode($pembiayaanData),
-];
+        'totalAnggota'        => $totalAnggota,
+        'totalSimpanan'       => $totalSimpanan,
+        'totalPembiayaan'     => $totalPembiayaan,
+        'totalMargin'         => $totalMargin,
+        'pendingPinjamanCount'=> $pendingPinjamanCount,
+        'pendingSimpananCount'=> $pendingSimpananCount,
+        'pendingSimpananPokokCount' => $pendingSimpananPokokCount, // TAMBAHKAN INI
+        'pendingPembayaranCount' => $pendingPembayaranCount,
+        'pendingCount'        => $pendingCount,
+        'chartLabels'         => json_encode($labels),
+        'chartSimpanan'       => json_encode($simpananData),
+        'chartPembiayaan'     => json_encode($pembiayaanData),
+    ];
 
 
     return view('layouts/header', ['title' => 'Dashboard Admin'])
@@ -1082,6 +1085,105 @@ public function checkSimpananPokok($id_anggota = null)
     ]);
 }
 
+
+
+// =========================
+// PENDING SIMPANAN POKOK
+// =========================
+
+public function pendingSimpananPokok()
+{
+    $db = \Config\Database::connect();
+
+    $pending = $db->table('simpanan_pokok')
+        ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
+        ->where('simpanan_pokok.status', 'pending')
+        ->select('simpanan_pokok.*, anggota.nama_lengkap, anggota.nomor_anggota, anggota.photo')
+        ->orderBy('simpanan_pokok.tanggal', 'DESC')
+        ->get()
+        ->getResultArray(); // Pastikan ini mengembalikan array
+
+    $data = [
+        'title' => 'Pending Simpanan Pokok',
+        'pending' => $pending // Pastikan ini array
+    ];
+
+    return view('layouts/header', $data)
+        . view('dashboard_admin/pending_simpanan_pokok', $data)
+        . view('layouts/footer');
+}
+
+public function approveSimpananPokok($id)
+{
+    log_message('debug', 'Approve Simpanan Pokok dipanggil, ID: ' . $id);
+    
+    $db = \Config\Database::connect();
+
+    // Debug: Cek apakah data exist
+    $dataExist = $db->table('simpanan_pokok')
+        ->where('id_sp', $id)
+        ->where('status', 'pending')
+        ->countAllResults();
+    
+    log_message('debug', 'Data ditemukan: ' . $dataExist);
+
+    $updated = $db->table('simpanan_pokok')
+        ->where('id_sp', $id)
+        ->update(['status' => 'aktif']);
+
+    log_message('debug', 'Update berhasil: ' . ($updated ? 'Ya' : 'Tidak'));
+
+    if ($updated) {
+        return redirect()->back()->with('success', 'Simpanan pokok berhasil disetujui.');
+    } else {
+        return redirect()->back()->with('error', 'Gagal menyetujui simpanan pokok.');
+    }
+}
+
+public function rejectSimpananPokok($id)
+{
+    log_message('debug', 'Reject Simpanan Pokok dipanggil, ID: ' . $id);
+    
+    $db = \Config\Database::connect();
+
+    $updated = $db->table('simpanan_pokok')
+        ->where('id_sp', $id)
+        ->update(['status' => 'ditolak']);
+
+    log_message('debug', 'Update berhasil: ' . ($updated ? 'Ya' : 'Tidak'));
+
+    if ($updated) {
+        return redirect()->back()->with('success', 'Simpanan pokok berhasil ditolak.');
+    } else {
+        return redirect()->back()->with('error', 'Gagal menolak simpanan pokok.');
+    }
+}
+
+public function detailSimpananPokok($id)
+{
+    $db = \Config\Database::connect();
+
+    $simpanan = $db->table('simpanan_pokok')
+        ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
+        ->where('simpanan_pokok.id_sp', $id)
+        ->select('simpanan_pokok.*, anggota.nama_lengkap, anggota.nomor_anggota, anggota.photo, anggota.email, anggota.no_hp')
+        ->get()
+        ->getRow();
+
+    if (!$simpanan) {
+        return redirect()->to('/admin/pending-simpanan-pokok')->with('error', 'Data tidak ditemukan');
+    }
+
+    $data = [
+        'title' => 'Detail Simpanan Pokok',
+        'simpanan' => $simpanan
+    ];
+
+    return view('layouts/header', $data)
+        . view('dashboard_admin/detail_simpanan_pokok')
+        . view('layouts/footer');
+}
+
     // =========================
     // MENU LAINNYA
     // =========================
@@ -1341,12 +1443,47 @@ public function saveTransaksi()
     }
 }
 
-    public function reports()
-    {
-        return view('layouts/header', ['title' => 'Laporan & Analisis'])
-             . view('dashboard_admin/reports')
-             . view('layouts/footer');
+
+public function reports()
+{
+    $tahun = date('Y'); // Tahun sekarang
+    $shuModel = new ShuModel();
+    
+    // Data SHU
+    $dataSHU = $shuModel->getSHU($tahun);
+    
+    // Data Grafik
+    $dataGrafik = $shuModel->getDataGrafik($tahun);
+
+    // Bagi hasil SHU
+    $jasaModal = $dataSHU['shu'] * 0.5;
+    $jasaUsaha = $dataSHU['shu'] * 0.5;
+
+    // Generate pilihan tahun
+    $tahunOptions = [];
+    for ($i = 0; $i < 3; $i++) {
+        $year = date('Y') - $i;
+        $tahunOptions[$year] = $year;
     }
+
+    $viewData = [
+        'title' => 'Laporan & Analisis',
+        'tahun' => $tahun,
+        'tahunOptions' => $tahunOptions,
+        'shu' => $dataSHU['shu'] ?? 0,
+        'margin_murabahah' => $dataSHU['margin_murabahah'] ?? 0,
+        'margin_mudharabah' => $dataSHU['margin_mudharabah'] ?? 0,
+        'pemasukan_umum' => $dataSHU['pemasukan_umum'] ?? 0,
+        'pengeluaran_umum' => $dataSHU['pengeluaran_umum'] ?? 0,
+        'jasaModal' => $jasaModal,
+        'jasaUsaha' => $jasaUsaha,
+        'grafikData' => $dataGrafik
+    ];
+
+    return view('layouts/header', $viewData)
+         . view('dashboard_admin/reports', $viewData)
+         . view('layouts/footer');
+}
 
    public function settings()
 {

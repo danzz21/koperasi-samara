@@ -1,0 +1,157 @@
+DEBUG - 2025-11-08 07:20:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:21:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:22:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:22:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 07:22:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 08:43:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 08:43:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 08:43:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 08:43:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 08:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 08:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:05:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:05:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:07:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:07:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:17:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:17:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:21:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:21:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:21:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:21:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:23:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:23:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:23:33 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-11-08 09:23:33 --> ID Anggota: 46
+DEBUG - 2025-11-08 09:23:33 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-11-08 09:23:33 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-11-08 09:23:33 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-11-08 09:23:33 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2025-11-08 09:23:33 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-11-08 09:23:33 --> Data Qard lunas: 0
+DEBUG - 2025-11-08 09:23:33 --> Data Murabahah lunas: 0
+DEBUG - 2025-11-08 09:23:33 --> Data Mudharabah lunas: 0
+DEBUG - 2025-11-08 09:23:33 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-11-08 09:23:33 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-11-08 09:23:33 --> Total pinjaman aktif: 0
+DEBUG - 2025-11-08 09:23:33 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2025-11-08 09:23:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:23:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-08 09:25:24 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard_admin/pending_simpanan_pokok.php"
+[Method: GET, Route: admin/pending-simpanan-pokok]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dashboard_admin/pending_simpanan_pokok.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/pending_simpanan_pokok', [], true)
+ 3 APPPATH\Controllers\AdminDashboard.php(1103): view('dashboard_admin/pending_simpanan_pokok', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->pendingSimpananPokok()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+CRITICAL - 2025-11-08 09:26:02 --> TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given
+[Method: GET, Route: admin/pending-simpanan-pokok]
+in APPPATH\Views\dashboard_admin\pending_simpanan_pokok.php on line 91.
+ 1 SYSTEMPATH\View\View.php(226): include()
+ 2 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/pending_simpanan_pokok', [], true)
+ 4 APPPATH\Controllers\AdminDashboard.php(1103): view('dashboard_admin/pending_simpanan_pokok', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->pendingSimpananPokok()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+CRITICAL - 2025-11-08 09:26:02 --> [Caused by] ErrorException: Undefined variable $pendingPokok
+in APPPATH\Views\dashboard_admin\pending_simpanan_pokok.php on line 91.
+ 1 APPPATH\Views\dashboard_admin\pending_simpanan_pokok.php(91): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pendingPokok', 'C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\pending_simpanan_pokok.php', 91)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\dashboard_admin\\pending_simpanan_pokok.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/pending_simpanan_pokok', [], true)
+ 5 APPPATH\Controllers\AdminDashboard.php(1103): view('dashboard_admin/pending_simpanan_pokok', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->pendingSimpananPokok()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-08 09:27:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:27:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-08 09:27:18 --> Error: Call to undefined function App\Controllers\csrf_val()
+[Method: POST, Route: anggota/simpanan/pokok/store]
+in APPPATH\Controllers\Simpanan.php on line 108.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Simpanan->storePokok()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Simpanan))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-08 09:34:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:35:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:35:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-08 09:35:46 --> Error storePokok: Undefined property: App\Controllers\Simpanan::$security
+DEBUG - 2025-11-08 09:38:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:46:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:47:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:47:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:49:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:49:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:50:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-08 09:50:09 --> mysqli_sql_exception: Unknown column 'bukti_transfer' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `si...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `si...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `si...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `si...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\app\Controllers\Simpanan.php(192): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(933): App\Controllers\Simpanan->storePokok()
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Simpanan))
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#12 {main}
+ERROR - 2025-11-08 09:50:09 --> Error storePokok: Unknown column 'bukti_transfer' in 'field list'
+DEBUG - 2025-11-08 09:52:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:52:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:52:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:53:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-08 09:53:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-08 09:54:02 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard_admin/detail_simpanan_pokok.php"
+[Method: GET, Route: admin/detail-simpanan-pokok/47]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dashboard_admin/detail_simpanan_pokok.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('dashboard_admin/detail_simpanan_pokok', [], true)
+ 3 APPPATH\Controllers\AdminDashboard.php(1175): view('dashboard_admin/detail_simpanan_pokok')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->detailSimpananPokok('47')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-11-08 09:54:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

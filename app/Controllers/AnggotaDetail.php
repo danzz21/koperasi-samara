@@ -30,6 +30,24 @@ class AnggotaDetail extends BaseController
         $this->mudharabahModel = new MudharabahModel();
     }
 
+    // AdminController.php
+    public function detailAnggota($id)
+    {
+        $anggotaModel = new \App\Models\AnggotaModel();
+        $anggota = $anggotaModel->find($id);
+
+        if (!$anggota) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Anggota tidak ditemukan");
+        }
+
+        $data = [
+            'anggota' => $anggota
+        ];
+
+        return view('admin/detail_anggota', $data);
+    }
+
+
     public function detail($id_anggota)
     {
         // Ambil data anggota

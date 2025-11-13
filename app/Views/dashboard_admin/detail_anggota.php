@@ -81,20 +81,22 @@
                 <div class="flex items-center space-x-6">
                     <!-- FOTO PROFIL -->
                     <div class="profile-photo w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold bg-emerald-600">
-                        <?php if (!empty($anggota['foto_diri']) && file_exists(FCPATH . 'uploads/foto_diri/' . $anggota['foto_diri'])): ?>
-                            <img src="<?= base_url('uploads/foto_diri/' . $anggota['foto_diri']) ?>" 
-                                 alt="Foto <?= esc($anggota['nama_lengkap']) ?>" 
-                                 class="w-full h-full rounded-full object-cover" />
-                        <?php elseif (!empty($anggota['foto']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto'])): ?>
-                            <img src="<?= base_url('uploads/profile/' . $anggota['foto']) ?>" 
-                                 alt="Foto <?= esc($anggota['nama_lengkap']) ?>" 
-                                 class="w-full h-full rounded-full object-cover" />
+                        <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
+                            <img src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" 
+                                alt="Foto <?= esc($anggota['nama_lengkap']) ?>" 
+                                class="w-full h-full rounded-full object-cover" />
                         <?php else: ?>
-                            <div class="w-full h-full rounded-full flex items-center justify-center text-2xl font-bold text-white bg-emerald-500">
-                                <?= strtoupper(substr($anggota['nama_lengkap'] ?? 'A', 0, 2)) ?>
+                            <?php 
+                            $firstLetter = strtoupper(substr($anggota['nama_lengkap'], 0, 1));
+                            $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
+                            $bgColor = $colors[crc32($anggota['nomor_anggota']) % count($colors)];
+                            ?>
+                            <div class="w-full h-full rounded-full flex items-center justify-center text-2xl font-bold text-white" style="background:<?= $bgColor ?>;">
+                                <?= $firstLetter ?>
                             </div>
                         <?php endif; ?>
                     </div>
+
 
                     <!-- DATA ANGGOTA -->
                     <div>

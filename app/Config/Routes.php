@@ -68,6 +68,11 @@ $routes->get('riwayat-cicilan', 'Cicilan::riwayatCicilan');
     $routes->get('search-anggota', 'Simpanan::searchAnggota');
     $routes->get('check-simpanan-pokok/(:num)', 'Simpanan::checkSimpananPokok/$1');
 });
+// Atau jika ingin lebih spesifik:
+$routes->post('anggota/simpanan/pokok/store', 'Simpanan::storePokok');
+$routes->post('anggota/simpanan/sukarela/store', 'Simpanan::storeSukarela');
+$routes->post('anggota/simpanan/setTenor', 'Simpanan::setTenor');
+$routes->get('anggota/simpanan', 'Simpanan::index');
 
 // ===========================
 // ROUTE UNTUK ADMIN
@@ -148,4 +153,10 @@ $routes->get('extras/backup', 'YourController::backupDatabase');
 $routes->get('extras/audit-log', 'YourController::auditLog');
 $routes->post('extras/update-notification', 'YourController::updateNotificationSettings');
 $routes->get('extras/get-notification-settings', 'YourController::getNotificationSettings');
+
+// Pending Simpanan Pokok Routes
+$routes->get('admin/pending-simpanan-pokok', 'AdminDashboard::pendingSimpananPokok');
+$routes->get('admin/detail-simpanan-pokok/(:num)', 'AdminDashboard::detailSimpananPokok/$1');
+$routes->post('admin/approve-simpanan-pokok/(:num)', 'AdminDashboard::approveSimpananPokok/$1');
+$routes->post('admin/reject-simpanan-pokok/(:num)', 'AdminDashboard::rejectSimpananPokok/$1');
 

@@ -254,6 +254,11 @@
       color: var(--secondary);
     }
 
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+
     .divider {
       height: 1px;
       background: var(--gray-light);
@@ -395,7 +400,8 @@
     }
 
     .form-group input,
-    .form-group textarea {
+    .form-group textarea,
+    .form-group select {
       width: 100%;
       padding: 0.8rem;
       border: 1px solid var(--gray-light);
@@ -404,7 +410,8 @@
     }
 
     .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group textarea:focus,
+    .form-group select:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
@@ -523,7 +530,7 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="header-simpan">
+   <header class="header-simpan">
     <div class="header-info">
         <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
           <img id="preview" src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
@@ -557,7 +564,9 @@
   
   <!-- Alert untuk simpanan pokok belum mencukupi -->
   <?php
-    $totalPokok = array_sum(array_column($pokok, 'jumlah'));
+    // Hitung total simpanan pokok yang sudah aktif (dikonfirmasi)
+    $pokok_approved = array_filter($pokok, fn($item) => $item['status'] === 'aktif');
+    $totalPokok = array_sum(array_column($pokok_approved, 'jumlah'));
     $isPokokComplete = $totalPokok >= 500000;
   ?>
   
@@ -589,26 +598,27 @@
             </span>
         </div>
         <div class="kv">
-            <span class="k">Cicilan</span>
-            <span class="v"><?= count($pokok) ?>x</span>
+            <span class="k">Target</span>
+            <span class="v">Rp 500.000</span>
         </div>
         <div class="kv">
-            <span class="k">Angsuran / Bulan</span>
+            <span class="k">Kekurangan</span>
             <span class="v">
                 <?php
-                    $cicilanPerBulan = 0;
-                    if (count($pokok) > 0 && $tenor_anggota > 0) {
-                        $cicilanPerBulan = 500000 / $tenor_anggota; // 500rb dibagi tenor
+                    $kekurangan = 500000 - $totalPokok;
+                    if ($kekurangan > 0) {
+                        echo 'Rp ' . number_format($kekurangan, 0, ',', '.');
+                    } else {
+                        echo 'Lunas';
                     }
                 ?>
-                Rp <?= number_format($cicilanPerBulan, 0, ',', '.') ?>
             </span>
         </div>
         <div class="row" style="margin-top:8px;">
             <span class="k">Status</span>
             <span class="badge <?= $isPokokComplete ? 'badge-lunas' : 'badge-belum' ?>">
                 <i class="fa-regular fa-clock"></i>
-                <?= $isPokokComplete ? 'Lunas' : 'Belum Bayar' ?>
+                <?= $isPokokComplete ? 'Lunas' : 'Belum Lunas' ?>
             </span>
         </div>
         <div class="divider"></div>
@@ -618,42 +628,44 @@
         </div>
     </div>
 
-    <!-- Jadwal Cicilan -->
+    <!-- Button Setor Simpanan Pokok -->
+    <?php if (!$isPokokComplete): ?>
+      <button class="btn-setor" id="btn-setor-pokok">
+        <i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan Pokok
+      </button>
+      <div class="note">Setoran akan masuk ke pending dan menunggu konfirmasi admin.</div>
+    <?php endif; ?>
+
+    <!-- Riwayat Setoran Pokok -->
     <div class="card">
         <div class="card-title">
-            <i data-lucide="calendar" width="20" height="20"></i>
-            Jadwal Cicilan
+            <i data-lucide="history" width="20" height="20"></i>
+            Riwayat Setoran Pokok
         </div>
-        <?php 
-        // Tampilkan jadwal cicilan berdasarkan tenor
-        if ($tenor_anggota && $tenor_anggota > 0): 
-            $cicilanPerBulan = 500000 / $tenor_anggota;
-            for ($i = 1; $i <= $tenor_anggota; $i++): 
-                $existingCicilan = $pokok[$i-1] ?? null;
-        ?>
+        <?php if (!empty($pokok)): ?>
+          <?php foreach ($pokok as $item): ?>
             <div class="bill">
-                <div class="bill-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                <div class="bill-icon" style="background:#f0fdf4;color:#16a34a;">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </div>
                 <div class="bill-main">
-                    <div class="bill-title">Bulan ke-<?= $i ?></div>
-                    <div class="bill-sub">Cicilan ke-<?= $i ?> • Potong gaji</div>
+                    <div class="bill-title">Setor Pokok</div>
+                    <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?> • Ref: PK-<?= date('md', strtotime($item['tanggal'])) ?></div>
                 </div>
                 <div class="bill-amount">
-                    <div class="nominal">Rp <?= number_format($cicilanPerBulan, 0, ',', '.') ?></div>
-                    <span class="badge <?= $existingCicilan ? 'badge-lunas' : 'badge-belum' ?>">
-                        <i class="fa-regular <?= $existingCicilan ? 'fa-check' : 'fa-clock' ?>"></i>
-                        <?= $existingCicilan ? 'Lunas' : 'Belum' ?>
+                    <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
+                    <span class="badge 
+                      <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-pending' : 'badge-ditolak') ?>">
+                      <i class="fa-regular 
+                         <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
+                      </i>
+                      <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Pending' : 'Ditolak') ?>
                     </span>
                 </div>
             </div>
-        <?php endfor; ?>
-        <?php elseif (empty($pokok)): ?>
-            <div style="padding:16px;text-align:center;color:#888;">
-                <?php if ($tenor_anggota): ?>
-                    Tenor: <?= $tenor_anggota ?> Bulan - Belum ada cicilan
-                <?php else: ?>
-                    Pilih tenor terlebih dahulu
-                <?php endif; ?>
-            </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <div style="padding:16px;text-align:center;color:#888;">Belum ada setoran pokok.</div>
         <?php endif; ?>
     </div>
   </section>
@@ -746,7 +758,7 @@
       </div>
 
       <!-- Button Setor -->
-      <button class="btn-setor <?= !$isPokokComplete ? 'disabled' : '' ?>" <?= !$isPokokComplete ? 'disabled' : '' ?>>
+      <button class="btn-setor" id="btn-setor-sukarela">
         <i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan
       </button>
       <div class="note">Penarikan tidak tersedia untuk Simpanan Sukarela.</div>
@@ -768,11 +780,11 @@
             <div class="bill-amount">
               <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
               <span class="badge 
-                <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-belum' : 'badge-ditolak') ?>">
+                <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-pending' : 'badge-ditolak') ?>">
                 <i class="fa-regular 
                    <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
                 </i>
-                <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Belum' : 'Ditolak') ?>
+                <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Pending' : 'Ditolak') ?>
               </span>
             </div>
           </div>
@@ -784,24 +796,50 @@
     <?php endif; ?>
   </section>
 
-  <!-- Modal Input Setoran Sukarela -->
-  <div id="modalSukarela" class="modal">
+  <!-- Modal Input Setoran Pokok -->
+<div id="modalPokok" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Sukarela</h3>
-      <form action="<?= base_url('anggota/simpanan/sukarela/store') ?>" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="jumlah">Jumlah Setoran (Rp)</label>
-          <input type="number" name="jumlah" id="jumlah" required />
-        </div>
-        <div class="form-group">
-          <label for="bukti">Upload Bukti Transfer</label>
-          <input type="file" name="bukti" id="bukti" accept="image/*,application/pdf" required />
-        </div>
-        <button type="submit" class="btn-submit">Kirim Setoran</button>
-      </form>
+        <span class="close" data-modal="modalPokok">&times;</span>
+        <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Pokok</h3>
+        <form id="formSimpananPokok" method="POST" enctype="multipart/form-data">
+            <!-- TAMBAHKAN CSRF TOKEN -->
+            <input type="hidden" name="csrf_test_name" value="<?= csrf_hash() ?>">
+            
+            <div class="form-group">
+                <label for="jumlah_pokok">Jumlah Setoran (Rp)</label>
+                <input type="number" name="jumlah" id="jumlah_pokok" required min="10000" max="500000" />
+                <small style="color:var(--gray);">Maksimal: Rp 500.000</small>
+            </div>
+            <div class="form-group">
+                <label for="bukti_pokok">Upload Bukti Transfer</label>
+                <input type="file" name="bukti" id="bukti_pokok" accept="image/*,application/pdf" required />
+            </div>
+            <button type="submit" class="btn-submit">Kirim Setoran</button>
+        </form>
     </div>
-  </div>
+</div>
+
+<!-- Modal Input Setoran Sukarela -->
+<div id="modalSukarela" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="modalSukarela">&times;</span>
+        <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Sukarela</h3>
+        <form id="formSimpananSukarela" method="POST" enctype="multipart/form-data">
+            <!-- TAMBAHKAN CSRF TOKEN -->
+            <input type="hidden" name="csrf_test_name" value="<?= csrf_hash() ?>">
+            
+            <div class="form-group">
+                <label for="jumlah_sukarela">Jumlah Setoran (Rp)</label>
+                <input type="number" name="jumlah" id="jumlah_sukarela" required min="10000" />
+            </div>
+            <div class="form-group">
+                <label for="bukti_sukarela">Upload Bukti Transfer</label>
+                <input type="file" name="bukti" id="bukti_sukarela" accept="image/*,application/pdf" required />
+            </div>
+            <button type="submit" class="btn-submit">Kirim Setoran</button>
+        </form>
+    </div>
+</div>
 
   <!-- Bottom Nav -->
   <nav class="bottom-nav">
@@ -951,60 +989,138 @@
     const isPokokComplete = <?= $isPokokComplete ? 'true' : 'false' ?>;
     
     function showTab(name){
-      // Jika mencoba akses tab wajib atau sukarela tapi pokok belum lunas
-      if ((name === 'wajib' || name === 'sukarela') && !isPokokComplete) {
-        alert('Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Wajib dan Sukarela.');
-        return;
-      }
-      
-      // content
-      document.querySelectorAll('.tab-content').forEach(el=>{
-        el.classList.remove('active');
-      });
-      document.getElementById(name).classList.add('active');
+        // Jika mencoba akses tab wajib atau sukarela tapi pokok belum lunas
+        if ((name === 'wajib' || name === 'sukarela') && !isPokokComplete) {
+            alert('Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Wajib dan Sukarela.');
+            return;
+        }
+        
+        // content
+        document.querySelectorAll('.tab-content').forEach(el=>{
+            el.classList.remove('active');
+        });
+        document.getElementById(name).classList.add('active');
 
-      // tabs
-      document.querySelectorAll('.tab-simpanan button').forEach(el=>el.classList.remove('active'));
-      if(name==='pokok') document.getElementById('tab-pokok').classList.add('active');
-      if(name==='wajib') document.getElementById('tab-wajib').classList.add('active');
-      if(name==='sukarela') document.getElementById('tab-sukarela').classList.add('active');
+        // tabs
+        document.querySelectorAll('.tab-simpanan button').forEach(el=>el.classList.remove('active'));
+        if(name==='pokok') document.getElementById('tab-pokok').classList.add('active');
+        if(name==='wajib') document.getElementById('tab-wajib').classList.add('active');
+        if(name==='sukarela') document.getElementById('tab-sukarela').classList.add('active');
     }
 
     // Modal logic
-    const modal = document.getElementById('modalSukarela');
-    const btn = document.querySelector('.btn-setor');
-    const span = document.querySelector('.close');
+    const modalPokok = document.getElementById('modalPokok');
+    const modalSukarela = document.getElementById('modalSukarela');
+    const btnPokok = document.getElementById('btn-setor-pokok');
+    const btnSukarela = document.getElementById('btn-setor-sukarela');
+    const closeButtons = document.querySelectorAll('.close');
 
-    if (btn) {
-      btn.onclick = () => {
-        if (!isPokokComplete) {
-          alert('Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Sukarela.');
-          return;
+    if (btnPokok) {
+        btnPokok.onclick = () => {
+            modalPokok.style.display = "block";
         }
-        modal.style.display = "block";
-      }
     }
 
-    if (span) {
-      span.onclick = () => {
-        modal.style.display = "none";
-      }
+    if (btnSukarela) {
+        btnSukarela.onclick = () => {
+            if (!isPokokComplete) {
+                alert('Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Sukarela.');
+                return;
+            }
+            modalSukarela.style.display = "block";
+        }
     }
+
+    closeButtons.forEach(btn => {
+        btn.onclick = (e) => {
+            const modalId = e.target.getAttribute('data-modal');
+            document.getElementById(modalId).style.display = "none";
+        }
+    });
 
     window.onclick = (event) => {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+        if (event.target == modalPokok) {
+            modalPokok.style.display = "none";
+        }
+        if (event.target == modalSukarela) {
+            modalSukarela.style.display = "none";
+        }
     }
     
+    // Handle Form Submission dengan AJAX
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form Simpanan Pokok
+        const formPokok = document.getElementById('formSimpananPokok');
+        if (formPokok) {
+            formPokok.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitForm(this, '<?= base_url('anggota/simpanan/pokok/store') ?>');
+            });
+        }
+
+        // Form Simpanan Sukarela
+        const formSukarela = document.getElementById('formSimpananSukarela');
+        if (formSukarela) {
+            formSukarela.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitForm(this, '<?= base_url('anggota/simpanan/sukarela/store') ?>');
+            });
+        }
+
+        function submitForm(form, url) {
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('.btn-submit');
+            const originalText = submitButton.textContent;
+
+            // Disable button dan show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Mengirim...';
+            submitButton.style.opacity = '0.7';
+
+            fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // Tutup modal
+                    form.closest('.modal').style.display = 'none';
+                    // Reset form
+                    form.reset();
+                    // Refresh halaman setelah 2 detik
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan jaringan. Silakan coba lagi.');
+            })
+            .finally(() => {
+                // Enable button kembali
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+                submitButton.style.opacity = '1';
+            });
+        }
+    });
+
+    // Auto-hide alerts
     setTimeout(() => {
-      document.querySelectorAll('.alert').forEach(alert => {
-        alert.style.opacity = '0';
-        alert.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => alert.remove(), 500);
-      });
+        document.querySelectorAll('.alert').forEach(alert => {
+            alert.style.opacity = '0';
+            alert.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => alert.remove(), 500);
+        });
     }, 5000);
-    
-  </script>
+</script>
 </body>
 </html>

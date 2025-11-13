@@ -492,44 +492,27 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="profile">
-            <?php 
-            $foto_anggota = null;
-            if (!empty($anggota['foto_diri']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto_diri'])) {
-                $foto_anggota = $anggota['foto_diri'];
-            } elseif (!empty($anggota['foto']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['foto'])) {
-                $foto_anggota = $anggota['foto'];
-            }
-            ?>
-            
-            <?php if ($foto_anggota): ?>
-                <img id="preview" src="<?= base_url('uploads/profile/' . $foto_anggota) ?>" alt="Foto Profil">
-            <?php else: ?>
-                <?php 
-                    $nama_lengkap = isset($anggota['nama_lengkap']) ? $anggota['nama_lengkap'] : 'Anggota';
-                    $nomor_anggota = isset($anggota['nomor_anggota']) ? $anggota['nomor_anggota'] : 'ANG00001';
-                    
-                    $firstLetter = strtoupper(substr($nama_lengkap, 0, 1));
-                    $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
-                    $bgColor = $colors[crc32($nomor_anggota) % count($colors)];
-                ?>
-                <div class="profile-avatar" style="background:<?= $bgColor ?>;">
-                    <?= $firstLetter ?>
-                </div>
-            <?php endif; ?>
-            <div class="profile-info">
-                <div class="header-name"><?= esc(isset($anggota['nama_lengkap']) ? $anggota['nama_lengkap'] : 'Anggota') ?></div>
-                <div class="header-id">ID: <?= esc(isset($anggota['nomor_anggota']) ? $anggota['nomor_anggota'] : 'ANG00001') ?></div>
-            </div>
+    <div class="profile">
+        <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
+          <img id="preview" src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
+        <?php else: ?>
+        <?php 
+          $firstLetter = strtoupper(substr($anggota['nama_lengkap'], 0, 1));
+          $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
+          $bgColor = $colors[crc32($anggota['nomor_anggota']) % count($colors)];
+        ?>
+        <div class="profile-avatar" style="background:<?= $bgColor ?>;">
+          <?= $firstLetter ?>
         </div>
-        <div class="header-actions">
-            <div style="position: relative;">
-                <i data-lucide="bell" class="icon"></i>
-                <div class="notification-badge">3</div>
-            </div>
-            <i data-lucide="settings" class="icon"></i>
-        </div>
-    </header>
+      <?php endif; ?>
+
+      <div>
+        <div class="header-name"><?= htmlspecialchars($anggota['nama_lengkap'] ?? '-') ?></div>
+        <div style="font-size:12px;opacity:.9;">ID: <?= htmlspecialchars($anggota['nomor_anggota'] ?? '-') ?></div>
+      </div>
+    </div>
+    <i data-lucide="bell" class="icon"></i>
+  </header>
 
     <!-- Section Title -->
     <h3 class="section-title">
