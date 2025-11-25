@@ -930,7 +930,7 @@ public function toggleMemberStatus()
             'id_anggota' => $id_anggota,
             'jumlah' => $jumlah,
             'tanggal' => $tanggal,
-            'status' => 'pending'
+            'status' => 'aktif'
         ];
         
         // Jika "Semua Anggota"

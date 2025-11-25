@@ -571,17 +571,17 @@
   ?>
   
   <?php if (!$isPokokComplete): ?>
-    <div class="alert alert-warning">
-      <i data-lucide="alert-triangle" class="alert-icon"></i>
-      <div>Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Wajib dan Sukarela.</div>
+    <div class="alert alert-info">
+      <i data-lucide="info" class="alert-icon"></i>
+      <div>Simpanan Pokok saat ini: Rp <?= number_format($totalPokok, 0, ',', '.') ?>. Target: Rp 500.000</div>
     </div>
   <?php endif; ?>
 
   <!-- ===== Tabs ===== -->
   <div class="tab-simpanan">
     <button id="tab-pokok" class="active" onclick="showTab('pokok')">Pokok</button>
-    <button id="tab-wajib" onclick="showTab('wajib')" <?= !$isPokokComplete ? 'class="disabled"' : '' ?>>Wajib</button>
-    <button id="tab-sukarela" onclick="showTab('sukarela')" <?= !$isPokokComplete ? 'class="disabled"' : '' ?>>Sukarela</button>
+    <button id="tab-wajib" onclick="showTab('wajib')">Wajib</button>
+    <button id="tab-sukarela" onclick="showTab('sukarela')">Sukarela</button>
   </div>
 
   <!-- ===== POKOK ===== -->
@@ -672,128 +672,106 @@
 
   <!-- ===== WAJIB ===== -->
   <section id="wajib" class="tab-content">
-    <?php if (!$isPokokComplete): ?>
-      <div class="card">
-        <div style="padding: 2rem; text-align: center;">
-          <i data-lucide="lock" width="48" height="48" style="color: var(--warning); margin-bottom: 1rem;"></i>
-          <h3 style="margin-bottom: 1rem; color: var(--dark);">Akses Dibatasi</h3>
-          <p style="color: var(--gray);">Simpanan Wajib belum dapat diakses karena Simpanan Pokok belum mencapai Rp 500.000.</p>
-          <p style="color: var(--gray); margin-top: 0.5rem;">Silakan lunasi Simpanan Pokok terlebih dahulu.</p>
-        </div>
+    <div class="card">
+      <div class="card-title">
+        <i data-lucide="calendar" width="20" height="20"></i>
+        Rangkuman Simpanan Wajib
       </div>
-    <?php else: ?>
-      <div class="card">
-        <div class="card-title">
-          <i data-lucide="calendar" width="20" height="20"></i>
-          Rangkuman Simpanan Wajib
-        </div>
-        <div class="kv"><span class="k">Nominal / Bulan</span>
-          <span class="v">
-            Rp <?= count($wajib) > 0 ? number_format($wajib[0]['jumlah'], 0, ',', '.') : '0' ?>
-          </span>
-        </div>
-        <div class="row" style="margin-top:8px;">
-          <span class="k">Sumber</span>
-          <span class="badge badge-gaji"><i class="fa-solid fa-money-bill-wave"></i> Potong Gaji</span>
-        </div>
+      <div class="kv"><span class="k">Nominal / Bulan</span>
+        <span class="v">
+          Rp <?= count($wajib) > 0 ? number_format($wajib[0]['jumlah'], 0, ',', '.') : '0' ?>
+        </span>
       </div>
+      <div class="row" style="margin-top:8px;">
+        <span class="k">Sumber</span>
+        <span class="badge badge-gaji"><i class="fa-solid fa-money-bill-wave"></i> Potong Gaji</span>
+      </div>
+    </div>
 
-      <div class="card">
-        <div class="card-title">
-          <i data-lucide="list-checks" width="20" height="20"></i>
-          Status Bulanan
-        </div>
-        <?php foreach ($wajib as $item): ?>
-          <div class="bill">
-            <div class="bill-icon"><i class="fa-solid fa-calendar-week"></i></div>
-            <div class="bill-main">
-              <div class="bill-title"><?= date('F Y', strtotime($item['tanggal'])) ?></div>
-              <div class="bill-sub">Pembayaran otomatis</div>
-            </div>
-            <div class="bill-amount">
-              <div class="nominal">Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
-              <span class="badge <?= $item['status']=='lunas' ? 'badge-lunas' : 'badge-belum' ?>">
-                <i class="fa-regular <?= $item['status']=='lunas' ? 'fa-check' : 'fa-clock' ?>"></i>
-                <?= ucfirst($item['status']) ?>
-              </span>
-            </div>
-          </div>
-        <?php endforeach; ?>
-        <?php if (empty($wajib)): ?>
-          <div style="padding:16px;text-align:center;color:#888;">Belum ada data simpanan wajib.</div>
-        <?php endif; ?>
+    <div class="card">
+      <div class="card-title">
+        <i data-lucide="list-checks" width="20" height="20"></i>
+        Status Bulanan
       </div>
-    <?php endif; ?>
+      <?php foreach ($wajib as $item): ?>
+        <div class="bill">
+          <div class="bill-icon"><i class="fa-solid fa-calendar-week"></i></div>
+          <div class="bill-main">
+            <div class="bill-title"><?= date('F Y', strtotime($item['tanggal'])) ?></div>
+            <div class="bill-sub">Pembayaran otomatis</div>
+          </div>
+          <div class="bill-amount">
+            <div class="nominal">Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
+            <span class="badge <?= $item['status']=='lunas' ? 'badge-lunas' : 'badge-belum' ?>">
+              <i class="fa-regular <?= $item['status']=='lunas' ? 'fa-check' : 'fa-clock' ?>"></i>
+              <?= ucfirst($item['status']) ?>
+            </span>
+          </div>
+        </div>
+      <?php endforeach; ?>
+      <?php if (empty($wajib)): ?>
+        <div style="padding:16px;text-align:center;color:#888;">Belum ada data simpanan wajib.</div>
+      <?php endif; ?>
+    </div>
   </section>
 
   <!-- ===== SUKARELA ===== -->
   <section id="sukarela" class="tab-content">
-    <?php if (!$isPokokComplete): ?>
-      <div class="card">
-        <div style="padding: 2rem; text-align: center;">
-          <i data-lucide="lock" width="48" height="48" style="color: var(--warning); margin-bottom: 1rem;"></i>
-          <h3 style="margin-bottom: 1rem; color: var(--dark);">Akses Dibatasi</h3>
-          <p style="color: var(--gray);">Simpanan Sukarela belum dapat diakses karena Simpanan Pokok belum mencapai Rp 500.000.</p>
-          <p style="color: var(--gray); margin-top: 0.5rem;">Silakan lunasi Simpanan Pokok terlebih dahulu.</p>
-        </div>
+    <div class="card">
+      <div class="card-title">
+        <i data-lucide="gift" width="20" height="20"></i>
+        Simpanan Sukarela
       </div>
-    <?php else: ?>
-      <div class="card">
-        <div class="card-title">
-          <i data-lucide="gift" width="20" height="20"></i>
-          Simpanan Sukarela
-        </div>
-        <?php
-          $sukarela_approved = array_filter($sukarela, fn($item) => $item['status'] === 'aktif');
-          $total_sukarela = array_sum(array_column($sukarela_approved, 'jumlah'));
-        ?>
-        <div class="kv"><span class="k">Saldo Saat Ini</span>
-          <span class="v">
-            Rp <?= number_format($total_sukarela, 0, ',', '.') ?>
-          </span>
-        </div>
-        <div class="kv"><span class="k">Keterangan</span>
-          <span class="v" style="color:var(--gray-700);font-weight:600;">Setor kapan saja</span>
-        </div>
+      <?php
+        $sukarela_approved = array_filter($sukarela, fn($item) => $item['status'] === 'aktif');
+        $total_sukarela = array_sum(array_column($sukarela_approved, 'jumlah'));
+      ?>
+      <div class="kv"><span class="k">Saldo Saat Ini</span>
+        <span class="v">
+          Rp <?= number_format($total_sukarela, 0, ',', '.') ?>
+        </span>
       </div>
+      <div class="kv"><span class="k">Keterangan</span>
+        <span class="v" style="color:var(--gray-700);font-weight:600;">Setor kapan saja</span>
+      </div>
+    </div>
 
-      <!-- Button Setor -->
-      <button class="btn-setor" id="btn-setor-sukarela">
-        <i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan
-      </button>
-      <div class="note">Penarikan tidak tersedia untuk Simpanan Sukarela.</div>
+    <!-- Button Setor -->
+    <button class="btn-setor" id="btn-setor-sukarela">
+      <i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan
+    </button>
+    <div class="note">Penarikan tidak tersedia untuk Simpanan Sukarela.</div>
 
-      <div class="card">
-        <div class="card-title">
-          <i data-lucide="history" width="20" height="20"></i>
-          Riwayat Setoran
-        </div>
-        <?php foreach ($sukarela as $item): ?>
-          <div class="bill">
-            <div class="bill-icon" style="background:#f0fdf4;color:#16a34a;">
-              <i class="fa-solid fa-arrow-down"></i>
-            </div>
-            <div class="bill-main">
-              <div class="bill-title">Setor</div>
-              <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?> • Ref: SR-<?= date('md', strtotime($item['tanggal'])) ?></div>
-            </div>
-            <div class="bill-amount">
-              <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
-              <span class="badge 
-                <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-pending' : 'badge-ditolak') ?>">
-                <i class="fa-regular 
-                   <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
-                </i>
-                <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Pending' : 'Ditolak') ?>
-              </span>
-            </div>
+    <div class="card">
+      <div class="card-title">
+        <i data-lucide="history" width="20" height="20"></i>
+        Riwayat Setoran
+      </div>
+      <?php foreach ($sukarela as $item): ?>
+        <div class="bill">
+          <div class="bill-icon" style="background:#f0fdf4;color:#16a34a;">
+            <i class="fa-solid fa-arrow-down"></i>
           </div>
-        <?php endforeach; ?>
-        <?php if (empty($sukarela)): ?>
-          <div style="padding:16px;text-align:center;color:#888;">Belum ada setoran sukarela.</div>
-        <?php endif; ?>
-      </div>
-    <?php endif; ?>
+          <div class="bill-main">
+            <div class="bill-title">Setor</div>
+            <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?> • Ref: SR-<?= date('md', strtotime($item['tanggal'])) ?></div>
+          </div>
+          <div class="bill-amount">
+            <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
+            <span class="badge 
+              <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-pending' : 'badge-ditolak') ?>">
+              <i class="fa-regular 
+                 <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
+              </i>
+              <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Pending' : 'Ditolak') ?>
+            </span>
+          </div>
+        </div>
+      <?php endforeach; ?>
+      <?php if (empty($sukarela)): ?>
+        <div style="padding:16px;text-align:center;color:#888;">Belum ada setoran sukarela.</div>
+      <?php endif; ?>
+    </div>
   </section>
 
   <!-- Modal Input Setoran Pokok -->
@@ -803,7 +781,7 @@
         <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Pokok</h3>
         <form id="formSimpananPokok" method="POST" enctype="multipart/form-data">
             <!-- TAMBAHKAN CSRF TOKEN -->
-            <input type="hidden" name="csrf_test_name" value="<?= csrf_hash() ?>">
+            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
             
             <div class="form-group">
                 <label for="jumlah_pokok">Jumlah Setoran (Rp)</label>
@@ -826,7 +804,7 @@
         <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Sukarela</h3>
         <form id="formSimpananSukarela" method="POST" enctype="multipart/form-data">
             <!-- TAMBAHKAN CSRF TOKEN -->
-            <input type="hidden" name="csrf_test_name" value="<?= csrf_hash() ?>">
+            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
             
             <div class="form-group">
                 <label for="jumlah_sukarela">Jumlah Setoran (Rp)</label>
@@ -966,6 +944,7 @@
     </p>
 
     <form action="<?= base_url('anggota/simpanan/setTenor') ?>" method="post">
+      <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
       <select name="tenor" required>
         <option value="">-- Pilih Tenor --</option>
         <option value="1">1 Bulan</option>
@@ -989,12 +968,6 @@
     const isPokokComplete = <?= $isPokokComplete ? 'true' : 'false' ?>;
     
     function showTab(name){
-        // Jika mencoba akses tab wajib atau sukarela tapi pokok belum lunas
-        if ((name === 'wajib' || name === 'sukarela') && !isPokokComplete) {
-            alert('Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Wajib dan Sukarela.');
-            return;
-        }
-        
         // content
         document.querySelectorAll('.tab-content').forEach(el=>{
             el.classList.remove('active');
@@ -1023,10 +996,6 @@
 
     if (btnSukarela) {
         btnSukarela.onclick = () => {
-            if (!isPokokComplete) {
-                alert('Simpanan Pokok belum mencapai Rp 500.000. Anda belum dapat mengakses Simpanan Sukarela.');
-                return;
-            }
             modalSukarela.style.display = "block";
         }
     }
@@ -1047,7 +1016,7 @@
         }
     }
     
-    // Handle Form Submission dengan AJAX
+    // Handle Form Submission dengan AJAX - DIPERBAIKI
     document.addEventListener('DOMContentLoaded', function() {
         // Form Simpanan Pokok
         const formPokok = document.getElementById('formSimpananPokok');
@@ -1084,7 +1053,17 @@
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                // Cek jika response adalah JSON
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    return response.text().then(text => {
+                        console.error('Server returned HTML instead of JSON:', text.substring(0, 200));
+                        throw new Error('Server error: Expected JSON but got HTML response');
+                    });
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     alert(data.message);
@@ -1097,12 +1076,12 @@
                         window.location.reload();
                     }, 2000);
                 } else {
-                    alert('Error: ' + data.message);
+                    alert('Error: ' + (data.message || 'Terjadi kesalahan'));
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan jaringan. Silakan coba lagi.');
+                alert('Terjadi kesalahan: ' + error.message + '. Silakan coba lagi atau hubungi admin.');
             })
             .finally(() => {
                 // Enable button kembali
