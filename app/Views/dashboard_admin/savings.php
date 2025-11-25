@@ -4,6 +4,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Simpanan</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <style>
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+    
+    .btn-delete {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    .btn-delete:hover {
+        background: #dc2626;
+        transform: translateY(-1px);
+    }
+    
+    .btn-delete:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+    }
+</style>
     </head>
     <body>
         <div class="mb-6">
@@ -69,25 +101,26 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Anggota</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200" id="simpananTableBody">
-                        <!-- Data akan diisi oleh JavaScript -->
-                        <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                Loading data...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+               <table class="w-full">
+    <thead class="bg-gray-50">
+        <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Anggota</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200" id="simpananTableBody">
+        <!-- Data akan diisi oleh JavaScript -->
+        <tr>
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                Loading data...
+            </td>
+        </tr>
+    </tbody>
+</table>
             </div>
         </div>
 
@@ -609,89 +642,175 @@
     }
 
     // Load data simpanan
-    function loadSimpanan() {
-        const jenis = document.getElementById('filterJenis')?.value || 'all';
-        const anggota = document.getElementById('filterAnggota')?.value || 'all';
-        
-        const tbody = document.getElementById('simpananTableBody');
-        if (!tbody) return;
+   // Load data simpanan
+function loadSimpanan() {
+    const jenis = document.getElementById('filterJenis')?.value || 'all';
+    const anggota = document.getElementById('filterAnggota')?.value || 'all';
+    
+    const tbody = document.getElementById('simpananTableBody');
+    if (!tbody) return;
 
-        tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">Loading...</td></tr>';
 
-        let url = `<?= base_url('admin/getSimpananList') ?>?jenis=${jenis}`;
-        if (anggota && anggota !== 'all') {
-            url += `&id_anggota=${anggota}`;
-        }
+    let url = `<?= base_url('admin/getSimpananList') ?>?jenis=${jenis}`;
+    if (anggota && anggota !== 'all') {
+        url += `&id_anggota=${anggota}`;
+    }
 
-        fetch(url)
-            .then(res => {
-                if (!res.ok) throw new Error('Network error');
-                return res.json();
-            })
-            .then(data => {
-                if (!data || data.length === 0) {
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                Tidak ada data simpanan
-                            </td>
-                        </tr>
-                    `;
-                    return;
-                }
-
-                tbody.innerHTML = '';
-                data.forEach(row => {
-                    // Status styling
-                    let statusClass = 'bg-gray-100 text-gray-800';
-                    let statusText = row.status || 'Aktif';
-                    
-                    if (row.status === 'lunas') {
-                        statusClass = 'bg-green-100 text-green-800';
-                        statusText = 'LUNAS';
-                    } else if (row.status === 'aktif') {
-                        statusClass = 'bg-blue-100 text-blue-800';
-                        statusText = 'Aktif';
-                    } else if (row.status === 'pending') {
-                        statusClass = 'bg-yellow-100 text-yellow-800';
-                        statusText = 'Pending';
-                    }
-                    
-                    const namaAnggota = row.nama_lengkap || '-';
-                    const tanggal = row.tanggal || '-';
-                    const jenisSimpanan = row.jenis || '-';
-                    const jumlah = row.jumlah || 0;
-
-                    tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${tanggal}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${namaAnggota}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <span class="capitalize">${jenisSimpanan}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                                ${formatRupiah(jumlah)}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
-                                    ${statusText}
-                                </span>
-                            </td>
-                        </tr>
-                    `;
-                });
-            })
-            .catch(err => {
-                console.error('Error loading simpanan:', err);
+    fetch(url)
+        .then(res => {
+            if (!res.ok) throw new Error('Network error');
+            return res.json();
+        })
+        .then(data => {
+            if (!data || data.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="5" class="px-6 py-4 text-center text-red-500">
-                            Gagal memuat data
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                            Tidak ada data simpanan
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = '';
+            data.forEach(row => {
+                // Status styling
+                let statusClass = 'bg-gray-100 text-gray-800';
+                let statusText = row.status || 'Aktif';
+                
+                if (row.status === 'lunas') {
+                    statusClass = 'bg-green-100 text-green-800';
+                    statusText = 'LUNAS';
+                } else if (row.status === 'aktif') {
+                    statusClass = 'bg-blue-100 text-blue-800';
+                    statusText = 'Aktif';
+                } else if (row.status === 'pending') {
+                    statusClass = 'bg-yellow-100 text-yellow-800';
+                    statusText = 'Pending';
+                }
+                
+                const namaAnggota = row.nama_lengkap || '-';
+                const tanggal = row.tanggal || '-';
+                const jenisSimpanan = row.jenis || '-';
+                const jumlah = row.jumlah || 0;
+                
+                // Tentukan ID berdasarkan jenis simpanan
+                let idField = '';
+                if (row.id_sp) idField = row.id_sp;
+                else if (row.id_sw) idField = row.id_sw;
+                else if (row.id_ss) idField = row.id_ss;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${tanggal}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${namaAnggota}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <span class="capitalize">${jenisSimpanan}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
+                            ${formatRupiah(jumlah)}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="action-buttons">
+                                <button class="btn-delete" onclick="deleteSimpanan('${jenisSimpanan}', '${idField}')" title="Hapus Simpanan">
+                                    <i class="fas fa-trash"></i>
+                                    Hapus
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `;
             });
-    }
+        })
+        .catch(err => {
+            console.error('Error loading simpanan:', err);
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="px-6 py-4 text-center text-red-500">
+                        Gagal memuat data
+                    </td>
+                </tr>
+            `;
+        });
+}
+
+// Function untuk hapus simpanan
+function deleteSimpanan(jenis, id) {
+    // Konfirmasi sebelum hapus
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: `Data simpanan ${jenis} ini akan dihapus permanen!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Show loading
+            Swal.fire({
+                title: 'Menghapus...',
+                text: 'Sedang menghapus data simpanan',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Kirim request hapus
+            fetch('<?= base_url('admin/deleteSimpanan') ?>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: new URLSearchParams({
+                    '<?= csrf_token() ?>': '<?= csrf_hash() ?>',
+                    'jenis': jenis,
+                    'id': id
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: result.message,
+                        icon: 'success',
+                        confirmButtonColor: '#10b981'
+                    });
+                    // Refresh tabel
+                    loadSimpanan();
+                } else {
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: result.message,
+                        icon: 'error',
+                        confirmButtonColor: '#ef4444'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan saat menghapus data',
+                    icon: 'error',
+                    confirmButtonColor: '#ef4444'
+                });
+            });
+        }
+    });
+}
 
     // Submit form dengan double submission protection
     function setupFormSubmit() {

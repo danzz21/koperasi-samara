@@ -970,20 +970,19 @@ public function toggleMemberStatus()
     $result = [];
 
     try {
-        // Jika "all", ambil semua jenis
         if ($jenis === 'all' || empty($jenis)) {
-            // **SIMPANAN POKOK - FILTER jumlah > 0**
+            // Simpanan Pokok
             $builderPokok = $db->table('simpanan_pokok')
                 ->select('simpanan_pokok.*, anggota.nama_lengkap, "pokok" as jenis')
                 ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
-                ->where('simpanan_pokok.jumlah >', 0);  // **FILTER PENTING**
+                ->where('simpanan_pokok.jumlah >', 0);
             
             if ($id_anggota && $id_anggota !== 'all') {
                 $builderPokok->where('simpanan_pokok.id_anggota', $id_anggota);
             }
             $pokok = $builderPokok->get()->getResultArray();
 
-            // **SIMPANAN WAJIB - tanpa filter jumlah**
+            // Simpanan Wajib
             $builderWajib = $db->table('simpanan_wajib')
                 ->select('simpanan_wajib.*, anggota.nama_lengkap, "wajib" as jenis')
                 ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota');
@@ -993,7 +992,7 @@ public function toggleMemberStatus()
             }
             $wajib = $builderWajib->get()->getResultArray();
 
-            // **SIMPANAN SUKARELA - tanpa filter jumlah**
+            // Simpanan Sukarela
             $builderSukarela = $db->table('simpanan_sukarela')
                 ->select('simpanan_sukarela.*, anggota.nama_lengkap, "sukarela" as jenis')
                 ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota');
@@ -1085,7 +1084,68 @@ public function checkSimpananPokok($id_anggota = null)
     ]);
 }
 
+// =========================
+// HAPUS SIMPANAN
+// =========================
+public function deleteSimpanan()
+{
+    if (!$this->request->isAJAX()) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Invalid request method'
+        ]);
+    }
 
+    $jenis = $this->request->getPost('jenis');
+    $id = $this->request->getPost('id');
+
+    $db = \Config\Database::connect();
+
+    try {
+        switch ($jenis) {
+            case 'pokok':
+                $table = 'simpanan_pokok';
+                $id_field = 'id_sp';
+                break;
+            case 'wajib':
+                $table = 'simpanan_wajib';
+                $id_field = 'id_sw';
+                break;
+            case 'sukarela':
+                $table = 'simpanan_sukarela';
+                $id_field = 'id_ss';
+                break;
+            default:
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Jenis simpanan tidak valid'
+                ]);
+        }
+
+        // Hapus data
+        $deleted = $db->table($table)
+            ->where($id_field, $id)
+            ->delete();
+
+        if ($deleted) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Data simpanan berhasil dihapus'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Gagal menghapus data simpanan'
+            ]);
+        }
+
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
+    }
+}
 
 // =========================
 // PENDING SIMPANAN POKOK

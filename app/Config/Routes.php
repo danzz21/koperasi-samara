@@ -160,3 +160,4 @@ $routes->get('admin/detail-simpanan-pokok/(:num)', 'AdminDashboard::detailSimpan
 $routes->post('admin/approve-simpanan-pokok/(:num)', 'AdminDashboard::approveSimpananPokok/$1');
 $routes->post('admin/reject-simpanan-pokok/(:num)', 'AdminDashboard::rejectSimpananPokok/$1');
 
+$routes->post('admin/deleteSimpanan', 'AdminDashboard::deleteSimpanan');
