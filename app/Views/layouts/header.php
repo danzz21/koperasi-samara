@@ -48,11 +48,13 @@
             <i class="fas fa-cog mr-2"></i>Settings
           </a>
           <div class="border-t border-gray-100"></div>
-          <form id="logoutForm" action="<?= base_url('auth/login') ?>" method="POST">
-            <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-              <i class="fas fa-sign-out-alt mr-2"></i>Logout
-            </button>
-          </form>
+          
+          <!-- FIXED LOGOUT LINK -->
+          <a href="<?= base_url('logout') ?>" 
+             onclick="return confirmLogout()"
+             class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 cursor-pointer">
+            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+          </a>
         </div>
       </div>
     </div>
@@ -64,26 +66,28 @@
 
 <script>
 // JavaScript untuk handle logout dengan konfirmasi
-document.addEventListener('DOMContentLoaded', function() {
-  const logoutForm = document.getElementById('logoutForm');
-  
-  if (logoutForm) {
-    logoutForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      if (confirm('Apakah Anda yakin ingin logout?')) {
-        // Jika menggunakan AJAX
-        // fetch(this.action, { method: 'POST' })
-        //   .then(response => {
-        //     if (response.ok) {
-        //       window.location.href = '<?= base_url() ?>';
-        //     }
-        //   });
+function confirmLogout() {
+    return confirm('Apakah Anda yakin ingin logout dari admin?');
+}
+
+// Jika ingin menggunakan form POST, gunakan ini:
+// function logoutAdmin() {
+//     if (confirm('Apakah Anda yakin ingin logout dari admin?')) {
+//         // Buat form dinamis untuk POST request
+//         const form = document.createElement('form');
+//         form.method = 'POST';
+//         form.action = '<?= base_url("logout/admin") ?>';
         
-        // Jika menggunakan form submit biasa
-        this.submit();
-      }
-    });
-  }
-});
+//         // Tambahkan CSRF token
+//         const csrfToken = document.createElement('input');
+//         csrfToken.type = 'hidden';
+//         csrfToken.name = '<?= csrf_token() ?>';
+//         csrfToken.value = '<?= csrf_hash() ?>';
+//         form.appendChild(csrfToken);
+        
+//         document.body.appendChild(form);
+//         form.submit();
+//     }
+//     return false;
+// }
 </script>

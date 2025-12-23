@@ -1,0 +1,402 @@
+DEBUG - 2025-12-23 03:17:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:20:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:20:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:20:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:20:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:27:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:27:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:27:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:32:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:38:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:38:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:39:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:39:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:39:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:39:09 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-12-23 03:39:09 --> ID Anggota: 46
+DEBUG - 2025-12-23 03:39:09 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-12-23 03:39:09 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-12-23 03:39:09 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-12-23 03:39:09 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2025-12-23 03:39:09 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-12-23 03:39:09 --> Data Qard lunas: 0
+DEBUG - 2025-12-23 03:39:09 --> Data Murabahah lunas: 0
+DEBUG - 2025-12-23 03:39:09 --> Data Mudharabah lunas: 0
+DEBUG - 2025-12-23 03:39:09 --> Total semua pinjaman lunas: 0
+DEBUG - 2025-12-23 03:39:09 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-12-23 03:39:09 --> Total pinjaman aktif: 0
+DEBUG - 2025-12-23 03:39:09 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2025-12-23 03:39:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:52:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:52:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:52:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:54:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:54:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:54:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:56:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:56:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 03:56:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:02:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:02:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:02:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:02:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:02:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:03:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:04:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:04:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:04:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:04:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:04:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:08:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:08:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:09:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 04:11:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:19:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:19:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:19:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:19:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:19:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:22:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:23:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:23:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:23:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:27:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:27:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:27:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:27:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:27:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:30:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:30:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:30:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:31:51 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-12-23 10:31:51 --> ID Anggota: 40
+DEBUG - 2025-12-23 10:31:51 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2025-12-23 10:31:51 --> 🔍 DETAIL QARD:
+DEBUG - 2025-12-23 10:31:51 -->   - ID: 23
+DEBUG - 2025-12-23 10:31:51 -->   - Jumlah Pinjam: 3000000.00
+DEBUG - 2025-12-23 10:31:51 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2025-12-23 10:31:51 -->   - Jumlah Angsuran: 10
+DEBUG - 2025-12-23 10:31:51 -->   - Status: aktif
+DEBUG - 2025-12-23 10:31:51 -->   - Tanggal: 2025-11-01
+DEBUG - 2025-12-23 10:31:51 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=3000000, Tenor=10
+DEBUG - 2025-12-23 10:31:51 -->   - Angsuran Berjalan: 0
+DEBUG - 2025-12-23 10:31:51 -->   - Angsuran per Bulan: 300000
+DEBUG - 2025-12-23 10:31:51 -->   - Bisa Bayar: YA ✅
+DEBUG - 2025-12-23 10:31:51 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-12-23 10:31:51 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-12-23 10:31:51 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2025-12-23 10:31:51 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-12-23 10:31:51 --> Data Qard lunas: 0
+DEBUG - 2025-12-23 10:31:51 --> Data Murabahah lunas: 2
+DEBUG - 2025-12-23 10:31:51 --> Data Mudharabah lunas: 0
+DEBUG - 2025-12-23 10:31:51 --> Total semua pinjaman lunas: 2
+DEBUG - 2025-12-23 10:31:51 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-12-23 10:31:51 --> Total pinjaman aktif: 1
+DEBUG - 2025-12-23 10:31:51 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2025-12-23 10:31:51 --> Jatuh tempo: 2025-12-01, Today: 2025-12-23
+DEBUG - 2025-12-23 10:31:51 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 300000
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 3000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-12-23 10:31:51 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 719.
+ 1 APPPATH\Views\cicilan.php(719): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-12-23 10:32:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:13 --> === MEMULAI PROSES BAYAR CICILAN ===
+DEBUG - 2025-12-23 10:32:13 --> ID Anggota: 40
+DEBUG - 2025-12-23 10:32:13 --> POST Data: Array
+(
+    [csrf_test_name] => a2ede8cde44113f648ebe1856065991d
+    [jenis_pinjaman] => qard
+    [id_pinjaman] => 23
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 3000000
+)
+
+DEBUG - 2025-12-23 10:32:13 --> Jumlah bayar input: 3000000, Formatted: 3000000
+DEBUG - 2025-12-23 10:32:13 --> Data pembayaran: Array
+(
+    [id_anggota] => 40
+    [jenis_pinjaman] => qard
+    [id_pinjaman] => 23
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 3000000
+    [tanggal_bayar] => 2025-12-23 10:32:13
+    [status] => pending
+    [created_at] => 2025-12-23 10:32:13
+)
+
+DEBUG - 2025-12-23 10:32:13 --> Uploading file to: C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\public/uploads/bukti_bayar/1766485933_0553df0bc7d12c992806.png
+DEBUG - 2025-12-23 10:32:13 --> File uploaded successfully: 1766485933_0553df0bc7d12c992806.png
+DEBUG - 2025-12-23 10:32:13 --> Save result: Success
+DEBUG - 2025-12-23 10:32:13 --> Payment saved successfully, ID: 16
+DEBUG - 2025-12-23 10:32:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:17 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-12-23 10:32:17 --> ID Anggota: 40
+DEBUG - 2025-12-23 10:32:17 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2025-12-23 10:32:17 --> 🔍 DETAIL QARD:
+DEBUG - 2025-12-23 10:32:17 -->   - ID: 23
+DEBUG - 2025-12-23 10:32:17 -->   - Jumlah Pinjam: 3000000.00
+DEBUG - 2025-12-23 10:32:17 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2025-12-23 10:32:17 -->   - Jumlah Angsuran: 10
+DEBUG - 2025-12-23 10:32:17 -->   - Status: aktif
+DEBUG - 2025-12-23 10:32:17 -->   - Tanggal: 2025-11-01
+DEBUG - 2025-12-23 10:32:17 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=3000000, Tenor=10
+DEBUG - 2025-12-23 10:32:17 -->   - Angsuran Berjalan: 0
+DEBUG - 2025-12-23 10:32:17 -->   - Angsuran per Bulan: 300000
+DEBUG - 2025-12-23 10:32:17 -->   - Bisa Bayar: YA ✅
+DEBUG - 2025-12-23 10:32:17 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-12-23 10:32:17 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-12-23 10:32:17 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2025-12-23 10:32:17 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-12-23 10:32:17 --> Data Qard lunas: 0
+DEBUG - 2025-12-23 10:32:17 --> Data Murabahah lunas: 2
+DEBUG - 2025-12-23 10:32:17 --> Data Mudharabah lunas: 0
+DEBUG - 2025-12-23 10:32:17 --> Total semua pinjaman lunas: 2
+DEBUG - 2025-12-23 10:32:17 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-12-23 10:32:17 --> Total pinjaman aktif: 1
+DEBUG - 2025-12-23 10:32:17 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2025-12-23 10:32:17 --> Jatuh tempo: 2025-12-01, Today: 2025-12-23
+DEBUG - 2025-12-23 10:32:17 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 300000
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 3000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-12-23 10:32:17 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 719.
+ 1 APPPATH\Views\cicilan.php(719): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-12-23 10:32:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:33 --> Properties available: id, id_anggota, jenis_pinjaman, id_pinjaman, angsuran_ke, jumlah_bayar, tanggal_bayar, bukti_bayar, status, created_at, updated_at
+DEBUG - 2025-12-23 10:32:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:44 --> === VERIFIKASI PEMBAYARAN START ===
+DEBUG - 2025-12-23 10:32:44 --> Verifikasi pembayaran dipanggil, ID: 16
+DEBUG - 2025-12-23 10:32:44 --> Data pembayaran ditemukan: {"id":"16","id_anggota":"40","jenis_pinjaman":"Qard","id_pinjaman":"23","angsuran_ke":"1","jumlah_bayar":"3000000.00","tanggal_bayar":"2025-12-23","bukti_bayar":"1766485933_0553df0bc7d12c992806.png","status":"pending","created_at":"2025-12-23 10:32:13","updated_at":"2025-12-23 17:32:13"}
+DEBUG - 2025-12-23 10:32:44 --> Update status pembayaran_pending result: SUCCESS
+DEBUG - 2025-12-23 10:32:44 --> Memanggil updatePinjamanTerbayar dengan params: jenis=Qard, id_pinjaman=23, jumlah=3000000.00
+DEBUG - 2025-12-23 10:32:44 --> === UPDATE PINJAMAN TERBAYAR START ===
+DEBUG - 2025-12-23 10:32:44 --> Jenis: Qard, ID Pinjaman: 23, Jumlah Bayar: 3000000.00
+DEBUG - 2025-12-23 10:32:44 --> Table: qard, ID Field: id_qard
+DEBUG - 2025-12-23 10:32:44 --> Data pinjaman ditemukan: {"id_qard":"23","id_anggota":"40","tanggal":"2025-11-01","jml_pinjam":"3000000.00","jml_angsuran":"10","deskripsi":"nfjfhiasjofdiasifjasojo","jml_terbayar":"0.00","status":"aktif","sisa_tenor":"0","keperluan":null,"tgl_pengajuan":null,"tgl_disetujui":null}
+DEBUG - 2025-12-23 10:32:44 --> Terbayar lama: 0.00, Terbayar baru: 3000000, Jml Pinjam: 3000000.00
+DEBUG - 2025-12-23 10:32:44 --> Status diubah menjadi LUNAS
+DEBUG - 2025-12-23 10:32:44 --> Update data: {"jml_terbayar":3000000,"status":"lunas"}
+DEBUG - 2025-12-23 10:32:44 --> Update result: SUCCESS
+DEBUG - 2025-12-23 10:32:44 --> === UPDATE PINJAMAN TERBAYAR END ===
+DEBUG - 2025-12-23 10:32:44 --> Pembayaran berhasil diverifikasi: 16
+DEBUG - 2025-12-23 10:32:44 --> === VERIFIKASI PEMBAYARAN END ===
+DEBUG - 2025-12-23 10:32:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:32:49 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2025-12-23 10:32:49 --> ID Anggota: 40
+DEBUG - 2025-12-23 10:32:49 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2025-12-23 10:32:49 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2025-12-23 10:32:49 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2025-12-23 10:32:49 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2025-12-23 10:32:49 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2025-12-23 10:32:49 --> Data Qard lunas: 0
+DEBUG - 2025-12-23 10:32:49 --> Data Murabahah lunas: 2
+DEBUG - 2025-12-23 10:32:49 --> Data Mudharabah lunas: 0
+DEBUG - 2025-12-23 10:32:49 --> Total semua pinjaman lunas: 2
+DEBUG - 2025-12-23 10:32:49 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2025-12-23 10:32:49 --> Total pinjaman aktif: 0
+DEBUG - 2025-12-23 10:32:49 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+WARNING - 2025-12-23 10:32:49 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\cicilan.php on line 719.
+ 1 APPPATH\Views\cicilan.php(719): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\app\\Views\\cicilan.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('cicilan', [], true)
+ 5 APPPATH\Controllers\Cicilan.php(103): view('cicilan', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Cicilan->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cicilan))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-12-23 10:32:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:33:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:33:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:33:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:33:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-12-23 10:33:24 --> mysqli_sql_exception: Unknown column 'anggota.no_rekening' in 'field list' in C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.*...', 0)
+#1 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.*...')
+#2 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.*...')
+#3 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.*...', Array, false)
+#4 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\app\Controllers\AdminPendingPinjaman.php(114): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(933): App\Controllers\AdminPendingPinjaman->detail('qard', '24')
+#6 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPendingPinjaman))
+#7 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\PTDRa\Documents\PKL\koperasi 3 fixing\system\rewrite.php(44): require_once('C:\\Users\\PTDRa\\...')
+#12 {main}
+CRITICAL - 2025-12-23 10:33:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'anggota.no_rekening' in 'field list'
+[Method: GET, Route: admin/pinjaman/detail/qard/24]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = :qard.id_qard:', [...], false)
+ 2 APPPATH\Controllers\AdminPendingPinjaman.php(114): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPendingPinjaman->detail('qard', '24')
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPendingPinjaman))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+CRITICAL - 2025-12-23 10:33:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'anggota.no_rekening' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = \'24\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = \'24\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = :qard.id_qard:', [...], false)
+ 4 APPPATH\Controllers\AdminPendingPinjaman.php(114): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPendingPinjaman->detail('qard', '24')
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPendingPinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+CRITICAL - 2025-12-23 10:33:24 --> [Caused by] mysqli_sql_exception: Unknown column 'anggota.no_rekening' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = \'24\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = \'24\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = \'24\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `qard`.*, `anggota`.`nama_lengkap`, `anggota`.`nomor_anggota`, `anggota`.`jenis_bank`, `anggota`.`no_rekening`, `anggota`.`atasnama_rekening`, `anggota`.`no_hp`, `anggota`.`email`
+FROM `qard`
+JOIN `anggota` ON `anggota`.`id` = `qard`.`id_anggota`
+WHERE `qard`.`id_qard` = :qard.id_qard:', [...], false)
+ 5 APPPATH\Controllers\AdminPendingPinjaman.php(114): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminPendingPinjaman->detail('qard', '24')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminPendingPinjaman))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\PTDRa\\Documents\\PKL\\koperasi 3 fixing\\public\\index.php')
+DEBUG - 2025-12-23 10:33:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:33:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:33:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:42:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:46:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:55:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:55:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:55:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:55:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:55:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 10:59:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-23 11:00:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

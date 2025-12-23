@@ -46,7 +46,7 @@
       line-height: 1.6;
     }
 
-    /* Header */
+    /* ==================== HEADER YANG DIUBAH ==================== */
     .header-pinjam {
       display: flex;
       justify-content: space-between;
@@ -76,6 +76,11 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
     .profile-avatar {
       width: 50px;
       height: 50px;
@@ -96,6 +101,38 @@
       letter-spacing: -0.3px;
     }
 
+    .header-id {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .notification-wrapper {
+      position: relative;
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--danger);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
     .icon {
       width: 24px;
       height: 24px;
@@ -107,7 +144,9 @@
     .icon:hover {
       transform: scale(1.1);
     }
+    /* ==================== AKHIR HEADER ==================== */
 
+    /* SEMUA STYLE LAIN TETAP SAMA */
     .page-title {
       font-size: 24px;
       font-weight: 800;
@@ -550,6 +589,7 @@
   </style>
 </head>
 <body>
+  <!-- HEADER YANG SUDAH DIUBAH -->
   <header class="header-pinjam">
     <div class="header-left">
         <?php if (!empty($user['photo']) && file_exists(FCPATH . 'uploads/profile/' . $user['photo'])): ?>
@@ -558,7 +598,6 @@
         <?php 
             $firstLetter = strtoupper(substr($user['nama_lengkap'] ?? 'U', 0, 1));
             $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
-            // Gunakan nomor_anggota dari table anggota atau ID sebagai fallback
             $uniqueId = $anggota['nomor_anggota'] ?? $user['id'] ?? 'default';
             $bgColor = $colors[crc32($uniqueId) % count($colors)];
         ?>
@@ -567,12 +606,19 @@
         </div>
         <?php endif; ?>
 
-        <div>
+        <div class="profile-info">
             <div class="header-name"><?= htmlspecialchars($nama ?? 'User') ?></div>
-            <div style="font-size:12px;opacity:.9;">ID: <?= htmlspecialchars($nomor_anggota ?? '-') ?></div>
+            <div class="header-id">ID: <?= htmlspecialchars($nomor_anggota ?? '-') ?></div>
         </div>
     </div>
-    <i data-lucide="bell" class="icon"></i>
+    
+    <div class="header-actions">
+        <div class="notification-wrapper">
+            <i data-lucide="bell" class="icon"></i>
+            <div class="notification-badge">3</div>
+        </div>
+        <i data-lucide="settings" class="icon"></i>
+    </div>
   </header>
   <h2 class="page-title">Pinjaman</h2>
 

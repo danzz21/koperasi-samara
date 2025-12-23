@@ -161,3 +161,11 @@ $routes->post('admin/approve-simpanan-pokok/(:num)', 'AdminDashboard::approveSim
 $routes->post('admin/reject-simpanan-pokok/(:num)', 'AdminDashboard::rejectSimpananPokok/$1');
 
 $routes->post('admin/deleteSimpanan', 'AdminDashboard::deleteSimpanan');
+// Route untuk admin auth
+$routes->get('admin/login', 'AdminAuth::login');
+$routes->post('logout/admin', 'Auth::logout');
+// TAMBAHKAN INI di bagian atas atau di section auth routes
+$routes->post('auth/process_login_admin', 'Auth::doLogin');
+$routes->get('login/admin', 'Auth::login');
+// Di routes.php
+$routes->get('admin/pinjaman/detail/(:segment)/(:num)', 'AdminPendingPinjaman::detail/$1/$2');

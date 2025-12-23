@@ -7,11 +7,22 @@ use CodeIgniter\Controller;
 
 class Auth extends BaseController
 {
-    public function logout()
-    {
-        session()->destroy();
+public function logout()
+{
+    // Simpan role sebelum destroy session
+    $role = session()->get('role');
+    
+    // Destroy session
+    session()->destroy();
+    
+    // Redirect berdasarkan role - PERBAIKI INI!
+    if ($role == 'admin') {
+        // Gunakan route yang sesuai dengan Routes.php
+        return redirect()->to('/login/admin'); // HAPUS 'auth/' dari sini
+    } else {
         return redirect()->to('/login');
     }
+}
 
     public function login()
     {
