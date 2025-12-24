@@ -83,12 +83,17 @@ $routes->post('pinjaman/ajukan', 'Pinjaman::ajukan', ['filter' => 'role:anggota'
 $routes->post('pinjaman/process-after-pin', 'Pinjaman::processAfterPin', ['filter' => 'role:anggota']);
 $routes->post('pinjaman/create-pin', 'Pinjaman::createPin', ['filter' => 'role:anggota']);
 $routes->post('pinjaman/verify-pin', 'Pinjaman::verifyPinAjax', ['filter' => 'role:anggota']);
+$routes->get('pinjaman/validateBeforeSubmit', 'Pinjaman::validateBeforeSubmit', ['filter' => 'role:anggota']);
+$routes->get('pinjaman/active-loan', 'Pinjaman::getActiveLoan', ['filter' => 'role:anggota']);
+
+// ALIAS UNTUK ROUTES DENGAN PREFIX ANGGOTA
 $routes->post('anggota/pinjaman/ajukan', 'Pinjaman::ajukan', ['filter' => 'role:anggota']);
 $routes->post('anggota/pinjaman/process-after-pin', 'Pinjaman::processAfterPin', ['filter' => 'role:anggota']);
 $routes->post('anggota/pinjaman/create-pin', 'Pinjaman::createPin', ['filter' => 'role:anggota']);
 $routes->post('anggota/pinjaman/verify-pin', 'Pinjaman::verifyPinAjax', ['filter' => 'role:anggota']);
+$routes->get('anggota/pinjaman/validateBeforeSubmit', 'Pinjaman::validateBeforeSubmit', ['filter' => 'role:anggota']);
 
-// Atau jika ingin lebih spesifik:
+// Simpanan routes
 $routes->post('anggota/simpanan/pokok/store', 'Simpanan::storePokok');
 $routes->post('anggota/simpanan/sukarela/store', 'Simpanan::storeSukarela');
 $routes->post('anggota/simpanan/setTenor', 'Simpanan::setTenor');

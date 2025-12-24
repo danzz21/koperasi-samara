@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     :root {
       --primary: #10b981;
@@ -747,10 +747,10 @@
 
   <!-- Tab akad -->
   <div class="tab-akad">
-    <button id="tab-alqord" class="active" onclick="showTab('alqord')">Al-Qord</button>
-    <button id="tab-murabahah" onclick="showTab('murabahah')">Murabahah</button>
-    <button id="tab-mudharabah" onclick="showTab('mudharabah')">Mudharabah</button>
-  </div>
+  <button id="tab-alqord" class="active" data-tab="alqord">Al-Qord</button>
+  <button id="tab-murabahah" data-tab="murabahah">Murabahah</button>
+  <button id="tab-mudharabah" data-tab="mudharabah">Mudharabah</button>
+</div>
 
   <?php
   // Helper variables
@@ -965,32 +965,35 @@
   </nav>
 
   <!-- Modal untuk input PIN -->
-  <div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
+  <!-- Modal untuk input PIN -->
+<div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="pinModalLabel">Verifikasi PIN</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form id="pinVerificationForm" action="<?= base_url('pinjaman/process-after-pin') ?>" method="POST">
-          <div class="modal-body">
-            <p>Masukkan 6 digit PIN untuk melanjutkan pengajuan pinjaman:</p>
-            <div class="mb-3">
-              <label for="pin" class="form-label">PIN</label>
-              <input type="password" class="form-control" id="pin" name="pin" 
-                     placeholder="Masukkan 6 digit PIN" maxlength="6" 
-                     pattern="\d{6}" title="Harus 6 digit angka" required>
-              <div class="invalid-feedback" id="pinError"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pinModalLabel">Verifikasi PIN</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Verifikasi dan Ajukan</button>
-          </div>
-        </form>
-      </div>
+            <form id="pinVerificationForm" action="<?= base_url('pinjaman/process-after-pin') ?>" method="POST">
+                <!-- Data pinjaman akan ditambahkan secara dinamis oleh JavaScript -->
+                
+                <div class="modal-body">
+                    <p>Masukkan 6 digit PIN untuk melanjutkan pengajuan pinjaman:</p>
+                    <div class="mb-3">
+                        <label for="pin" class="form-label">PIN</label>
+                        <input type="password" class="form-control" id="pin" name="pin" 
+                               placeholder="Masukkan 6 digit PIN" maxlength="6" 
+                               pattern="\d{6}" title="Harus 6 digit angka" required>
+                        <div class="invalid-feedback" id="pinError"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Verifikasi dan Ajukan</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
 
   <!-- Modal untuk buat PIN (jika belum punya) -->
   <div class="modal fade" id="createPinModal" tabindex="-1" aria-labelledby="createPinModalLabel" aria-hidden="true">
@@ -1146,7 +1149,48 @@
   <!-- Bootstrap 5 JS Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
+ <script>
+// Pastikan jQuery tersedia
+if (typeof jQuery === 'undefined') {
+    // Load jQuery jika belum ada
+    const script = document.createElement('script');
+    script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+    script.onload = function() {
+        initializeApp();
+    };
+    document.head.appendChild(script);
+} else {
+    // jQuery sudah tersedia, langsung initialize
+    $(document).ready(function() {
+        initializeApp();
+    });
+}
+
+function initializeApp() {
+    console.log('Initializing app...');
+    
+    // Global function untuk tab switching
+    window.showTab = function(name){
+        console.log('Switching to tab:', name);
+        document.querySelectorAll('.tab-content').forEach(el=>{
+            el.classList.remove('active');
+        });
+        
+        const tabContent = document.getElementById(name);
+        if (tabContent) {
+            tabContent.classList.add('active');
+        }
+        
+        document.querySelectorAll('.tab-akad button').forEach(el=>{
+            el.classList.remove('active');
+        });
+        
+        const tabButton = document.getElementById('tab-'+name);
+        if (tabButton) {
+            tabButton.classList.add('active');
+        }
+    };
+    
     lucide.createIcons();
 
     const MAX_PINJAMAN = 4000000;
@@ -1155,409 +1199,695 @@
 
     // Fungsi validasi nominal
     function validateNominal(input, errorElement) {
-      const raw = input.value.replace(/\./g, "");
-      const nominal = parseInt(raw) || 0;
-      
-      if (nominal > MAX_PINJAMAN) {
-        errorElement.style.display = 'block';
-        input.parentElement.classList.add('input-error');
-        return false;
-      } else {
-        errorElement.style.display = 'none';
-        input.parentElement.classList.remove('input-error');
-        return true;
-      }
+        const raw = input.value.replace(/\./g, "");
+        const nominal = parseInt(raw) || 0;
+        
+        if (nominal > MAX_PINJAMAN) {
+            if (errorElement) {
+                errorElement.style.display = 'block';
+            }
+            input.parentElement.classList.add('input-error');
+            return false;
+        } else {
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+            input.parentElement.classList.remove('input-error');
+            return true;
+        }
     }
 
     // Fungsi update character count
     function updateCharacterCount(textarea, counter) {
-      const length = textarea.value.length;
-      counter.textContent = `${length}/500 karakter`;
-      
-      if (length > 450) {
-        counter.classList.add('warning');
-        counter.classList.remove('danger');
-      } else if (length > 490) {
-        counter.classList.add('danger');
-        counter.classList.remove('warning');
-      } else {
-        counter.classList.remove('warning', 'danger');
-      }
+        const length = textarea.value.length;
+        if (counter) {
+            counter.textContent = `${length}/500 karakter`;
+            
+            if (length > 450) {
+                counter.classList.add('warning');
+                counter.classList.remove('danger');
+            } else if (length > 490) {
+                counter.classList.add('danger');
+                counter.classList.remove('warning');
+            } else {
+                counter.classList.remove('warning', 'danger');
+            }
+        }
     }
 
-    // Al-Qord
-    document.getElementById("alqord-nominal").addEventListener("input", function() {
-      validateNominal(this, document.getElementById("alqord-error"));
-      updateAlqord();
-    });
+    // Inisialisasi Al-Qord
+    const alqordNominal = document.getElementById("alqord-nominal");
+    const alqordBulan = document.getElementById("alqord-bulan");
+    const alqordDeskripsi = document.getElementById("alqord-deskripsi");
     
-    document.getElementById("alqord-bulan").addEventListener("input", updateAlqord);
+    if (alqordNominal) {
+        alqordNominal.addEventListener("input", function() {
+            validateNominal(this, document.getElementById("alqord-error"));
+            updateAlqord();
+        });
+    }
     
-    document.getElementById("alqord-deskripsi").addEventListener("input", function() {
-      updateCharacterCount(this, document.getElementById("alqord-charcount"));
-    });
+    if (alqordBulan) {
+        alqordBulan.addEventListener("change", updateAlqord);
+    }
+    
+    if (alqordDeskripsi) {
+        alqordDeskripsi.addEventListener("input", function() {
+            updateCharacterCount(this, document.getElementById("alqord-charcount"));
+        });
+    }
 
     function updateAlqord(){
-      let raw = document.getElementById("alqord-nominal").value;
-      const n = parseInt(raw.replace(/\./g, "")) || 0;
-      const b = parseInt(document.getElementById("alqord-bulan").value) || 0;
-      
-      if(n > 0 && b > 0 && b <= 12 && n <= MAX_PINJAMAN){
-        const cicilan = Math.round(n / b);
-        document.getElementById("alqord-cicilan").textContent = "Rp " + cicilan.toLocaleString();
-      } else {
-        document.getElementById("alqord-cicilan").textContent = "-";
-      }
+        const nominalInput = document.getElementById("alqord-nominal");
+        const bulanSelect = document.getElementById("alqord-bulan");
+        const cicilanSpan = document.getElementById("alqord-cicilan");
+        
+        if (!nominalInput || !bulanSelect || !cicilanSpan) return;
+        
+        let raw = nominalInput.value;
+        const n = parseInt(raw.replace(/\./g, "")) || 0;
+        const b = parseInt(bulanSelect.value) || 0;
+        
+        if(n > 0 && b > 0 && b <= 12 && n <= MAX_PINJAMAN){
+            const cicilan = Math.round(n / b);
+            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString();
+        } else {
+            cicilanSpan.textContent = "-";
+        }
     }
 
-    // Murabahah
-    document.getElementById("murabahah-harga").addEventListener("input", function() {
-      validateNominal(this, document.getElementById("murabahah-error"));
-      updateMurabahah();
-    });
+    // Inisialisasi Murabahah
+    const murabahahHarga = document.getElementById("murabahah-harga");
+    const murabahahBulan = document.getElementById("murabahah-bulan");
+    const murabahahDeskripsi = document.getElementById("murabahah-deskripsi");
     
-    document.getElementById("murabahah-bulan").addEventListener("input", updateMurabahah);
+    if (murabahahHarga) {
+        murabahahHarga.addEventListener("input", function() {
+            validateNominal(this, document.getElementById("murabahah-error"));
+            updateMurabahah();
+        });
+    }
+    
+    if (murabahahBulan) {
+        murabahahBulan.addEventListener("change", updateMurabahah);
+    }
 
-    document.getElementById("murabahah-deskripsi").addEventListener("input", function() {
-      updateCharacterCount(this, document.getElementById("murabahah-charcount"));
-    });
+    if (murabahahDeskripsi) {
+        murabahahDeskripsi.addEventListener("input", function() {
+            updateCharacterCount(this, document.getElementById("murabahah-charcount"));
+        });
+    }
 
     function updateMurabahah(){
-      let raw = document.getElementById("murabahah-harga").value;
-      const h = parseInt(raw.replace(/\./g, "")) || 0;
-      const b = parseInt(document.getElementById("murabahah-bulan").value) || 0;
-      
-      if(h > 0 && h <= MAX_PINJAMAN){
-        const total = Math.round(h + (h * 0.1));
-        const cicilan = Math.round(total / b);
-        document.getElementById("murabahah-total").textContent = "Rp " + total.toLocaleString();
-        document.getElementById("murabahah-cicilan").textContent = "Rp " + cicilan.toLocaleString();
-      } else {
-        document.getElementById("murabahah-total").textContent = "-";
-        document.getElementById("murabahah-cicilan").textContent = "-";
-      }
+        const hargaInput = document.getElementById("murabahah-harga");
+        const bulanSelect = document.getElementById("murabahah-bulan");
+        const totalSpan = document.getElementById("murabahah-total");
+        const cicilanSpan = document.getElementById("murabahah-cicilan");
+        
+        if (!hargaInput || !bulanSelect || !totalSpan || !cicilanSpan) return;
+        
+        let raw = hargaInput.value;
+        const h = parseInt(raw.replace(/\./g, "")) || 0;
+        const b = parseInt(bulanSelect.value) || 0;
+        
+        if(h > 0 && h <= MAX_PINJAMAN){
+            const total = Math.round(h + (h * 0.1));
+            const cicilan = Math.round(total / b);
+            totalSpan.textContent = "Rp " + total.toLocaleString();
+            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString();
+        } else {
+            totalSpan.textContent = "-";
+            cicilanSpan.textContent = "-";
+        }
     }
 
-    // Mudharabah
-    document.getElementById("mudharabah-nominal").addEventListener("input", function() {
-      validateNominal(this, document.getElementById("mudharabah-error"));
-      updateMudharabah();
-    });
+    // Inisialisasi Mudharabah
+    const mudharabahNominal = document.getElementById("mudharabah-nominal");
+    const mudharabahBulan = document.getElementById("mudharabah-bulan");
+    const mudharabahDeskripsi = document.getElementById("mudharabah-deskripsi");
     
-    document.getElementById("mudharabah-bulan").addEventListener("input", updateMudharabah);
+    if (mudharabahNominal) {
+        mudharabahNominal.addEventListener("input", function() {
+            validateNominal(this, document.getElementById("mudharabah-error"));
+            updateMudharabah();
+        });
+    }
+    
+    if (mudharabahBulan) {
+        mudharabahBulan.addEventListener("change", updateMudharabah);
+    }
 
-    document.getElementById("mudharabah-deskripsi").addEventListener("input", function() {
-      updateCharacterCount(this, document.getElementById("mudharabah-charcount"));
-    });
+    if (mudharabahDeskripsi) {
+        mudharabahDeskripsi.addEventListener("input", function() {
+            updateCharacterCount(this, document.getElementById("mudharabah-charcount"));
+        });
+    }
 
     function updateMudharabah(){
-      let raw = document.getElementById("mudharabah-nominal").value;
-      const n = parseInt(raw.replace(/\./g, "")) || 0;
-      const b = parseInt(document.getElementById("mudharabah-bulan").value) || 0;
-      
-      if(n > 0 && n <= MAX_PINJAMAN){
-        const total = Math.round(n + (n * 0.1));
-        const cicilan = Math.round(total / b);
-        document.getElementById("mudharabah-total").textContent = "Rp " + total.toLocaleString();
-        document.getElementById("mudharabah-cicilan").textContent = "Rp " + cicilan.toLocaleString();
-      } else {
-        document.getElementById("mudharabah-total").textContent = "-";
-        document.getElementById("mudharabah-cicilan").textContent = "-";
-      }
+        const nominalInput = document.getElementById("mudharabah-nominal");
+        const bulanSelect = document.getElementById("mudharabah-bulan");
+        const totalSpan = document.getElementById("mudharabah-total");
+        const cicilanSpan = document.getElementById("mudharabah-cicilan");
+        
+        if (!nominalInput || !bulanSelect || !totalSpan || !cicilanSpan) return;
+        
+        let raw = nominalInput.value;
+        const n = parseInt(raw.replace(/\./g, "")) || 0;
+        const b = parseInt(bulanSelect.value) || 0;
+        
+        if(n > 0 && n <= MAX_PINJAMAN){
+            const total = Math.round(n + (n * 0.1));
+            const cicilan = Math.round(total / b);
+            totalSpan.textContent = "Rp " + total.toLocaleString();
+            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString();
+        } else {
+            totalSpan.textContent = "-";
+            cicilanSpan.textContent = "-";
+        }
     }
 
-    // Tab switch
-    function showTab(name){
-      document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
-      document.getElementById(name).classList.add('active');
-      document.querySelectorAll('.tab-akad button').forEach(el=>el.classList.remove('active'));
-      document.getElementById('tab-'+name).classList.add('active');
+    // Setup event listeners untuk tab buttons
+    document.querySelectorAll('.tab-akad button[data-tab]').forEach(button => {
+        button.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+            showTab(tabName);
+        });
+    });
+
+    // ======================= SIMPAN DATA FORM =======================
+    // Simpan data form ke localStorage
+    function saveFormDataToLocalStorage(form) {
+        const formData = {};
+        const formElements = form.elements;
+        
+        for (let i = 0; i < formElements.length; i++) {
+            const element = formElements[i];
+            if (element.name && element.type !== 'button' && element.type !== 'submit') {
+                if (element.type === 'checkbox') {
+                    formData[element.name] = element.checked;
+                } else {
+                    formData[element.name] = element.value;
+                }
+            }
+        }
+        
+        // Tambahkan timestamp untuk uniqueness
+        formData['timestamp'] = Date.now();
+        
+        // Simpan ke localStorage
+        localStorage.setItem('pending_pinjaman', JSON.stringify(formData));
+        console.log('Form data saved to localStorage:', formData);
+        return formData;
+    }
+    
+    // Restore form data dari localStorage ke modal PIN
+    function restoreFormDataToPinModal() {
+        const savedData = JSON.parse(localStorage.getItem('pending_pinjaman') || '{}');
+        if (savedData && Object.keys(savedData).length > 0) {
+            const pinForm = document.getElementById('pinVerificationForm');
+            if (!pinForm) return;
+            
+            // Hapus dulu jika ada hidden inputs sebelumnya
+            const existingHiddenInputs = pinForm.querySelectorAll('input[name^="pinjaman_"]');
+            existingHiddenInputs.forEach(el => el.remove());
+            
+            // Tambahkan hidden inputs untuk semua data form
+            for (const [key, value] of Object.entries(savedData)) {
+                if (key !== 'timestamp') {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'pinjaman_' + key;
+                    hiddenInput.value = value;
+                    pinForm.appendChild(hiddenInput);
+                }
+            }
+            console.log('Form data restored to PIN modal');
+        }
     }
 
+    // ======================= KONFIRMASI FORM =======================
     // Konfirmasi sebelum submit form pinjaman
     document.querySelectorAll('form[id^="form-"]').forEach(function(form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault(); // Selalu prevent default untuk validasi custom
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
 
-        if (isDisabled) {
-          if (!hasNoRekening) {
-            alert('Harap lengkapi nomor rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.');
-            // Redirect ke profil
-            window.location.href = '<?= base_url('anggota/profil/edit') ?>';
-          } else {
-            alert('Anda memiliki pinjaman aktif. Silakan selesaikan pinjaman terlebih dahulu sebelum mengajukan pinjaman baru.');
-          }
-          return;
-        }
-
-        const checkboxes = form.querySelectorAll('.confirm-checkbox');
-        let allChecked = true;
-
-        checkboxes.forEach(cb => {
-          if (!cb.checked) {
-            allChecked = false;
-          }
-        });
-
-        // Validasi nominal
-        const nominalInput = form.querySelector('input[type="text"]');
-        const rawNominal = nominalInput.value.replace(/\./g, "");
-        const nominal = parseInt(rawNominal) || 0;
-
-        // Validasi deskripsi
-        const deskripsiInput = form.querySelector('textarea');
-        const deskripsi = deskripsiInput.value.trim();
-
-        if (!allChecked) {
-          alert('Harap centang semua pernyataan sebelum mengajukan pinjaman.');
-          return;
-        }
-
-        if (nominal > MAX_PINJAMAN) {
-          alert('Nominal pinjaman melebihi batas maksimum Rp 4.000.000');
-          return;
-        }
-
-        if (nominal <= 0) {
-          alert('Nominal pinjaman harus lebih dari 0');
-          return;
-        }
-
-        if (deskripsi === '') {
-          alert('Harap isi deskripsi penggunaan pinjaman');
-          deskripsiInput.focus();
-          return;
-        }
-
-        if (deskripsi.length < 10) {
-          alert('Deskripsi penggunaan pinjaman minimal 10 karakter');
-          deskripsiInput.focus();
-          return;
-        }
-
-        // Show loading state
-        const submitBtn = form.querySelector('.btn-ajukan');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '⏳ Mengajukan...';
-        submitBtn.disabled = true;
-
-        // Submit form via AJAX untuk validasi dan menampilkan modal PIN
-        const formData = new FormData(form);
-        
-        // Validasi sebelum submit via AJAX
-        $.ajax({
-          url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
-          type: 'GET',
-          success: function(response) {
-            if (response.canSubmit) {
-              // Cek apakah sudah punya PIN
-              if (response.hasPin) {
-                // Simpan form data dan tampilkan modal PIN
-                sessionStorage.setItem('pinjamanFormData', JSON.stringify(Object.fromEntries(formData)));
-                $('#pinModal').modal('show');
-              } else {
-                // Tampilkan modal buat PIN
-                $('#createPinModal').modal('show');
-              }
-            } else {
-              // Tampilkan pesan error
-              let errorMsg = 'Tidak dapat mengajukan pinjaman karena:<br>';
-              response.messages.forEach(function(msg) {
-                if (msg) errorMsg += '- ' + msg + '<br>';
-              });
-              alert(errorMsg);
+            if (isDisabled) {
+                if (!hasNoRekening) {
+                    alert('Harap lengkapi nomor rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.');
+                    window.location.href = '<?= base_url('anggota/profil/edit') ?>';
+                } else {
+                    alert('Anda memiliki pinjaman aktif. Silakan selesaikan pinjaman terlebih dahulu sebelum mengajukan pinjaman baru.');
+                }
+                return;
             }
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-          },
-          error: function() {
-            alert('Terjadi kesalahan. Silakan coba lagi.');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-          }
+
+            const checkboxes = form.querySelectorAll('.confirm-checkbox');
+            let allChecked = true;
+
+            checkboxes.forEach(cb => {
+                if (!cb.checked) {
+                    allChecked = false;
+                }
+            });
+
+            // Validasi nominal
+            const nominalInput = form.querySelector('input[type="text"]');
+            const rawNominal = nominalInput.value.replace(/\./g, "");
+            const nominal = parseInt(rawNominal) || 0;
+
+            // Validasi deskripsi
+            const deskripsiInput = form.querySelector('textarea');
+            const deskripsi = deskripsiInput.value.trim();
+
+            if (!allChecked) {
+                alert('Harap centang semua pernyataan sebelum mengajukan pinjaman.');
+                return;
+            }
+
+            if (nominal > MAX_PINJAMAN) {
+                alert('Nominal pinjaman melebihi batas maksimum Rp 4.000.000');
+                return;
+            }
+
+            if (nominal <= 0) {
+                alert('Nominal pinjaman harus lebih dari 0');
+                return;
+            }
+
+            if (deskripsi === '') {
+                alert('Harap isi deskripsi penggunaan pinjaman');
+                deskripsiInput.focus();
+                return;
+            }
+
+            if (deskripsi.length < 10) {
+                alert('Deskripsi penggunaan pinjaman minimal 10 karakter');
+                deskripsiInput.focus();
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = form.querySelector('.btn-ajukan');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Mengajukan...';
+            submitBtn.disabled = true;
+
+            // Simpan data form ke localStorage
+            const formData = saveFormDataToLocalStorage(form);
+
+            // Validasi sebelum submit via AJAX
+            console.log('Validating before submit...');
+            $.ajax({
+                url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
+                type: 'GET',
+                success: function(response) {
+                    console.log('Validation response:', response);
+                    if (response.canSubmit) {
+                        // Cek apakah sudah punya PIN
+                        if (response.hasPin) {
+                            // Tampilkan modal PIN
+                            const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+                            
+                            // Restore form data ke modal PIN
+                            restoreFormDataToPinModal();
+                            
+                            // Submit form secara normal (bukan AJAX) untuk menyimpan di session
+                            // Kita akan submit form via JavaScript biasa
+                            const submitForm = function() {
+                                // Buat form sementara untuk submit
+                                const tempForm = document.createElement('form');
+                                tempForm.method = 'POST';
+                                tempForm.action = form.action;
+                                tempForm.style.display = 'none';
+                                
+                                // Tambahkan semua field dari form asli
+                                const formElements = form.elements;
+                                for (let i = 0; i < formElements.length; i++) {
+                                    const element = formElements[i];
+                                    if (element.name && element.type !== 'button' && element.type !== 'submit') {
+                                        const newElement = document.createElement('input');
+                                        newElement.type = 'hidden';
+                                        newElement.name = element.name;
+                                        newElement.value = element.value;
+                                        tempForm.appendChild(newElement);
+                                    }
+                                }
+                                
+                                document.body.appendChild(tempForm);
+                                tempForm.submit();
+                            };
+                            
+                            // Coba submit dulu untuk menyimpan di session backend
+                            $.ajax({
+                                url: form.action,
+                                type: 'POST',
+                                data: $(form).serialize(), // Gunakan serialize() bukan FormData
+                                success: function() {
+                                    console.log('Form submitted to backend, showing PIN modal');
+                                    pinModal.show();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Submit error:', error);
+                                    alert('Gagal menyimpan data pinjaman.');
+                                    submitBtn.innerHTML = originalText;
+                                    submitBtn.disabled = false;
+                                }
+                            });
+                        } else {
+                            // Tampilkan modal buat PIN
+                            const createPinModal = new bootstrap.Modal(document.getElementById('createPinModal'));
+                            createPinModal.show();
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        }
+                    } else {
+                        // Tampilkan pesan error
+                        let errorMsg = 'Tidak dapat mengajukan pinjaman karena:\n';
+                        response.messages.forEach(function(msg) {
+                            if (msg) errorMsg += '- ' + msg + '\n';
+                        });
+                        alert(errorMsg);
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', error);
+                    alert('Terjadi kesalahan saat validasi. Silakan coba lagi.');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
         });
-      });
     });
 
+    // ======================= VERIFIKASI PIN =======================
     // Handle verifikasi PIN
-    $('#pinVerificationForm').on('submit', function(e) {
-      e.preventDefault();
-      
-      const pin = $('#pin').val();
-      
-      if (pin.length !== 6) {
-        $('#pinError').text('PIN harus 6 digit').show();
-        return;
-      }
-      
-      // Verifikasi PIN via AJAX dulu
-      $.ajax({
-        url: '<?= base_url("pinjaman/verify-pin") ?>',
-        type: 'POST',
-        data: {pin: pin},
-        success: function(response) {
-          if (response.success) {
-            // Jika PIN valid, submit form
-            $('#pinVerificationForm').off('submit').submit();
-          } else {
-            $('#pinError').text(response.message).show();
-          }
-        },
-        error: function() {
-          $('#pinError').text('Terjadi kesalahan saat verifikasi PIN').show();
-        }
-      });
-    });
-    
-    // Handle buat PIN
-    $('#createPinForm').on('submit', function(e) {
-      e.preventDefault();
-      
-      const newPin = $('#new_pin').val();
-      const confirmPin = $('#confirm_pin').val();
-      
-      // Validasi
-      if (newPin.length !== 6) {
-        showPinMessage('PIN harus 6 digit', 'danger');
-        return;
-      }
-      
-      if (newPin !== confirmPin) {
-        showPinMessage('PIN tidak cocok', 'danger');
-        return;
-      }
-      
-      // Submit buat PIN
-      $.ajax({
-        url: '<?= base_url("pinjaman/create-pin") ?>',
-        type: 'POST',
-        data: $(this).serialize(),
-        success: function(response) {
-          if (response.success) {
-            showPinMessage(response.message, 'success');
+    const pinVerificationForm = document.getElementById('pinVerificationForm');
+    if (pinVerificationForm) {
+        pinVerificationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Tutup modal buat PIN dan buka modal verifikasi PIN
-            setTimeout(function() {
-              $('#createPinModal').modal('hide');
-              $('#pinModal').modal('show');
-            }, 1500);
-          } else {
-            showPinMessage(response.message, 'danger');
-          }
-        },
-        error: function() {
-          showPinMessage('Terjadi kesalahan. Silakan coba lagi.', 'danger');
-        }
-      });
-    });
+            const pin = document.getElementById('pin').value;
+            const pinError = document.getElementById('pinError');
+            
+            if (pin.length !== 6) {
+                pinError.textContent = 'PIN harus 6 digit';
+                pinError.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Memproses...';
+            submitBtn.disabled = true;
+            
+            // Verifikasi PIN via AJAX
+            $.ajax({
+                url: '<?= base_url("pinjaman/verify-pin") ?>',
+                type: 'POST',
+                data: {pin: pin},
+                success: function(response) {
+                    console.log('PIN verification response:', response);
+                    if (response.success) {
+                        // Jika PIN valid, submit form PIN verification
+                        pinVerificationForm.submit();
+                    } else {
+                        pinError.textContent = response.message;
+                        pinError.style.display = 'block';
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('PIN verification error:', error);
+                    pinError.textContent = 'Terjadi kesalahan saat verifikasi PIN';
+                    pinError.style.display = 'block';
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    }
+    
+    // ======================= BUAT PIN =======================
+    // Handle buat PIN
+    const createPinForm = document.getElementById('createPinForm');
+    if (createPinForm) {
+        createPinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newPin = document.getElementById('new_pin').value;
+            const confirmPin = document.getElementById('confirm_pin').value;
+            
+            // Validasi
+            if (newPin.length !== 6) {
+                showPinMessage('PIN harus 6 digit', 'danger');
+                return;
+            }
+            
+            if (newPin !== confirmPin) {
+                showPinMessage('PIN tidak cocok', 'danger');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Membuat PIN...';
+            submitBtn.disabled = true;
+            
+            // Submit buat PIN menggunakan serialize() bukan FormData
+            $.ajax({
+                url: '<?= base_url("pinjaman/create-pin") ?>',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log('Create PIN response:', response);
+                    if (response.success) {
+                        showPinMessage(response.message, 'success');
+                        
+                        // Tutup modal buat PIN dan buka modal verifikasi PIN
+                        setTimeout(function() {
+                            const createPinModal = bootstrap.Modal.getInstance(document.getElementById('createPinModal'));
+                            const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+                            if (createPinModal) createPinModal.hide();
+                            
+                            // Restore form data dari localStorage ke modal PIN
+                            restoreFormDataToPinModal();
+                            
+                            pinModal.show();
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        }, 1500);
+                    } else {
+                        showPinMessage(response.message, 'danger');
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Create PIN error:', error);
+                    showPinMessage('Terjadi kesalahan. Silakan coba lagi.', 'danger');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    }
     
     function showPinMessage(message, type) {
-      const $message = $('#pinMessage');
-      $message.removeClass('alert-success alert-danger')
-              .addClass('alert-' + type)
-              .text(message)
-              .show();
-      
-      // Auto hide setelah 3 detik
-      setTimeout(() => {
-        $message.fadeOut();
-      }, 3000);
+        const messageDiv = document.getElementById('pinMessage');
+        if (messageDiv) {
+            // Hapus semua alert classes
+            messageDiv.className = 'alert alert-' + type;
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            // Auto hide setelah 3 detik
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
     }
 
+    // ======================= FORMAT RUPIAH =======================
     // Fungsi format rupiah
     function formatRupiah(angka) {
-      return angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if (!angka) return '';
+        return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     // Format input rupiah
     document.querySelectorAll('input[id$="-nominal"], input[id$="-harga"]').forEach(input => {
-      input.addEventListener('input', function(e) {
-        let value = this.value.replace(/\D/g, '');
-        if (value) {
-          this.value = formatRupiah(value);
-          
-          // Validasi real-time
-          const nominal = parseInt(value) || 0;
-          const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
-          const errorElement = document.getElementById(errorId);
-          
-          if (nominal > MAX_PINJAMAN) {
-            errorElement.style.display = 'block';
-            this.parentElement.classList.add('input-error');
-          } else {
-            errorElement.style.display = 'none';
-            this.parentElement.classList.remove('input-error');
-          }
-        } else {
-          this.value = '';
-          const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
-          const errorElement = document.getElementById(errorId);
-          errorElement.style.display = 'none';
-          this.parentElement.classList.remove('input-error');
-        }
-      });
+        input.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            if (value) {
+                this.value = formatRupiah(value);
+                
+                // Validasi real-time
+                const nominal = parseInt(value) || 0;
+                const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
+                const errorElement = document.getElementById(errorId);
+                
+                if (nominal > MAX_PINJAMAN) {
+                    if (errorElement) {
+                        errorElement.style.display = 'block';
+                    }
+                    this.parentElement.classList.add('input-error');
+                } else {
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                    this.parentElement.classList.remove('input-error');
+                }
+            } else {
+                this.value = '';
+                const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                }
+                this.parentElement.classList.remove('input-error');
+            }
+        });
     });
 
     // Validasi real-time untuk textarea
     document.querySelectorAll('textarea').forEach(textarea => {
-      textarea.addEventListener('input', function() {
-        const length = this.value.trim().length;
-        if (length > 0 && length < 10) {
-          this.classList.add('input-error');
-        } else {
-          this.classList.remove('input-error');
-        }
-      });
+        textarea.addEventListener('input', function() {
+            const length = this.value.trim().length;
+            if (length > 0 && length < 10) {
+                this.classList.add('input-error');
+            } else {
+                this.classList.remove('input-error');
+            }
+        });
     });
 
     // Initialize character counts
     document.querySelectorAll('textarea').forEach(textarea => {
-      const id = textarea.id;
-      const counterId = id.replace('-deskripsi', '-charcount');
-      const counter = document.getElementById(counterId);
-      if (counter) {
-        updateCharacterCount(textarea, counter);
-      }
+        const id = textarea.id;
+        const counterId = id.replace('-deskripsi', '-charcount');
+        const counter = document.getElementById(counterId);
+        if (counter) {
+            updateCharacterCount(textarea, counter);
+        }
     });
 
+    // Initialize semua perhitungan saat load
+    updateAlqord();
+    updateMurabahah();
+    updateMudharabah();
+    
     // Auto-hide alerts after 5 seconds
     setTimeout(() => {
-      document.querySelectorAll('.alert').forEach(alert => {
-        alert.style.opacity = '0';
-        alert.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => alert.remove(), 500);
-      });
-      
-      // Auto-hide success message after 8 seconds
-      document.querySelectorAll('.success-message').forEach(msg => {
-        setTimeout(() => {
-          msg.style.opacity = '0';
-          msg.style.transition = 'opacity 0.5s ease';
-          setTimeout(() => msg.remove(), 500);
-        }, 8000);
-      });
+        document.querySelectorAll('.alert:not(.success-message .alert)').forEach(alert => {
+            if (alert.style) {
+                alert.style.opacity = '0';
+                alert.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    if (alert.parentElement) alert.remove();
+                }, 500);
+            }
+        });
     }, 5000);
 
     // Jika ada flash data show_pin_modal, tampilkan modal
     <?php if (session()->getFlashdata('show_pin_modal')): ?>
-      $(document).ready(function() {
         setTimeout(function() {
-          $.ajax({
-            url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
-            type: 'GET',
-            success: function(response) {
-              if (response.hasPin) {
-                $('#pinModal').modal('show');
-              } else {
-                $('#createPinModal').modal('show');
-              }
-            }
-          });
-        }, 500);
-      });
+            // Restore form data dari localStorage
+            restoreFormDataToPinModal();
+            
+            $.ajax({
+                url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
+                type: 'GET',
+                success: function(response) {
+                    console.log('Auto-show modal response:', response);
+                    if (response.hasPin) {
+                        const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+                        pinModal.show();
+                    } else {
+                        const createPinModal = new bootstrap.Modal(document.getElementById('createPinModal'));
+                        createPinModal.show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Auto-show modal error:', error);
+                }
+            });
+        }, 1000);
     <?php endif; ?>
-  </script>
-  
+
+    // ======================= CLEANUP =======================
+    // Handle modal hidden events
+    const pinModalElement = document.getElementById('pinModal');
+    if (pinModalElement) {
+        pinModalElement.addEventListener('hidden.bs.modal', function () {
+            // Clear PIN field
+            const pinInput = document.getElementById('pin');
+            if (pinInput) pinInput.value = '';
+            // Clear error
+            const pinError = document.getElementById('pinError');
+            if (pinError) {
+                pinError.textContent = '';
+                pinError.style.display = 'none';
+            }
+            // Hapus data dari localStorage jika modal ditutup tanpa submit
+            localStorage.removeItem('pending_pinjaman');
+        });
+    }
+
+    const createPinModalElement = document.getElementById('createPinModal');
+    if (createPinModalElement) {
+        createPinModalElement.addEventListener('hidden.bs.modal', function () {
+            // Clear PIN fields
+            const newPinInput = document.getElementById('new_pin');
+            const confirmPinInput = document.getElementById('confirm_pin');
+            if (newPinInput) newPinInput.value = '';
+            if (confirmPinInput) confirmPinInput.value = '';
+            // Clear message
+            const pinMessage = document.getElementById('pinMessage');
+            if (pinMessage) {
+                pinMessage.textContent = '';
+                pinMessage.style.display = 'none';
+            }
+            // Hapus data dari localStorage jika user membatalkan
+            localStorage.removeItem('pending_pinjaman');
+        });
+    }
+    
+    // Clean up localStorage saat page unload atau saat success
+    window.addEventListener('beforeunload', function() {
+        // Hanya hapus jika tidak ada success message
+        const successMessage = document.querySelector('.success-message');
+        if (!successMessage) {
+            localStorage.removeItem('pending_pinjaman');
+        }
+    });
+    
+    // Jika ada success message, hapus localStorage
+    const successMessage = document.querySelector('.success-message');
+    if (successMessage) {
+        localStorage.removeItem('pending_pinjaman');
+    }
+}
+
+// Error handling
+window.addEventListener('error', function(e) {
+    console.error('JavaScript Error:', e.error);
+    console.error('Error message:', e.message);
+    console.error('Error at:', e.filename, 'line:', e.lineno, 'col:', e.colno);
+    
+    // Tangani error Illegal invocation
+    if (e.message && e.message.includes('Illegal invocation')) {
+        console.log('Illegal invocation error detected, reloading page...');
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    }
+});
+</script>
 </body>
 </html>
