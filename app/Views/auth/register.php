@@ -588,18 +588,19 @@
         <input type="text" name="no_ktp" placeholder="Nomor KTP (16 digit)" minlength="16" maxlength="16" pattern="[0-9]{16}" required>
         <div class="validation-message" id="noKtpValidation">Nomor KTP harus 16 digit angka</div>
 
-        <!-- Foto KTP -->
+        <!-- Foto KTP (KAMERA BELAKANG) -->
         <div class="camera-container">
-          <h3>Foto KTP</h3>
+          <h3>Foto KTP (Gunakan Kamera Belakang)</h3>
           <div class="photo-instruction">
             <strong>Pastikan:</strong>
             <ul>
               <li>KTP dalam kondisi jelas dan terbaca</li>
               <li>Foto diambil dalam pencahayaan yang baik</li>
               <li>Seluruh bagian KTP terlihat</li>
+              <li>Gunakan kamera belakang untuk hasil terbaik</li>
             </ul>
           </div>
-          <button type="button" id="openKtpCamera">Buka Kamera</button>
+          <button type="button" id="openKtpCamera">Buka Kamera Belakang</button>
           <video id="ktpCamera" autoplay playsinline style="display:none;"></video>
           <canvas id="ktpCanvas" style="display:none;"></canvas>
           <button type="button" id="takeKtpPhoto" style="display:none;">Ambil Foto KTP</button>
@@ -608,7 +609,7 @@
           <div class="size-info" id="sizeInfo_ktp">Maksimal 2MB</div>
         </div>
 
-        <!-- Foto Diri dengan KTP -->
+        <!-- Foto Diri dengan KTP (KAMERA DEPAN) -->
         <div class="camera-container">
           <h3>Foto Diri Memegang KTP</h3>
           <div class="photo-instruction">
@@ -620,7 +621,7 @@
               <li>Foto diambil dengan pencahayaan yang baik</li>
             </ul>
           </div>
-          <button type="button" id="openDiriKtpCamera">Buka Kamera</button>
+          <button type="button" id="openDiriKtpCamera">Buka Kamera Depan</button>
           <video id="diriKtpCamera" autoplay playsinline style="display:none;"></video>
           <canvas id="diriKtpCanvas" style="display:none;"></canvas>
           <button type="button" id="takeDiriKtpPhoto" style="display:none;">Ambil Foto Diri dengan KTP</button>
@@ -629,10 +630,10 @@
           <div class="size-info" id="sizeInfo_diri_ktp">Maksimal 2MB</div>
         </div>
 
-        <!-- Kamera Langsung untuk Foto Diri -->
+        <!-- Kamera Langsung untuk Foto Diri (KAMERA DEPAN) -->
         <div class="camera-container">
-          <h3>Foto Diri </h3>
-          <button type="button" id="openCamera">Buka Kamera</button>
+          <h3>Foto Diri (Selfie)</h3>
+          <button type="button" id="openCamera">Buka Kamera Depan</button>
           <video id="camera" autoplay playsinline style="display:none;"></video>
           <canvas id="canvas" style="display:none;"></canvas>
           <button type="button" id="takePhoto" style="display:none;">Ambil Foto</button>
@@ -1032,8 +1033,41 @@
       }
     }
 
+    // Fungsi untuk mendapatkan kamera belakang (rear camera)
+    async function getCameraWithMode(mode) {
+      const constraints = {
+        video: {
+          width: { ideal: 1920 },
+          height: { ideal: 1080 }
+        }
+      };
+      
+      if (mode === 'rear') {
+        constraints.video.facingMode = { exact: 'environment' };
+      } else if (mode === 'front') {
+        constraints.video.facingMode = { exact: 'user' };
+      }
+      
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        return stream;
+      } catch (err) {
+        console.log(`${mode} camera not available, trying any camera...`);
+        // Fallback ke kamera apapun yang tersedia
+        delete constraints.video.facingMode;
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          return stream;
+        } catch (err2) {
+          console.error('Error accessing any camera:', err2);
+          alert(`Gagal mengakses kamera: ${err2.message}`);
+          return null;
+        }
+      }
+    }
+
     // Setup camera dengan kompresi
-    function setupCameraWithCompression(videoElement, takeButton, previewElement, hiddenInput, sizeInfoId) {
+    function setupCameraWithCompression(videoElement, takeButton, previewElement, hiddenInput, sizeInfoId, mode = 'front') {
       takeButton.addEventListener('click', () => {
         const tempCanvas = document.createElement('canvas');
         const tempCtx = tempCanvas.getContext('2d');
@@ -1041,14 +1075,19 @@
         tempCanvas.width = videoElement.videoWidth;
         tempCanvas.height = videoElement.videoHeight;
 
-        // Biar gak mirror
-        tempCtx.save();
-        tempCtx.translate(tempCanvas.width, 0);
-        tempCtx.scale(-1, 1);
-        tempCtx.drawImage(videoElement, 0, 0, tempCanvas.width, tempCanvas.height);
-        tempCtx.restore();
+        // Untuk kamera depan, mirror effect
+        if (mode === 'front') {
+          tempCtx.save();
+          tempCtx.translate(tempCanvas.width, 0);
+          tempCtx.scale(-1, 1);
+          tempCtx.drawImage(videoElement, 0, 0, tempCanvas.width, tempCanvas.height);
+          tempCtx.restore();
+        } else {
+          // Untuk kamera belakang, tidak perlu mirror
+          tempCtx.drawImage(videoElement, 0, 0, tempCanvas.width, tempCanvas.height);
+        }
 
-        const originalBase64 = tempCanvas.toDataURL("image/png");
+        const originalBase64 = tempCanvas.toDataURL("image/jpeg", 0.8);
         
         // Kompres image sebelum disimpan
         compressImage(originalBase64, 2, function(compressedBase64, compressedSize) {
@@ -1060,11 +1099,7 @@
           updateSizeInfo(sizeInfoId, compressedSize);
           
           // Matikan kamera setelah ambil foto
-          let currentStream = null;
-          if (videoElement === video) currentStream = stream;
-          if (videoElement === ktpVideo) currentStream = ktpStream;
-          if (videoElement === diriKtpVideo) currentStream = diriKtpStream;
-          
+          let currentStream = videoElement.srcObject;
           if (currentStream) {
             currentStream.getTracks().forEach(track => track.stop());
           }
@@ -1081,89 +1116,71 @@
       });
     }
 
-    // Camera functionality untuk Foto Diri
+    // Camera functionality untuk Foto Diri (KAMERA DEPAN)
     const video = document.getElementById('camera');
-    const canvas = document.getElementById('canvas');
     const openCameraBtn = document.getElementById('openCamera');
     const takePhotoBtn = document.getElementById('takePhoto');
     const preview = document.getElementById('preview');
     const fotoInput = document.getElementById('foto_diri');
-    const ctx = canvas.getContext('2d');
     let stream;
 
-    // Buka kamera pas tombol ditekan
-    openCameraBtn.addEventListener('click', () => {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(s => {
-          stream = s;
-          video.srcObject = stream;
-          video.style.display = "block";
-          takePhotoBtn.style.display = "inline-block";
-          openCameraBtn.style.display = "none";
-        })
-        .catch(err => {
-          alert("Gagal akses kamera: " + err);
-        });
+    // Buka kamera depan
+    openCameraBtn.addEventListener('click', async () => {
+      stream = await getCameraWithMode('front');
+      if (stream) {
+        video.srcObject = stream;
+        video.style.display = "block";
+        takePhotoBtn.style.display = "inline-block";
+        openCameraBtn.style.display = "none";
+      }
     });
 
     // Setup kompresi untuk foto diri
-    setupCameraWithCompression(video, takePhotoBtn, preview, fotoInput, 'sizeInfo_diri');
+    setupCameraWithCompression(video, takePhotoBtn, preview, fotoInput, 'sizeInfo_diri', 'front');
 
-    // Camera functionality untuk Foto KTP
+    // Camera functionality untuk Foto KTP (KAMERA BELAKANG)
     const ktpVideo = document.getElementById('ktpCamera');
-    const ktpCanvas = document.getElementById('ktpCanvas');
     const openKtpCameraBtn = document.getElementById('openKtpCamera');
     const takeKtpPhotoBtn = document.getElementById('takeKtpPhoto');
     const ktpPreview = document.getElementById('ktpPreview');
     const ktpInput = document.getElementById('foto_ktp');
-    const ktpCtx = ktpCanvas.getContext('2d');
     let ktpStream;
 
-    // Buka kamera untuk foto KTP
-    openKtpCameraBtn.addEventListener('click', () => {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(s => {
-          ktpStream = s;
-          ktpVideo.srcObject = ktpStream;
-          ktpVideo.style.display = "block";
-          takeKtpPhotoBtn.style.display = "inline-block";
-          openKtpCameraBtn.style.display = "none";
-        })
-        .catch(err => {
-          alert("Gagal akses kamera: " + err);
-        });
+    // Buka kamera belakang untuk foto KTP
+    openKtpCameraBtn.addEventListener('click', async () => {
+      ktpStream = await getCameraWithMode('rear');
+      if (ktpStream) {
+        ktpVideo.srcObject = ktpStream;
+        ktpVideo.style.display = "block";
+        takeKtpPhotoBtn.style.display = "inline-block";
+        openKtpCameraBtn.style.display = "none";
+      }
     });
 
     // Setup kompresi untuk foto KTP
-    setupCameraWithCompression(ktpVideo, takeKtpPhotoBtn, ktpPreview, ktpInput, 'sizeInfo_ktp');
+    setupCameraWithCompression(ktpVideo, takeKtpPhotoBtn, ktpPreview, ktpInput, 'sizeInfo_ktp', 'rear');
 
-    // Camera functionality untuk Foto Diri dengan KTP
+    // Camera functionality untuk Foto Diri dengan KTP (KAMERA DEPAN)
     const diriKtpVideo = document.getElementById('diriKtpCamera');
-    const diriKtpCanvas = document.getElementById('diriKtpCanvas');
     const openDiriKtpCameraBtn = document.getElementById('openDiriKtpCamera');
     const takeDiriKtpPhotoBtn = document.getElementById('takeDiriKtpPhoto');
     const diriKtpPreview = document.getElementById('diriKtpPreview');
     const diriKtpInput = document.getElementById('foto_diri_ktp');
-    const diriKtpCtx = diriKtpCanvas.getContext('2d');
     let diriKtpStream;
 
-    // Buka kamera untuk foto diri dengan KTP
-    openDiriKtpCameraBtn.addEventListener('click', () => {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(s => {
-          diriKtpStream = s;
-          diriKtpVideo.srcObject = diriKtpStream;
-          diriKtpVideo.style.display = "block";
-          takeDiriKtpPhotoBtn.style.display = "inline-block";
-          openDiriKtpCameraBtn.style.display = "none";
-        })
-        .catch(err => {
-          alert("Gagal akses kamera: " + err);
-        });
+    // Buka kamera depan untuk foto diri dengan KTP
+    openDiriKtpCameraBtn.addEventListener('click', async () => {
+      diriKtpStream = await getCameraWithMode('front');
+      if (diriKtpStream) {
+        diriKtpVideo.srcObject = diriKtpStream;
+        diriKtpVideo.style.display = "block";
+        takeDiriKtpPhotoBtn.style.display = "inline-block";
+        openDiriKtpCameraBtn.style.display = "none";
+      }
     });
 
     // Setup kompresi untuk foto diri dengan KTP
-    setupCameraWithCompression(diriKtpVideo, takeDiriKtpPhotoBtn, diriKtpPreview, diriKtpInput, 'sizeInfo_diri_ktp');
+    setupCameraWithCompression(diriKtpVideo, takeDiriKtpPhotoBtn, diriKtpPreview, diriKtpInput, 'sizeInfo_diri_ktp', 'front');
   </script>
 </body>
 </html>
