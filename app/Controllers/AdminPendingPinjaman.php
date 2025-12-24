@@ -75,6 +75,15 @@ class AdminPendingPinjaman extends BaseController
             $item['jml_angsuran'] = $item['jml_angsuran'] ?? 0;
             $item['tanggal'] = $item['tanggal'] ?? date('Y-m-d');
             $item['status'] = $item['status'] ?? 'pending';
+            
+            // Pastikan variabel yang dibutuhkan view ada
+            $item['nama_lengkap'] = $item['nama_lengkap'] ?? 'N/A';
+            $item['nomor_anggota'] = $item['nomor_anggota'] ?? 'N/A';
+            $item['jenis_bank'] = $item['jenis_bank'] ?? null;
+            $item['no_rek'] = $item['no_rek'] ?? null;
+            $item['atasnama_rekening'] = $item['atasnama_rekening'] ?? null;
+            $item['no_hp'] = $item['no_hp'] ?? null;
+            $item['email'] = $item['email'] ?? null;
         }
 
         // Hitung total pending

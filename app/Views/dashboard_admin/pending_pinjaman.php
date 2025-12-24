@@ -76,38 +76,6 @@
             </div>
         <?php endif; ?>
 
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-gray-600 text-sm">Total Pending</p>
-                        <p class="text-2xl font-bold text-gray-800"><?= $pendingPinjamanCount ?></p>
-                    </div>
-                    <i class="fas fa-clock text-yellow-500 text-2xl"></i>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-gray-600 text-sm">Menunggu Verifikasi</p>
-                        <p class="text-2xl font-bold text-gray-800"><?= $pendingPinjamanCount ?></p>
-                    </div>
-                    <i class="fas fa-user-check text-blue-500 text-2xl"></i>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-gray-600 text-sm">Siap Diproses</p>
-                        <p class="text-2xl font-bold text-gray-800"><?= $pendingPinjamanCount ?></p>
-                    </div>
-                    <i class="fas fa-check-circle text-green-500 text-2xl"></i>
-                </div>
-            </div>
-        </div>
 
         <!-- Main Content -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -172,16 +140,20 @@
                                 </h4>
                                 
                                 <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                                    <?php if (!empty($p['jenis_bank']) && !empty($p['no_rek'])): ?>
+                                    <?php 
+                                    $bank = $p['jenis_bank'] ?? null;
+                                    $noRek = $p['no_rek'] ?? null;
+                                    
+                                    if (!empty($bank) && !empty($noRek)): ?>
                                         <div class="space-y-2">
                                             <div class="flex justify-between items-center">
                                                 <span class="text-gray-700">Bank:</span>
-                                                <span class="font-bold text-blue-700"><?= esc($p['jenis_bank']) ?></span>
+                                                <span class="font-bold text-blue-700"><?= esc($bank) ?></span>
                                             </div>
                                             
                                             <div class="flex justify-between items-center">
                                                 <span class="text-gray-700">No. Rekening:</span>
-                                                <span class="font-bold text-gray-800"><?= esc($p['no_rek']) ?></span>
+                                                <span class="font-bold text-gray-800"><?= esc($noRek) ?></span>
                                             </div>
                                             
                                             <div class="flex justify-between items-center">
@@ -306,7 +278,10 @@
         const modal = document.getElementById('detailModal');
         const modalContent = document.getElementById('modalContent');
         
-        if (!modal || !modalContent) return;
+        if (!modal || !modalContent) {
+            console.error('Modal elements not found');
+            return;
+        }
         
         // Tampilkan loading state
         modalContent.innerHTML = `
@@ -331,7 +306,7 @@
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Network response was not ok: ' + response.status);
             }
             return response.json();
         })
@@ -460,6 +435,7 @@
             }
         })
         .catch(error => {
+            console.error('Error fetching detail:', error);
             modalContent.innerHTML = `
                 <div class="text-center py-8">
                     <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-4"></i>
