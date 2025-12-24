@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
   <style>
     :root {
@@ -184,6 +188,12 @@
       border-left: 4px solid var(--danger);
     }
 
+    .alert-info {
+      background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+      color: #1e40af;
+      border-left: 4px solid var(--accent);
+    }
+
     .alert-icon {
       width: 24px;
       height: 24px;
@@ -199,6 +209,37 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    /* Success Message Styles */
+    .success-message {
+      background: linear-gradient(135deg, #d1fae5 0%, #bbf7d0 100%);
+      border: 1px solid var(--success);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin: 1rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      animation: slideDown 0.5s ease-out;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      color: var(--success);
+      margin-bottom: 1rem;
+    }
+
+    .success-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .success-desc {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
 
     /* Tabs */
@@ -566,6 +607,25 @@
       pointer-events: none;
     }
 
+    /* Custom Modal Styles */
+    .modal-content {
+      border-radius: var(--border-radius);
+      border: none;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-header {
+      border-bottom: 1px solid var(--gray-light);
+      background: var(--light);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .modal-footer {
+      border-top: 1px solid var(--gray-light);
+      background: var(--light);
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+
     /* Responsive */
     @media (max-width: 480px) {
       .header-pinjam, .tab-akad, .tab-content {
@@ -582,6 +642,11 @@
       }
       
       .alert {
+        margin: 1rem 1.2rem;
+        padding: 1rem;
+      }
+      
+      .success-message {
         margin: 1rem 1.2rem;
         padding: 1rem;
       }
@@ -662,6 +727,20 @@
       <div>
         <strong>Pinjaman Aktif Ditemukan</strong>
         <div style="font-size: 14px; margin-top: 4px;">Anda sudah memiliki pinjaman yang aktif. Silakan selesaikan pinjaman terlebih dahulu sebelum mengajukan pinjaman baru.</div>
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <!-- Success Message Box -->
+  <?php if (session()->getFlashdata('pinjaman_success')): ?>
+    <div class="success-message">
+      <div class="success-icon">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+      <div class="success-title">Pengajuan Pinjaman Berhasil!</div>
+      <div class="success-desc">Pengajuan berhasil, mohon tunggu verifikasi admin. Anda akan mendapatkan notifikasi setelah pinjaman diverifikasi.</div>
+      <div class="success-info">
+        <small><i class="bi bi-clock"></i> Estimasi verifikasi: 1-3 hari kerja</small>
       </div>
     </div>
   <?php endif; ?>
@@ -861,8 +940,6 @@
     </div>
   </section>
 
-
-
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <a href="<?= base_url('anggota/dashboard')?>">
@@ -887,6 +964,67 @@
     </a>
   </nav>
 
+  <!-- Modal untuk input PIN -->
+  <div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pinModalLabel">Verifikasi PIN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="pinVerificationForm" action="<?= base_url('pinjaman/process-after-pin') ?>" method="POST">
+          <div class="modal-body">
+            <p>Masukkan 6 digit PIN untuk melanjutkan pengajuan pinjaman:</p>
+            <div class="mb-3">
+              <label for="pin" class="form-label">PIN</label>
+              <input type="password" class="form-control" id="pin" name="pin" 
+                     placeholder="Masukkan 6 digit PIN" maxlength="6" 
+                     pattern="\d{6}" title="Harus 6 digit angka" required>
+              <div class="invalid-feedback" id="pinError"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Verifikasi dan Ajukan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal untuk buat PIN (jika belum punya) -->
+  <div class="modal fade" id="createPinModal" tabindex="-1" aria-labelledby="createPinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createPinModalLabel">Buat PIN Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="createPinForm">
+          <div class="modal-body">
+            <p>Anda belum memiliki PIN. Harap buat PIN 6 digit terlebih dahulu.</p>
+            <div class="mb-3">
+              <label for="new_pin" class="form-label">PIN Baru (6 digit)</label>
+              <input type="password" class="form-control" id="new_pin" name="new_pin" 
+                     placeholder="Masukkan 6 digit PIN" maxlength="6" required
+                     pattern="\d{6}" title="Harus 6 digit angka">
+            </div>
+            <div class="mb-3">
+              <label for="confirm_pin" class="form-label">Konfirmasi PIN</label>
+              <input type="password" class="form-control" id="confirm_pin" name="confirm_pin" 
+                     placeholder="Konfirmasi 6 digit PIN" maxlength="6" required
+                     pattern="\d{6}" title="Harus 6 digit angka">
+            </div>
+            <div id="pinMessage" class="alert" style="display:none;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Buat PIN</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 <?php if ($showTenorModal): ?>
 <style>
@@ -1005,9 +1143,11 @@
 </script>
 <?php endif; ?>
 
+  <!-- Bootstrap 5 JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-      lucide.createIcons();
+    lucide.createIcons();
 
     const MAX_PINJAMAN = 4000000;
     const isDisabled = <?= $isDisabled ? 'true' : 'false' ?>;
@@ -1135,10 +1275,11 @@
     }
 
     // Konfirmasi sebelum submit form pinjaman
-      document.querySelectorAll('form[id^="form-"]').forEach(function(form){
+    document.querySelectorAll('form[id^="form-"]').forEach(function(form){
       form.addEventListener('submit', function(e){
+        e.preventDefault(); // Selalu prevent default untuk validasi custom
+
         if (isDisabled) {
-          e.preventDefault();
           if (!hasNoRekening) {
             alert('Harap lengkapi nomor rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.');
             // Redirect ke profil
@@ -1168,32 +1309,27 @@
         const deskripsi = deskripsiInput.value.trim();
 
         if (!allChecked) {
-          e.preventDefault();
           alert('Harap centang semua pernyataan sebelum mengajukan pinjaman.');
           return;
         }
 
         if (nominal > MAX_PINJAMAN) {
-          e.preventDefault();
           alert('Nominal pinjaman melebihi batas maksimum Rp 4.000.000');
           return;
         }
 
         if (nominal <= 0) {
-          e.preventDefault();
           alert('Nominal pinjaman harus lebih dari 0');
           return;
         }
 
         if (deskripsi === '') {
-          e.preventDefault();
           alert('Harap isi deskripsi penggunaan pinjaman');
           deskripsiInput.focus();
           return;
         }
 
         if (deskripsi.length < 10) {
-          e.preventDefault();
           alert('Deskripsi penggunaan pinjaman minimal 10 karakter');
           deskripsiInput.focus();
           return;
@@ -1204,19 +1340,137 @@
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '⏳ Mengajukan...';
         submitBtn.disabled = true;
+
+        // Submit form via AJAX untuk validasi dan menampilkan modal PIN
+        const formData = new FormData(form);
         
-        // Re-enable after 3 seconds if form doesn't submit
-        setTimeout(() => {
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 3000);
+        // Validasi sebelum submit via AJAX
+        $.ajax({
+          url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
+          type: 'GET',
+          success: function(response) {
+            if (response.canSubmit) {
+              // Cek apakah sudah punya PIN
+              if (response.hasPin) {
+                // Simpan form data dan tampilkan modal PIN
+                sessionStorage.setItem('pinjamanFormData', JSON.stringify(Object.fromEntries(formData)));
+                $('#pinModal').modal('show');
+              } else {
+                // Tampilkan modal buat PIN
+                $('#createPinModal').modal('show');
+              }
+            } else {
+              // Tampilkan pesan error
+              let errorMsg = 'Tidak dapat mengajukan pinjaman karena:<br>';
+              response.messages.forEach(function(msg) {
+                if (msg) errorMsg += '- ' + msg + '<br>';
+              });
+              alert(errorMsg);
+            }
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          },
+          error: function() {
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }
+        });
       });
     });
 
+    // Handle verifikasi PIN
+    $('#pinVerificationForm').on('submit', function(e) {
+      e.preventDefault();
+      
+      const pin = $('#pin').val();
+      
+      if (pin.length !== 6) {
+        $('#pinError').text('PIN harus 6 digit').show();
+        return;
+      }
+      
+      // Verifikasi PIN via AJAX dulu
+      $.ajax({
+        url: '<?= base_url("pinjaman/verify-pin") ?>',
+        type: 'POST',
+        data: {pin: pin},
+        success: function(response) {
+          if (response.success) {
+            // Jika PIN valid, submit form
+            $('#pinVerificationForm').off('submit').submit();
+          } else {
+            $('#pinError').text(response.message).show();
+          }
+        },
+        error: function() {
+          $('#pinError').text('Terjadi kesalahan saat verifikasi PIN').show();
+        }
+      });
+    });
+    
+    // Handle buat PIN
+    $('#createPinForm').on('submit', function(e) {
+      e.preventDefault();
+      
+      const newPin = $('#new_pin').val();
+      const confirmPin = $('#confirm_pin').val();
+      
+      // Validasi
+      if (newPin.length !== 6) {
+        showPinMessage('PIN harus 6 digit', 'danger');
+        return;
+      }
+      
+      if (newPin !== confirmPin) {
+        showPinMessage('PIN tidak cocok', 'danger');
+        return;
+      }
+      
+      // Submit buat PIN
+      $.ajax({
+        url: '<?= base_url("pinjaman/create-pin") ?>',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+          if (response.success) {
+            showPinMessage(response.message, 'success');
+            
+            // Tutup modal buat PIN dan buka modal verifikasi PIN
+            setTimeout(function() {
+              $('#createPinModal').modal('hide');
+              $('#pinModal').modal('show');
+            }, 1500);
+          } else {
+            showPinMessage(response.message, 'danger');
+          }
+        },
+        error: function() {
+          showPinMessage('Terjadi kesalahan. Silakan coba lagi.', 'danger');
+        }
+      });
+    });
+    
+    function showPinMessage(message, type) {
+      const $message = $('#pinMessage');
+      $message.removeClass('alert-success alert-danger')
+              .addClass('alert-' + type)
+              .text(message)
+              .show();
+      
+      // Auto hide setelah 3 detik
+      setTimeout(() => {
+        $message.fadeOut();
+      }, 3000);
+    }
+
+    // Fungsi format rupiah
     function formatRupiah(angka) {
       return angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    // Format input rupiah
     document.querySelectorAll('input[id$="-nominal"], input[id$="-harga"]').forEach(input => {
       input.addEventListener('input', function(e) {
         let value = this.value.replace(/\D/g, '');
@@ -1274,7 +1528,36 @@
         alert.style.transition = 'opacity 0.5s ease';
         setTimeout(() => alert.remove(), 500);
       });
+      
+      // Auto-hide success message after 8 seconds
+      document.querySelectorAll('.success-message').forEach(msg => {
+        setTimeout(() => {
+          msg.style.opacity = '0';
+          msg.style.transition = 'opacity 0.5s ease';
+          setTimeout(() => msg.remove(), 500);
+        }, 8000);
+      });
     }, 5000);
+
+    // Jika ada flash data show_pin_modal, tampilkan modal
+    <?php if (session()->getFlashdata('show_pin_modal')): ?>
+      $(document).ready(function() {
+        setTimeout(function() {
+          $.ajax({
+            url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
+            type: 'GET',
+            success: function(response) {
+              if (response.hasPin) {
+                $('#pinModal').modal('show');
+              } else {
+                $('#createPinModal').modal('show');
+              }
+            }
+          });
+        }, 500);
+      });
+    <?php endif; ?>
   </script>
+  
 </body>
 </html>

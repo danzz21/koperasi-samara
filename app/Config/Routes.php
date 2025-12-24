@@ -32,7 +32,8 @@ $routes->group('anggota', ['filter' => 'role:anggota'], function ($routes) {
     $routes->get('pinjaman', 'Pinjaman::index');
     $routes->get('profil', 'Profil::index');
     $routes->post('profil/updateFoto', 'Profil::updateFoto');
-$routes->get('riwayat-cicilan', 'Cicilan::riwayatCicilan');
+    $routes->get('riwayat-cicilan', 'Cicilan::riwayatCicilan');
+    
     // Simpanan jenis
     $routes->get('sim_pokok', 'Sim_pokok::index');
     $routes->get('sim_wajib', 'Sim_wajib::index');
@@ -62,12 +63,31 @@ $routes->get('riwayat-cicilan', 'Cicilan::riwayatCicilan');
     $routes->get('validate-pinjaman', 'Pinjaman::validateBeforeSubmit');
     $routes->get('active-loan', 'Pinjaman::getActiveLoan');
     
+    // ===== ROUTES UNTUK PIN VALIDATION =====
+    $routes->post('pinjaman/process-after-pin', 'Pinjaman::processAfterPin');
+    $routes->post('pinjaman/create-pin', 'Pinjaman::createPin');
+    $routes->post('pinjaman/verify-pin', 'Pinjaman::verifyPinAjax');
+    
     // ===== ROUTES UNTUK SIMPANAN (jika diperlukan) =====
     $routes->post('simpanan/input', 'Simpanan::inputSimpanan');
     $routes->get('simpanan/list', 'Simpanan::getSimpananList');
     $routes->get('search-anggota', 'Simpanan::searchAnggota');
     $routes->get('check-simpanan-pokok/(:num)', 'Simpanan::checkSimpananPokok/$1');
 });
+
+// ======================================
+// ROUTE ALIAS UNTUK PINJAMAN (tanpa prefix)
+// ======================================
+$routes->get('pinjaman', 'Pinjaman::index', ['filter' => 'role:anggota']);
+$routes->post('pinjaman/ajukan', 'Pinjaman::ajukan', ['filter' => 'role:anggota']);
+$routes->post('pinjaman/process-after-pin', 'Pinjaman::processAfterPin', ['filter' => 'role:anggota']);
+$routes->post('pinjaman/create-pin', 'Pinjaman::createPin', ['filter' => 'role:anggota']);
+$routes->post('pinjaman/verify-pin', 'Pinjaman::verifyPinAjax', ['filter' => 'role:anggota']);
+$routes->post('anggota/pinjaman/ajukan', 'Pinjaman::ajukan', ['filter' => 'role:anggota']);
+$routes->post('anggota/pinjaman/process-after-pin', 'Pinjaman::processAfterPin', ['filter' => 'role:anggota']);
+$routes->post('anggota/pinjaman/create-pin', 'Pinjaman::createPin', ['filter' => 'role:anggota']);
+$routes->post('anggota/pinjaman/verify-pin', 'Pinjaman::verifyPinAjax', ['filter' => 'role:anggota']);
+
 // Atau jika ingin lebih spesifik:
 $routes->post('anggota/simpanan/pokok/store', 'Simpanan::storePokok');
 $routes->post('anggota/simpanan/sukarela/store', 'Simpanan::storeSukarela');
