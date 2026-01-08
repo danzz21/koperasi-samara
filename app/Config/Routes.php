@@ -51,6 +51,10 @@ $routes->group('anggota', ['filter' => 'role:anggota'], function ($routes) {
     $routes->post('pinjaman/setTenor', 'Pinjaman::setTenor');
     $routes->post('cicilan/setTenor', 'Cicilan::setTenor');
 
+    $routes->post('profil/update-pin', 'Profil::updatePin');
+    $routes->post('profil/change-pin', 'Profil::changePin');
+    $routes->post('profil/verify-pin', 'Profil::verifyPinAjax');
+    
     // Pinjaman jenis
     $routes->get('pin_alqordh', 'Pin_alqordh::index');
     $routes->get('pin_murobahah', 'Pin_murobahah::index');

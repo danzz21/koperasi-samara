@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Bootstrap CSS for Modal -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     :root {
@@ -188,6 +190,13 @@
       display: block;
     }
 
+    .success-message {
+      color: var(--success);
+      font-size: 12px;
+      margin-top: 0.25rem;
+      display: block;
+    }
+
     .password-toggle {
       position: relative;
     }
@@ -199,6 +208,42 @@
       transform: translateY(-50%);
       cursor: pointer;
       color: var(--gray);
+    }
+
+    /* PIN Section */
+    .pin-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray-light);
+    }
+
+    .pin-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .pin-status-label {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .pin-status-value {
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .pin-status-active {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+
+    .pin-status-inactive {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
     }
 
     /* Button Styles */
@@ -221,6 +266,7 @@
       justify-content: center;
       gap: 8px;
       text-decoration: none;
+      font-size: 14px;
     }
 
     .btn-primary {
@@ -242,6 +288,37 @@
     .btn-secondary:hover {
       background: var(--gray);
       color: white;
+    }
+
+    .btn-warning {
+      background: var(--warning);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-warning:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Modal Custom Styles */
+    .modal-content {
+      border-radius: var(--border-radius);
+      border: none;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-header {
+      background: var(--light);
+      border-bottom: 1px solid var(--gray-light);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .modal-footer {
+      background: var(--light);
+      border-top: 1px solid var(--gray-light);
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
     }
 
     /* Bottom Navigation */
@@ -357,9 +434,27 @@
     <p>ID: <?= htmlspecialchars($nomor_anggota ?? '-') ?></p>
   </header>
 
-  <!-- Di bagian form data pribadi, tambahkan field jenis bank -->
-<!-- Pastikan form dimulai dengan tag form yang benar -->
-<form action="<?= base_url('anggota/profil/update') ?>" method="post">
+  <!-- Flash Messages -->
+  <?php if (session()->getFlashdata('success')): ?>
+    <div class="card">
+      <div style="color: var(--success); display: flex; align-items: center; gap: 10px;">
+        <i data-lucide="check-circle" style="color: var(--success);"></i>
+        <span><?= session()->getFlashdata('success') ?></span>
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <?php if (session()->getFlashdata('error')): ?>
+    <div class="card">
+      <div style="color: var(--danger); display: flex; align-items: center; gap: 10px;">
+        <i data-lucide="alert-circle" style="color: var(--danger);"></i>
+        <span><?= session()->getFlashdata('error') ?></span>
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <!-- Form Data Pribadi -->
+  <form action="<?= base_url('anggota/profil/update') ?>" method="post">
     <!-- Tambahkan CSRF Token -->
     <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
     
@@ -438,6 +533,36 @@
         </div>
     </div>
 
+    <!-- Section PIN -->
+    <div class="card">
+        <div class="card-title">
+            <i data-lucide="key" width="20" height="20"></i>
+            Pengaturan PIN
+        </div>
+
+        <div class="pin-section">
+            <div class="pin-status">
+                <span class="pin-status-label">Status PIN:</span>
+                <span class="pin-status-value <?= $hasPin ? 'pin-status-active' : 'pin-status-inactive' ?>">
+                    <?= $hasPin ? '✓ Sudah Ada' : '✗ Belum Dibuat' ?>
+                </span>
+            </div>
+
+            <?php if ($hasPin): ?>
+                <button type="button" class="btn btn-warning" style="width: 100%;" onclick="showChangePinModal()">
+                    <i data-lucide="refresh-cw"></i>
+                    Ubah PIN
+                </button>
+            <?php else: ?>
+                <button type="button" class="btn btn-primary" style="width: 100%;" onclick="showCreatePinModal()">
+                    <i data-lucide="key"></i>
+                    Buat PIN Baru
+                </button>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- Password Section -->
     <div class="card">
         <div class="card-title">
             <i data-lucide="lock" width="20" height="20"></i>
@@ -447,8 +572,8 @@
         <div class="form-group">
             <label class="form-label">Password Baru</label>
             <div class="password-toggle">
-                <input type="password" name="password" class="form-input" placeholder="Kosongkan jika tidak ingin mengubah">
-                <span class="password-toggle-icon" onclick="togglePassword(this)">
+                <input type="password" name="password" id="password" class="form-input" placeholder="Kosongkan jika tidak ingin mengubah">
+                <span class="password-toggle-icon" onclick="togglePassword('password', this)">
                     <i data-lucide="eye"></i>
                 </span>
             </div>
@@ -460,8 +585,8 @@
         <div class="form-group">
             <label class="form-label">Konfirmasi Password</label>
             <div class="password-toggle">
-                <input type="password" name="confirm_password" class="form-input" placeholder="Ulangi password baru">
-                <span class="password-toggle-icon" onclick="togglePassword(this)">
+                <input type="password" name="confirm_password" id="confirm_password" class="form-input" placeholder="Ulangi password baru">
+                <span class="password-toggle-icon" onclick="togglePassword('confirm_password', this)">
                     <i data-lucide="eye"></i>
                 </span>
             </div>
@@ -471,6 +596,7 @@
         </div>
     </div>
 
+    <!-- Action Buttons -->
     <div class="btn-group">
         <a href="<?= base_url('anggota/profil') ?>" class="btn btn-secondary">
             <i data-lucide="x"></i>
@@ -481,7 +607,81 @@
             Simpan Perubahan
         </button>
     </div>
-</form> <!-- JANGAN LUPA TUTUP FORM -->
+  </form>
+
+  <!-- Modal untuk Buat PIN Baru -->
+  <div class="modal fade" id="createPinModal" tabindex="-1" aria-labelledby="createPinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createPinModalLabel">Buat PIN Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="createPinForm" action="<?= base_url('anggota/profil/update-pin') ?>" method="POST">
+          <div class="modal-body">
+            <p>Buat PIN 6 digit untuk keamanan transaksi:</p>
+            <div class="form-group">
+              <label class="form-label">PIN Baru (6 digit)</label>
+              <input type="password" class="form-control" id="new_pin" name="new_pin" 
+                     placeholder="Masukkan 6 digit PIN" maxlength="6" 
+                     pattern="\d{6}" title="Harus 6 digit angka" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Konfirmasi PIN</label>
+              <input type="password" class="form-control" id="confirm_new_pin" name="confirm_new_pin" 
+                     placeholder="Konfirmasi 6 digit PIN" maxlength="6" 
+                     pattern="\d{6}" title="Harus 6 digit angka" required>
+            </div>
+            <div id="pinMessage" class="mt-3" style="display: none;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Buat PIN</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal untuk Ubah PIN -->
+  <div class="modal fade" id="changePinModal" tabindex="-1" aria-labelledby="changePinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changePinModalLabel">Ubah PIN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="changePinForm" action="<?= base_url('anggota/profil/change-pin') ?>" method="POST">
+          <div class="modal-body">
+            <p>Ubah PIN 6 digit Anda:</p>
+            <div class="form-group">
+              <label class="form-label">PIN Lama</label>
+              <input type="password" class="form-control" id="old_pin" name="old_pin" 
+                     placeholder="Masukkan PIN lama" maxlength="6" 
+                     pattern="\d{6}" title="Harus 6 digit angka" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">PIN Baru (6 digit)</label>
+              <input type="password" class="form-control" id="new_pin_change" name="new_pin" 
+                     placeholder="Masukkan 6 digit PIN baru" maxlength="6" 
+                     pattern="\d{6}" title="Harus 6 digit angka" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Konfirmasi PIN Baru</label>
+              <input type="password" class="form-control" id="confirm_new_pin_change" name="confirm_new_pin" 
+                     placeholder="Konfirmasi 6 digit PIN baru" maxlength="6" 
+                     pattern="\d{6}" title="Harus 6 digit angka" required>
+            </div>
+            <div id="changePinMessage" class="mt-3" style="display: none;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Ubah PIN</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Bottom Nav -->
   <nav class="bottom-nav">
@@ -507,11 +707,16 @@
     </a>
   </nav>
 
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script>
     lucide.createIcons();
     
-    function togglePassword(icon) {
-      const input = icon.parentElement.querySelector('input');
+    function togglePassword(inputId, icon) {
+      const input = document.getElementById(inputId);
       const eyeIcon = icon.querySelector('i');
       
       if (input.type === 'password') {
@@ -523,6 +728,127 @@
       }
       lucide.createIcons();
     }
+    
+    function showCreatePinModal() {
+      const modal = new bootstrap.Modal(document.getElementById('createPinModal'));
+      modal.show();
+    }
+    
+    function showChangePinModal() {
+      const modal = new bootstrap.Modal(document.getElementById('changePinModal'));
+      modal.show();
+    }
+    
+    // Handle Create PIN Form
+    document.getElementById('createPinForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const newPin = document.getElementById('new_pin').value;
+      const confirmPin = document.getElementById('confirm_new_pin').value;
+      const messageDiv = document.getElementById('pinMessage');
+      
+      // Validasi
+      if (newPin.length !== 6) {
+        showMessage('PIN harus 6 digit', 'danger', messageDiv);
+        return;
+      }
+      
+      if (newPin !== confirmPin) {
+        showMessage('PIN tidak cocok', 'danger', messageDiv);
+        return;
+      }
+      
+      // Submit form
+      $.ajax({
+        url: this.action,
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+          if (response.success) {
+            showMessage(response.message, 'success', messageDiv);
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+          } else {
+            showMessage(response.message, 'danger', messageDiv);
+          }
+        },
+        error: function() {
+          showMessage('Terjadi kesalahan. Silakan coba lagi.', 'danger', messageDiv);
+        }
+      });
+    });
+    
+    // Handle Change PIN Form
+    document.getElementById('changePinForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const oldPin = document.getElementById('old_pin').value;
+      const newPin = document.getElementById('new_pin_change').value;
+      const confirmPin = document.getElementById('confirm_new_pin_change').value;
+      const messageDiv = document.getElementById('changePinMessage');
+      
+      // Validasi
+      if (oldPin.length !== 6 || newPin.length !== 6) {
+        showMessage('PIN harus 6 digit', 'danger', messageDiv);
+        return;
+      }
+      
+      if (newPin !== confirmPin) {
+        showMessage('PIN baru tidak cocok', 'danger', messageDiv);
+        return;
+      }
+      
+      // Submit form
+      $.ajax({
+        url: this.action,
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+          if (response.success) {
+            showMessage(response.message, 'success', messageDiv);
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+          } else {
+            showMessage(response.message, 'danger', messageDiv);
+          }
+        },
+        error: function() {
+          showMessage('Terjadi kesalahan. Silakan coba lagi.', 'danger', messageDiv);
+        }
+      });
+    });
+    
+    function showMessage(message, type, messageDiv) {
+      messageDiv.innerHTML = `
+        <div class="alert alert-${type}" role="alert">
+          ${message}
+        </div>
+      `;
+      messageDiv.style.display = 'block';
+      
+      // Auto hide setelah 5 detik
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }
+    
+    // Clear modal form saat ditutup
+    document.getElementById('createPinModal')?.addEventListener('hidden.bs.modal', function () {
+      document.getElementById('new_pin').value = '';
+      document.getElementById('confirm_new_pin').value = '';
+      document.getElementById('pinMessage').innerHTML = '';
+      document.getElementById('pinMessage').style.display = 'none';
+    });
+    
+    document.getElementById('changePinModal')?.addEventListener('hidden.bs.modal', function () {
+      document.getElementById('old_pin').value = '';
+      document.getElementById('new_pin_change').value = '';
+      document.getElementById('confirm_new_pin_change').value = '';
+      document.getElementById('changePinMessage').innerHTML = '';
+      document.getElementById('changePinMessage').style.display = 'none';
+    });
   </script>
 </body>
 </html>
