@@ -565,6 +565,330 @@ $data = [
         ]);
     }
 }
+
+/**
+ * DELETE ANGGOTA (SOFT DELETE)
+ */
+/**
+ * DELETE ANGGOTA (SOFT DELETE)
+ */
+public function deleteAnggota()
+{
+    // Cek request AJAX
+    if (!$this->request->isAJAX()) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid request method'
+        ]);
+    }
+
+    // Validasi token CSRF - PERBAIKI INI
+    $csrf_token = $this->request->getPost('csrf_token');
+    $current_csrf_token = csrf_hash();
+    
+    // Debug CSRF
+    log_message('debug', '=== CSRF VALIDATION ===');
+    log_message('debug', 'Posted CSRF: ' . $csrf_token);
+    log_message('debug', 'Current CSRF: ' . $current_csrf_token);
+    log_message('debug', 'Match: ' . ($csrf_token === $current_csrf_token ? 'YES' : 'NO'));
+    
+    // Validasi CSRF dengan cara CI4 yang benar
+    if (empty($csrf_token) || $csrf_token !== $current_csrf_token) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Token CSRF tidak valid atau expired'
+        ]);
+    }
+
+    $memberId = $this->request->getPost('member_id');
+    $hardDelete = $this->request->getPost('hard_delete') === 'true'; // Opsi hard delete
+
+    log_message('debug', '=== DELETE ANGGOTA START ===');
+    log_message('debug', 'Member ID: ' . $memberId);
+    log_message('debug', 'Hard Delete: ' . ($hardDelete ? 'Yes' : 'No'));
+
+    if (!$memberId) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'ID anggota tidak ditemukan'
+        ]);
+    }
+
+    try {
+        // Cari data anggota
+        $anggota = $this->anggotaModel->find($memberId);
+        
+        if (!$anggota) {
+            log_message('debug', 'Anggota tidak ditemukan dengan ID: ' . $memberId);
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Data anggota tidak ditemukan'
+            ]);
+        }
+
+        // Simpan nama anggota untuk pesan konfirmasi
+        $namaAnggota = $anggota['nama_lengkap'];
+        $idUser = $anggota['id_anggota']; // ID user yang terkait
+        
+        log_message('debug', 'Nama Anggota: ' . $namaAnggota);
+        log_message('debug', 'ID User terkait: ' . $idUser);
+
+        // Mulai transaction database
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        if ($hardDelete) {
+            // ===== HARD DELETE (hapus permanen) =====
+            
+            // 1. Hapus dari tabel pembayaran_pending (jika ada)
+            if ($db->tableExists('pembayaran_pending')) {
+                $db->table('pembayaran_pending')
+                   ->where('id_anggota', $memberId)
+                   ->delete();
+                log_message('debug', 'Hapus dari pembayaran_pending: OK');
+            }
+
+            // 2. Hapus dari tabel simpanan
+            $tablesSimpanan = ['simpanan_pokok', 'simpanan_wajib', 'simpanan_sukarela'];
+            foreach ($tablesSimpanan as $table) {
+                if ($db->tableExists($table)) {
+                    $db->table($table)
+                       ->where('id_anggota', $memberId)
+                       ->delete();
+                    log_message('debug', 'Hapus dari ' . $table . ': OK');
+                }
+            }
+
+            // 3. Hapus dari tabel pembiayaan
+            $tablesPembiayaan = ['qard', 'murabahah', 'mudharabah'];
+            foreach ($tablesPembiayaan as $table) {
+                if ($db->tableExists($table)) {
+                    $db->table($table)
+                       ->where('id_anggota', $memberId)
+                       ->delete();
+                    log_message('debug', 'Hapus dari ' . $table . ': OK');
+                }
+            }
+
+            // 4. Hapus dari tabel anggota
+            $anggotaDeleted = $this->anggotaModel->delete($memberId);
+            log_message('debug', 'Hapus dari anggota: ' . ($anggotaDeleted ? 'OK' : 'FAILED'));
+
+            // 5. Hapus dari tabel users jika ada
+            if ($idUser) {
+                $userDeleted = $this->userModel->delete($idUser);
+                log_message('debug', 'Hapus dari users: ' . ($userDeleted ? 'OK' : 'FAILED'));
+            }
+
+            $message = 'Anggota <strong>' . $namaAnggota . '</strong> berhasil dihapus permanen beserta semua datanya.';
+
+        } else {
+            // ===== SOFT DELETE (hanya ubah status) =====
+            
+            // 1. Ubah status anggota menjadi 'dihapus'
+            $anggotaUpdated = $this->anggotaModel->update($memberId, [
+                'status' => 'dihapus',
+                'deleted_at' => date('Y-m-d H:i:s')
+            ]);
+            log_message('debug', 'Update status anggota: ' . ($anggotaUpdated ? 'OK' : 'FAILED'));
+
+            // 2. Nonaktifkan user terkait
+            if ($idUser) {
+                $userUpdated = $this->userModel->update($idUser, [
+                    'status' => 'nonaktif',
+                    'deleted_at' => date('Y-m-d H:i:s')
+                ]);
+                log_message('debug', 'Update status user: ' . ($userUpdated ? 'OK' : 'FAILED'));
+            }
+
+            // 3. Nonaktifkan simpanan dan pembiayaan yang aktif
+            $tablesToDeactivate = ['simpanan_pokok', 'simpanan_wajib', 'simpanan_sukarela', 'qard', 'murabahah', 'mudharabah'];
+            foreach ($tablesToDeactivate as $table) {
+                if ($db->tableExists($table)) {
+                    $db->table($table)
+                       ->where('id_anggota', $memberId)
+                       ->where('status', 'aktif')
+                       ->update(['status' => 'nonaktif']);
+                    log_message('debug', 'Nonaktifkan ' . $table . ': OK');
+                }
+            }
+
+            $message = 'Anggota <strong>' . $namaAnggota . '</strong> berhasil dinonaktifkan (soft delete). Data dapat dipulihkan kembali.';
+        }
+
+        // Commit transaction
+        $db->transComplete();
+
+        if ($db->transStatus() === FALSE) {
+            log_message('error', 'Transaction failed for member deletion');
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Gagal menghapus anggota. Terjadi kesalahan database.'
+            ]);
+        }
+
+        log_message('debug', '=== DELETE ANGGOTA END - SUCCESS ===');
+        
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => $message,
+            'reload' => true // Untuk reload halaman
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error deleteAnggota: ' . $e->getMessage());
+        log_message('error', 'Stack trace: ' . $e->getTraceAsString());
+        
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+        ]);
+    }
+}
+/**
+ * GET DETAIL ANGGOTA UNTUK KONFIRMASI HAPUS
+ */
+public function getMemberDetails($id)
+{
+    // Cek request AJAX
+    if (!$this->request->isAJAX()) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid request'
+        ]);
+    }
+
+    try {
+        // Cari data anggota
+        $anggota = $this->anggotaModel->find($id);
+        
+        if (!$anggota) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Anggota tidak ditemukan'
+            ]);
+        }
+
+        $db = \Config\Database::connect();
+        
+        // Hitung jumlah data terkait
+        $dataSummary = [
+            'simpanan_pokok' => $db->table('simpanan_pokok')
+                ->where('id_anggota', $id)
+                ->countAllResults(),
+            'simpanan_wajib' => $db->table('simpanan_wajib')
+                ->where('id_anggota', $id)
+                ->countAllResults(),
+            'simpanan_sukarela' => $db->table('simpanan_sukarela')
+                ->where('id_anggota', $id)
+                ->countAllResults(),
+            'pembiayaan_aktif' => $db->table('qard')
+                ->where('id_anggota', $id)
+                ->where('status', 'aktif')
+                ->countAllResults() +
+                $db->table('murabahah')
+                ->where('id_anggota', $id)
+                ->where('status', 'aktif')
+                ->countAllResults() +
+                $db->table('mudharabah')
+                ->where('id_anggota', $id)
+                ->where('status', 'aktif')
+                ->countAllResults(),
+            'pembayaran_pending' => $db->tableExists('pembayaran_pending') ? 
+                $db->table('pembayaran_pending')
+                   ->where('id_anggota', $id)
+                   ->where('status', 'pending')
+                   ->countAllResults() : 0
+        ];
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => [
+                'anggota' => [
+                    'id' => $anggota['id_anggota'],
+                    'nama' => $anggota['nama_lengkap'],
+                    'nomor_anggota' => $anggota['nomor_anggota'] ?? '-',
+                    'email' => $anggota['email'] ?? '-',
+                    'status' => $anggota['status'] ?? 'tidak diketahui',
+                    'tanggal_daftar' => isset($anggota['tanggal_daftar']) ? 
+                        date('d M Y', strtotime($anggota['tanggal_daftar'])) : '-'
+                ],
+                'summary' => $dataSummary,
+                'total_data_terkait' => array_sum($dataSummary)
+            ]
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error getMemberDetails: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
+    }
+}
+/**
+ * RESTORE ANGGOTA (PULIHKAN DARI SOFT DELETE)
+ */
+public function restoreAnggota()
+{
+    if (!$this->request->isAJAX()) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid request'
+        ]);
+    }
+
+    $memberId = $this->request->getPost('member_id');
+
+    if (!$memberId) {
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'ID anggota tidak ditemukan'
+        ]);
+    }
+
+    try {
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        // 1. Pulihkan anggota
+        $anggotaUpdated = $this->anggotaModel->update($memberId, [
+            'status' => 'aktif',
+            'deleted_at' => null
+        ]);
+
+        // 2. Pulihkan user terkait
+        $anggota = $this->anggotaModel->find($memberId);
+        if ($anggota && isset($anggota['id_anggota'])) {
+            $this->userModel->update($anggota['id_anggota'], [
+                'status' => 'verified',
+                'deleted_at' => null
+            ]);
+        }
+
+        $db->transComplete();
+
+        if ($db->transStatus() === FALSE) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Gagal memulihkan anggota'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Anggota berhasil dipulihkan',
+            'reload' => true
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error restoreAnggota: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+        ]);
+    }
+}
 public function toggleMemberStatus()
 {
     if (!$this->request->isAJAX()) {

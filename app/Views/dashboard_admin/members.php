@@ -226,6 +226,11 @@
                                 <button onclick="event.stopPropagation(); window.location.href='<?= base_url('admin/edit-anggota/' . $id_anggota) ?>'" class='text-blue-600 hover:text-blue-900' title="Edit">
                                     <i class='fas fa-edit'></i>
                                 </button>
+                                 <button onclick="event.stopPropagation(); showDeleteModal(<?= $id_anggota ?>)" 
+            class='text-red-600 hover:text-red-900' 
+            title="Hapus Anggota">
+        <i class='fas fa-trash'></i>
+    </button>
                                 <button onclick="event.stopPropagation(); window.location.href='<?= base_url('admin/detail-anggota/' . $id_anggota) ?>'" class='text-green-600 hover:text-green-900' title="Detail">
                                     <i class='fas fa-eye'></i>
                                 </button>
@@ -237,6 +242,7 @@
                                 <button class='<?= $resetClass ?>' title="<?= $resetTitle ?>" disabled>
                                     <i class='fas fa-key'></i>
                                 </button>
+                                
                                 <?php endif; ?>
                                 <!-- Ganti tombol print dengan tombol nonaktifkan -->
 <button onclick="event.stopPropagation(); toggleMemberStatus(<?= $id_anggota ?>, '<?= htmlspecialchars($nama) ?>', '<?= $status ?>')" 
@@ -352,6 +358,46 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL KONFIRMASI HAPUS ANGGOTA -->
+<div id="deleteMemberModal" class="modal">
+    <div class="modal-content max-w-lg">
+        <h3 class="text-xl font-bold text-gray-800 mb-4" id="deleteMemberTitle">Hapus Anggota</h3>
+        
+        <div id="deleteMemberContent">
+            <!-- Konten akan diisi oleh JavaScript -->
+        </div>
+
+        <div id="deleteLoading" class="hidden text-center py-8">
+            <i class="fas fa-spinner fa-spin text-2xl text-blue-600 mb-4"></i>
+            <p class="text-gray-600">Memuat data anggota...</p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-gray-200">
+            <div class="flex space-x-3">
+                <button type="button" onclick="closeModal('deleteMemberModal')" 
+                        class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
+                    Batal
+                </button>
+                <div class="flex space-x-2">
+                    <button type="button" onclick="confirmDeleteMember(false)" 
+                            class="flex-1 bg-orange-600 text-white py-2 rounded-md hover:bg-orange-700 transition-colors">
+                        Nonaktifkan
+                    </button>
+                    <button type="button" onclick="confirmDeleteMember(true)" 
+                            class="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-colors">
+                        Hapus Permanen
+                    </button>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-3">
+                <i class="fas fa-info-circle mr-1"></i>
+                <strong>Nonaktifkan:</strong> Data tetap tersimpan dan bisa dipulihkan.<br>
+                <strong>Hapus Permanen:</strong> Semua data akan dihapus selamanya.
+            </p>
+        </div>
+    </div>
+</div>
     <script>
         let currentUserId = null;
 let currentUserName = null;
@@ -450,6 +496,175 @@ function confirmResetPassword() {
     .finally(() => {
         button.innerHTML = originalText;
         button.disabled = false;
+    });
+}
+
+// Variabel global untuk delete member
+let currentDeleteMemberId = null;
+
+// Fungsi tampilkan modal hapus
+// Fungsi showDeleteModal - PERBAIKI LOGIKA SUMMARY
+function showDeleteModal(memberId) {
+    console.log('Show delete modal for member ID:', memberId);
+    currentDeleteMemberId = memberId;
+    
+    const contentDiv = document.getElementById('deleteMemberContent');
+    const loadingDiv = document.getElementById('deleteLoading');
+    
+    contentDiv.classList.add('hidden');
+    loadingDiv.classList.remove('hidden');
+    
+    // URL endpoint
+    const detailsUrl = '<?= base_url("admin/get-member-details/") ?>' + memberId;
+    
+    console.log('Fetching URL:', detailsUrl);
+    
+    fetch(detailsUrl, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest' // ✅ TAMBAHKAN HEADER INI
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data received:', data);
+        
+        loadingDiv.classList.add('hidden');
+        contentDiv.classList.remove('hidden');
+        
+        if (data.status === 'success' && data.data) {
+            const anggota = data.data.anggota;
+            const summary = data.data.summary;
+            const totalData = data.data.total_data_terkait || 0;
+            
+            // Tampilkan data
+            let summaryHtml = '';
+            
+            if (totalData > 0) {
+                let detailItems = [];
+                
+                if (summary.simpanan_pokok > 0) detailItems.push(`${summary.simpanan_pokok} simpanan pokok`);
+                if (summary.simpanan_wajib > 0) detailItems.push(`${summary.simpanan_wajib} simpanan wajib`);
+                if (summary.simpanan_sukarela > 0) detailItems.push(`${summary.simpanan_sukarela} simpanan sukarela`);
+                if (summary.pembiayaan_aktif > 0) detailItems.push(`${summary.pembiayaan_aktif} pembiayaan aktif`);
+                if (summary.pembayaran_pending > 0) detailItems.push(`${summary.pembayaran_pending} pembayaran pending`);
+                
+                summaryHtml = `
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4 mb-4">
+                        <p class="text-sm text-yellow-800 font-semibold mb-2">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            Anggota ini memiliki ${totalData} data terkait
+                        </p>
+                        <ul class="text-xs text-yellow-700 ml-5 list-disc">
+                            ${detailItems.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            contentDiv.innerHTML = `
+                ${summaryHtml}
+                <div class="mb-4">
+                    <p class="text-gray-700 mb-2">Detail Anggota:</p>
+                    <div class="bg-gray-50 p-4 rounded-md border border-gray-200">
+                        <table class="text-sm w-full">
+                            <tr>
+                                <td class="py-1 text-gray-600 font-medium w-1/3">Nama</td>
+                                <td class="py-1"><strong>${anggota.nama}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 text-gray-600 font-medium">No. Anggota</td>
+                                <td class="py-1">${anggota.nomor_anggota}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 text-gray-600 font-medium">Email</td>
+                                <td class="py-1">${anggota.email}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 text-gray-600 font-medium">Status</td>
+                                <td class="py-1">
+                                    <span class="px-2 py-1 text-xs rounded-full ${anggota.status === 'aktif' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                                        ${anggota.status}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-1 text-gray-600 font-medium">Tanggal Daftar</td>
+                                <td class="py-1">${anggota.tanggal_daftar}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            `;
+        } else {
+            contentDiv.innerHTML = `
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <p class="text-red-700">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        ${data.message || 'Gagal memuat data'}
+                    </p>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        loadingDiv.classList.add('hidden');
+        contentDiv.classList.remove('hidden');
+        contentDiv.innerHTML = `
+            <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                <p class="text-red-700 font-semibold">Error</p>
+                <p class="text-sm text-red-600">${error.message}</p>
+            </div>
+        `;
+    });
+    
+    openModal('deleteMemberModal');
+}
+
+// Fungsi konfirmasi hapus
+// Di view members.php
+function confirmDeleteMember(hardDelete = false) {
+    if (!currentDeleteMemberId) return;
+    
+    const confirmText = hardDelete ? 
+        'Apakah Anda YAKIN ingin menghapus PERMANEN?' :
+        'Apakah Anda yakin ingin menonaktifkan?';
+    
+    if (!confirm(confirmText)) return;
+    
+    // Dapatkan CSRF token dari form yang sudah ada
+    const csrfToken = document.querySelector('input[name="<?= csrf_token() ?>"]')?.value || '<?= csrf_hash() ?>';
+    
+    const formData = new FormData();
+    formData.append('member_id', currentDeleteMemberId);
+    formData.append('hard_delete', hardDelete);
+    formData.append('csrf_token', csrfToken); // Gunakan nama 'csrf_token'
+    // Atau gunakan nama default CI4:
+    formData.append('<?= csrf_token() ?>', '<?= csrf_hash() ?>');
+    
+    fetch('<?= base_url("admin/delete-anggota") ?>', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': csrfToken // Header alternatif
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('✅ ' + data.message);
+            location.reload(); // Reload halaman
+        } else {
+            alert('❌ ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('❌ Terjadi kesalahan jaringan');
     });
 }
 

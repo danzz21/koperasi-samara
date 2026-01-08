@@ -54,7 +54,7 @@ $routes->group('anggota', ['filter' => 'role:anggota'], function ($routes) {
     $routes->post('profil/update-pin', 'Profil::updatePin');
     $routes->post('profil/change-pin', 'Profil::changePin');
     $routes->post('profil/verify-pin', 'Profil::verifyPinAjax');
-    
+
     // Pinjaman jenis
     $routes->get('pin_alqordh', 'Pin_alqordh::index');
     $routes->get('pin_murobahah', 'Pin_murobahah::index');
@@ -134,6 +134,10 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('verify/(:num)', 'AdminDashboard::verify/$1');
     $routes->get('reject/(:num)', 'AdminDashboard::reject/$1');
     
+     $routes->get('get-member-details/(:num)', 'AdminDashboard::getMemberDetails/$1');
+    $routes->post('delete-anggota', 'AdminDashboard::deleteAnggota');
+    $routes->post('restore-anggota', 'AdminDashboard::restoreAnggota');
+    
     // Pembiayaan
     $routes->post('savePembiayaan', 'AdminDashboard::savePembiayaan');
     $routes->post('approvePembiayaan', 'AdminDashboard::approvePembiayaan');
@@ -182,6 +186,7 @@ $routes->get('extras/backup', 'YourController::backupDatabase');
 $routes->get('extras/audit-log', 'YourController::auditLog');
 $routes->post('extras/update-notification', 'YourController::updateNotificationSettings');
 $routes->get('extras/get-notification-settings', 'YourController::getNotificationSettings');
+
 
 // Pending Simpanan Pokok Routes
 $routes->get('admin/pending-simpanan-pokok', 'AdminDashboard::pendingSimpananPokok');
