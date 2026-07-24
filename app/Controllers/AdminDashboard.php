@@ -438,7 +438,9 @@ $data = [
         $builder = $builder->like('nama_lengkap', $search)
                            ->orLike('no_ktp', $search);
     }
-    $anggota = $builder->findAll();
+    $anggota = $builder->orderBy('tanggal_daftar', 'ASC')
+                      ->orderBy('id_anggota', 'ASC')
+                      ->findAll();
 
     // Cari relasi antara anggota dan users
     $userModel = new \App\Models\UserModel();
@@ -470,6 +472,44 @@ $data = [
          . view('dashboard_admin/members', ['anggota' => $anggota, 'search' => $search])
          . view('layouts/footer');
 }
+
+    public function editAnggota($id)
+    {
+        $anggota = $this->anggotaModel->find($id);
+
+        if (!$anggota) {
+            return redirect()->to('/admin/members')->with('error', 'Data anggota tidak ditemukan');
+        }
+
+        return view('dashboard_admin/edit_anggota', ['anggota' => $anggota]);
+    }
+
+    public function updateAnggota($id)
+    {
+        $anggota = $this->anggotaModel->find($id);
+
+        if (!$anggota) {
+            return redirect()->to('/admin/members')->with('error', 'Data anggota tidak ditemukan');
+        }
+
+        $namaLengkap = trim($this->request->getPost('nama_lengkap') ?? '');
+        if ($namaLengkap === '') {
+            return redirect()->back()->withInput()->with('error', 'Nama lengkap wajib diisi');
+        }
+
+        $data = [
+            'nama_lengkap' => $namaLengkap,
+            'no_ktp' => trim($this->request->getPost('no_ktp') ?? ''),
+            'status' => trim($this->request->getPost('status') ?? $anggota['status']),
+            'tanggal_daftar' => $this->request->getPost('tanggal_daftar') ?? $anggota['tanggal_daftar'],
+        ];
+
+        if ($this->anggotaModel->update($id, $data)) {
+            return redirect()->to('/admin/dashboard_admin/members')->with('success', 'Data anggota berhasil diperbarui');
+        }
+
+        return redirect()->back()->withInput()->with('error', 'Gagal memperbarui data anggota');
+    }
 
    public function resetPassword()
 {
@@ -1108,6 +1148,7 @@ public function toggleMemberStatus()
     $jenis = $this->request->getPost('jenis');
     $jumlah = $this->request->getPost('jumlah');
     $id_anggota = $this->request->getPost('id_anggota');
+    $tenor = $this->request->getPost('tenor');
     $tanggal = date('Y-m-d');
     $status = 'aktif';
 
@@ -1122,6 +1163,15 @@ public function toggleMemberStatus()
                 'message' => 'Jumlah simpanan harus lebih dari 0'
             ]);
         }
+
+        if (empty($tenor) || !is_numeric($tenor) || (int) $tenor <= 0) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Tenor simpanan pokok wajib diisi dengan angka bulan yang valid'
+            ]);
+        }
+
+        $tenor = (int) $tenor;
         
         // Jika "Semua Anggota"
         if ($id_anggota === 'all') {
@@ -1144,7 +1194,8 @@ public function toggleMemberStatus()
                         'id_anggota' => $currentId,
                         'jumlah' => $jumlah,
                         'tanggal' => $tanggal,
-                        'status' => 'aktif'
+                        'status' => 'aktif',
+                        'tenor' => $tenor
                     ];
                     
                     if ($model->insert($data)) {
@@ -1186,7 +1237,8 @@ public function toggleMemberStatus()
             'id_anggota' => $id_anggota,
             'jumlah' => $jumlah,
             'tanggal' => $tanggal,
-            'status' => $status
+            'status' => $status,
+            'tenor' => $tenor
         ];
         
         $result = $model->insert($data);
@@ -1398,12 +1450,22 @@ public function checkSimpananPokok($id_anggota = null)
     $total = $model->getTotalSimpananPokok($id_anggota);
     $isLunas = $model->isLunas($id_anggota);
     $sisa = $model->getSisaSimpananPokok($id_anggota);
+    $count = $model->where('id_anggota', $id_anggota)
+                   ->where('jumlah >', 0)
+                   ->countAllResults();
+    $lastRecord = $model->where('id_anggota', $id_anggota)
+                        ->where('jumlah >', 0)
+                        ->orderBy('tanggal', 'DESC')
+                        ->first();
+    $existingTenor = $lastRecord['tenor'] ?? null;
     
     return $this->response->setJSON([
         'success' => true,
         'total' => $total,
         'isLunas' => $isLunas,
         'sisa' => $sisa,
+        'count' => $count,
+        'existingTenor' => $existingTenor,
         'max_limit' => 500000
     ]);
 }

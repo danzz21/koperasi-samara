@@ -189,7 +189,7 @@
             <table class="w-full">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No. KTP</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -199,7 +199,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200" id="anggotaTableBody">
                     <?php if (!isset($search) || $search === ''): ?>
-                        <?php foreach ($anggota as $data): 
+                        <?php $nomor = 1; foreach ($anggota as $data): 
                             $id_anggota = $data['id_anggota'];
                             $id_user = $data['id_user'] ?? null;
                             $nama = ucwords($data['nama_lengkap']);
@@ -217,13 +217,21 @@
                             $resetTitle = $canReset ? 'Reset Password' : 'User tidak ditemukan';
                         ?>
                         <tr class='table-row' onclick="window.location.href='<?= $urlDetail ?>'">
-                            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'><?= $id_anggota ?></td>
+                            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'><?= $nomor++ ?></td>
                             <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'><?= $nama ?></td>
                             <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'><?= $ktp ?></td>
                             <td class='px-6 py-4 whitespace-nowrap'><?= $badge ?></td>
                             <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'><?= $tanggal ?></td>
                             <td class='px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2'>
-                                <button onclick="event.stopPropagation(); window.location.href='<?= base_url('admin/edit-anggota/' . $id_anggota) ?>'" class='text-blue-600 hover:text-blue-900' title="Edit">
+                                <button type="button"
+                                    onclick="event.stopPropagation(); openEditMemberModal(this)"
+                                    class='text-blue-600 hover:text-blue-900'
+                                    data-id="<?= $id_anggota ?>"
+                                    data-name="<?= htmlspecialchars($data['nama_lengkap'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-ktp="<?= htmlspecialchars($data['no_ktp'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-status="<?= htmlspecialchars($status, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-tanggal="<?= htmlspecialchars($data['tanggal_daftar'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                    title="Edit">
                                     <i class='fas fa-edit'></i>
                                 </button>
                                  <button onclick="event.stopPropagation(); showDeleteModal(<?= $id_anggota ?>)" 
@@ -314,6 +322,50 @@
 
             <div class="flex space-x-3 pt-4">
                 <button type="button" onclick="closeModal('memberModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
+                    Batal
+                </button>
+                <button type="submit" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition-colors">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL EDIT ANGGOTA -->
+<div id="editMemberModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
+    <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <h3 class="text-xl font-bold text-gray-800 mb-4" id="editMemberTitle">Edit Data Anggota</h3>
+        <form id="editMemberForm" method="post" class="space-y-4">
+            <?= csrf_field() ?>
+            <input type="hidden" name="id_anggota" id="editMemberId" />
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap *</label>
+                <input type="text" name="nama_lengkap" id="editNamaLengkap" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">No. KTP *</label>
+                <input type="text" name="no_ktp" id="editNoKtp" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select name="status" id="editStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <option value="Aktif">Aktif</option>
+                    <option value="Menunggu Verifikasi">Menunggu Verifikasi</option>
+                    <option value="Nonaktif">Nonaktif</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Daftar</label>
+                <input type="date" name="tanggal_daftar" id="editTanggalDaftar" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            </div>
+
+            <div class="flex space-x-3 pt-4">
+                <button type="button" onclick="closeModal('editMemberModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
                     Batal
                 </button>
                 <button type="submit" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition-colors">
@@ -761,7 +813,43 @@ function confirmToggleStatus() {
         button.disabled = false;
     });
 }
- function openModal(id) {
+function openEditMemberModal(button) {
+            const form = document.getElementById('editMemberForm');
+            if (!form) return;
+
+            const id = button.getAttribute('data-id') || '';
+            const name = button.getAttribute('data-name') || '';
+            const ktp = button.getAttribute('data-ktp') || '';
+            const status = button.getAttribute('data-status') || '';
+            const tanggal = button.getAttribute('data-tanggal') || '';
+
+            document.getElementById('editMemberId').value = id;
+            document.getElementById('editNamaLengkap').value = name;
+            document.getElementById('editNoKtp').value = ktp;
+            document.getElementById('editStatus').value = status;
+            document.getElementById('editTanggalDaftar').value = tanggal;
+            document.getElementById('editMemberTitle').textContent = 'Edit Data Anggota #' + id;
+            form.action = '<?= base_url('admin/update-anggota') ?>/' + id;
+
+            openModal('editMemberModal');
+        }
+
+        function openEditMemberModalFromData(data) {
+            const form = document.getElementById('editMemberForm');
+            if (!form) return;
+
+            document.getElementById('editMemberId').value = data.id || '';
+            document.getElementById('editNamaLengkap').value = data.name || '';
+            document.getElementById('editNoKtp').value = data.ktp || '';
+            document.getElementById('editStatus').value = data.status || '';
+            document.getElementById('editTanggalDaftar').value = data.tanggal || '';
+            document.getElementById('editMemberTitle').textContent = 'Edit Data Anggota #' + (data.id || '');
+            form.action = '<?= base_url('admin/update-anggota') ?>/' + (data.id || '');
+
+            openModal('editMemberModal');
+        }
+
+        function openModal(id) {
             document.getElementById(id).classList.remove("hidden");
             document.getElementById(id).classList.add("flex");
         }
@@ -770,6 +858,51 @@ function confirmToggleStatus() {
             document.getElementById(id).classList.add("hidden");
             document.getElementById(id).classList.remove("flex");
         }
+
+        document.getElementById('editMemberForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
+    submitBtn.disabled = true;
+
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(async res => {
+        const text = await res.text();
+        if (res.redirected) {
+            window.location.href = res.url;
+            return null;
+        }
+        return text;
+    })
+    .then(data => {
+        if (data === null) return;
+        if (data.includes('success') || data.includes('Data anggota berhasil diperbarui')) {
+            alert('Data anggota berhasil diperbarui!');
+            closeModal('editMemberModal');
+            location.reload();
+        } else {
+            alert('Gagal menyimpan perubahan.');
+        }
+    })
+    .catch(err => {
+        console.error('Edit error:', err);
+        alert('Terjadi kesalahan jaringan.');
+    })
+    .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+});
 
         document.getElementById('formMember').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -852,7 +985,7 @@ function confirmToggleStatus() {
                                     <td class='px-6 py-4 whitespace-nowrap'>${badge}</td>
                                     <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>${item.tanggal_daftar}</td>
                                     <td class='px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2'>
-                                        <button onclick="event.stopPropagation(); window.location.href='/admin/edit-anggota/${anggotaId}'" class='text-blue-600 hover:text-blue-900' title="Edit">
+                                        <button type="button" onclick="event.stopPropagation(); openEditMemberModalFromData({id:${anggotaId}, name:'${item.nama_lengkap.replace(/'/g, "\\'")}', ktp:'${(item.no_ktp || '').replace(/'/g, "\\'")}', status:'${(item.status || '').replace(/'/g, "\\'")}', tanggal:'${(item.tanggal_daftar || '').replace(/'/g, "\\'")}'});" class='text-blue-600 hover:text-blue-900' title="Edit">
                                             <i class='fas fa-edit'></i>
                                         </button>
                                         <button onclick="event.stopPropagation(); window.location.href='${item.urlDetail}'" class='text-green-600 hover:text-green-900' title="Detail">

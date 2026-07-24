@@ -119,6 +119,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('dashboard_admin/extras', 'AdminDashboard::extras');
     $routes->post('dashboard_admin/members/save', 'AdminDashboard::saveMember');
     $routes->get('detail-anggota/(:num)', 'AdminDashboard::detailAnggota/$1');
+    $routes->get('edit-anggota/(:num)', 'AdminDashboard::editAnggota/$1');
+    $routes->post('update-anggota/(:num)', 'AdminDashboard::updateAnggota/$1');
 
     // ✅ PERBAIKI ROUTES MANAJEMEN ANGSURAN - GUNAKAN DASHBOARD_ADMIN
     $routes->get('dashboard_admin/installments', 'AdminDashboard::installments');
@@ -128,6 +130,9 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     // Simpanan
     $routes->get('getSimpananList', 'AdminDashboard::getSimpananList');
     $routes->post('inputSimpanan', 'AdminDashboard::inputSimpanan');
+    $routes->get('checkSimpananPokok', 'AdminDashboard::checkSimpananPokok');
+    $routes->get('checkSimpananPokok/(:any)', 'AdminDashboard::checkSimpananPokok/$1');
+    $routes->get('search-anggota', 'AdminDashboard::searchAnggota');
     
     // Members
     $routes->get('pending-members', 'AdminDashboard::pendingMembers');

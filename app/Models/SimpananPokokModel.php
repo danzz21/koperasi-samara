@@ -7,7 +7,7 @@ class SimpananPokokModel extends Model
 {
     protected $table = 'simpanan_pokok';
     protected $primaryKey = 'id_simpanan_pokok';
-    protected $allowedFields = ['id_anggota', 'jumlah', 'tanggal', 'status'];
+    protected $allowedFields = ['id_anggota', 'jumlah', 'tanggal', 'status', 'tenor'];
     
     public function total()
     {

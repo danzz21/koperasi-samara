@@ -11,6 +11,7 @@
     <h1 class="text-xl font-bold mb-4">Edit Data Anggota</h1>
 
     <form action="<?= base_url('admin/update-anggota/'.$anggota['id_anggota']) ?>" method="post" class="space-y-4">
+        <?= csrf_field() ?>
         <div>
             <label class="block text-sm font-medium">Nama Lengkap</label>
             <input type="text" name="nama_lengkap" value="<?= esc($anggota['nama_lengkap']) ?>"
@@ -26,9 +27,10 @@
         <div>
             <label class="block text-sm font-medium">Status</label>
             <select name="status" class="w-full border rounded px-3 py-2">
-                <option value="Aktif" <?= $anggota['status'] == 'Aktif' ? 'selected' : '' ?>>Aktif</option>
-                <option value="Menunggu Verifikasi" <?= $anggota['status'] == 'Menunggu Verifikasi' ? 'selected' : '' ?>>Menunggu Verifikasi</option>
-                <option value="Nonaktif" <?= $anggota['status'] == 'Nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+                <?php $selectedStatus = strtolower(trim($anggota['status'] ?? '')); ?>
+                <option value="Aktif" <?= $selectedStatus === 'aktif' || $selectedStatus === 'active' ? 'selected' : '' ?>>Aktif</option>
+                <option value="Menunggu Verifikasi" <?= $selectedStatus === 'menunggu verifikasi' || $selectedStatus === 'pending' ? 'selected' : '' ?>>Menunggu Verifikasi</option>
+                <option value="Nonaktif" <?= $selectedStatus === 'nonaktif' || $selectedStatus === 'inactive' ? 'selected' : '' ?>>Nonaktif</option>
             </select>
         </div>
 

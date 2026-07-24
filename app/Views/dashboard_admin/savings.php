@@ -6,10 +6,115 @@
         <title>Simpanan</title>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <style>
+    /* Tab Navigation Styles */
+    .savings-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        background: white;
+        color: #6b7280;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .savings-tab-btn:hover {
+        border-color: #10b981;
+        color: #10b981;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    }
+
+    .savings-tab-btn.active {
+        border-color: #10b981;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Stat Card Styles */
+    .savings-stat-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .savings-stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-stat.hidden {
+        display: none !important;
+    }
+
+    /* Jenis Selection Buttons in Modal */
+    .jenis-select-btn {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .jenis-select-btn div {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .jenis-select-btn.active div {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .jenis-select-btn i {
+        display: block;
+    }
+
+    /* Table row hover effect */
+    tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+    tbody tr:hover {
+        background-color: #f9fafb;
+    }
+
+    /* Jenis badge styling */
+    .jenis-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .jenis-badge.pokok {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .jenis-badge.wajib {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+
+    .jenis-badge.sukarela {
+        background: #f3e8ff;
+        color: #7e22ce;
+    }
+
     .action-buttons {
         display: flex;
         gap: 8px;
-        justify-content: flex-end;
+        justify-content: center;
     }
     
     .btn-delete {
@@ -21,19 +126,39 @@
         cursor: pointer;
         font-size: 12px;
         transition: all 0.3s;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 4px;
+        font-weight: 600;
     }
     
     .btn-delete:hover {
         background: #dc2626;
         transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
     }
     
     .btn-delete:disabled {
         background: #9ca3af;
         cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Empty state styling */
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .empty-state i {
+        font-size: 48px;
+        color: #d1d5db;
+        margin-bottom: 16px;
+    }
+
+    .empty-state p {
+        color: #6b7280;
+        margin-bottom: 8px;
     }
 </style>
     </head>
@@ -43,150 +168,327 @@
             <p class="text-gray-600">Kelola simpanan anggota koperasi</p>
         </div>
 
+        <!-- Tab Navigation -->
+        <div class="flex gap-2 mb-6 flex-wrap">
+            <button class="savings-tab-btn active" data-tab="pokok" onclick="switchTab('pokok')">
+                <i class="fas fa-piggy-bank mr-2"></i>Pokok
+            </button>
+            <button class="savings-tab-btn" data-tab="wajib" onclick="switchTab('wajib')">
+                <i class="fas fa-receipt mr-2"></i>Wajib
+            </button>
+            <button class="savings-tab-btn" data-tab="sukarela" onclick="switchTab('sukarela')">
+                <i class="fas fa-heart mr-2"></i>Sukarela
+            </button>
+            <button class="savings-tab-btn" data-tab="all" onclick="switchTab('all')">
+                <i class="fas fa-list mr-2"></i>Semua
+            </button>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-            <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">Simpanan Pokok</h3>
-                <p class="text-2xl font-bold text-emerald-600">Rp <?= number_format($totalPokok, 0, ',', '.') ?></p>
-                <p class="text-sm text-gray-600">Total dari <?= $anggotaPokok ?> anggota</p>
+            <!-- Card Simpanan Pokok -->
+            <div class="savings-stat-card bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-md border-l-4 border-emerald-600 tab-stat" data-tab="pokok">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <p class="text-sm text-emerald-600 font-semibold">Simpanan Pokok</p>
+                        <p class="text-2xl font-bold text-emerald-700">Rp <?= number_format($totalPokok, 0, ',', '.') ?></p>
+                    </div>
+                    <i class="fas fa-piggy-bank text-3xl text-emerald-300"></i>
+                </div>
+                <p class="text-xs text-emerald-600">Total dari <?= $anggotaPokok ?> anggota</p>
+                <div class="mt-2 pt-2 border-t border-emerald-200">
+                    <span class="text-xs font-semibold text-emerald-700">Lunas: <?= $anggotaLunas ?? 0 ?> anggota</span>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">Anggota Lunas</h3>
-                <p class="text-2xl font-bold text-green-600"><?= $anggotaLunas ?? 0 ?></p>
-                <p class="text-sm text-gray-600">Simpanan Pokok Lunas</p>
+
+            <!-- Card Simpanan Wajib -->
+            <div class="savings-stat-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-md border-l-4 border-blue-600 tab-stat" data-tab="wajib">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <p class="text-sm text-blue-600 font-semibold">Simpanan Wajib</p>
+                        <p class="text-2xl font-bold text-blue-700">Rp <?= number_format($totalWajib, 0, ',', '.') ?></p>
+                    </div>
+                    <i class="fas fa-receipt text-3xl text-blue-300"></i>
+                </div>
+                <p class="text-xs text-blue-600">Bulan ini</p>
+                <div class="mt-2 pt-2 border-t border-blue-200">
+                    <span class="text-xs font-semibold text-blue-700">Rutin setiap bulan</span>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">Simpanan Wajib</h3>
-                <p class="text-2xl font-bold text-blue-600">Rp <?= number_format($totalWajib, 0, ',', '.') ?></p>
-                <p class="text-sm text-gray-600">Bulan ini</p>
+
+            <!-- Card Simpanan Sukarela -->
+            <div class="savings-stat-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl shadow-md border-l-4 border-purple-600 tab-stat" data-tab="sukarela">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <p class="text-sm text-purple-600 font-semibold">Simpanan Sukarela</p>
+                        <p class="text-2xl font-bold text-purple-700">Rp <?= number_format($totalSukarela, 0, ',', '.') ?></p>
+                    </div>
+                    <i class="fas fa-heart text-3xl text-purple-300"></i>
+                </div>
+                <p class="text-xs text-purple-600">Bulan ini</p>
+                <div class="mt-2 pt-2 border-t border-purple-200">
+                    <span class="text-xs font-semibold text-purple-700">Opsional & fleksibel</span>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">Simpanan Sukarela</h3>
-                <p class="text-2xl font-bold text-purple-600">Rp <?= number_format($totalSukarela, 0, ',', '.') ?></p>
-                <p class="text-sm text-gray-600">Bulan ini</p>
+
+            <!-- Card Total -->
+            <div class="savings-stat-card bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl shadow-md border-l-4 border-gray-600 tab-stat" data-tab="all">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <p class="text-sm text-gray-600 font-semibold">Total Semua Simpanan</p>
+                        <p class="text-2xl font-bold text-gray-700">Rp <?= number_format($totalPokok + $totalWajib + $totalSukarela, 0, ',', '.') ?></p>
+                    </div>
+                    <i class="fas fa-calculator text-3xl text-gray-300"></i>
+                </div>
+                <p class="text-xs text-gray-600">Akumulasi keseluruhan</p>
+                <div class="mt-2 pt-2 border-t border-gray-200">
+                    <span class="text-xs font-semibold text-gray-700">3 jenis simpanan</span>
+                </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-md">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <div class="p-6 border-b border-gray-200">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xl font-bold text-gray-800">Transaksi Simpanan</h3>
-                    <button onclick="openModal('savingsModal')" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">
-                        <i class="fas fa-plus mr-2"></i>Input Simpanan
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Transaksi Simpanan</h3>
+                        <p class="text-sm text-gray-500 mt-1" id="tabTitle">Data simpanan pokok</p>
+                    </div>
+                    <button onclick="openModal('savingsModal')" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2 shadow-md">
+                        <i class="fas fa-plus"></i>Input Simpanan
                     </button>
                 </div>
                 
-                <!-- Filter Section -->
-                <div class="mt-4 flex gap-4">
-                    <div class="w-1/3">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Filter Jenis</label>
-                        <select id="filterJenis" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                            <option value="all">Semua Jenis</option>
-                            <option value="pokok">Pokok</option>
-                            <option value="wajib">Wajib</option>
-                            <option value="sukarela">Sukarela</option>
-                        </select>
+                <!-- Filter Section - Enhanced -->
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-filter mr-1"></i>Cari Anggota
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    id="filterSearchAnggota" 
+                                    type="text" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" 
+                                    placeholder="Nama atau nomor KTP..."
+                                >
+                                <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-list mr-1"></i>Pilih Anggota
+                            </label>
+                            <select id="filterAnggota" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                                <option value="all">Semua Anggota</option>
+                                <?php foreach($anggotaList ?? [] as $anggota): ?>
+                                    <option value="<?= $anggota['id_anggota'] ?>"><?= $anggota['nama_lengkap'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div>
+                            <button onclick="loadSimpanan()" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                                <i class="fas fa-sync"></i>Filter
+                            </button>
+                        </div>
                     </div>
-                    <div class="w-1/3">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Filter Anggota</label>
-                        <select id="filterAnggota" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                            <option value="all">Semua Anggota</option>
-                            <?php foreach($anggotaList ?? [] as $anggota): ?>
-                                <option value="<?= $anggota['id_anggota'] ?>"><?= $anggota['nama_lengkap'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <button onclick="loadSimpanan()" class="mt-6 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                        Filter
-                    </button>
                 </div>
             </div>
+            
+            <!-- Table with responsive scroll -->
             <div class="overflow-x-auto">
                <table class="w-full">
-    <thead class="bg-gray-50">
-        <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Anggota</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-        </tr>
-    </thead>
-    <tbody class="bg-white divide-y divide-gray-200" id="simpananTableBody">
-        <!-- Data akan diisi oleh JavaScript -->
-        <tr>
-            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
-                Loading data...
-            </td>
-        </tr>
-    </tbody>
-</table>
+                    <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                        <tr class="border-b border-gray-200">
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                <i class="fas fa-calendar-alt mr-2"></i>Tanggal
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                <i class="fas fa-user mr-2"></i>Nama Anggota
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                <i class="fas fa-tag mr-2"></i>Jenis
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                <i class="fas fa-money-bill mr-2"></i>Jumlah
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                <i class="fas fa-check-circle mr-2"></i>Status
+                            </th>
+                            <th class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                <i class="fas fa-cog mr-2"></i>Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="simpananTableBody">
+                        <!-- Data akan diisi oleh JavaScript -->
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>Loading data...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <!-- MODAL INPUT SIMPANAN -->
         <div id="savingsModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
-        <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Input Simpanan</h3>
+        <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full mx-4 overflow-y-auto max-h-[90vh]">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Input Simpanan</h3>
+                <button onclick="closeModal('savingsModal')" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Visual Jenis Selection -->
+            <div class="mb-6 grid grid-cols-3 gap-2" id="jenisVisualGroup">
+                <button type="button" class="jenis-select-btn group" data-jenis="pokok" onclick="selectJenis('pokok')">
+                    <div class="p-3 rounded-lg border-2 border-gray-200 group-hover:border-emerald-500 transition-all cursor-pointer">
+                        <i class="fas fa-piggy-bank text-2xl text-emerald-600 mb-2 block"></i>
+                        <span class="text-xs font-semibold text-gray-700">Pokok</span>
+                    </div>
+                </button>
+                <button type="button" class="jenis-select-btn group" data-jenis="wajib" onclick="selectJenis('wajib')">
+                    <div class="p-3 rounded-lg border-2 border-gray-200 group-hover:border-blue-500 transition-all cursor-pointer">
+                        <i class="fas fa-receipt text-2xl text-blue-600 mb-2 block"></i>
+                        <span class="text-xs font-semibold text-gray-700">Wajib</span>
+                    </div>
+                </button>
+                <button type="button" class="jenis-select-btn group" data-jenis="sukarela" onclick="selectJenis('sukarela')">
+                    <div class="p-3 rounded-lg border-2 border-gray-200 group-hover:border-purple-500 transition-all cursor-pointer">
+                        <i class="fas fa-heart text-2xl text-purple-600 mb-2 block"></i>
+                        <span class="text-xs font-semibold text-gray-700">Sukarela</span>
+                    </div>
+                </button>
+            </div>
+
             <form id="formSimpanan" class="space-y-4">
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
 
-            <!-- Jenis Simpanan -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Simpanan</label>
-                <select id="jenisSelect" name="jenis" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
-                <option value="">Pilih Jenis</option>
-                <option value="pokok">Simpanan Pokok</option>
-                <option value="wajib">Simpanan Wajib</option>
-                <option value="sukarela">Simpanan Sukarela</option>
-                </select>
-            </div>
+            <!-- Jenis Simpanan (Hidden) -->
+            <input type="hidden" id="jenisSelect" name="jenis" value="">
 
             <!-- Tenor (khusus pokok) -->
             <div id="tenorGroup" class="hidden">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Tenor (bulan)</label>
-                <select id="tenorSelect" name="tenor" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                <option value="">Pilih Tenor</option>
-                <option value="1">1 Bulan</option>
-                <option value="2">2 Bulan</option>
-                <option value="5">5 Bulan</option>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-hourglass-half mr-1"></i>Tenor (bulan)
+                </label>
+                <select id="tenorSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required>
+                    <option value="">Pilih tenor</option>
+                    <?php for ($i = 1; $i <= 12; $i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?> Bulan</option>
+                    <?php endfor; ?>
                 </select>
+                <input type="hidden" id="tenorHidden" name="tenor" value="">
+                <p class="text-xs text-gray-500 mt-2"><i class="fas fa-info-circle mr-1"></i>Pilih tenor simpanan pokok dari 1 sampai 12 bulan.</p>
             </div>
 
             <!-- Anggota -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Anggota</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-users mr-1"></i>Anggota
+                </label>
                 <div class="relative">
-                <input id="anggotaSearch" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Cari nama anggota..." autocomplete="off">
-                <div id="anggotaResults" class="absolute z-10 bg-white border border-gray-300 rounded-md w-full mt-1 max-h-60 overflow-y-auto hidden"></div>
-                <button type="button" id="semuaAnggotaBtn" class="absolute right-0 top-0 mt-2 mr-2 bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs border border-blue-300 hover:bg-blue-200 hidden">Semua Anggota</button>
+                <input id="anggotaSearch" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Cari nama anggota..." autocomplete="off">
+                <div id="anggotaResults" class="absolute z-10 bg-white border border-gray-300 rounded-md w-full mt-1 max-h-60 overflow-y-auto hidden shadow-lg"></div>
+                <button type="button" id="semuaAnggotaBtn" class="absolute right-0 top-0 mt-2 mr-2 bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs border border-blue-300 hover:bg-blue-200 transition-colors hidden font-semibold">Semua Anggota</button>
                 <input type="hidden" id="anggotaSelect" name="id_anggota">
                 </div>
-                <div id="anggotaInfo" class="mt-1 text-xs text-gray-500 hidden"></div>
+                <div id="anggotaInfo" class="mt-2 text-xs text-gray-500 hidden flex items-center gap-1">
+                    <i class="fas fa-check-circle text-green-600"></i>
+                    <span id="anggotaInfoText"></span>
+                </div>
             </div>
 
             <!-- Jumlah -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah (Rp)</label>
-                <input id="jumlahInput" name="jumlah" type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md" min="1" required>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-money-bill mr-1"></i>Jumlah (Rp)
+                </label>
+                <input id="jumlahInput" name="jumlah" type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" min="1" placeholder="0" required>
             </div>
 
             <!-- Info Status Pokok -->
-            <div id="pokokInfo" class="hidden">
+            <div id="pokokInfo" class="hidden rounded-md p-3 text-sm">
                 <div id="pokokDetail"></div>
             </div>
 
-            <div class="flex space-x-3 pt-4">
-                <button type="button" onclick="closeModal('savingsModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600">Batal</button>
-                <button type="submit" id="simpanBtn" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700">Simpan</button>
+            <div class="flex space-x-3 pt-4 border-t border-gray-200">
+                <button type="button" onclick="closeModal('savingsModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors font-semibold">Batal</button>
+                <button type="submit" id="simpanBtn" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Simpan</button>
             </div>
             </form>
         </div>
         </div>
 
     <script>
-    // Global variables
+    // Global state for current tab
+    let currentTab = 'pokok';
     let isSubmitting = false;
+
+    // Tab switching function
+    function switchTab(tab) {
+        currentTab = tab;
+        
+        // Update active button
+        document.querySelectorAll('.savings-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+
+        // Update stat cards visibility
+        document.querySelectorAll('.tab-stat').forEach(card => {
+            if (card.dataset.tab === 'all' || card.dataset.tab === tab) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Update tab title
+        const titles = {
+            'pokok': 'Data simpanan pokok',
+            'wajib': 'Data simpanan wajib',
+            'sukarela': 'Data simpanan sukarela',
+            'all': 'Semua data simpanan'
+        };
+        document.getElementById('tabTitle').textContent = titles[tab];
+
+        // Update filter and reload data
+        if (tab === 'all') {
+            if (document.getElementById('filterJenis')) {
+                document.getElementById('filterJenis').value = 'all';
+            } else {
+                addHiddenFilterJenis('all');
+            }
+        } else {
+            if (document.getElementById('filterJenis')) {
+                document.getElementById('filterJenis').value = tab;
+            } else {
+                addHiddenFilterJenis(tab);
+            }
+        }
+        
+        // Reset anggota filter
+        document.getElementById('filterAnggota').value = 'all';
+        loadSimpanan();
+    }
+
+    // Add hidden filter jenis element (keep it hidden but functional)
+    function addHiddenFilterJenis(value = 'pokok') {
+        if (!document.getElementById('filterJenis')) {
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.id = 'filterJenis';
+            hidden.value = value;
+            document.body.appendChild(hidden);
+        }
+    }
+
+    // Global variables
+    // let isSubmitting = false; // Already defined above
 
     // Modal functions
     function openModal(id) {
@@ -210,6 +512,23 @@
     function resetForm() {
         const form = document.getElementById('formSimpanan');
         if (form) form.reset();
+        
+        // Reset visual jenis buttons
+        document.querySelectorAll('.jenis-select-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.querySelector('div').className = 'p-3 rounded-lg border-2 border-gray-200 group-hover:border-gray-500 transition-all cursor-pointer';
+        });
+        
+        const tenorInput = document.getElementById('tenorSelect');
+        const tenorHidden = document.getElementById('tenorHidden');
+        if (tenorInput) {
+            tenorInput.required = false;
+            tenorInput.value = '';
+            tenorInput.disabled = false;
+        }
+        if (tenorHidden) {
+            tenorHidden.value = '';
+        }
         
         const anggotaSelect = document.getElementById('anggotaSelect');
         if (anggotaSelect) anggotaSelect.value = '';
@@ -240,6 +559,9 @@
             anggotaInfo.innerHTML = '';
         }
         
+        const jenisSelect = document.getElementById('jenisSelect');
+        if (jenisSelect) jenisSelect.value = '';
+        
         resetPokokInfo();
         
         // Reset submit state
@@ -249,6 +571,45 @@
             simpanBtn.disabled = false;
             simpanBtn.innerHTML = 'Simpan';
         }
+    }
+
+    // Function untuk select jenis simpanan
+    function selectJenis(jenis) {
+        console.log('selectJenis called with:', jenis);
+        
+        // Update hidden input
+        document.getElementById('jenisSelect').value = jenis;
+        
+        // Update visual buttons
+        document.querySelectorAll('.jenis-select-btn').forEach(btn => {
+            const div = btn.querySelector('div');
+            if (btn.dataset.jenis === jenis) {
+                btn.classList.add('active');
+                div.classList.remove('border-gray-200');
+                div.classList.add('border-2', 'border-' + (jenis === 'pokok' ? 'emerald' : jenis === 'wajib' ? 'blue' : 'purple') + '-500', 'bg-' + (jenis === 'pokok' ? 'emerald' : jenis === 'wajib' ? 'blue' : 'purple') + '-50');
+                
+                // Dynamic border color update for better styling
+                if (jenis === 'pokok') {
+                    div.style.borderColor = '#10b981';
+                    div.style.backgroundColor = '#f0fdf4';
+                } else if (jenis === 'wajib') {
+                    div.style.borderColor = '#3b82f6';
+                    div.style.backgroundColor = '#eff6ff';
+                } else {
+                    div.style.borderColor = '#a855f7';
+                    div.style.backgroundColor = '#faf5ff';
+                }
+            } else {
+                btn.classList.remove('active');
+                div.className = 'p-3 rounded-lg border-2 border-gray-200 group-hover:border-gray-500 transition-all cursor-pointer';
+                div.style.borderColor = '';
+                div.style.backgroundColor = '';
+            }
+        });
+        
+        // Trigger change event
+        toggleTenorField();
+        checkSimpananPokok();
     }
 
     function resetPokokInfo() {
@@ -285,6 +646,7 @@
                 .then(data => {
                     const pokokInfo = document.getElementById('pokokInfo');
                     const pokokDetail = document.getElementById('pokokDetail');
+                    const tenorSelect = document.getElementById('tenorSelect');
                     
                     if (data.success) {
                         pokokInfo.classList.remove('hidden');
@@ -304,12 +666,33 @@
                         } else {
                             // Belum lunas, tampilkan sisa
                             pokokInfo.className = 'bg-blue-50 border border-blue-200 rounded-md p-3';
+                            const nextInstallment = data.count + 1;
+                            const existingTenor = data.existingTenor ? parseInt(data.existingTenor) : null;
+                            const tenorSelect = document.getElementById('tenorSelect');
+
+                            const tenorHidden = document.getElementById('tenorHidden');
+                            if (tenorSelect) {
+                                tenorSelect.disabled = false;
+                                tenorSelect.value = '';
+                                if (existingTenor) {
+                                    tenorSelect.value = existingTenor;
+                                    tenorSelect.disabled = true;
+                                }
+                                if (tenorHidden) {
+                                    tenorHidden.value = existingTenor ? String(existingTenor) : '';
+                                }
+                            }
+
+                            const tenorText = existingTenor ? ` dari tenor ${existingTenor} bulan` : '';
+                            const tenorHint = existingTenor ? '<br>• Tenor akan dikunci karena sudah dipilih sebelumnya untuk anggota ini.' : '';
                             pokokDetail.innerHTML = `
                                 <div class="text-blue-700">
                                     <strong>Informasi Simpanan Pokok:</strong><br>
                                     • Total simpanan: ${formatRupiah(data.total)}<br>
                                     • Batas maksimal: ${formatRupiah(data.max_limit)}<br>
-                                    • <strong>Sisa yang bisa diinput: ${formatRupiah(data.sisa)}</strong>
+                                    • <strong>Sisa yang bisa diinput: ${formatRupiah(data.sisa)}</strong><br>
+                                    • <strong>Simpanan berikutnya: ke-${nextInstallment}${tenorText}</strong>
+                                    ${tenorHint}
                                 </div>
                             `;
                             simpanBtn.disabled = false;
@@ -408,6 +791,37 @@
             document.getElementById('simpanBtn').disabled = false;
             document.getElementById('jumlahInput').disabled = false;
             document.getElementById('jumlahInput').removeAttribute('max');
+        }
+    }
+
+    function toggleTenorField() {
+        const jenisSelect = document.getElementById('jenisSelect');
+        const tenorGroup = document.getElementById('tenorGroup');
+        const tenorInput = document.getElementById('tenorSelect');
+        const tenorHidden = document.getElementById('tenorHidden');
+        const semuaBtn = document.getElementById('semuaAnggotaBtn');
+        const anggotaSelected = document.getElementById('anggotaSelect')?.value;
+
+        if (!jenisSelect || !tenorGroup || !tenorInput) return;
+
+        if (jenisSelect.value === 'pokok' && (anggotaSelected || anggotaSelected === 'all')) {
+            tenorGroup.classList.remove('hidden');
+            tenorInput.required = true;
+            if (tenorHidden) tenorHidden.value = tenorInput.value || '';
+            if (semuaBtn) semuaBtn.classList.remove('hidden');
+        } else {
+            tenorGroup.classList.add('hidden');
+            tenorInput.required = false;
+            tenorInput.value = '';
+            tenorInput.disabled = false;
+            if (tenorHidden) tenorHidden.value = '';
+            if (semuaBtn) {
+                if (jenisSelect.value === 'wajib') {
+                    semuaBtn.classList.remove('hidden');
+                } else {
+                    semuaBtn.classList.add('hidden');
+                }
+            }
         }
     }
 
@@ -534,6 +948,7 @@
                                 anggotaInfo.classList.remove('hidden');
                             }
                             
+                            toggleTenorField();
                             checkSimpananPokok();
                         });
 
@@ -642,104 +1057,124 @@
     }
 
     // Load data simpanan
-   // Load data simpanan
-function loadSimpanan() {
-    const jenis = document.getElementById('filterJenis')?.value || 'all';
-    const anggota = document.getElementById('filterAnggota')?.value || 'all';
-    
-    const tbody = document.getElementById('simpananTableBody');
-    if (!tbody) return;
+    // Load data simpanan
+    function loadSimpanan() {
+        const jenis = document.getElementById('filterJenis')?.value || currentTab || 'all';
+        const anggota = document.getElementById('filterAnggota')?.value || 'all';
+        
+        const tbody = document.getElementById('simpananTableBody');
+        if (!tbody) return;
 
-    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">Loading...</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr>';
 
-    let url = `<?= base_url('admin/getSimpananList') ?>?jenis=${jenis}`;
-    if (anggota && anggota !== 'all') {
-        url += `&id_anggota=${anggota}`;
-    }
+        let url = `<?= base_url('admin/getSimpananList') ?>?jenis=${jenis}`;
+        if (anggota && anggota !== 'all') {
+            url += `&id_anggota=${anggota}`;
+        }
 
-    fetch(url)
-        .then(res => {
-            if (!res.ok) throw new Error('Network error');
-            return res.json();
-        })
-        .then(data => {
-            if (!data || data.length === 0) {
+        fetch(url)
+            .then(res => {
+                if (!res.ok) throw new Error('Network error');
+                return res.json();
+            })
+            .then(data => {
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center">
+                                <div class="empty-state">
+                                    <i class="fas fa-inbox"></i>
+                                    <p class="text-sm font-medium">Tidak ada data simpanan</p>
+                                    <p class="text-xs">Mulai input simpanan dengan menekan tombol "Input Simpanan"</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                data.forEach(row => {
+                    // Status styling dengan icon
+                    let statusClass = 'bg-gray-100 text-gray-800';
+                    let statusIcon = 'fas fa-circle';
+                    let statusText = row.status || 'Aktif';
+                    
+                    if (row.status === 'lunas') {
+                        statusClass = 'bg-green-100 text-green-800';
+                        statusIcon = 'fas fa-check-circle';
+                        statusText = 'LUNAS';
+                    } else if (row.status === 'aktif') {
+                        statusClass = 'bg-blue-100 text-blue-800';
+                        statusIcon = 'fas fa-play-circle';
+                        statusText = 'Aktif';
+                    } else if (row.status === 'pending') {
+                        statusClass = 'bg-yellow-100 text-yellow-800';
+                        statusIcon = 'fas fa-clock';
+                        statusText = 'Pending';
+                    }
+                    
+                    const namaAnggota = row.nama_lengkap || '-';
+                    const tanggal = row.tanggal || '-';
+                    const jenisSimpanan = row.jenis || '-';
+                    const jumlah = row.jumlah || 0;
+                    
+                    // Jenis badge dengan warna berbeda
+                    let jenisBadgeClass = 'jenis-badge pokok';
+                    if (jenisSimpanan === 'wajib') jenisBadgeClass = 'jenis-badge wajib';
+                    else if (jenisSimpanan === 'sukarela') jenisBadgeClass = 'jenis-badge sukarela';
+
+                    // Tentukan ID berdasarkan jenis simpanan
+                    let idField = '';
+                    if (row.id_sp) idField = row.id_sp;
+                    else if (row.id_sw) idField = row.id_sw;
+                    else if (row.id_ss) idField = row.id_ss;
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900 font-medium">${tanggal}</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm font-semibold text-gray-900">${namaAnggota}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="${jenisBadgeClass}">
+                                    <i class="fas fa-tag"></i>
+                                    ${jenisSimpanan.charAt(0).toUpperCase() + jenisSimpanan.slice(1)}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-sm font-bold text-gray-900">${formatRupiah(jumlah)}</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${statusClass}">
+                                    <i class="${statusIcon}"></i>
+                                    ${statusText}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="action-buttons">
+                                    <button class="btn-delete" onclick="deleteSimpanan('${jenisSimpanan}', '${idField}')" title="Hapus Simpanan">
+                                        <i class="fas fa-trash"></i>Hapus
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(err => {
+                console.error('Error loading simpanan:', err);
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">
-                            Tidak ada data simpanan
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            tbody.innerHTML = '';
-            data.forEach(row => {
-                // Status styling
-                let statusClass = 'bg-gray-100 text-gray-800';
-                let statusText = row.status || 'Aktif';
-                
-                if (row.status === 'lunas') {
-                    statusClass = 'bg-green-100 text-green-800';
-                    statusText = 'LUNAS';
-                } else if (row.status === 'aktif') {
-                    statusClass = 'bg-blue-100 text-blue-800';
-                    statusText = 'Aktif';
-                } else if (row.status === 'pending') {
-                    statusClass = 'bg-yellow-100 text-yellow-800';
-                    statusText = 'Pending';
-                }
-                
-                const namaAnggota = row.nama_lengkap || '-';
-                const tanggal = row.tanggal || '-';
-                const jenisSimpanan = row.jenis || '-';
-                const jumlah = row.jumlah || 0;
-                
-                // Tentukan ID berdasarkan jenis simpanan
-                let idField = '';
-                if (row.id_sp) idField = row.id_sp;
-                else if (row.id_sw) idField = row.id_sw;
-                else if (row.id_ss) idField = row.id_ss;
-
-                tbody.innerHTML += `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${tanggal}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${namaAnggota}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            <span class="capitalize">${jenisSimpanan}</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                            ${formatRupiah(jumlah)}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
-                                ${statusText}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="action-buttons">
-                                <button class="btn-delete" onclick="deleteSimpanan('${jenisSimpanan}', '${idField}')" title="Hapus Simpanan">
-                                    <i class="fas fa-trash"></i>
-                                    Hapus
-                                </button>
-                            </div>
+                        <td colspan="6" class="px-6 py-4 text-center text-red-500">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Gagal memuat data
                         </td>
                     </tr>
                 `;
             });
-        })
-        .catch(err => {
-            console.error('Error loading simpanan:', err);
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="6" class="px-6 py-4 text-center text-red-500">
-                        Gagal memuat data
-                    </td>
-                </tr>
-            `;
-        });
-}
+    }
 
 // Function untuk hapus simpanan
 function deleteSimpanan(jenis, id) {
@@ -815,10 +1250,14 @@ function deleteSimpanan(jenis, id) {
     // Submit form dengan double submission protection
     function setupFormSubmit() {
         const form = document.getElementById('formSimpanan');
-        if (!form) return;
+        if (!form) {
+            console.error('formSimpanan not found');
+            return;
+        }
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('Form submitted');
             
             if (isSubmitting) {
                 showNotification('warning', 'Peringatan', 'Sedang memproses data sebelumnya...');
@@ -826,7 +1265,10 @@ function deleteSimpanan(jenis, id) {
             }
             
             const submitBtn = document.getElementById('simpanBtn');
-            if (!submitBtn) return;
+            if (!submitBtn) {
+                console.error('simpanBtn not found');
+                return;
+            }
 
             const originalText = submitBtn.innerHTML;
             
@@ -835,8 +1277,11 @@ function deleteSimpanan(jenis, id) {
             const data = {
                 id_anggota: document.getElementById('anggotaSelect')?.value,
                 jenis: document.getElementById('jenisSelect')?.value,
-                jumlah: document.getElementById('jumlahInput')?.value
+                jumlah: document.getElementById('jumlahInput')?.value,
+                tenor: document.getElementById('tenorSelect')?.value
             };
+            
+            console.log('Form data:', data);
             
             // Validasi
             if (!data.id_anggota || !data.jenis || !data.jumlah) {
@@ -846,6 +1291,11 @@ function deleteSimpanan(jenis, id) {
 
             if (parseInt(data.jumlah) <= 0) {
                 showNotification('error', 'Gagal!', 'Jumlah simpanan harus lebih dari 0!');
+                return;
+            }
+
+            if (data.jenis === 'pokok' && (!data.tenor || parseInt(data.tenor) <= 0)) {
+                showNotification('error', 'Gagal!', 'Tenor simpanan pokok wajib diisi dengan angka bulan yang valid!');
                 return;
             }
 
@@ -899,49 +1349,77 @@ function deleteSimpanan(jenis, id) {
     document.addEventListener('DOMContentLoaded', function() {
         console.log('Initializing savings page...');
         
-        setupAnggotaSearch();
-        setupFormSubmit();
-        setupJumlahValidation();
-        loadSimpanan();
-        
-        // Event listeners
-        const filterJenis = document.getElementById('filterJenis');
-        const filterAnggota = document.getElementById('filterAnggota');
-        const jenisSelect = document.getElementById('jenisSelect');
-        
-        if (filterJenis) filterJenis.addEventListener('change', loadSimpanan);
-        if (filterAnggota) filterAnggota.addEventListener('change', loadSimpanan);
-        if (jenisSelect) {
-            jenisSelect.addEventListener('change', function() {
-                const tenorGroup = document.getElementById('tenorGroup');
-                const semuaBtn = document.getElementById('semuaAnggotaBtn');
-                
-                if (this.value === 'pokok') {
-                    tenorGroup.classList.remove('hidden');
-                    semuaBtn.classList.remove('hidden');
-                } else {
-                    tenorGroup.classList.add('hidden');
-                    if (this.value === 'wajib') {
-                        semuaBtn.classList.remove('hidden');
+        try {
+            // Add hidden filter jenis element
+            addHiddenFilterJenis('pokok');
+            
+            // Setup the first tab as active
+            switchTab('pokok');
+            
+            setupAnggotaSearch();
+            setupFormSubmit();
+            setupJumlahValidation();
+            loadSimpanan();
+            
+            // Event listeners
+            const filterSearchAnggota = document.getElementById('filterSearchAnggota');
+            const filterAnggota = document.getElementById('filterAnggota');
+            const filterJenis = document.getElementById('filterJenis');
+            const tenorSelect = document.getElementById('tenorSelect');
+            const anggotaSelect = document.getElementById('anggotaSelect');
+            
+            if (filterSearchAnggota) {
+                filterSearchAnggota.addEventListener('input', function() {
+                    const q = this.value.trim();
+                    if (q.length < 2 && q.length > 0) return;
+                    
+                    if (!q) {
+                        filterAnggota.value = 'all';
                     } else {
-                        semuaBtn.classList.add('hidden');
+                        // Filter dari opsi yang tersedia
+                        const options = filterAnggota.querySelectorAll('option');
+                        let found = false;
+                        options.forEach(option => {
+                            if (option.textContent.toLowerCase().includes(q.toLowerCase())) {
+                                filterAnggota.value = option.value;
+                                found = true;
+                            }
+                        });
+                        if (!found) {
+                            filterAnggota.value = 'all';
+                        }
                     }
+                    loadSimpanan();
+                });
+            }
+            
+            if (filterJenis) filterJenis.addEventListener('change', loadSimpanan);
+            if (filterAnggota) filterAnggota.addEventListener('change', function() {
+                if (filterSearchAnggota) {
+                    filterSearchAnggota.value = this.options[this.selectedIndex].text;
                 }
-                
-                checkSimpananPokok();
+                loadSimpanan();
             });
+            
+            if (tenorSelect) {
+                tenorSelect.addEventListener('change', function() {
+                    const tenorHidden = document.getElementById('tenorHidden');
+                    if (tenorHidden) {
+                        tenorHidden.value = this.value;
+                    }
+                });
+            }
+
+            if (anggotaSelect) {
+                anggotaSelect.addEventListener('change', function() {
+                    checkSimpananPokok();
+                });
+            }
+            
+            console.log('Savings page initialized successfully');
+        } catch (err) {
+            console.error('Error initializing savings page:', err);
         }
-        
-        // Juga panggil checkSimpananPokok ketika anggota berubah
-        const anggotaSelect = document.getElementById('anggotaSelect');
-        if (anggotaSelect) {
-            // Gunakan event listener untuk perubahan value
-            anggotaSelect.addEventListener('change', function() {
-                checkSimpananPokok();
-            });
-        }
-        
-        console.log('Savings page initialized');
     });
 
     // Tambahkan CSS untuk animasi
