@@ -100,7 +100,7 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Anggota</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akad</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
@@ -110,12 +110,13 @@
                     </tr>
                 </thead>
                <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+    <?php $nomor = 1; ?>
     <?php foreach ($pembiayaan as $item): ?>
     <tr class="table-row" 
         data-status="<?= esc($item['status']) ?>" 
         data-akad="<?= esc($item['akad']) ?>" 
         data-nama="<?= esc(strtolower($item['nama_lengkap'])) ?>">
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?= esc($item['id']) ?></td>
+        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'><?= $nomor++ ?></td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?= esc($item['nama_lengkap']) ?></td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium 

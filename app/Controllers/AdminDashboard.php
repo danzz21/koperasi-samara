@@ -155,22 +155,27 @@ public function tolakPinjaman($jenis, $id)
     // =========================
     // Hitung Total Simpanan
     // =========================
-    $totalSimpananPokok = $db->table('simpanan_pokok')
-        ->where('status', 'aktif')
-        ->selectSum('jumlah')
-        ->get()->getRow()->jumlah ?? 0;
+    // ... dalam method index() ...
 
-    $totalSimpananWajib = $db->table('simpanan_wajib')
-        ->where('status', 'aktif')
-        ->selectSum('jumlah')
-        ->get()->getRow()->jumlah ?? 0;
+// =========================
+// Hitung Total Simpanan (PASTIKAN STATUS AKTIF & LUNAS TERHITUNG)
+// =========================
+$totalSimpananPokok = $db->table('simpanan_pokok')
+    ->whereIn('status', ['aktif', 'lunas']) 
+    ->selectSum('jumlah')
+    ->get()->getRow()->jumlah ?? 0;
 
-    $totalSimpananSukarela = $db->table('simpanan_sukarela')
-        ->where('status', 'aktif')
-        ->selectSum('jumlah')
-        ->get()->getRow()->jumlah ?? 0;
+$totalSimpananWajib = $db->table('simpanan_wajib')
+    ->whereIn('status', ['aktif', 'lunas']) 
+    ->selectSum('jumlah')
+    ->get()->getRow()->jumlah ?? 0;
 
-    $totalSimpanan = $totalSimpananPokok + $totalSimpananWajib + $totalSimpananSukarela;
+$totalSimpananSukarela = $db->table('simpanan_sukarela')
+    ->whereIn('status', ['aktif', 'lunas']) 
+    ->selectSum('jumlah')
+    ->get()->getRow()->jumlah ?? 0;
+
+$totalSimpanan = $totalSimpananPokok + $totalSimpananWajib + $totalSimpananSukarela;
 
     // =========================
     // Hitung Pembiayaan Berjalan
@@ -2607,26 +2612,27 @@ $qardModel = new \App\Models\QardModel();
 $murabahahModel = new \App\Models\MurabahahModel();
 $mudharabahModel = new \App\Models\MudharabahModel();
 
-// ===== SIMPANAN =====
-$totalPokok = $simpananPokokModel
+// ===== SIMPANAN (Menghitung yang aktif dan lunas) =====
+$totalPokok = $simpananPokokModel->builder()
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
-    ->selectSum('jumlah')
-    ->first()['jumlah'] ?? 0;
+    ->whereIn('status', ['aktif', 'lunas'])
+    ->selectSum('jumlah', 'total')
+    ->get()->getRowArray()['total'] ?? 0;
 
-$totalWajib = $simpananWajibModel
+$totalWajib = $simpananWajibModel->builder()
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
-    ->selectSum('jumlah')
-    ->first()['jumlah'] ?? 0;
+    ->whereIn('status', ['aktif', 'lunas'])
+    ->selectSum('jumlah', 'total')
+    ->get()->getRowArray()['total'] ?? 0;
 
-$totalSukarela = $simpananSukarelaModel
+$totalSukarela = $simpananSukarelaModel->builder()
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
-    ->selectSum('jumlah')
-    ->first()['jumlah'] ?? 0;
+    ->whereIn('status', ['aktif', 'lunas'])
+    ->selectSum('jumlah', 'total')
+    ->get()->getRowArray()['total'] ?? 0;
 
-$totalSimpanan = $totalPokok + $totalWajib + $totalSukarela;
+$totalSimpanan = (float)$totalPokok + (float)$totalWajib + (float)$totalSukarela;
+
 
 // ===== PEMBIAYAAN (hanya yang aktif) =====
 $totalQard = $qardModel
@@ -2726,23 +2732,24 @@ $bagiHasil = 0;
 
 // ===== DETAIL SIMPANAN =====
 $simpanan_pokok = [
-    'total' => $totalPokok,
+    'total' => (float)$totalPokok,
     'tanggal_terakhir' => $simpananPokokModel
         ->where('id_anggota', $id)
-        ->where('status', 'aktif')
+        ->whereIn('status', ['aktif', 'lunas'])
         ->orderBy('tanggal', 'DESC')
         ->first()['tanggal'] ?? null
 ];
 
 $simpanan_wajib = [
-    'total' => $totalWajib,
+    'total' => (float)$totalWajib,
     'setoran_bulanan' => 50000, // Default, bisa disesuaikan
     'tanggal_terakhir' => $simpananWajibModel
         ->where('id_anggota', $id)
-        ->where('status', 'aktif')
+        ->whereIn('status', ['aktif', 'lunas'])
         ->orderBy('tanggal', 'DESC')
         ->first()['tanggal'] ?? null
 ];
+
 
 $simpanan_sukarela = [
     'total' => $totalSukarela
@@ -2869,21 +2876,22 @@ $riwayat_transaksi = [];
 // Transaksi Simpanan
 $transaksiPokok = $simpananPokokModel
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
+    ->whereIn('status', ['aktif', 'lunas'])
     ->select("jumlah, 'Setoran Simpanan Pokok' as keterangan, tanggal, 'pemasukan' as type, 'berhasil' as status")
     ->findAll();
 
 $transaksiWajib = $simpananWajibModel
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
+    ->whereIn('status', ['aktif', 'lunas'])
     ->select("jumlah, 'Setoran Simpanan Wajib' as keterangan, tanggal, 'pemasukan' as type, 'berhasil' as status")
     ->findAll();
 
 $transaksiSukarela = $simpananSukarelaModel
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
+    ->whereIn('status', ['aktif', 'lunas'])
     ->select("jumlah, 'Setoran Simpanan Sukarela' as keterangan, tanggal, 'pemasukan' as type, 'berhasil' as status")
     ->findAll();
+
 
 // Gabung semua transaksi
 $riwayat_transaksi = array_merge($transaksiPokok, $transaksiWajib, $transaksiSukarela);
@@ -2922,21 +2930,22 @@ $data = [
 // ===== TRANSAKSI SIMPANAN (gabungan semua jenis) =====
 $transaksiPokok = $simpananPokokModel
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
+    ->whereIn('status', ['aktif', 'lunas'])
     ->select("jumlah, 'Simpanan Pokok' as jenis, tanggal, 'masuk' as tipe, 'berhasil' as status")
     ->findAll();
 
 $transaksiWajib = $simpananWajibModel
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
+    ->whereIn('status', ['aktif', 'lunas'])
     ->select("jumlah, 'Simpanan Wajib' as jenis, tanggal, 'masuk' as tipe, 'berhasil' as status")
     ->findAll();
 
 $transaksiSukarela = $simpananSukarelaModel
     ->where('id_anggota', $id)
-    ->where('status', 'aktif')
+    ->whereIn('status', ['aktif', 'lunas'])
     ->select("jumlah, 'Simpanan Sukarela' as jenis, tanggal, 'masuk' as tipe, 'berhasil' as status")
     ->findAll();
+
 
 // Gabung semua transaksi simpanan
 $transaksi = array_merge($transaksiPokok, $transaksiWajib, $transaksiSukarela);

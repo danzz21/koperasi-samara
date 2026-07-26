@@ -182,7 +182,7 @@
     <!-- Tab Navigation -->
     <div class="flex gap-2 mb-6 flex-wrap">
         <button class="savings-tab-btn active" data-tab="pokok" onclick="switchTab('pokok')">
-            <i class="fas fa-piggy-bank mr-2"></i>Pokok
+            <i class="fas fa-money-bill-wave mr-2"></i>Pokok
         </button>
         <button class="savings-tab-btn" data-tab="wajib" onclick="switchTab('wajib')">
             <i class="fas fa-receipt mr-2"></i>Wajib
@@ -204,7 +204,7 @@
                     <p class="text-sm text-emerald-600 font-semibold">Simpanan Pokok</p>
                     <p class="text-2xl font-bold text-emerald-700">Rp <?= number_format($totalPokok ?? 0, 0, ',', '.') ?></p>
                 </div>
-                <i class="fas fa-piggy-bank text-3xl text-emerald-300"></i>
+                <i class="fas fa-money-bill-wave text-3xl text-green-500 opacity-80"></i>
             </div>
             <p class="text-xs text-emerald-600">Total dari <?= $anggotaPokok ?? 0 ?> anggota</p>
             <div class="mt-2 pt-2 border-t border-emerald-200">

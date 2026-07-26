@@ -59,7 +59,7 @@
                     <p class="text-blue-700 text-sm font-medium">Total Simpanan</p>
                     <p class="text-2xl font-bold text-blue-900">Rp <?= number_format($totalSimpanan, 0, ',', '.') ?></p>
                 </div>
-                <i class="fas fa-piggy-bank text-3xl text-blue-500 opacity-80"></i>
+                <i class="fas fa-coins text-3xl text-blue-500 opacity-80"></i>
             </div>
         </div>
 
@@ -172,7 +172,7 @@
                 <span class="font-medium text-blue-800">Kelola Anggota</span>
             </a>
             <a href="<?= base_url('admin/savings') ?>" class="flex items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                <i class="fas fa-piggy-bank text-green-500 mr-3"></i>
+                <i class="fas fa-coins text-3xl text-blue-500 mr-3"></i>
                 <span class="font-medium text-green-800">Kelola Simpanan</span>
             </a>
             <a href="<?= base_url('admin/financing') ?>" class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">

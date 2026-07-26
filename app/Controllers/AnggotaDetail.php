@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\AnggotaModel;
@@ -30,24 +31,6 @@ class AnggotaDetail extends BaseController
         $this->mudharabahModel = new MudharabahModel();
     }
 
-    // AdminController.php
-    public function detailAnggota($id)
-    {
-        $anggotaModel = new \App\Models\AnggotaModel();
-        $anggota = $anggotaModel->find($id);
-
-        if (!$anggota) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Anggota tidak ditemukan");
-        }
-
-        $data = [
-            'anggota' => $anggota
-        ];
-
-        return view('admin/detail_anggota', $data);
-    }
-
-
     public function detail($id_anggota)
     {
         // Ambil data anggota
@@ -57,22 +40,36 @@ class AnggotaDetail extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Anggota tidak ditemukan');
         }
 
-        // 1. TOTAL SIMPANAN (dari 3 tabel)
-        $simpanan_pokok = $this->simpananPokokModel->where('id_anggota', $id_anggota)->first();
-        $simpanan_wajib = $this->simpananWajibModel->where('id_anggota', $id_anggota)->first();
-        $simpanan_sukarela = $this->simpananSukarelaModel->where('id_anggota', $id_anggota)->first();
+                // 1. TOTAL SIMPANAN (Menggunakan selectSum)
+        $sumPokok = $this->simpananPokokModel->builder()->selectSum('jumlah', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $sumWajib = $this->simpananWajibModel->builder()->selectSum('jumlah', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $sumSukarela = $this->simpananSukarelaModel->builder()->selectSum('jumlah', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
 
-        // 2. TOTAL PEMBIAYAAN (dari 3 tabel)
-        $total_qard = $this->qardModel->selectSum('jml_pinjam')->where('id_anggota', $id_anggota)->first();
-        $total_murabahah = $this->murabahahModel->selectSum('jml_pinjam')->where('id_anggota', $id_anggota)->first();
-        $total_mudharabah = $this->mudharabahModel->selectSum('jml_pinjam')->where('id_anggota', $id_anggota)->first();
+        $totalPokok = (float) ($sumPokok['total'] ?? 0);
+        $totalWajib = (float) ($sumWajib['total'] ?? 0);
+        $totalSukarela = (float) ($sumSukarela['total'] ?? 0);
+        $totalSimpanan = $totalPokok + $totalWajib + $totalSukarela;
 
-        // 3. SISA ANGSURAN (dari sisa_tenor 3 tabel)
-        $sisa_tenor_qard = $this->qardModel->selectSum('sisa_tenor')->where('id_anggota', $id_anggota)->first();
-        $sisa_tenor_murabahah = $this->murabahahModel->selectSum('sisa_tenor')->where('id_anggota', $id_anggota)->first();
-        $sisa_tenor_mudharabah = $this->mudharabahModel->selectSum('sisa_tenor')->where('id_anggota', $id_anggota)->first();
 
-        // 4. DATA PEMBIAYAAN (dari 3 tabel)
+        // Tanggal Transaksi Terakhir
+        $lastPokok = $this->simpananPokokModel->where('id_anggota', $id_anggota)->orderBy('tanggal', 'DESC')->first();
+        $lastWajib = $this->simpananWajibModel->where('id_anggota', $id_anggota)->orderBy('tanggal', 'DESC')->first();
+        $lastSukarela = $this->simpananSukarelaModel->where('id_anggota', $id_anggota)->orderBy('tanggal', 'DESC')->first();
+
+                // 2. TOTAL PEMBIAYAAN
+        $total_qard_row = $this->qardModel->builder()->selectSum('jml_pinjam', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $total_murabahah_row = $this->murabahahModel->builder()->selectSum('jml_pinjam', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $total_mudharabah_row = $this->mudharabahModel->builder()->selectSum('jml_pinjam', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $totalPembiayaan = (float)($total_qard_row['total'] ?? 0) + (float)($total_murabahah_row['total'] ?? 0) + (float)($total_mudharabah_row['total'] ?? 0);
+
+        // 3. SISA ANGSURAN
+        $sisa_tenor_qard_row = $this->qardModel->builder()->selectSum('sisa_tenor', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $sisa_tenor_murabahah_row = $this->murabahahModel->builder()->selectSum('sisa_tenor', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $sisa_tenor_mudharabah_row = $this->mudharabahModel->builder()->selectSum('sisa_tenor', 'total')->where('id_anggota', $id_anggota)->get()->getRowArray();
+        $sisaAngsuran = (int)($sisa_tenor_qard_row['total'] ?? 0) + (int)($sisa_tenor_murabahah_row['total'] ?? 0) + (int)($sisa_tenor_mudharabah_row['total'] ?? 0);
+
+
+        // 4. DATA PEMBIAYAAN
         $data_pembiayaan = [];
         
         // Qard
@@ -84,9 +81,9 @@ class AnggotaDetail extends BaseController
                 'nomor_pembiayaan' => 'QARD-' . $qard['id_qard'],
                 'status' => $qard['status'],
                 'jumlah_pembiayaan' => $qard['jml_pinjam'],
-                'margin' => 0, // Qard tanpa margin
+                'margin' => 0,
                 'jangka_waktu' => $qard['jml_angsuran'],
-                'angsuran_per_bulan' => $qard['jml_pinjam'] / $qard['jml_angsuran'],
+                'angsuran_per_bulan' => $qard['jml_pinjam'] / max($qard['jml_angsuran'], 1),
                 'sisa_tenor' => $qard['sisa_tenor'],
                 'total_dibayar' => $qard['jml_terbayar']
             ];
@@ -101,9 +98,9 @@ class AnggotaDetail extends BaseController
                 'nomor_pembiayaan' => 'MRB-' . $murabahah['id_mr'],
                 'status' => $murabahah['status'],
                 'jumlah_pembiayaan' => $murabahah['jml_pinjam'],
-                'margin' => 10, // Contoh 10%
+                'margin' => 10,
                 'jangka_waktu' => $murabahah['jml_angsuran'],
-                'angsuran_per_bulan' => $murabahah['jml_pinjam'] / $murabahah['jml_angsuran'],
+                'angsuran_per_bulan' => $murabahah['jml_pinjam'] / max($murabahah['jml_angsuran'], 1),
                 'sisa_tenor' => $murabahah['sisa_tenor'],
                 'total_dibayar' => $murabahah['jml_terbayar']
             ];
@@ -118,51 +115,55 @@ class AnggotaDetail extends BaseController
                 'nomor_pembiayaan' => 'MDH-' . $mudharabah['id_md'],
                 'status' => $mudharabah['status'],
                 'jumlah_pembiayaan' => $mudharabah['jml_pinjam'],
-                'margin' => 10, // Contoh 10%
+                'margin' => 10,
                 'jangka_waktu' => $mudharabah['jml_angsuran'],
-                'angsuran_per_bulan' => $mudharabah['jml_pinjam'] / $mudharabah['jml_angsuran'],
+                'angsuran_per_bulan' => $mudharabah['jml_pinjam'] / max($mudharabah['jml_angsuran'], 1),
                 'sisa_tenor' => $mudharabah['sisa_tenor'],
                 'total_dibayar' => $mudharabah['jml_terbayar']
             ];
         }
 
-        // 5. RIWAYAT TRANSAKSI (gabungan dari semua tabel)
+        // 5. RIWAYAT TRANSAKSI & JADWAL ANGSURAN
         $riwayat_transaksi = $this->getRiwayatTransaksi($id_anggota);
-
-        // 6. JADWAL ANGSURAN
         $jadwal_angsuran = $this->getJadwalAngsuran($id_anggota);
 
         $data = [
             'title' => 'Detail Anggota - ' . $anggota['nama_lengkap'],
             'anggota' => $anggota,
             
-            // Data Simpanan
+            // Akumulasi Card Utama
+            'totalSimpanan' => $totalSimpanan,
+            'totalPembiayaan' => $totalPembiayaan,
+            'sisaAngsuran' => $sisaAngsuran,
+
+            // Data Simpanan Rinci
             'simpanan_pokok' => [
-                'total' => $simpanan_pokok['jumlah'] ?? 0,
-                'tanggal_terakhir' => $simpanan_pokok['tanggal'] ?? null
+                'total' => $totalPokok,
+                'tanggal_terakhir' => $lastPokok['tanggal'] ?? null
             ],
             'simpanan_wajib' => [
-                'total' => $simpanan_wajib['jumlah'] ?? 0,
-                'setoran_bulanan' => 100000, // Contoh
-                'tanggal_terakhir' => $simpanan_wajib['tanggal'] ?? null
+                'total' => $totalWajib,
+                'setoran_bulanan' => 100000,
+                'tanggal_terakhir' => $lastWajib['tanggal'] ?? null
             ],
             'simpanan_sukarela' => [
-                'total' => $simpanan_sukarela['jumlah'] ?? 0,
-                'tanggal_terakhir' => $simpanan_sukarela['tanggal'] ?? null
+                'total' => $totalSukarela,
+                'tanggal_terakhir' => $lastSukarela['tanggal'] ?? null
             ],
             
-            // Data Pembiayaan
-            'total_qard' => ['total' => $total_qard['jml_pinjam'] ?? 0],
-            'total_murabahah' => ['total' => $total_murabahah['jml_pinjam'] ?? 0],
-            'total_mudharabah' => ['total' => $total_mudharabah['jml_pinjam'] ?? 0],
+                        // Data Pembiayaan
+            'total_qard' => ['total' => $total_qard_row['total'] ?? 0],
+            'total_murabahah' => ['total' => $total_murabahah_row['total'] ?? 0],
+            'total_mudharabah' => ['total' => $total_mudharabah_row['total'] ?? 0],
             
-            // Sisa Tenor
-            'sisa_tenor_qard' => $sisa_tenor_qard['sisa_tenor'] ?? 0,
-            'sisa_tenor_murabahah' => $sisa_tenor_murabahah['sisa_tenor'] ?? 0,
-            'sisa_tenor_mudharabah' => $sisa_tenor_mudharabah['sisa_tenor'] ?? 0,
+            // Sisa Tenor Spesifik
+            'sisa_tenor_qard' => $sisa_tenor_qard_row['total'] ?? 0,
+            'sisa_tenor_murabahah' => $sisa_tenor_murabahah_row['total'] ?? 0,
+            'sisa_tenor_mudharabah' => $sisa_tenor_mudharabah_row['total'] ?? 0,
+
             
             // Data Lainnya
-            'bagi_hasil' => 0, // Sesuaikan dengan data bagi hasil
+            'bagi_hasil' => 0,
             'bagi_hasil_bulan_ini' => 0,
             'bagi_hasil_tahun_ini' => 0,
             'data_pembiayaan' => $data_pembiayaan,
@@ -170,8 +171,9 @@ class AnggotaDetail extends BaseController
             'jadwal_angsuran' => $jadwal_angsuran
         ];
 
-        return view('detail_anggota', $data);
+                return view('dashboard_admin/detail_anggota', $data);
     }
+
 
     private function getRiwayatTransaksi($id_anggota)
     {
@@ -213,8 +215,7 @@ class AnggotaDetail extends BaseController
             ];
         }
 
-        // Urutkan berdasarkan tanggal terbaru
-        usort($riwayat, function($a, $b) {
+        usort($riwayat, function ($a, $b) {
             return strtotime($b['tanggal']) - strtotime($a['tanggal']);
         });
 
@@ -231,7 +232,7 @@ class AnggotaDetail extends BaseController
             $jadwal[] = [
                 'nama_pembiayaan' => 'Pinjaman Qard',
                 'sisa_tenor' => $qard['sisa_tenor'],
-                'angsuran_per_bulan' => $qard['jml_pinjam'] / $qard['jml_angsuran'],
+                'angsuran_per_bulan' => $qard['jml_pinjam'] / max($qard['jml_angsuran'], 1),
                 'tanggal_pembiayaan' => $qard['tanggal']
             ];
         }
@@ -242,7 +243,7 @@ class AnggotaDetail extends BaseController
             $jadwal[] = [
                 'nama_pembiayaan' => 'Pembiayaan Murabahah',
                 'sisa_tenor' => $murabahah['sisa_tenor'],
-                'angsuran_per_bulan' => $murabahah['jml_pinjam'] / $murabahah['jml_angsuran'],
+                'angsuran_per_bulan' => $murabahah['jml_pinjam'] / max($murabahah['jml_angsuran'], 1),
                 'tanggal_pembiayaan' => $murabahah['tanggal']
             ];
         }
@@ -253,7 +254,7 @@ class AnggotaDetail extends BaseController
             $jadwal[] = [
                 'nama_pembiayaan' => 'Pembiayaan Mudharabah',
                 'sisa_tenor' => $mudharabah['sisa_tenor'],
-                'angsuran_per_bulan' => $mudharabah['jml_pinjam'] / $mudharabah['jml_angsuran'],
+                'angsuran_per_bulan' => $mudharabah['jml_pinjam'] / max($mudharabah['jml_angsuran'], 1),
                 'tanggal_pembiayaan' => $mudharabah['tanggal']
             ];
         }
