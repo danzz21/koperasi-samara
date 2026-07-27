@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,128 +9,129 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="<?= base_url('css/style.css') ?>" rel="stylesheet">
 </head>
+
 <body class="bg-gray-50">
-<header class="bg-white shadow-lg border-b-4 border-emerald-500">
-  <div class="flex items-center justify-between px-6 py-4">
-    <div class="flex items-center space-x-4">
-      <div class="w-12 h-12 rounded-lg overflow-hidden transform scale-150">
-        <img src="<?= base_url('assets/images/logo.png') ?>" alt="Logo Koperasi" class="w-full h-full object-cover">
-      </div>
+    <header class="bg-white shadow-lg border-b-4 border-emerald-500">
+        <div class="flex items-center justify-between px-6 py-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-lg overflow-hidden transform scale-150">
+                    <img src="<?= base_url('assets/images/logo.png') ?>" alt="Logo Koperasi" class="w-full h-full object-cover">
+                </div>
 
-      <div>
-        <h1 class="text-2xl font-bold text-gray-800">Koperasi Syariah K-Samara</h1>
-        <p class="text-sm text-gray-600">Dashboard Administrasi</p>
-      </div>
-    </div>
-    <div class="flex items-center space-x-4">
-      <div class="relative">
-        <i class="fas fa-bell text-gray-600 text-xl cursor-pointer"></i>
-        <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs notification-badge">3</span>
-      </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Koperasi Syariah K-Samara</h1>
+                    <p class="text-sm text-gray-600">Dashboard Administrasi</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fas fa-bell text-gray-600 text-xl cursor-pointer"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs notification-badge">3</span>
+                </div>
 
-      <!-- Dropdown Profile dengan Logout -->
-      <div class="relative group">
-        <div class="flex items-center space-x-2 cursor-pointer">
-          <img src="<?= base_url('assets/images/danzz.png') ?>" alt="Foto Admin" class="w-10 h-10 rounded-full object-cover">
-          <div>
-            <p class="text-sm font-medium text-gray-800">Admin Koperasi</p>
-            <p class="text-xs text-gray-600">Administrator</p>
-          </div>
-          <i class="fas fa-chevron-down text-gray-600 text-xs"></i>
+                <!-- Dropdown Profile dengan Logout -->
+                <div class="relative group">
+                    <div class="flex items-center space-x-2 cursor-pointer">
+                        <img src="<?= base_url('assets/images/danzz.png') ?>" alt="Foto Admin" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Admin Koperasi</p>
+                            <p class="text-xs text-gray-600">Administrator</p>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-600 text-xs"></i>
+                    </div>
+
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-user mr-2"></i>Profile
+                        </a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-cog mr-2"></i>Settings
+                        </a>
+                        <div class="border-t border-gray-100"></div>
+                        <form id="logoutForm" action="<?= base_url('auth/login') ?>" method="POST">
+                            <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </header>
+    <div class="flex">
+        <aside class="w-64 bg-gradient-to-b from-emerald-800 to-emerald-900 min-h-screen text-white">
+            <nav class="mt-8">
+                <ul class="space-y-2 px-4">
+                    <li>
+                        <a href="<?= base_url('admin') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard Utama</span>
+                        </a>
+                    </li>
 
-        <!-- Dropdown Menu -->
-        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-            <i class="fas fa-user mr-2"></i>Profile
-          </a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-            <i class="fas fa-cog mr-2"></i>Settings
-          </a>
-          <div class="border-t border-gray-100"></div>
-          <form id="logoutForm" action="<?= base_url('auth/login') ?>" method="POST">
-            <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-              <i class="fas fa-sign-out-alt mr-2"></i>Logout
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<div class="flex">
-  <aside class="w-64 bg-gradient-to-b from-emerald-800 to-emerald-900 min-h-screen text-white">
-  <nav class="mt-8">
-    <ul class="space-y-2 px-4">
-      <li>
-        <a href="<?= base_url('admin') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-tachometer-alt"></i>
-          <span>Dashboard Utama</span>
-        </a>
-      </li>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/members') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-users"></i>
+                            <span>Manajemen Anggota</span>
+                        </a>
+                    </li>
 
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/members') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-users"></i>
-          <span>Manajemen Anggota</span>
-        </a>
-      </li>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/savings') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-coins"></i>
+                            <span>Manajemen Simpanan</span>
+                        </a>
+                    </li>
 
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/savings') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-coins"></i>
-          <span>Manajemen Simpanan</span>
-        </a>
-      </li>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/financing') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Manajemen Pinjaman</span>
+                        </a>
+                    </li>
 
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/financing') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-hand-holding-usd"></i>
-          <span>Manajemen Pinjaman</span>
-        </a>
-      </li>
+                    <!-- Menu Manajemen Angsuran -->
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/installments') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg bg-emerald-700">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Manajemen Angsuran</span>
+                        </a>
+                    </li>
 
-      <!-- Menu Manajemen Angsuran -->
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/installments') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg bg-emerald-700">
-          <i class="fas fa-calendar-check"></i>
-          <span>Manajemen Angsuran</span>
-        </a>
-      </li>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/transactions') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transaksi Umum</span>
+                        </a>
+                    </li>
 
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/transactions') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-exchange-alt"></i>
-          <span>Transaksi Umum</span>
-        </a>
-      </li>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/reports') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Laporan & Analisis</span>
+                        </a>
+                    </li>
 
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/reports') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-chart-bar"></i>
-          <span>Laporan & Analisis</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="<?= base_url('admin/dashboard_admin/settings') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
-          <i class="fas fa-cog"></i>
-          <span>Pengaturan</span>
-        </a>
-      </li>
-      <li><a href="<?= base_url('admin/dashboard_admin/extras') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg"><i class="fas fa-plus-circle"></i><span>Fitur Tambahan</span></a></li>
-    </ul>
-  </nav>
-</aside>
-<main class="flex-1 p-6 overflow-x-auto">
-        <!-- Main Content -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800"><?= $title ?></h1>
-            <p class="text-gray-600">Kelola pembayaran angsuran anggota untuk semua jenis pembiayaan</p>
-        </div>
+                    <li>
+                        <a href="<?= base_url('admin/dashboard_admin/settings') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg">
+                            <i class="fas fa-cog"></i>
+                            <span>Pengaturan</span>
+                        </a>
+                    </li>
+                    <li><a href="<?= base_url('admin/dashboard_admin/extras') ?>" class="sidebar-item flex items-center space-x-3 py-3 px-4 rounded-lg"><i class="fas fa-plus-circle"></i><span>Fitur Tambahan</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="flex-1 p-6 overflow-x-auto">
+            <!-- Main Content -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800"><?= $title ?></h1>
+                <p class="text-gray-600">Kelola pembayaran angsuran anggota untuk semua jenis pembiayaan</p>
+            </div>
 
             <!-- Alert Notifikasi -->
-            <?php if(session()->getFlashdata('success')): ?>
+            <?php if (session()->getFlashdata('success')): ?>
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6 fade-in">
                     <div class="flex items-center">
                         <i class="fas fa-check-circle mr-2"></i>
@@ -138,7 +140,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if(session()->getFlashdata('error')): ?>
+            <?php if (session()->getFlashdata('error')): ?>
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 fade-in">
                     <div class="flex items-center">
                         <i class="fas fa-exclamation-circle mr-2"></i>
@@ -189,282 +191,352 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
-</main>
+    </div>
+    </main>
 
-    <!-- Modal Bayar Angsuran -->
-    <div id="bayarModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-medium text-gray-900">Bayar Angsuran</h3>
-                    <button type="button" id="closeModal" class="text-gray-400 hover:text-gray-500">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                <!-- Form dengan method POST langsung -->
-                <form action="<?= base_url('admin/dashboard_admin/angsuran/bayar') ?>" method="POST" class="mt-4" id="bayarForm">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="jenis" id="jenis_angsuran">
-                    <input type="hidden" name="id" id="id_angsuran">
-                    
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700">Sisa Pembayaran</label>
-                        <input type="text" id="sisa_pembayaran" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-50" readonly>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700">Tenor Dibayar</label>
-                        <input type="text" id="tenor_dibayar" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-50" readonly>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="jumlah_bayar" class="block text-sm font-medium text-gray-700">Jumlah Bayar</label>
-                        <input type="number" name="jumlah_bayar" id="jumlah_bayar" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required min="1">
-                        <p class="mt-1 text-sm text-gray-500">Masukkan jumlah pembayaran angsuran</p>
-                    </div>
-                    
-                    <div class="flex justify-end space-x-3 mt-6">
-                        <button type="button" id="cancelBtn" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-200">
-                            Batal
-                        </button>
-                        <button type="submit" class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition duration-200" id="submitBtn">
-                            Bayar
-                        </button>
-                    </div>
-                </form>
-            </div>
+    <!-- Modal Bayar Angsuran Super Fleksibel -->
+<div id="bayarModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-10 mx-auto p-5 border w-full max-w-md shadow-lg rounded-xl bg-white">
+        <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+            <h3 class="text-lg font-bold text-gray-800">Bayar Angsuran</h3>
+            <button type="button" id="closeModal" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
         </div>
+        
+        <form action="<?= base_url('admin/dashboard_admin/angsuran/bayar') ?>" method="POST" class="mt-4 space-y-4" id="bayarForm">
+            <?= csrf_field() ?>
+            <input type="hidden" name="jenis" id="jenis_angsuran">
+            <input type="hidden" name="id" id="id_angsuran">
+            
+            <!-- Ringkasan Pinjaman -->
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs space-y-1">
+                <div class="flex justify-between text-gray-600">
+                    <span>Posisi Pembayaran:</span>
+                    <span id="text_posisi_saat_ini" class="font-bold text-emerald-700">Angsuran Ke-1</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>Angsuran Standard:</span>
+                    <span id="text_angsuran_per_bulan" class="font-semibold text-gray-800">Rp 0 / bulan</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>Sisa Pokok Tagihan:</span>
+                    <span id="text_sisa_pinjaman" class="font-semibold text-red-600">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- Pilih Jumlah Bulan (Quick Select) -->
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Bayar Berapa Bulan Sekaligus?</label>
+                <div class="grid grid-cols-4 gap-2" id="boxQuickBulan">
+                    <button type="button" onclick="setMultiBulan(1)" class="py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-xs font-semibold hover:bg-emerald-100">1 Bulan</button>
+                    <button type="button" onclick="setMultiBulan(2)" class="py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-xs font-semibold hover:bg-emerald-100">2 Bulan</button>
+                    <button type="button" onclick="setMultiBulan(3)" class="py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded text-xs font-semibold hover:bg-emerald-100">3 Bulan</button>
+                    <button type="button" onclick="setMultiBulan('lunas')" class="py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded text-xs font-semibold hover:bg-blue-100">Lunas</button>
+                </div>
+            </div>
+
+            <!-- Input Custom Nominal -->
+            <div>
+                <label for="jumlah_bayar" class="block text-xs font-semibold text-gray-700 mb-1">Nominal Pembayaran (Seadanya Uang) *</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-2.5 text-gray-500 font-bold text-sm">Rp</span>
+                    <input type="number" name="jumlah_bayar" id="jumlah_bayar" oninput="hitungEfekBayar()" class="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-base font-bold text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:outline-none" required min="1">
+                </div>
+            </div>
+
+            <!-- Preview Efek Pembayaran Dinamis -->
+            <div id="boxPreviewDinamis" class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs space-y-1">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Setara dengan:</span>
+                    <span id="text_setara_bulan" class="font-bold text-emerald-800">0 Bulan</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Sisa Tagihan Setelah Bayar:</span>
+                    <span id="text_sisa_setelah_bayar" class="font-bold text-emerald-800">Rp 0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Status Baru:</span>
+                    <span id="text_status_baru" class="font-bold text-emerald-800">Aktif</span>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-3 border-t border-gray-100">
+                <button type="button" id="cancelBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
+                    Batal
+                </button>
+                <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-700" id="submitBtn">
+                    <i class="fas fa-check-circle mr-1"></i> Simpan Pembayaran
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 
     <script>
-    // Tab functionality
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active', 'border-emerald-500', 'text-emerald-600');
-                btn.classList.add('text-gray-500');
-            });
-            
-            // Add active class to clicked tab
-            button.classList.add('active', 'border-emerald-500', 'text-emerald-600');
-            button.classList.remove('text-gray-500');
-            
-            // Hide all tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-                content.classList.remove('active');
-            });
-            
-            // Show selected tab content
-            const tabId = button.getAttribute('data-tab');
-            const tabContent = document.getElementById(`${tabId}-content`);
-            tabContent.classList.remove('hidden');
-            tabContent.classList.add('active');
-        });
-    });
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active', 'border-emerald-500', 'text-emerald-600');
+                    btn.classList.add('text-gray-500');
+                });
 
-    // Modal functionality
-    const modal = document.getElementById('bayarModal');
-    const cancelBtn = document.getElementById('cancelBtn');
-    const closeModal = document.getElementById('closeModal');
-    const bayarForm = document.getElementById('bayarForm');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const submitBtn = document.getElementById('submitBtn');
+                // Add active class to clicked tab
+                button.classList.add('active', 'border-emerald-500', 'text-emerald-600');
+                button.classList.remove('text-gray-500');
 
-    document.querySelectorAll('.bayar-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const jenis = this.getAttribute('data-jenis');
-            const id = this.getAttribute('data-id');
-            
-            document.getElementById('jenis_angsuran').value = jenis;
-            document.getElementById('id_angsuran').value = id;
-            
-            // Show loading state
-            const originalText = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Loading...</span>';
-            this.disabled = true;
-            
-            // Gunakan fetch dengan error handling yang lebih baik
-            fetch(`<?= base_url('admin/dashboard_admin/angsuran/detail') ?>?jenis=${jenis}&id=${id}`, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => {
-                // Cek content type sebelum parse JSON
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    throw new TypeError('Response bukan JSON');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    const sisa = data.sisa_pembayaran;
-                    const tenorDibayar = data.tenor_dibayar;
-                    const totalTenor = data.jml_angsuran;
-                    
-                    document.getElementById('sisa_pembayaran').value = 'Rp ' + sisa.toLocaleString('id-ID');
-                    document.getElementById('tenor_dibayar').value = tenorDibayar + ' / ' + totalTenor + ' bulan';
-                    document.getElementById('jumlah_bayar').setAttribute('max', sisa);
-                    document.getElementById('jumlah_bayar').value = '';
-                    modal.classList.remove('hidden');
-                } else {
-                    showAlert('error', 'Gagal mengambil data angsuran: ' + (data.message || 'Unknown error'));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                if (error.name === 'TypeError') {
-                    showAlert('error', 'Terjadi kesalahan format data. Silakan coba lagi.');
-                } else {
-                    showAlert('error', 'Terjadi kesalahan saat mengambil data: ' + error.message);
-                }
-            })
-            .finally(() => {
-                // Restore button state
-                this.innerHTML = originalText;
-                this.disabled = false;
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+
+                // Show selected tab content
+                const tabId = button.getAttribute('data-tab');
+                const tabContent = document.getElementById(`${tabId}-content`);
+                tabContent.classList.remove('hidden');
+                tabContent.classList.add('active');
             });
         });
-    });
 
-    // Form submission dengan redirect biasa (tanpa AJAX)
-    bayarForm.addEventListener('submit', function(e) {
-        const jumlahBayar = document.getElementById('jumlah_bayar').value;
-        const maxBayar = document.getElementById('jumlah_bayar').getAttribute('max');
-        
-        // Validasi client-side
-        if (!jumlahBayar || jumlahBayar <= 0) {
-            e.preventDefault();
-            showAlert('error', 'Masukkan jumlah pembayaran yang valid');
-            return;
-        }
-        
-        if (parseInt(jumlahBayar) > parseInt(maxBayar)) {
-            e.preventDefault();
-            showAlert('error', 'Jumlah bayar tidak boleh melebihi sisa pembayaran');
-            return;
-        }
-        
-        // Show loading
-        loadingOverlay.classList.remove('hidden');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-        
-        // Biarkan form submit normal, loading akan hilang setelah page reload
-    });
+        // Modal functionality
+        const modal = document.getElementById('bayarModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const closeModal = document.getElementById('closeModal');
+        const bayarForm = document.getElementById('bayarForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const submitBtn = document.getElementById('submitBtn');
 
-    // Fungsi untuk menampilkan alert
-    function showAlert(type, message) {
-        // Hapus alert existing
-        const existingAlert = document.querySelector('.alert-custom');
-        if (existingAlert) {
-            existingAlert.remove();
-        }
+        // Variable global untuk menyimpan nilai hitungan sementara
+   let globalNominalPerBulan = 0;
+let globalSisaTagihan = 0;
+let globalTotalTenor = 1;
+let globalTenorTerbayar = 0;
+
+document.querySelectorAll('.bayar-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const jenis = this.getAttribute('data-jenis');
+        const id = this.getAttribute('data-id');
         
-        const alertClass = type === 'error' ? 'bg-red-100 border-red-400 text-red-700' : 'bg-green-100 border-green-400 text-green-700';
-        const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
+        document.getElementById('jenis_angsuran').value = jenis;
+        document.getElementById('id_angsuran').value = id;
         
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert-custom ${alertClass} border px-4 py-3 rounded mb-6 fade-in flex items-center`;
-        alertDiv.innerHTML = `
+        const originalText = this.innerHTML;
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        this.disabled = true;
+        
+        fetch(`<?= base_url('admin/dashboard_admin/angsuran/detail') ?>?jenis=${jenis}&id=${id}`, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const item = data.data;
+                globalSisaTagihan = parseFloat(data.sisa_pembayaran) || 0;
+                globalTotalTenor = parseInt(data.jml_angsuran) || 1;
+                const jmlPinjam = parseFloat(item.jml_pinjam) || 0;
+                
+                // Nominal 1 Bulan Normal
+                globalNominalPerBulan = Math.round(jmlPinjam / globalTotalTenor);
+                globalTenorTerbayar = Math.floor((jmlPinjam - globalSisaTagihan) / globalNominalPerBulan);
+                const angsuranKe = Math.min(globalTenorTerbayar + 1, globalTotalTenor);
+
+                // Set Info Ringkasan
+                document.getElementById('text_posisi_saat_ini').innerText = `Angsuran Ke-${angsuranKe} dari ${globalTotalTenor} Bulan`;
+                document.getElementById('text_angsuran_per_bulan').innerText = 'Rp ' + globalNominalPerBulan.toLocaleString('id-ID') + ' / bulan';
+                document.getElementById('text_sisa_pinjaman').innerText = 'Rp ' + globalSisaTagihan.toLocaleString('id-ID');
+
+                // Default input: 1 Bulan
+                setMultiBulan(1);
+                
+                modal.classList.remove('hidden');
+            } else {
+                showAlert('error', 'Gagal memuat detail angsuran.');
+            }
+        })
+        .catch(err => console.error(err))
+        .finally(() => {
+            this.innerHTML = originalText;
+            this.disabled = false;
+        });
+    });
+});
+
+// Shortcut pilih berapa bulan
+function setMultiBulan(bulan) {
+    let nominal = 0;
+    if (bulan === 'lunas') {
+        nominal = globalSisaTagihan;
+    } else {
+        nominal = Math.min(globalNominalPerBulan * bulan, globalSisaTagihan);
+    }
+    document.getElementById('jumlah_bayar').value = nominal;
+    hitungEfekBayar();
+}
+
+// Kalkulator Dinamis Real-Time saat Admin Mengetik Nominal Seadanya
+function hitungEfekBayar() {
+    const inputVal = parseFloat(document.getElementById('jumlah_bayar').value) || 0;
+    
+    // Cegah input melebihi sisa tagihan
+    let bayar = inputVal;
+    if (bayar > globalSisaTagihan) {
+        bayar = globalSisaTagihan;
+        document.getElementById('jumlah_bayar').value = bayar;
+    }
+
+    const hitungSetaraBulan = (bayar / globalNominalPerBulan).toFixed(1);
+    const sisaAkhir = Math.max(0, globalSisaTagihan - bayar);
+
+    document.getElementById('text_setara_bulan').innerText = `${hitungSetaraBulan} Bulan Angsuran`;
+    document.getElementById('text_sisa_setelah_bayar').innerText = 'Rp ' + Math.round(sisaAkhir).toLocaleString('id-ID');
+    
+    if (sisaAkhir <= 0 && bayar > 0) {
+        document.getElementById('text_status_baru').innerText = 'LUNAS 🎉';
+        document.getElementById('text_status_baru').className = 'font-bold text-blue-700';
+    } else {
+        document.getElementById('text_status_baru').innerText = 'Masih Aktif';
+        document.getElementById('text_status_baru').className = 'font-bold text-emerald-800';
+    }
+}
+
+        // Form submission dengan redirect biasa (tanpa AJAX)
+        bayarForm.addEventListener('submit', function(e) {
+            const jumlahBayar = document.getElementById('jumlah_bayar').value;
+            const maxBayar = document.getElementById('jumlah_bayar').getAttribute('max');
+
+            // Validasi client-side
+            if (!jumlahBayar || jumlahBayar <= 0) {
+                e.preventDefault();
+                showAlert('error', 'Masukkan jumlah pembayaran yang valid');
+                return;
+            }
+
+            if (parseInt(jumlahBayar) > parseInt(maxBayar)) {
+                e.preventDefault();
+                showAlert('error', 'Jumlah bayar tidak boleh melebihi sisa pembayaran');
+                return;
+            }
+
+            // Show loading
+            loadingOverlay.classList.remove('hidden');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+            // Biarkan form submit normal, loading akan hilang setelah page reload
+        });
+
+        // Fungsi untuk menampilkan alert
+        function showAlert(type, message) {
+            // Hapus alert existing
+            const existingAlert = document.querySelector('.alert-custom');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+
+            const alertClass = type === 'error' ? 'bg-red-100 border-red-400 text-red-700' : 'bg-green-100 border-green-400 text-green-700';
+            const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert-custom ${alertClass} border px-4 py-3 rounded mb-6 fade-in flex items-center`;
+            alertDiv.innerHTML = `
             <i class="fas ${icon} mr-2"></i>
             ${message}
         `;
-        
-        document.querySelector('.mb-8').after(alertDiv);
-        
-        // Auto remove setelah 5 detik
-        setTimeout(() => {
-            if (alertDiv.parentNode) {
-                alertDiv.remove();
+
+            document.querySelector('.mb-8').after(alertDiv);
+
+            // Auto remove setelah 5 detik
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
             }
-        }, 5000);
-    }
+        });
 
-    cancelBtn.addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
+        // Validate payment amount
+        document.getElementById('jumlah_bayar').addEventListener('input', function() {
+            const max = parseInt(this.getAttribute('max'));
+            const value = parseInt(this.value) || 0;
 
-    closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
+            if (value > max) {
+                this.value = max;
+            }
 
-    // Close modal when clicking outside
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
+            // Add visual feedback
+            if (value > 0 && value <= max) {
+                this.classList.remove('border-red-300');
+                this.classList.add('border-green-300');
+            } else {
+                this.classList.remove('border-green-300');
+                this.classList.add('border-red-300');
+            }
+        });
 
-    // Validate payment amount
-    document.getElementById('jumlah_bayar').addEventListener('input', function() {
-        const max = parseInt(this.getAttribute('max'));
-        const value = parseInt(this.value) || 0;
-        
-        if (value > max) {
-            this.value = max;
-        }
-        
-        // Add visual feedback
-        if (value > 0 && value <= max) {
-            this.classList.remove('border-red-300');
-            this.classList.add('border-green-300');
-        } else {
-            this.classList.remove('border-green-300');
-            this.classList.add('border-red-300');
-        }
-    });
+        // Add keyboard shortcut for modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                modal.classList.add('hidden');
+            }
+        });
 
-    // Add keyboard shortcut for modal
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-            modal.classList.add('hidden');
-        }
-    });
-
-    // Jika halaman dimuat ulang setelah submit, sembunyikan loading
-    window.addEventListener('load', () => {
-        loadingOverlay.classList.add('hidden');
-    });
+        // Jika halaman dimuat ulang setelah submit, sembunyikan loading
+        window.addEventListener('load', () => {
+            loadingOverlay.classList.add('hidden');
+        });
     </script>
-<script>
-// JavaScript untuk handle logout dengan konfirmasi
-document.addEventListener('DOMContentLoaded', function() {
-  const logoutForm = document.getElementById('logoutForm');
+    <script>
+        // JavaScript untuk handle logout dengan konfirmasi
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutForm = document.getElementById('logoutForm');
 
-  if (logoutForm) {
-    logoutForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+            if (logoutForm) {
+                logoutForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
 
-      if (confirm('Apakah Anda yakin ingin logout?')) {
-        // Jika menggunakan AJAX
-        // fetch(this.action, { method: 'POST' })
-        //   .then(response => {
-        //     if (response.ok) {
-        //       window.location.href = '<?= base_url() ?>';
-        //     }
-        //   });
+                    if (confirm('Apakah Anda yakin ingin logout?')) {
+                        // Jika menggunakan AJAX
+                        // fetch(this.action, { method: 'POST' })
+                        //   .then(response => {
+                        //     if (response.ok) {
+                        //       window.location.href = '<?= base_url() ?>';
+                        //     }
+                        //   });
 
-        // Jika menggunakan form submit biasa
-        this.submit();
-      }
-    });
-  }
-});
-</script>
+                        // Jika menggunakan form submit biasa
+                        this.submit();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>
 
 <?php
 // Helper function to render table
-function renderTable($data, $type, $idField) {
-    if(empty($data)) {
+function renderTable($data, $type, $idField)
+{
+    if (empty($data)) {
         return '
             <div class="text-center py-8">
                 <i class="fas fa-file-invoice text-gray-300 text-4xl mb-4"></i>
@@ -472,7 +544,7 @@ function renderTable($data, $type, $idField) {
             </div>
         ';
     }
-    
+
     $html = '
         <div class="overflow-x-auto">
             <table class="w-full table-auto">
@@ -491,14 +563,14 @@ function renderTable($data, $type, $idField) {
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
     ';
-    
-    foreach($data as $item) {
+
+    foreach ($data as $item) {
         // Validasi data yang diperlukan
         $jml_angsuran = isset($item['jml_angsuran']) && $item['jml_angsuran'] > 0 ? $item['jml_angsuran'] : 1;
         $jml_pinjam = $item['jml_pinjam'] ?? 0;
         $jml_terbayar = $item['jml_terbayar'] ?? 0;
         $angsuran_per_bulan = $jml_pinjam / $jml_angsuran;
-        
+
         // Hitung tenor dibayar berdasarkan data yang tersedia
         $tenor_dibayar = $item['tenor_dibayar'] ?? $item['sisa_tenor'] ?? 0;
         if ($type === 'qard') {
@@ -507,9 +579,9 @@ function renderTable($data, $type, $idField) {
             // Untuk murabahah dan mudharabah, hitung tenor dibayar dari sisa tenor
             $tenor_dibayar = $jml_angsuran - ($item['sisa_tenor'] ?? $jml_angsuran);
         }
-        
+
         $sisa_pinjaman = $jml_pinjam - $jml_terbayar;
-        
+
         // TENTUKAN STATUS BERDASARKAN SISA PEMBAYARAN
         // Jika sisa pinjaman <= 0, maka status lunas
         if ($sisa_pinjaman <= 0) {
@@ -520,13 +592,13 @@ function renderTable($data, $type, $idField) {
             $status = $item['status'] ?? 'aktif';
             $status_class = $status == 'aktif' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800';
         }
-        
+
         // Validasi field ID
         $itemId = $item[$idField] ?? null;
         if (!$itemId) {
             continue; // Skip item jika ID tidak valid
         }
-        
+
         $html .= '
             <tr class="hover:bg-gray-50 transition duration-150">
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -558,8 +630,8 @@ function renderTable($data, $type, $idField) {
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
         ';
-        
-        if($status != 'lunas') {
+
+        if ($status != 'lunas') {
             $html .= '
                 <button class="bayar-btn bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg text-sm transition duration-200 flex items-center space-x-2"
                         data-jenis="' . $type . '" 
@@ -576,19 +648,19 @@ function renderTable($data, $type, $idField) {
                 </span>
             ';
         }
-        
+
         $html .= '
                 </td>
             </tr>
         ';
     }
-    
+
     $html .= '
                 </tbody>
             </table>
         </div>
     ';
-    
+
     return $html;
 }
 ?>

@@ -556,6 +556,4 @@ class Extras extends Controller
         exit();
     }
 
-
-
 }

@@ -168,73 +168,94 @@
     <div id="financingModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
         <div class="bg-white p-6 rounded-xl shadow-xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
             <h3 class="text-xl font-bold text-gray-800 mb-4">Pengajuan Pinjaman</h3>
-            <form id="formPembiayaan" class="space-y-4">
-                <!-- CSRF Token -->
-                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Anggota *</label>
-                        <div class="relative">
-                            <input type="text" id="anggotaSearch" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Cari anggota..." autocomplete="off">
-                            <div id="anggotaResults" class="absolute z-10 bg-white border border-gray-300 rounded-md w-full mt-1 max-h-60 overflow-y-auto hidden"></div>
-                            <input type="hidden" id="id_anggota" name="id_anggota" required>
-                        </div>
-                        <div id="selectedAnggota" class="mt-2 p-2 bg-gray-50 rounded hidden">
-                            <span class="text-sm font-medium" id="anggotaNama"></span>
-                            <span class="text-xs text-gray-500 block" id="anggotaKtp"></span>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Akad Syariah *</label>
-                        <select name="akad" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
-                            <option value="">Pilih Akad</option>
-                            <option value="qard">Qard</option>
-                            <option value="murabahah">Murabahah</option>
-                            <option value="mudharabah">Mudharabah</option>
-                        </select>
-                    </div>
-                </div>
+           <form id="formPembiayaan" class="space-y-4">
+    <!-- CSRF Token -->
+    <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Anggota *</label>
+            <div class="relative">
+                <input type="text" id="anggotaSearch" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Cari anggota..." autocomplete="off">
+                <div id="anggotaResults" class="absolute z-10 bg-white border border-gray-300 rounded-md w-full mt-1 max-h-60 overflow-y-auto hidden"></div>
+                <input type="hidden" id="id_anggota" name="id_anggota" required>
+            </div>
+            <div id="selectedAnggota" class="mt-2 p-2 bg-gray-50 rounded hidden">
+                <span class="text-sm font-medium" id="anggotaNama"></span>
+                <span class="text-xs text-gray-500 block" id="anggotaKtp"></span>
+            </div>
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Akad Syariah *</label>
+            <select id="selectAkad" name="akad" onchange="hitungSimulasi()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
+                <option value="">Pilih Akad</option>
+                <option value="qard">Qard (Bebas Margin 0%)</option>
+                <option value="murabahah">Murabahah (Jual Beli - Margin 10%)</option>
+                <option value="mudharabah">Mudharabah (Bagi Hasil 10%)</option>
+            </select>
+        </div>
+    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah Pinjam *</label>
-                        <input type="number" name="jml_pinjam" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="0" min="100000" required>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Tenor (Bulan) *</label>
-                        <select name="tenor" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
-                            <option value="">Pilih Tenor</option>
-                            <option value="3">3 Bulan</option>
-                            <option value="6">6 Bulan</option>
-                            <option value="12">12 Bulan</option>
-                            <option value="24">24 Bulan</option>
-                        </select>
-                    </div>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah Pinjam *</label>
+            <input type="number" id="inputPinjam" name="jml_pinjam" oninput="hitungSimulasi()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Rp 0" min="100000" required>
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tenor (1-24 Bulan) *</label>
+            <select id="selectTenor" name="tenor" onchange="hitungSimulasi()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
+                <option value="">Pilih Tenor</option>
+                <?php for($i = 1; $i <= 24; $i++): ?>
+                    <option value="<?= $i ?>"><?= $i ?> Bulan</option>
+                <?php endfor; ?>
+            </select>
+        </div>
+    </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Keperluan Pinjaman *</label>
-                    <textarea name="keperluan" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" rows="3" placeholder="Jelaskan keperluan pinjam..." required></textarea>
-                </div>
+    <!-- BOX SIMULASI KETARANGAN MARGIN & ANGSURAN (Dinamis) -->
+    <div id="boxSimulasi" class="p-3 bg-emerald-50 rounded-lg border border-emerald-200 hidden">
+        <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2">Rincian & Simulasi Pembiayaan</h4>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+                <span class="text-gray-600 block">Keterangan Margin/Keuntungan:</span>
+                <span id="textRateMargin" class="font-bold text-emerald-700">0%</span>
+            </div>
+            <div>
+                <span class="text-gray-600 block">Nominal Margin:</span>
+                <span id="textNominalMargin" class="font-bold text-emerald-700">Rp 0</span>
+            </div>
+            <div>
+                <span class="text-gray-600 block">Total Pengembalian:</span>
+                <span id="textTotalPinjaman" class="font-bold text-emerald-700">Rp 0</span>
+            </div>
+            <div>
+                <span class="text-gray-600 block">Angsuran per Bulan:</span>
+                <span id="textAngsuranBulanan" class="font-bold text-emerald-700">Rp 0 /bln</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- Tambahkan field tanggal -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal *</label>
-                    <input type="date" name="tanggal" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" value="<?= date('Y-m-d') ?>" required>
-                </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Keperluan Pinjaman *</label>
+        <textarea name="keperluan" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" rows="2" placeholder="Jelaskan keperluan pinjam..." required></textarea>
+    </div>
 
-                <div class="flex space-x-3 pt-4">
-                    <button type="button" onclick="closeModal('financingModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
-                        Batal
-                    </button>
-                    <button type="submit" id="submitBtn" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition-colors">
-                        <i class="fas fa-paper-plane mr-2"></i>Ajukan
-                    </button>
-                </div>
-            </form>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal *</label>
+        <input type="date" name="tanggal" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" value="<?= date('Y-m-d') ?>" required>
+    </div>
+
+    <div class="flex space-x-3 pt-4">
+        <button type="button" onclick="closeModal('financingModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
+            Batal
+        </button>
+        <button type="submit" id="submitBtn" class="flex-1 bg-emerald-600 text-white py-2 rounded-md hover:bg-emerald-700 transition-colors">
+            <i class="fas fa-paper-plane mr-2"></i>Ajukan
+        </button>
+    </div>
+</form>
         </div>
     </div>
 
@@ -459,6 +480,34 @@
             document.getElementById('filterAkad').addEventListener('change', applyFilter);
             document.getElementById('searchNama').addEventListener('input', applyFilter);
         });
+
+        function hitungSimulasi() {
+    const akad = document.getElementById('selectAkad').value;
+    const pinjam = parseFloat(document.getElementById('inputPinjam').value) || 0;
+    const tenor = parseInt(document.getElementById('selectTenor').value) || 0;
+    const box = document.getElementById('boxSimulasi');
+
+    if (!akad || pinjam <= 0 || tenor <= 0) {
+        box.classList.add('hidden');
+        return;
+    }
+
+    let rate = 0;
+    if (akad === 'murabahah' || akad === 'mudharabah') {
+        rate = 0.10; // Margin standar 10%
+    }
+
+    const nominalMargin = pinjam * rate;
+    const totalPengembalian = pinjam + nominalMargin;
+    const angsuranPerBulan = totalPengembalian / tenor;
+
+    document.getElementById('textRateMargin').innerText = (rate * 100) + '% ' + (akad === 'qard' ? '(Kebajikan)' : '(Margin/Bagi Hasil)');
+    document.getElementById('textNominalMargin').innerText = 'Rp ' + Math.round(nominalMargin).toLocaleString('id-ID');
+    document.getElementById('textTotalPinjaman').innerText = 'Rp ' + Math.round(totalPengembalian).toLocaleString('id-ID');
+    document.getElementById('textAngsuranBulanan').innerText = 'Rp ' + Math.round(angsuranPerBulan).toLocaleString('id-ID') + ' /bln';
+
+    box.classList.remove('hidden');
+}
     </script>   
 </body>
 </html>
