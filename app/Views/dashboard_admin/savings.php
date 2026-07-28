@@ -1,178 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simpanan</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-    /* Tab Navigation Styles */
-    .savings-tab-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 20px;
-        border: 2px solid #e5e7eb;
-        border-radius: 8px;
-        background: white;
-        color: #6b7280;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+        /* Tab Navigation Styles */
+        .savings-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #6b7280;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    .savings-tab-btn:hover {
-        border-color: #10b981;
-        color: #10b981;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
-    }
+        .savings-tab-btn:hover {
+            border-color: #10b981;
+            color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
 
-    .savings-tab-btn.active {
-        border-color: #10b981;
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
+        .savings-tab-btn.active {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
 
-    /* Stat Card Styles */
-    .savings-stat-card {
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
+        /* Stat Card Styles */
+        .savings-stat-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
-    .savings-stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    }
+        .savings-stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Jenis Selection Buttons in Modal */
-    .jenis-select-btn {
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-    }
+        /* Jenis Selection Buttons in Modal */
+        .jenis-select-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
 
-    .jenis-select-btn div {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
+        .jenis-select-btn div {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
 
-    .jenis-select-btn.active div {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+        .jenis-select-btn.active div {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-    .jenis-select-btn i {
-        display: block;
-    }
+        .jenis-select-btn i {
+            display: block;
+        }
 
-    /* Table row hover effect */
-    tbody tr {
-        transition: background-color 0.2s ease;
-    }
+        /* Table row hover effect */
+        tbody tr {
+            transition: background-color 0.2s ease;
+        }
 
-    tbody tr:hover {
-        background-color: #f9fafb;
-    }
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
 
-    /* Jenis badge styling */
-    .jenis-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-    }
+        /* Jenis badge styling */
+        .jenis-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
 
-    .jenis-badge.pokok {
-        background: #dcfce7;
-        color: #15803d;
-    }
+        .jenis-badge.pokok {
+            background: #dcfce7;
+            color: #15803d;
+        }
 
-    .jenis-badge.wajib {
-        background: #dbeafe;
-        color: #1e40af;
-    }
+        .jenis-badge.wajib {
+            background: #dbeafe;
+            color: #1e40af;
+        }
 
-    .jenis-badge.sukarela {
-        background: #f3e8ff;
-        color: #7e22ce;
-    }
+        .jenis-badge.sukarela {
+            background: #f3e8ff;
+            color: #7e22ce;
+        }
 
-    .action-buttons {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-    }
-    
-    .btn-detail {
-        background: #3b82f6;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 12px;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-weight: 600;
-    }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
 
-    .btn-detail:hover {
-        background: #2563eb;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
-    }
+        .btn-detail {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
 
-    .btn-delete {
-        background: #ef4444;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 12px;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-weight: 600;
-    }
-    
-    .btn-delete:hover {
-        background: #dc2626;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
-    }
+        .btn-detail:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
 
-    /* Empty state styling */
-    .empty-state {
-        text-align: center;
-        padding: 40px 20px;
-    }
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
 
-    .empty-state i {
-        font-size: 48px;
-        color: #d1d5db;
-        margin-bottom: 16px;
-    }
+        .btn-delete:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+        }
 
-    .empty-state p {
-        color: #6b7280;
-        margin-bottom: 8px;
-    }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: #d1d5db;
+            margin-bottom: 16px;
+        }
+
+        .empty-state p {
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
+
 <body>
     <div class="mb-6">
         <h2 class="text-3xl font-bold text-gray-800 mb-2">Manajemen Simpanan</h2>
@@ -195,7 +196,7 @@
         </button>
     </div>
 
-    <!-- Stat Cards (Tetap 4 Card Selalu Tampil) -->
+    <!-- Stat Cards -->
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
         <!-- Card Simpanan Pokok -->
         <div class="savings-stat-card bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl shadow-md border-l-4 border-emerald-600" onclick="switchTab('pokok')">
@@ -269,7 +270,7 @@
                     <i class="fas fa-plus"></i>Input Simpanan
                 </button>
             </div>
-            
+
             <!-- Filter Section -->
             <div class="bg-gray-50 p-4 rounded-lg mb-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
@@ -278,12 +279,7 @@
                             <i class="fas fa-filter mr-1"></i>Cari Anggota
                         </label>
                         <div class="relative">
-                            <input 
-                                id="filterSearchAnggota" 
-                                type="text" 
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" 
-                                placeholder="Nama atau nomor KTP..."
-                            >
+                            <input id="filterSearchAnggota" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Nama atau nomor KTP...">
                             <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
                         </div>
                     </div>
@@ -293,7 +289,7 @@
                         </label>
                         <select id="filterAnggota" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
                             <option value="all">Semua Anggota</option>
-                            <?php foreach($anggotaList ?? [] as $anggota): ?>
+                            <?php foreach ($anggotaList ?? [] as $anggota): ?>
                                 <option value="<?= $anggota['id_anggota'] ?>"><?= $anggota['nama_lengkap'] ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -306,7 +302,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Table -->
         <div class="overflow-x-auto">
             <table class="w-full">
@@ -356,7 +352,7 @@
             <div class="mb-6 grid grid-cols-3 gap-2" id="jenisVisualGroup">
                 <button type="button" class="jenis-select-btn group" data-jenis="pokok" onclick="selectJenis('pokok')">
                     <div class="p-3 rounded-lg border-2 border-gray-200 group-hover:border-emerald-500 transition-all cursor-pointer">
-                        <i class="fas fa-piggy-bank text-2xl text-emerald-600 mb-2 block"></i>
+                        <i class="fas fa-money-bill-wave text-2xl text-emerald-600 mb-2 block"></i>
                         <span class="text-xs font-semibold text-gray-700">Pokok</span>
                     </div>
                 </button>
@@ -378,6 +374,7 @@
                 <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                 <input type="hidden" id="jenisSelect" name="jenis" value="">
 
+                <!-- Field Tenor Simpanan Pokok -->
                 <div id="tenorGroup" class="hidden">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
                         <i class="fas fa-hourglass-half mr-1"></i>Tenor (bulan)
@@ -392,9 +389,10 @@
                     <p class="text-xs text-gray-500 mt-2"><i class="fas fa-info-circle mr-1"></i>Pilih tenor simpanan pokok dari 1 sampai 12 bulan.</p>
                 </div>
 
+                <!-- Field Pilih / Cari Anggota -->
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        <i class="fas fa-users mr-1"></i>Anggota
+                        <i class="fas fa-users mr-1"></i>Anggota *
                     </label>
                     <div class="relative">
                         <input id="anggotaSearch" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Cari nama anggota..." autocomplete="off">
@@ -408,11 +406,52 @@
                     </div>
                 </div>
 
+                <!-- CARD INFO DINAMIS KHUSUS SIMPANAN WAJIB -->
+                <div id="infoWajibCard" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs space-y-1.5 transition-all">
+                    <div class="flex justify-between items-center text-blue-900 border-b border-blue-200 pb-1.5">
+                        <span class="font-semibold"><i class="fas fa-info-circle mr-1"></i>Posisi Simpanan Wajib:</span>
+                        <span id="textWajibKe" class="font-bold text-sm bg-blue-200 px-2 py-0.5 rounded text-blue-900">Ke-1</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Total Terkumpul Saat Ini:</span>
+                        <span id="textTotalWajibLama" class="font-bold text-gray-800">Rp 0</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600">
+                        <span>Standar Wajib Bulanan:</span>
+                        <span class="font-semibold text-gray-800">Rp 50.000 / bulan</span>
+                    </div>
+                </div>
+
+                <!-- Field Input Jumlah Rp -->
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        <i class="fas fa-money-bill mr-1"></i>Jumlah (Rp)
+                        <i class="fas fa-money-bill mr-1"></i>Jumlah Simpanan (Rp) *
                     </label>
-                    <input id="jumlahInput" name="jumlah" type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent" min="1" placeholder="0" required>
+                    <input id="jumlahInput" name="jumlah" type="number" oninput="hitungSimulasiWajib()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-base font-bold text-gray-800" min="1" placeholder="0" required>
+
+                    <!-- Pilihan Cepat Nominal Wajib -->
+                    <div id="quickSelectWajib" class="hidden grid-cols-4 gap-2 mt-2">
+                        <button type="button" onclick="setQuickWajib(50000)" class="py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded text-xs font-semibold hover:bg-blue-100">1 Bln (50rb)</button>
+                        <button type="button" onclick="setQuickWajib(100000)" class="py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded text-xs font-semibold hover:bg-blue-100">2 Bln (100rb)</button>
+                        <button type="button" onclick="setQuickWajib(150000)" class="py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded text-xs font-semibold hover:bg-blue-100">3 Bln (150rb)</button>
+                        <button type="button" onclick="setQuickWajib(300000)" class="py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded text-xs font-semibold hover:bg-blue-100">6 Bln (300rb)</button>
+                    </div>
+                </div>
+
+                <!-- PREVIEW HASIL SETELAH INPUT -->
+                <div id="previewWajibResult" class="hidden bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-xs space-y-1">
+                    <div class="flex justify-between text-gray-700">
+                        <span>Setara Tambahan:</span>
+                        <span id="textSetaraBulan" class="font-bold text-emerald-800">0 Bulan</span>
+                    </div>
+                    <div class="flex justify-between text-gray-700">
+                        <span>Total Baru Setelah Simpan:</span>
+                        <span id="textTotalWajibBaru" class="font-bold text-emerald-800">Rp 0</span>
+                    </div>
+                    <div class="flex justify-between text-gray-700">
+                        <span>Menjadi Simpanan Wajib Ke:</span>
+                        <span id="textWajibKeBaru" class="font-bold text-emerald-900">Ke-1</span>
+                    </div>
                 </div>
 
                 <div id="pokokInfo" class="hidden rounded-md p-3 text-sm">
@@ -429,60 +468,71 @@
 
     <!-- MODAL DETAIL RIWAYAT TRANSAKSI -->
     <div id="historyModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
-        <div class="bg-white p-6 rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-y-auto max-h-[90vh]">
-            <div class="flex justify-between items-center mb-4 border-b pb-3 border-gray-200">
-                <div>
-                    <h3 class="text-xl font-bold text-gray-800" id="detailNamaAnggota">Detail Riwayat Simpanan</h3>
-                    <p class="text-xs text-gray-500 mt-1" id="detailJenisSimpanan">Rincian seluruh transaksi simpanan</p>
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-2xl w-full mx-4 overflow-y-auto max-h-[90vh] border border-gray-100">
+            <div class="flex justify-between items-start mb-5 pb-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800" id="detailNamaAnggota">Detail Riwayat Simpanan</h3>
+                        <p class="text-xs text-gray-500 font-medium mt-0.5" id="detailJenisSimpanan">Rincian seluruh transaksi simpanan</p>
+                    </div>
                 </div>
-                <button onclick="closeModal('historyModal')" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times text-lg"></i>
+                <button onclick="closeModal('historyModal')" class="text-gray-400 hover:text-gray-600 p-1.5 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
 
-            <!-- Ringkasan Singkat Modal -->
-            <div class="bg-gray-50 p-4 rounded-lg mb-4 flex justify-between items-center border border-gray-200">
-                <div>
-                    <span class="text-xs text-gray-500 font-semibold block uppercase">Total Terkumpul</span>
-                    <span class="text-lg font-bold text-emerald-600" id="detailTotalNominal">Rp 0</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-3.5">
+                    <span class="text-[11px] text-emerald-700 font-bold uppercase tracking-wider block mb-1">Total Terkumpul</span>
+                    <span class="text-lg font-extrabold text-emerald-800 block" id="detailTotalNominal">Rp 0</span>
                 </div>
-                <div>
-                    <span class="text-xs text-gray-500 font-semibold block uppercase">Total Transaksi</span>
-                    <span class="text-lg font-bold text-gray-800" id="detailTotalFrekuensi">0x</span>
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-3.5">
+                    <span class="text-[11px] text-blue-700 font-bold uppercase tracking-wider block mb-1" id="detailLabelKeBerapa">Simpanan Ke-</span>
+                    <span class="text-lg font-extrabold text-blue-800 block" id="detailStatusKeBerapa">Ke-1</span>
+                </div>
+                <div class="bg-purple-50 border border-purple-100 rounded-xl p-3.5">
+                    <span class="text-[11px] text-purple-700 font-bold uppercase tracking-wider block mb-1">Total Transaksi</span>
+                    <span class="text-lg font-extrabold text-purple-800 block" id="detailTotalFrekuensi">0x</span>
                 </div>
             </div>
 
-            <!-- Tabel Riwayat Transaksi Modal -->
-            <div class="overflow-x-auto border rounded-lg">
-                <table class="w-full text-sm text-left text-gray-600">
-                    <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+            <div class="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-gray-50 text-gray-700 uppercase text-[11px] font-bold tracking-wider border-b border-gray-200">
                         <tr>
-                            <th class="px-4 py-3">Ke-</th>
-                            <th class="px-4 py-3">Tanggal Transaksi</th>
-                            <th class="px-4 py-3">Jumlah (Rp)</th>
-                            <th class="px-4 py-3 text-center">Aksi</th>
+                            <th class="px-5 py-3">Urutan</th>
+                            <th class="px-5 py-3">Tanggal Transaksi</th>
+                            <th class="px-5 py-3 text-right">Nominal (Rp)</th>
+                            <th class="px-5 py-3 text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="historyTableBody" class="divide-y divide-gray-200 bg-white">
-                        <!-- Diisi via JavaScript -->
+                    <tbody id="historyTableBody" class="divide-y divide-gray-100 bg-white">
                     </tbody>
                 </table>
             </div>
 
-            <div class="pt-4 mt-4 border-t border-gray-200 flex justify-end">
-                <button type="button" onclick="closeModal('historyModal')" class="bg-gray-600 text-white px-5 py-2 rounded-md hover:bg-gray-700 transition-colors text-sm font-semibold">Tutup</button>
+            <div class="pt-4 mt-5 border-t border-gray-100 flex justify-between items-center">
+                <span class="text-xs text-gray-400"><i class="fas fa-shield-alt mr-1"></i>Data tercatat secara otomatis</span>
+                <button type="button" onclick="closeModal('historyModal')" class="bg-gray-800 text-white px-5 py-2 rounded-xl hover:bg-gray-900 transition-colors text-sm font-semibold shadow-md">
+                    Tutup
+                </button>
             </div>
         </div>
     </div>
 
-    <script>
+<script>
     let currentTab = 'pokok';
     let isSubmitting = false;
-    let rawSimpananData = []; // Menyimpan data mentah dari backend untuk modal detail
+    let rawSimpananData = [];
+    let currentWajibAnggotaTotal = 0;
+    const STANDAR_WAJIB = 50000;
 
     function switchTab(tab) {
         currentTab = tab;
-        
+
         document.querySelectorAll('.savings-tab-btn').forEach(btn => {
             btn.classList.remove('active');
         });
@@ -498,7 +548,6 @@
         document.getElementById('tabTitle').textContent = titles[tab];
 
         addHiddenFilterJenis(tab);
-        
         document.getElementById('filterAnggota').value = 'all';
         loadSimpanan();
     }
@@ -535,55 +584,63 @@
     function resetForm() {
         const form = document.getElementById('formSimpanan');
         if (form) form.reset();
-        
+
         document.querySelectorAll('.jenis-select-btn').forEach(btn => {
             btn.classList.remove('active');
-            btn.querySelector('div').className = 'p-3 rounded-lg border-2 border-gray-200 group-hover:border-gray-500 transition-all cursor-pointer';
+            const div = btn.querySelector('div');
+            if (div) {
+                div.className = 'p-3 rounded-lg border-2 border-gray-200 group-hover:border-gray-500 transition-all cursor-pointer';
+                div.style.borderColor = '';
+                div.style.backgroundColor = '';
+            }
         });
-        
+
         const tenorInput = document.getElementById('tenorSelect');
         const tenorHidden = document.getElementById('tenorHidden');
         if (tenorInput) {
             tenorInput.required = false;
             tenorInput.value = '';
             tenorInput.disabled = false;
+            tenorInput.removeAttribute('name'); // Mencegah nama 'tenor' bentrok dari select kosong
         }
         if (tenorHidden) tenorHidden.value = '';
-        
+
         const anggotaSelect = document.getElementById('anggotaSelect');
         if (anggotaSelect) anggotaSelect.value = '';
-        
+
         const anggotaResults = document.getElementById('anggotaResults');
         if (anggotaResults) {
             anggotaResults.innerHTML = '';
             anggotaResults.classList.add('hidden');
         }
-        
+
         const anggotaSearch = document.getElementById('anggotaSearch');
         if (anggotaSearch) {
             anggotaSearch.value = '';
             anggotaSearch.disabled = false;
             anggotaSearch.placeholder = 'Cari nama anggota...';
         }
-        
+
         const semuaBtn = document.getElementById('semuaAnggotaBtn');
         if (semuaBtn) {
             semuaBtn.classList.remove('bg-emerald-600', 'text-white');
             semuaBtn.classList.add('bg-blue-100', 'text-blue-700');
             semuaBtn.textContent = 'Semua Anggota';
         }
-        
+
         const anggotaInfo = document.getElementById('anggotaInfo');
         if (anggotaInfo) {
             anggotaInfo.classList.add('hidden');
             anggotaInfo.innerHTML = '';
         }
-        
+
         const jenisSelect = document.getElementById('jenisSelect');
         if (jenisSelect) jenisSelect.value = '';
-        
+
+        currentWajibAnggotaTotal = 0;
         resetPokokInfo();
-        
+        checkAndSetupWajibUI();
+
         isSubmitting = false;
         const simpanBtn = document.getElementById('simpanBtn');
         if (simpanBtn) {
@@ -594,7 +651,7 @@
 
     function selectJenis(jenis) {
         document.getElementById('jenisSelect').value = jenis;
-        
+
         document.querySelectorAll('.jenis-select-btn').forEach(btn => {
             const div = btn.querySelector('div');
             if (btn.dataset.jenis === jenis) {
@@ -611,21 +668,28 @@
                 }
             } else {
                 btn.classList.remove('active');
-                div.className = 'p-3 rounded-lg border-2 border-gray-200 group-hover:border-gray-500 transition-all cursor-pointer';
-                div.style.borderColor = '';
-                div.style.backgroundColor = '';
+                if (div) {
+                    div.className = 'p-3 rounded-lg border-2 border-gray-200 group-hover:border-gray-500 transition-all cursor-pointer';
+                    div.style.borderColor = '';
+                    div.style.backgroundColor = '';
+                }
             }
         });
-        
+
+        runDynamicCalculations();
+    }
+
+    function runDynamicCalculations() {
         toggleTenorField();
         checkSimpananPokok();
+        checkAndSetupWajibUI();
     }
 
     function resetPokokInfo() {
         const pokokInfo = document.getElementById('pokokInfo');
         const pokokDetail = document.getElementById('pokokDetail');
         const jumlahInput = document.getElementById('jumlahInput');
-        
+
         if (pokokInfo) pokokInfo.classList.add('hidden');
         if (pokokDetail) pokokDetail.innerHTML = '';
         if (jumlahInput) {
@@ -640,179 +704,280 @@
         return 'Rp ' + number.toLocaleString('id-ID');
     }
 
-    function checkSimpananPokok() {
-        const jenis = document.getElementById('jenisSelect').value;
-        const idAnggota = document.getElementById('anggotaSelect').value;
-        const jumlahInput = document.getElementById('jumlahInput');
-        const simpanBtn = document.getElementById('simpanBtn');
-        
-        if (jenis === 'pokok' && idAnggota && idAnggota !== 'all') {
-            fetch(`<?= base_url('admin/checkSimpananPokok/') ?>${idAnggota}`)
-                .then(res => res.json())
-                .then(data => {
-                    const pokokInfo = document.getElementById('pokokInfo');
-                    const pokokDetail = document.getElementById('pokokDetail');
-                    
-                    if (data.success) {
-                        pokokInfo.classList.remove('hidden');
-                        
-                        if (data.isLunas) {
-                            pokokInfo.className = 'bg-red-50 border border-red-200 rounded-md p-3';
-                            pokokDetail.innerHTML = `
-                                <div class="text-red-700">
-                                    <strong><i class="fas fa-exclamation-triangle mr-1"></i>ANGGOTA SUDAH LUNAS!</strong><br>
-                                    Total simpanan: ${formatRupiah(data.total)}<br>
-                                    <strong>Tidak dapat input simpanan pokok lagi.</strong>
-                                </div>
-                            `;
-                            simpanBtn.disabled = true;
-                            jumlahInput.disabled = true;
-                        } else {
-                            pokokInfo.className = 'bg-blue-50 border border-blue-200 rounded-md p-3';
-                            const nextInstallment = data.count + 1;
-                            const existingTenor = data.existingTenor ? parseInt(data.existingTenor) : null;
-                            const tenorSelect = document.getElementById('tenorSelect');
-                            const tenorHidden = document.getElementById('tenorHidden');
+   function checkSimpananPokok() {
+    const jenis = document.getElementById('jenisSelect').value;
+    const idAnggota = document.getElementById('anggotaSelect').value;
+    const jumlahInput = document.getElementById('jumlahInput');
+    const simpanBtn = document.getElementById('simpanBtn');
+    const tenorGroup = document.getElementById('tenorGroup');
+    const tenorSelect = document.getElementById('tenorSelect');
+    const tenorHidden = document.getElementById('tenorHidden');
 
+    if (jenis === 'pokok' && idAnggota && idAnggota !== 'all') {
+        fetch(`<?= base_url('admin/checkSimpananPokok/') ?>${idAnggota}`)
+            .then(res => res.json())
+            .then(data => {
+                const pokokInfo = document.getElementById('pokokInfo');
+                const pokokDetail = document.getElementById('pokokDetail');
+
+                if (data.success) {
+                    pokokInfo.classList.remove('hidden');
+
+                    if (data.isLunas) {
+                        pokokInfo.className = 'bg-red-50 border border-red-200 rounded-md p-3 text-xs';
+                        pokokDetail.innerHTML = `
+                            <div class="text-red-700">
+                                <strong><i class="fas fa-exclamation-triangle mr-1"></i>SIMPANAN POKOK SUDAH LUNAS!</strong><br>
+                                • Total Tersimpan: <strong>${formatRupiah(data.total)}</strong><br>
+                                • Batas Maksimal: ${formatRupiah(data.max_limit)}<br>
+                                <span class="text-red-600 font-semibold mt-1 block">Tidak dapat menginput simpanan pokok lagi.</span>
+                            </div>
+                        `;
+                        simpanBtn.disabled = true;
+                        jumlahInput.disabled = true;
+                        if (tenorGroup) tenorGroup.classList.add('hidden');
+                    } else {
+                        pokokInfo.className = 'bg-blue-50 border border-blue-200 rounded-md p-3 text-xs';
+                        
+                        const existingCount = parseInt(data.count) || 0;
+                        const existingTenorVal = parseInt(data.existingTenor) || 0;
+
+                        // Angsuran Ke-1 jika belum ada transaksi (total tersimpan = 0)
+                        const isFirstInstallment = (existingCount === 0 || parseFloat(data.total) === 0);
+                        const currentInstallment = isFirstInstallment ? 1 : (existingCount + 1);
+
+                        const infoTenorText = tenorGroup ? tenorGroup.querySelector('p') : null;
+
+                        let tenorText = '';
+
+                        if (isFirstInstallment) {
+                            // ANGSURAN KE-1: Bebas Pilih Tenor, Keterangan Terkunci MATI
+                            if (tenorGroup) tenorGroup.classList.remove('hidden');
                             if (tenorSelect) {
                                 tenorSelect.disabled = false;
-                                tenorSelect.value = '';
-                                if (existingTenor) {
-                                    tenorSelect.value = existingTenor;
-                                    tenorSelect.disabled = true;
-                                }
-                                if (tenorHidden) {
-                                    tenorHidden.value = existingTenor ? String(existingTenor) : '';
-                                }
+                                tenorSelect.required = true;
+                                tenorSelect.setAttribute('name', 'tenor');
                             }
-
-                            const tenorText = existingTenor ? ` dari tenor ${existingTenor} bulan` : '';
-                            const tenorHint = existingTenor ? '<br>• Tenor dikunci karena sudah dipilih sebelumnya.' : '';
-                            pokokDetail.innerHTML = `
-                                <div class="text-blue-700">
-                                    <strong>Informasi Simpanan Pokok:</strong><br>
-                                    • Total simpanan: ${formatRupiah(data.total)}<br>
-                                    • Batas maksimal: ${formatRupiah(data.max_limit)}<br>
-                                    • <strong>Sisa yang bisa diinput: ${formatRupiah(data.sisa)}</strong><br>
-                                    • <strong>Simpanan berikutnya: ke-${nextInstallment}${tenorText}</strong>
-                                    ${tenorHint}
-                                </div>
-                            `;
-                            simpanBtn.disabled = false;
-                            jumlahInput.disabled = false;
-                            
-                            if (data.sisa > 0) {
-                                jumlahInput.max = data.sisa;
-                            } else {
-                                jumlahInput.disabled = true;
-                                simpanBtn.disabled = true;
+                            if (tenorHidden) {
+                                tenorHidden.removeAttribute('name');
+                                tenorHidden.value = '';
                             }
-                        }
-                    }
-                })
-                .catch(err => console.error('Error checking simpanan pokok:', err));
-        } else if (jenis === 'pokok' && idAnggota === 'all') {
-            const pokokInfo = document.getElementById('pokokInfo');
-            const pokokDetail = document.getElementById('pokokDetail');
-            pokokInfo.classList.remove('hidden');
-            pokokInfo.className = 'bg-yellow-50 border border-yellow-200 rounded-md p-3';
-            pokokDetail.innerHTML = `
-                <div class="text-yellow-700">
-                    <strong><i class="fas fa-info-circle mr-1"></i>Input untuk Semua Anggota:</strong><br>
-                    • Simpanan akan diinput hanya untuk anggota yang belum lunas<br>
-                    • Anggota yang sudah lunas dilewati secara otomatis
-                </div>
-            `;
-            simpanBtn.disabled = false;
-            jumlahInput.disabled = false;
-            jumlahInput.removeAttribute('max');
-        } else if ((jenis === 'wajib' || jenis === 'sukarela') && idAnggota && idAnggota !== 'all') {
-            fetch(`<?= base_url('admin/checkSimpananPokok/') ?>${idAnggota}`)
-                .then(res => res.json())
-                .then(data => {
-                    const pokokInfo = document.getElementById('pokokInfo');
-                    const pokokDetail = document.getElementById('pokokDetail');
-                    
-                    if (data.success) {
-                        pokokInfo.classList.remove('hidden');
-                        
-                        if (!data.isLunas) {
-                            pokokInfo.className = 'bg-red-50 border border-red-200 rounded-md p-3';
-                            pokokDetail.innerHTML = `
-                                <div class="text-red-700">
-                                    <strong><i class="fas fa-exclamation-triangle mr-1"></i>TIDAK DAPAT INPUT SIMPANAN ${jenis.toUpperCase()}!</strong><br>
-                                    • Total simpanan pokok: ${formatRupiah(data.total)}<br>
-                                    • <strong>Harus lunasi simpanan pokok terlebih dahulu!</strong>
-                                </div>
-                            `;
-                            simpanBtn.disabled = true;
-                            jumlahInput.disabled = true;
+                            if (infoTenorText) {
+                                infoTenorText.innerHTML = '<i class="fas fa-info-circle mr-1"></i>Pilih tenor simpanan pokok dari 1 sampai 12 bulan.';
+                                infoTenorText.className = 'text-xs text-gray-500 mt-2';
+                            }
+                            // Teks kunci di card biru disosongkan
+                            tenorText = ''; 
                         } else {
-                            pokokInfo.className = 'bg-green-50 border border-green-200 rounded-md p-3';
-                            pokokDetail.innerHTML = `
-                                <div class="text-green-700">
-                                    <strong><i class="fas fa-check-circle mr-1"></i>SIAP INPUT SIMPANAN ${jenis.toUpperCase()}</strong><br>
-                                    • Simpanan pokok sudah lunas: ${formatRupiah(data.total)}
+                            // ANGSURAN KE-2 DST: Tenor Dikunci Sesuai Transaksi Awal
+                            if (tenorGroup) tenorGroup.classList.remove('hidden');
+                            if (tenorSelect) {
+                                tenorSelect.value = existingTenorVal;
+                                tenorSelect.disabled = true; // Dikunci
+                                tenorSelect.required = false;
+                                tenorSelect.removeAttribute('name');
+                            }
+                            if (tenorHidden) {
+                                tenorHidden.setAttribute('name', 'tenor');
+                                tenorHidden.value = existingTenorVal;
+                            }
+                            if (infoTenorText) {
+                                infoTenorText.innerHTML = `<i class="fas fa-lock mr-1 text-amber-600"></i>Tenor otomatis terkunci dari transaksi awal (<strong>${existingTenorVal} Bulan</strong>).`;
+                                infoTenorText.className = 'text-xs text-amber-700 font-semibold mt-2';
+                            }
+                            // Teks kunci baru tampil jika benar-benar angsuran ke-2+
+                            tenorText = existingTenorVal > 0 ? ` (Tenor Terkunci: ${existingTenorVal} Bulan)` : '';
+                        }
+
+                        pokokDetail.innerHTML = `
+                            <div class="text-blue-900 space-y-1">
+                                <div class="flex justify-between border-b border-blue-200 pb-1 font-bold">
+                                    <span><i class="fas fa-piggy-bank mr-1"></i>Posisi Simpanan Pokok:</span>
+                                    <span class="bg-blue-200 px-2 py-0.5 rounded text-blue-900">Angsuran Ke-${currentInstallment}${tenorText}</span>
                                 </div>
-                            `;
-                            simpanBtn.disabled = false;
-                            jumlahInput.disabled = false;
-                            jumlahInput.removeAttribute('max');
+                                <div class="flex justify-between pt-1 text-gray-700">
+                                    <span>Total Tersimpan Saat Ini:</span>
+                                    <span class="font-bold text-gray-900">${formatRupiah(data.total)}</span>
+                                </div>
+                                <div class="flex justify-between text-gray-700">
+                                    <span>Sisa Yang Harus Dibayar:</span>
+                                    <span class="font-bold text-blue-700">${formatRupiah(data.sisa)}</span>
+                                </div>
+                            </div>
+                        `;
+
+                        simpanBtn.disabled = false;
+                        jumlahInput.disabled = false;
+                        if (data.sisa > 0) {
+                            jumlahInput.max = data.sisa;
                         }
                     }
-                })
-                .catch(err => console.error('Error checking simpanan pokok:', err));
-        } else {
-            resetPokokInfo();
-            simpanBtn.disabled = false;
-            jumlahInput.disabled = false;
-            jumlahInput.removeAttribute('max');
+                }
+            })
+            .catch(err => console.error('Error checking simpanan pokok:', err));
+    } else if ((jenis === 'wajib' || jenis === 'sukarela') && idAnggota && idAnggota !== 'all') {
+        fetch(`<?= base_url('admin/checkSimpananPokok/') ?>${idAnggota}`)
+            .then(res => res.json())
+            .then(data => {
+                const pokokInfo = document.getElementById('pokokInfo');
+                const pokokDetail = document.getElementById('pokokDetail');
+
+                if (data.success) {
+                    pokokInfo.classList.remove('hidden');
+
+                    if (!data.isLunas) {
+                        pokokInfo.className = 'bg-red-50 border border-red-200 rounded-md p-3 text-xs';
+                        pokokDetail.innerHTML = `
+                            <div class="text-red-700">
+                                <strong><i class="fas fa-exclamation-triangle mr-1"></i>BELUM BISA INPUT SIMPANAN ${jenis.toUpperCase()}!</strong><br>
+                                • Total Simpanan Pokok Saat Ini: <strong>${formatRupiah(data.total)}</strong><br>
+                                • <strong>Anggota harus melunasi Simpanan Pokok (${formatRupiah(data.max_limit)}) terlebih dahulu.</strong>
+                            </div>
+                        `;
+                        simpanBtn.disabled = true;
+                        jumlahInput.disabled = true;
+                    } else {
+                        pokokInfo.className = 'bg-green-50 border border-green-200 rounded-md p-3 text-xs';
+                        pokokDetail.innerHTML = `
+                            <div class="text-green-800 flex justify-between items-center">
+                                <span><i class="fas fa-check-circle mr-1 text-green-600"></i>Syarat Lunas Simpanan Pokok Terpenuhi</span>
+                                <span class="font-bold">${formatRupiah(data.total)}</span>
+                            </div>
+                        `;
+                        simpanBtn.disabled = false;
+                        jumlahInput.disabled = false;
+                        jumlahInput.removeAttribute('max');
+                    }
+                }
+            });
+    } else {
+        resetPokokInfo();
+        simpanBtn.disabled = false;
+        jumlahInput.disabled = false;
+        jumlahInput.removeAttribute('max');
+    }
+}
+    function checkAndSetupWajibUI() {
+        const jenis = document.getElementById('jenisSelect')?.value;
+        const idAnggota = document.getElementById('anggotaSelect')?.value;
+        const infoCard = document.getElementById('infoWajibCard');
+        const quickSelect = document.getElementById('quickSelectWajib');
+        const previewResult = document.getElementById('previewWajibResult');
+
+        if (jenis === 'wajib') {
+            if (quickSelect) {
+                quickSelect.classList.remove('hidden');
+                quickSelect.classList.add('grid');
+            }
+
+            if (idAnggota && idAnggota !== 'all') {
+                fetch(`<?= base_url('admin/getSimpananList') ?>?jenis=wajib&id_anggota=${idAnggota}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const wajibList = data || [];
+                        
+                        // KUNCI UTAMA: Membaca beragam kemungkinan nama field nominal dari backend PHP
+                        currentWajibAnggotaTotal = wajibList.reduce((acc, curr) => {
+                            const val = parseFloat(curr.jumlah || curr.nominal || curr.total_jumlah || curr.total || 0);
+                            return acc + val;
+                        }, 0);
+
+                        const bulanTercover = Math.floor(currentWajibAnggotaTotal / STANDAR_WAJIB);
+                        const wajibKeBerikutnya = bulanTercover + 1;
+
+                        const textWajibKe = document.getElementById('textWajibKe');
+                        const textTotalWajibLama = document.getElementById('textTotalWajibLama');
+
+                        if (textWajibKe) textWajibKe.innerHTML = `Ke-<b>${wajibKeBerikutnya}</b> (${wajibList.length}x Transaksi)`;
+                        if (textTotalWajibLama) textTotalWajibLama.innerText = formatRupiah(currentWajibAnggotaTotal);
+
+                        if (infoCard) infoCard.classList.remove('hidden');
+                        hitungSimulasiWajib();
+                    })
+                    .catch(err => {
+                        console.error('Error fetching data wajib:', err);
+                        if (infoCard) infoCard.classList.add('hidden');
+                    });
+                return;
+            }
         }
+
+        if (infoCard) infoCard.classList.add('hidden');
+        if (quickSelect) {
+            quickSelect.classList.add('hidden');
+            quickSelect.classList.remove('grid');
+        }
+        if (previewResult) previewResult.classList.add('hidden');
+    }
+
+    function setQuickWajib(nominal) {
+        document.getElementById('jumlahInput').value = nominal;
+        hitungSimulasiWajib();
+    }
+
+    function hitungSimulasiWajib() {
+        const jenis = document.getElementById('jenisSelect').value;
+        const inputVal = parseFloat(document.getElementById('jumlahInput').value) || 0;
+        const previewResult = document.getElementById('previewWajibResult');
+
+        if (jenis !== 'wajib' || inputVal <= 0) {
+            if (previewResult) previewResult.classList.add('hidden');
+            return;
+        }
+
+        const setaraBulan = (inputVal / STANDAR_WAJIB).toFixed(1);
+        const totalBaru = currentWajibAnggotaTotal + inputVal;
+        const wajibKeBaru = Math.floor(totalBaru / STANDAR_WAJIB);
+
+        document.getElementById('textSetaraBulan').innerText = `${setaraBulan} Bulan Simpanan`;
+        document.getElementById('textTotalWajibBaru').innerText = formatRupiah(totalBaru);
+        document.getElementById('textWajibKeBaru').innerText = `Ke-${wajibKeBaru > 0 ? wajibKeBaru : 1}`;
+
+        if (previewResult) previewResult.classList.remove('hidden');
     }
 
     function toggleTenorField() {
-        const jenisSelect = document.getElementById('jenisSelect');
-        const tenorGroup = document.getElementById('tenorGroup');
-        const tenorInput = document.getElementById('tenorSelect');
-        const tenorHidden = document.getElementById('tenorHidden');
-        const semuaBtn = document.getElementById('semuaAnggotaBtn');
-        const anggotaSelected = document.getElementById('anggotaSelect')?.value;
+    const jenisSelect = document.getElementById('jenisSelect');
+    const tenorGroup = document.getElementById('tenorGroup');
+    const tenorInput = document.getElementById('tenorSelect');
+    const semuaBtn = document.getElementById('semuaAnggotaBtn');
+    const idAnggota = document.getElementById('anggotaSelect')?.value;
 
-        if (!jenisSelect || !tenorGroup || !tenorInput) return;
+    if (!jenisSelect || !tenorGroup || !tenorInput) return;
 
-        if (jenisSelect.value === 'pokok' && (anggotaSelected || anggotaSelected === 'all')) {
+    if (jenisSelect.value === 'pokok') {
+        // Hanya buka grup tenor secara manual jika Belum Memilih Anggota
+        if (!idAnggota || idAnggota === 'all') {
             tenorGroup.classList.remove('hidden');
             tenorInput.required = true;
-            if (tenorHidden) tenorHidden.value = tenorInput.value || '';
-            if (semuaBtn) semuaBtn.classList.remove('hidden');
-        } else {
-            tenorGroup.classList.add('hidden');
-            tenorInput.required = false;
-            tenorInput.value = '';
-            tenorInput.disabled = false;
-            if (tenorHidden) tenorHidden.value = '';
-            if (semuaBtn) {
-                if (jenisSelect.value === 'wajib') {
-                    semuaBtn.classList.remove('hidden');
-                } else {
-                    semuaBtn.classList.add('hidden');
-                }
+        }
+        if (semuaBtn) semuaBtn.classList.remove('hidden');
+    } else {
+        tenorGroup.classList.add('hidden');
+        tenorInput.required = false;
+        tenorInput.value = '';
+        tenorInput.disabled = false;
+        if (semuaBtn) {
+            if (jenisSelect.value === 'wajib') {
+                semuaBtn.classList.remove('hidden');
+            } else {
+                semuaBtn.classList.add('hidden');
             }
         }
     }
-
+}
     function setupJumlahValidation() {
         const jumlahInput = document.getElementById('jumlahInput');
         if (!jumlahInput) return;
-        
+
         jumlahInput.addEventListener('input', function() {
             const jenis = document.getElementById('jenisSelect').value;
             const idAnggota = document.getElementById('anggotaSelect').value;
-            
+
             if (jenis === 'pokok' && idAnggota && idAnggota !== 'all') {
                 const currentJumlah = parseInt(this.value) || 0;
                 const maxJumlah = parseInt(this.max) || 0;
-                
+
                 if (currentJumlah > maxJumlah && maxJumlah > 0) {
                     this.value = maxJumlah;
                     showNotification('warning', 'Peringatan', `Jumlah tidak boleh melebihi sisa simpanan pokok: ${formatRupiah(maxJumlah)}`);
@@ -832,12 +997,12 @@
 
         semuaBtn.addEventListener('click', function() {
             const jenis = document.getElementById('jenisSelect').value;
-            
+
             if (!jenis) {
                 showNotification('warning', 'Peringatan', 'Pilih jenis simpanan terlebih dahulu!');
                 return;
             }
-            
+
             if (hidden.value === 'all') {
                 hidden.value = '';
                 input.value = '';
@@ -869,12 +1034,12 @@
                 }
             }
             results.classList.add('hidden');
-            checkSimpananPokok();
+            runDynamicCalculations();
         });
 
         input.addEventListener('input', function() {
             if (hidden.value === 'all') return;
-            
+
             const q = input.value.trim();
             if (!q) {
                 results.innerHTML = '';
@@ -884,6 +1049,7 @@
                     anggotaInfo.classList.add('hidden');
                     anggotaInfo.innerHTML = '';
                 }
+                runDynamicCalculations();
                 return;
             }
 
@@ -910,14 +1076,14 @@
                             input.value = a.nama_lengkap || a.nama;
                             hidden.value = a.id_anggota || a.id;
                             results.classList.add('hidden');
-                            
+
                             if (anggotaInfo) {
                                 anggotaInfo.innerHTML = `Anggota terpilih: ${a.nama_lengkap || a.nama}`;
                                 anggotaInfo.classList.remove('hidden');
                             }
-                            
-                            toggleTenorField();
-                            checkSimpananPokok();
+
+                            // KUNCI UTAMA: Memanggil kalkulasi otomatis setelah anggota dipilih
+                            runDynamicCalculations();
                         });
 
                         results.appendChild(div);
@@ -980,16 +1146,17 @@
         setTimeout(() => {
             if (notification.parentElement) {
                 notification.style.animation = 'slideOutRight 0.3s ease-in';
-                setTimeout(() => { if (notification.parentElement) notification.remove(); }, 300);
+                setTimeout(() => {
+                    if (notification.parentElement) notification.remove();
+                }, 300);
             }
         }, duration);
     }
 
-    // Load Data Simpanan dengan Pengelompokan
     function loadSimpanan() {
         const jenisFilter = document.getElementById('filterJenis')?.value || currentTab || 'all';
         const anggotaFilter = document.getElementById('filterAnggota')?.value || 'all';
-        
+
         const tbody = document.getElementById('simpananTableBody');
         if (!tbody) return;
 
@@ -1003,8 +1170,8 @@
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                rawSimpananData = data || []; // Simpan data mentah ke variabel global
-                
+                rawSimpananData = data || [];
+
                 if (!data || data.length === 0) {
                     tbody.innerHTML = `
                         <tr>
@@ -1020,7 +1187,6 @@
                     return;
                 }
 
-                // Grouping berdasarkan Nama/ID dan Jenis Simpanan
                 const groupedData = {};
 
                 data.forEach(row => {
@@ -1043,7 +1209,7 @@
                         };
                     }
 
-                    groupedData[key].total_jumlah += parseFloat(row.jumlah || 0);
+                    groupedData[key].total_jumlah += parseFloat(row.jumlah || row.nominal || 0);
                     groupedData[key].count += 1;
 
                     if (row.tanggal && row.tanggal > groupedData[key].tanggal_terakhir) {
@@ -1053,7 +1219,7 @@
                 });
 
                 tbody.innerHTML = '';
-                
+
                 Object.values(groupedData).forEach(row => {
                     let statusClass = 'bg-gray-100 text-gray-800';
                     let statusIcon = 'fas fa-circle';
@@ -1073,6 +1239,26 @@
                     if (row.jenis === 'wajib') jenisBadgeClass = 'jenis-badge wajib';
                     else if (row.jenis === 'sukarela') jenisBadgeClass = 'jenis-badge sukarela';
 
+                    let subInfoText = `<i class="fas fa-history mr-1"></i>${row.count}x Transaksi`;
+
+                    if (row.jenis === 'wajib') {
+                        const nominalAcuanStandard = 50000;
+                        const totalUang = parseFloat(row.total_jumlah || 0);
+                        const bulanTercover = Math.floor(totalUang / nominalAcuanStandard);
+                        const sisaUangPecahan = totalUang % nominalAcuanStandard;
+
+                        if (bulanTercover > 0) {
+                            subInfoText = `<i class="fas fa-calendar-check mr-1 text-blue-600"></i>Simpanan Wajib Ke-<b>${bulanTercover}</b> (${row.count}x Input)`;
+                            if (sisaUangPecahan > 0) {
+                                subInfoText += ` <span class="text-xs text-amber-600 font-normal">(+${formatRupiah(sisaUangPecahan)})</span>`;
+                            }
+                        } else {
+                            subInfoText = `<i class="fas fa-history mr-1"></i>Simpanan Wajib Ke-1 (${row.count}x Input)`;
+                        }
+                    } else if (row.jenis === 'pokok') {
+                        subInfoText = `<i class="fas fa-money-bill-wave mr-1"></i>Simpanan Pokok Ke-${row.count}`;
+                    }
+
                     tbody.innerHTML += `
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -1080,9 +1266,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm font-semibold text-gray-900">${row.nama_lengkap}</div>
-                                <div class="text-xs text-emerald-600 font-medium">
-                                    <i class="fas fa-history mr-1"></i>Simpanan ke-${row.count} (${row.count}x Transaksi)
-                                </div>
+                                <div class="text-xs text-blue-600 font-medium">${subInfoText}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="${jenisBadgeClass}">
@@ -1112,55 +1296,56 @@
                         </tr>
                     `;
                 });
-            })
-            .catch(err => {
-                console.error('Error loading simpanan:', err);
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="px-6 py-4 text-center text-red-500">
-                            <i class="fas fa-exclamation-triangle mr-2"></i>Gagal memuat data
-                        </td>
-                    </tr>
-                `;
             });
     }
 
-    // Fungsi untuk menampilkan Riwayat Pembayaran pada Modal Detail
     function viewHistory(idAnggota, jenis, namaLengkap) {
-        // Filter data transaksi milik anggota spesifik ini
         const userTransactions = rawSimpananData.filter(row => {
             const matchUser = (row.id_anggota == idAnggota || row.nama_lengkap === namaLengkap);
             const matchJenis = row.jenis === jenis;
             return matchUser && matchJenis;
         });
 
-        // Urutkan transaksi dari yang paling lama ke terbaru
         userTransactions.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
-        // Set UI Header Modal
         document.getElementById('detailNamaAnggota').textContent = namaLengkap;
-        document.getElementById('detailJenisSimpanan').textContent = `Riwayat Simpanan ${jenis.toUpperCase()}`;
+        document.getElementById('detailJenisSimpanan').textContent = `Rincian Seluruh Riwayat Simpanan ${jenis.toUpperCase()}`;
 
         let totalAmount = 0;
         const historyTbody = document.getElementById('historyTableBody');
         historyTbody.innerHTML = '';
 
         if (userTransactions.length === 0) {
-            historyTbody.innerHTML = `<tr><td colspan="4" class="px-4 py-3 text-center text-gray-500">Tidak ada riwayat transaksi ditemukan.</td></tr>`;
+            historyTbody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="px-4 py-8 text-center text-gray-400">
+                        <i class="fas fa-folder-open text-3xl mb-2 block"></i>
+                        <span class="text-sm">Belum ada riwayat transaksi ditemukan.</span>
+                    </td>
+                </tr>
+            `;
         } else {
             userTransactions.forEach((tx, index) => {
-                const amount = parseFloat(tx.jumlah || 0);
+                const amount = parseFloat(tx.jumlah || tx.nominal || 0);
                 totalAmount += amount;
                 const idTx = tx.id_sp || tx.id_sw || tx.id_ss || tx.id;
 
                 historyTbody.innerHTML += `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 font-semibold text-gray-700">Ke-${index + 1}</td>
-                        <td class="px-4 py-3 text-gray-900">${tx.tanggal || '-'}</td>
-                        <td class="px-4 py-3 font-bold text-emerald-600">${formatRupiah(amount)}</td>
-                        <td class="px-4 py-3 text-center">
-                            <button onclick="deleteSimpananDetail('${jenis}', '${idTx}')" class="text-red-600 hover:text-red-800 text-xs font-semibold" title="Hapus transaksi ini">
-                                <i class="fas fa-trash mr-1"></i>Hapus
+                    <tr class="hover:bg-gray-50/80 transition-colors">
+                        <td class="px-5 py-3.5 whitespace-nowrap">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                                Ke-${index + 1}
+                            </span>
+                        </td>
+                        <td class="px-5 py-3.5 text-gray-700 font-medium whitespace-nowrap">
+                            <i class="far fa-calendar-alt mr-2 text-gray-400"></i>${tx.tanggal || '-'}
+                        </td>
+                        <td class="px-5 py-3.5 font-bold text-gray-900 text-right whitespace-nowrap">
+                            ${formatRupiah(amount)}
+                        </td>
+                        <td class="px-5 py-3.5 text-center whitespace-nowrap">
+                            <button onclick="deleteSimpananDetail('${jenis}', '${idTx}')" class="text-red-500 hover:text-red-700 hover:bg-red-50 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all" title="Hapus transaksi ini">
+                                <i class="fas fa-trash-alt mr-1"></i>Hapus
                             </button>
                         </td>
                     </tr>
@@ -1170,6 +1355,22 @@
 
         document.getElementById('detailTotalNominal').textContent = formatRupiah(totalAmount);
         document.getElementById('detailTotalFrekuensi').textContent = `${userTransactions.length}x Transaksi`;
+
+        const labelEl = document.getElementById('detailLabelKeBerapa');
+        const valueEl = document.getElementById('detailStatusKeBerapa');
+
+        if (jenis === 'wajib') {
+            const standarWajib = 50000;
+            const keBerapa = Math.floor(totalAmount / standarWajib);
+            labelEl.textContent = "Simpanan Wajib Ke-";
+            valueEl.textContent = `Ke-${keBerapa > 0 ? keBerapa : 1}`;
+        } else if (jenis === 'pokok') {
+            labelEl.textContent = "Simpanan Pokok Ke-";
+            valueEl.textContent = `Ke-${userTransactions.length}`;
+        } else if (jenis === 'sukarela') {
+            labelEl.textContent = "Status Sukarela";
+            valueEl.textContent = userTransactions.length > 0 ? "Fleksibel / Aktif" : "Belum Ada";
+        }
 
         openModal('historyModal');
     }
@@ -1196,49 +1397,51 @@
                     title: 'Menghapus...',
                     text: 'Sedang menghapus data simpanan',
                     allowOutsideClick: false,
-                    didOpen: () => { Swal.showLoading(); }
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
                 });
 
                 fetch('<?= base_url('admin/deleteSimpanan') ?>', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: new URLSearchParams({
-                        '<?= csrf_token() ?>': '<?= csrf_hash() ?>',
-                        'jenis': jenis,
-                        'id': id
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: new URLSearchParams({
+                            '<?= csrf_token() ?>': '<?= csrf_hash() ?>',
+                            'jenis': jenis,
+                            'id': id
+                        })
                     })
-                })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.success) {
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: result.message,
+                                icon: 'success',
+                                confirmButtonColor: '#10b981'
+                            });
+                            loadSimpanan();
+                        } else {
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: result.message,
+                                icon: 'error',
+                                confirmButtonColor: '#ef4444'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
                         Swal.fire({
-                            title: 'Berhasil!',
-                            text: result.message,
-                            icon: 'success',
-                            confirmButtonColor: '#10b981'
-                        });
-                        loadSimpanan();
-                    } else {
-                        Swal.fire({
-                            title: 'Gagal!',
-                            text: result.message,
+                            title: 'Error!',
+                            text: 'Terjadi kesalahan saat menghapus data',
                             icon: 'error',
                             confirmButtonColor: '#ef4444'
                         });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan saat menghapus data',
-                        icon: 'error',
-                        confirmButtonColor: '#ef4444'
                     });
-                });
             }
         });
     }
@@ -1249,38 +1452,34 @@
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            if (isSubmitting) {
-                showNotification('warning', 'Peringatan', 'Sedang memproses data sebelumnya...');
-                return;
-            }
-            
-            const submitBtn = document.getElementById('simpanBtn');
-            if (!submitBtn) return;
 
-            const originalText = submitBtn.innerHTML;
+            if (isSubmitting) return;
+
+            const submitBtn = document.getElementById('simpanBtn');
             const formData = new FormData(this);
+
+            const jenisVal = document.getElementById('jenisSelect')?.value;
+            const idAnggotaVal = document.getElementById('anggotaSelect')?.value;
+            const jumlahVal = document.getElementById('jumlahInput')?.value;
             
-            const data = {
-                id_anggota: document.getElementById('anggotaSelect')?.value,
-                jenis: document.getElementById('jenisSelect')?.value,
-                jumlah: document.getElementById('jumlahInput')?.value,
-                tenor: document.getElementById('tenorSelect')?.value
-            };
-            
-            if (!data.id_anggota || !data.jenis || !data.jumlah) {
+            // Ambil tenor dari Select ATAU Hidden input
+            const tenorSelectVal = document.getElementById('tenorSelect')?.value;
+            const tenorHiddenVal = document.getElementById('tenorHidden')?.value;
+            const activeTenor = tenorSelectVal || tenorHiddenVal;
+
+            if (!idAnggotaVal || !jenisVal || !jumlahVal) {
                 showNotification('error', 'Gagal!', 'Harap lengkapi semua field!');
                 return;
             }
 
-            if (parseInt(data.jumlah) <= 0) {
-                showNotification('error', 'Gagal!', 'Jumlah simpanan harus lebih dari 0!');
-                return;
-            }
-
-            if (data.jenis === 'pokok' && (!data.tenor || parseInt(data.tenor) <= 0)) {
-                showNotification('error', 'Gagal!', 'Tenor simpanan pokok wajib diisi dengan angka bulan yang valid!');
-                return;
+            // KUNCI UTAMA TENOR POKOK:
+            if (jenisVal === 'pokok') {
+                if (!activeTenor || parseInt(activeTenor) <= 0) {
+                    showNotification('error', 'Gagal!', 'Tenor simpanan pokok wajib diisi!');
+                    return;
+                }
+                // Selalu paksa key 'tenor' masuk ke FormData
+                formData.set('tenor', activeTenor);
             }
 
             isSubmitting = true;
@@ -1294,25 +1493,20 @@
             .then(res => res.json())
             .then(result => {
                 if (result.success) {
-                    showNotification(result.type || 'success', 
-                        result.type === 'success' ? 'Berhasil!' : 'Peringatan', 
-                        result.message, 8000);
-                    
-                    setTimeout(() => {
-                        closeModal('savingsModal');
-                        loadSimpanan();
-                    }, 1000);
+                    showNotification('success', 'Berhasil!', result.message);
+                    closeModal('savingsModal');
+                    loadSimpanan();
                 } else {
-                    showNotification(result.type || 'error', 'Gagal!', result.message, 6000);
+                    showNotification('error', 'Gagal!', result.message);
                 }
             })
             .catch(err => {
                 console.error('Fetch error:', err);
-                showNotification('error', 'Error!', 'Terjadi kesalahan: ' + err.message);
+                showNotification('error', 'Error!', 'Terjadi kesalahan sistem.');
             })
             .finally(() => {
                 isSubmitting = false;
-                submitBtn.innerHTML = originalText;
+                submitBtn.innerHTML = 'Simpan';
                 submitBtn.disabled = false;
             });
         });
@@ -1326,18 +1520,18 @@
             setupFormSubmit();
             setupJumlahValidation();
             loadSimpanan();
-            
+
             const filterSearchAnggota = document.getElementById('filterSearchAnggota');
             const filterAnggota = document.getElementById('filterAnggota');
             const filterJenis = document.getElementById('filterJenis');
             const tenorSelect = document.getElementById('tenorSelect');
             const anggotaSelect = document.getElementById('anggotaSelect');
-            
+
             if (filterSearchAnggota) {
                 filterSearchAnggota.addEventListener('input', function() {
                     const q = this.value.trim();
                     if (q.length < 2 && q.length > 0) return;
-                    
+
                     if (!q) {
                         filterAnggota.value = 'all';
                     } else {
@@ -1354,7 +1548,7 @@
                     loadSimpanan();
                 });
             }
-            
+
             if (filterJenis) filterJenis.addEventListener('change', loadSimpanan);
             if (filterAnggota) filterAnggota.addEventListener('change', function() {
                 if (filterSearchAnggota) {
@@ -1362,7 +1556,7 @@
                 }
                 loadSimpanan();
             });
-            
+
             if (tenorSelect) {
                 tenorSelect.addEventListener('change', function() {
                     const tenorHidden = document.getElementById('tenorHidden');
@@ -1371,7 +1565,7 @@
             }
 
             if (anggotaSelect) {
-                anggotaSelect.addEventListener('change', checkSimpananPokok);
+                anggotaSelect.addEventListener('change', runDynamicCalculations);
             }
         } catch (err) {
             console.error('Error initializing savings page:', err);
@@ -1380,20 +1574,22 @@
 
     const style = document.createElement('style');
     style.textContent = `
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-        @keyframes progressBar {
-            from { width: 100%; }
-            to { width: 0%; }
-        }
-    `;
+    @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+    @keyframes progressBar {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+`;
     document.head.appendChild(style);
-    </script>
+</script>
+
 </body>
+
 </html>

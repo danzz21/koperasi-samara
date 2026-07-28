@@ -1428,40 +1428,49 @@ class AdminDashboard extends BaseController
             return $this->response->setJSON([]);
         }
     }
-    public function checkSimpananPokok($id_anggota = null)
-    {
-        if (!$id_anggota) {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'ID Anggota tidak valid'
-            ]);
-        }
 
-        $model = new \App\Models\SimpananPokokModel();
+public function checkSimpananPokok($id_anggota)
+{
+    $db = \Config\Database::connect();
+    
+    // Total simpanan pokok
+    $totalPokok = $db->table('simpanan_pokok')
+        ->where('id_anggota', $id_anggota)
+        ->whereIn('status', ['aktif', 'lunas'])
+        ->selectSum('jumlah')
+        ->get()->getRow()->jumlah ?? 0;
 
-        $total = $model->getTotalSimpananPokok($id_anggota);
-        $isLunas = $model->isLunas($id_anggota);
-        $sisa = $model->getSisaSimpananPokok($id_anggota);
-        $count = $model->where('id_anggota', $id_anggota)
-            ->where('jumlah >', 0)
-            ->countAllResults();
-        $lastRecord = $model->where('id_anggota', $id_anggota)
-            ->where('jumlah >', 0)
-            ->orderBy('tanggal', 'DESC')
-            ->first();
-        $existingTenor = $lastRecord['tenor'] ?? null;
+    $maxLimit = 500000;
+    $isLunas  = ($totalPokok >= $maxLimit);
+    $sisa     = max(0, $maxLimit - $totalPokok);
 
-        return $this->response->setJSON([
-            'success' => true,
-            'total' => $total,
-            'isLunas' => $isLunas,
-            'sisa' => $sisa,
-            'count' => $count,
-            'existingTenor' => $existingTenor,
-            'max_limit' => 500000
-        ]);
-    }
+    // Hitung berapa transaksi yang sudah ada
+    $count = $db->table('simpanan_pokok')
+        ->where('id_anggota', $id_anggota)
+        ->where('jumlah >', 0)
+        ->countAllResults();
 
+    // === FIX TENOR: Ambil tenor dari transaksi pertama berdasarkan tanggal / id terkecil ===
+    $firstTx = $db->table('simpanan_pokok')
+        ->where('id_anggota', $id_anggota)
+        ->where('tenor IS NOT NULL')
+        ->where('tenor >', 0)
+        ->orderBy('created_at', 'ASC') // Jika tidak ada kolom created_at, ganti dengan orderBy('id_sp', 'ASC')
+        ->get()
+        ->getRow();
+
+    $existingTenor = ($firstTx && isset($firstTx->tenor)) ? (int) $firstTx->tenor : 0;
+
+    return $this->response->setJSON([
+        'success'       => true,
+        'total'         => (float) $totalPokok,
+        'max_limit'     => (float) $maxLimit,
+        'sisa'          => (float) $sisa,
+        'isLunas'       => $isLunas,
+        'count'         => $count,
+        'existingTenor' => $existingTenor
+    ]);
+}
     // =========================
     // HAPUS SIMPANAN
     // =========================
