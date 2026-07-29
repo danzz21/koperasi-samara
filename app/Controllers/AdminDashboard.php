@@ -1332,102 +1332,106 @@ class AdminDashboard extends BaseController
 
     // Ambil data simpanan (GET)
     public function getSimpananList()
-    {
-        $jenis = $this->request->getGet('jenis');
-        $id_anggota = $this->request->getGet('id_anggota');
-        $db = \Config\Database::connect();
+{
+    $jenis = $this->request->getGet('jenis');
+    $id_anggota = $this->request->getGet('id_anggota');
+    $db = \Config\Database::connect();
 
-        $result = [];
+    $result = [];
 
-        try {
-            if ($jenis === 'all' || empty($jenis)) {
-                // Simpanan Pokok
-                $builderPokok = $db->table('simpanan_pokok')
+    try {
+        if ($jenis === 'all' || empty($jenis)) {
+            // Simpanan Pokok
+            $builderPokok = $db->table('simpanan_pokok')
+                ->select('simpanan_pokok.*, anggota.nama_lengkap, "pokok" as jenis')
+                ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
+                ->where('simpanan_pokok.jumlah >', 0);
+
+            if ($id_anggota && $id_anggota !== 'all') {
+                $builderPokok->where('simpanan_pokok.id_anggota', $id_anggota);
+            }
+            $pokok = $builderPokok->get()->getResultArray();
+
+            // Simpanan Wajib
+            $builderWajib = $db->table('simpanan_wajib')
+                ->select('simpanan_wajib.*, anggota.nama_lengkap, "wajib" as jenis')
+                ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota');
+
+            if ($id_anggota && $id_anggota !== 'all') {
+                $builderWajib->where('simpanan_wajib.id_anggota', $id_anggota);
+            }
+            $wajib = $builderWajib->get()->getResultArray();
+
+            // Simpanan Sukarela
+            $builderSukarela = $db->table('simpanan_sukarela')
+                ->select('simpanan_sukarela.*, anggota.nama_lengkap, "sukarela" as jenis')
+                ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota');
+
+            if ($id_anggota && $id_anggota !== 'all') {
+                $builderSukarela->where('simpanan_sukarela.id_anggota', $id_anggota);
+            }
+            $sukarela = $builderSukarela->get()->getResultArray();
+
+            $result = array_merge($pokok, $wajib, $sukarela);
+        } else {
+            // Filter Jenis Spesifik
+            if ($jenis === 'pokok') {
+                $builder = $db->table('simpanan_pokok')
                     ->select('simpanan_pokok.*, anggota.nama_lengkap, "pokok" as jenis')
                     ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
                     ->where('simpanan_pokok.jumlah >', 0);
 
                 if ($id_anggota && $id_anggota !== 'all') {
-                    $builderPokok->where('simpanan_pokok.id_anggota', $id_anggota);
+                    $builder->where('simpanan_pokok.id_anggota', $id_anggota);
                 }
-                $pokok = $builderPokok->get()->getResultArray();
 
-                // Simpanan Wajib
-                $builderWajib = $db->table('simpanan_wajib')
+            } elseif ($jenis === 'wajib') {
+                $builder = $db->table('simpanan_wajib')
                     ->select('simpanan_wajib.*, anggota.nama_lengkap, "wajib" as jenis')
                     ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota');
 
                 if ($id_anggota && $id_anggota !== 'all') {
-                    $builderWajib->where('simpanan_wajib.id_anggota', $id_anggota);
+                    // PERBAIKAN PENTING: Panggil tabel spesifik 'simpanan_wajib.id_anggota'
+                    $builder->where('simpanan_wajib.id_anggota', $id_anggota);
                 }
-                $wajib = $builderWajib->get()->getResultArray();
 
-                // Simpanan Sukarela
-                $builderSukarela = $db->table('simpanan_sukarela')
+            } elseif ($jenis === 'sukarela') {
+                $builder = $db->table('simpanan_sukarela')
                     ->select('simpanan_sukarela.*, anggota.nama_lengkap, "sukarela" as jenis')
                     ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota');
 
                 if ($id_anggota && $id_anggota !== 'all') {
-                    $builderSukarela->where('simpanan_sukarela.id_anggota', $id_anggota);
+                    $builder->where('simpanan_sukarela.id_anggota', $id_anggota);
                 }
-                $sukarela = $builderSukarela->get()->getResultArray();
 
-                $result = array_merge($pokok, $wajib, $sukarela);
             } else {
-                // Jika filter jenis tertentu
-                if ($jenis === 'pokok') {
-                    $builder = $db->table('simpanan_pokok')
-                        ->select('simpanan_pokok.*, anggota.nama_lengkap, "pokok" as jenis')
-                        ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
-                        ->where('simpanan_pokok.jumlah >', 0);  // **FILTER PENTING**
-
-                } elseif ($jenis === 'wajib') {
-                    $builder = $db->table('simpanan_wajib')
-                        ->select('simpanan_wajib.*, anggota.nama_lengkap, "wajib" as jenis')
-                        ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota');
-                    // Tidak perlu filter jumlah untuk wajib
-
-                } elseif ($jenis === 'sukarela') {
-                    $builder = $db->table('simpanan_sukarela')
-                        ->select('simpanan_sukarela.*, anggota.nama_lengkap, "sukarela" as jenis')
-                        ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota');
-                    // Tidak perlu filter jumlah untuk sukarela
-
-                } else {
-                    return $this->response->setJSON([]);
-                }
-
-                if ($id_anggota && $id_anggota !== 'all') {
-                    $builder->where('id_anggota', $id_anggota);
-                }
-
-                $result = $builder->orderBy('tanggal', 'DESC')->get()->getResultArray();
+                return $this->response->setJSON([]);
             }
 
-            // Format tanggal
-            foreach ($result as &$row) {
-                if (isset($row['tanggal'])) {
-                    $row['tanggal'] = date('d M Y', strtotime($row['tanggal']));
-                }
-
-                // **OPTIONAL: Filter tambahan di PHP untuk memastikan**
-                if ($jenis === 'pokok' || $jenis === 'all') {
-                    // Pastikan tidak ada data pokok dengan jumlah 0 yang lolos
-                    if ($row['jenis'] === 'pokok' && $row['jumlah'] <= 0) {
-                        continue; // Skip data ini
-                    }
-                }
-            }
-
-            // **Hapus entry yang di-skip**
-            $result = array_values(array_filter($result));
-
-            return $this->response->setJSON($result);
-        } catch (\Exception $e) {
-            log_message('error', 'Error getSimpananList: ' . $e->getMessage());
-            return $this->response->setJSON([]);
+            $result = $builder->orderBy('tanggal', 'DESC')->get()->getResultArray();
         }
+
+        // Format tanggal & sanitasi array
+        $formattedResult = [];
+        foreach ($result as $row) {
+            // Khusus simpanan pokok, buang jika jumlah 0
+            if ($row['jenis'] === 'pokok' && (float)($row['jumlah'] ?? 0) <= 0) {
+                continue;
+            }
+
+            if (isset($row['tanggal'])) {
+                $row['tanggal'] = date('d M Y', strtotime($row['tanggal']));
+            }
+
+            $formattedResult[] = $row;
+        }
+
+        return $this->response->setJSON($formattedResult);
+    } catch (\Exception $e) {
+        log_message('error', 'Error getSimpananList: ' . $e->getMessage());
+        return $this->response->setJSON([]);
     }
+}
 
 public function checkSimpananPokok($id_anggota)
 {

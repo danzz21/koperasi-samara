@@ -709,3 +709,76 @@ DEBUG - 2026-07-28 16:44:50 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2026-07-28 16:44:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-07-28 16:44:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-07-28 16:44:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:46:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:46:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:46:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:46:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:46:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-07-28 16:47:04 --> mysqli_sql_exception: Column 'id_anggota' in where clause is ambiguous in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `simpana...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `simpana...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `simpana...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `simpana...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(1404): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#12 {main}
+ERROR - 2026-07-28 16:47:04 --> Error getSimpananList: Column 'id_anggota' in where clause is ambiguous
+DEBUG - 2026-07-28 16:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-07-28 16:47:27 --> mysqli_sql_exception: Column 'id_anggota' in where clause is ambiguous in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `simpana...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `simpana...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `simpana...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `simpana...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(1404): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->getSimpananList()
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#12 {main}
+ERROR - 2026-07-28 16:47:27 --> Error getSimpananList: Column 'id_anggota' in where clause is ambiguous
+DEBUG - 2026-07-28 16:47:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:47:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:48:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-28 16:48:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
