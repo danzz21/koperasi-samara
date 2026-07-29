@@ -148,14 +148,14 @@ class AdminDashboard extends BaseController
         $db = \Config\Database::connect();
 
         // ==========================================
-        // 1. TOTAL ANGGOTA AKTIF (CARD 8)
+        // 1. TOTAL ANGGOTA AKTIF
         // ==========================================
         $totalAnggota = $db->table('anggota')
             ->where('status', 'aktif')
             ->countAllResults();
 
         // ==========================================
-        // 2. TOTAL SIMPANAN ANGGOTA (CARD 2)
+        // 2. TOTAL SIMPANAN ANGGOTA
         // Pokok + Wajib + Sukarela (Aktif & Lunas)
         // ==========================================
         $totalSimpananPokok = $db->table('simpanan_pokok')
@@ -176,21 +176,19 @@ class AdminDashboard extends BaseController
         $totalSimpanan = (float)$totalSimpananPokok + (float)$totalSimpananWajib + (float)$totalSimpananSukarela;
 
         // ==========================================
-        // 3. PEMBIAYAAN & POKOK PINJAMAN BEREDAR (CARD 3)
-        // Memisahkan Pokok Murni dari Margin 10%
+        // 3. PEMBIAYAAN & POKOK PINJAMAN BEREDAR
         // ==========================================
-        
-        // 1. Qard (Tanpa Margin / 0%)
+        // Qard
         $qardRow = $db->table('qard')
             ->where('status', 'aktif')
             ->selectSum('jml_pinjam', 'pinjam')
             ->selectSum('jml_terbayar', 'terbayar')
             ->get()->getRow();
-        
+
         $pokokQard = (float)($qardRow->pinjam ?? 0);
         $terbayarQard = (float)($qardRow->terbayar ?? 0);
 
-        // 2. Murabahah (Ada Margin 10%) -> Konversi ke Pokok Murni
+        // Murabahah (Keluarkan 10% Margin)
         $mrbRow = $db->table('murabahah')
             ->where('status', 'aktif')
             ->selectSum('jml_pinjam', 'pinjam')
@@ -200,11 +198,10 @@ class AdminDashboard extends BaseController
         $totalMrbWithMargin = (float)($mrbRow->pinjam ?? 0);
         $terbayarMrbWithMargin = (float)($mrbRow->terbayar ?? 0);
 
-        // Keluarkan porsi margin 10% untuk dapat Pokok Murni Murabahah
         $pokokMrbMurni = $totalMrbWithMargin / 1.10;
         $terbayarMrbMurni = $terbayarMrbWithMargin / 1.10;
 
-        // 3. Mudharabah (Ada Margin/Nisbah 10%) -> Konversi ke Pokok Murni
+        // Mudharabah (Keluarkan 10% Margin)
         $mdhRow = $db->table('mudharabah')
             ->where('status', 'aktif')
             ->selectSum('jml_pinjam', 'pinjam')
@@ -214,29 +211,46 @@ class AdminDashboard extends BaseController
         $totalMdhWithMargin = (float)($mdhRow->pinjam ?? 0);
         $terbayarMdhWithMargin = (float)($mdhRow->terbayar ?? 0);
 
-        // Keluarkan porsi margin 10% untuk dapat Pokok Murni Mudharabah
         $pokokMdhMurni = $totalMdhWithMargin / 1.10;
         $terbayarMdhMurni = $terbayarMdhWithMargin / 1.10;
 
-        // Total Pokok Murni Keseluruhan yang Dipinjam
         $totalPokokMurniPinjam = $pokokQard + $pokokMrbMurni + $pokokMdhMurni;
-        
-        // Total Angsuran Pokok Murni yang Sudah Kembali ke Kas
         $totalTerbayarPokokMurni = $terbayarQard + $terbayarMrbMurni + $terbayarMdhMurni;
 
-        // Pokok Pinjaman Beredar (Benar-benar murni uang pokok tanpa margin)
+        // Sisa Pokok Pinjaman Beredar (Piutang Koperasi)
         $sisaPokokPinjaman = max(0, $totalPokokMurniPinjam - $totalTerbayarPokokMurni);
 
         // ==========================================
-        // 4. KAS REAL / SALDO KAS AKTIF (CARD 1)
-        // Uang fisik di kas = Total Simpanan - Pokok Pinjaman Beredar
+        // 4. PEMASUKAN & PENGELUARAN UMUM (TRANSAKSI OPERASIONAL)
         // ==========================================
-        $kasReal = max(0, $totalSimpanan - $sisaPokokPinjaman);
+        $pemasukanUmum = $db->table('transaksi_umum')
+            ->where('jenis', 'pemasukan')
+            ->selectSum('jumlah')
+            ->get()->getRow()->jumlah ?? 0;
+
+        $pengeluaranUmum = $db->table('transaksi_umum')
+            ->where('jenis', 'pengeluaran')
+            ->selectSum('jumlah')
+            ->get()->getRow()->jumlah ?? 0;
+
+        // Pemasukan & Pengeluaran Bulan Ini saja
+        $pemasukanBulanIni = $db->table('transaksi_umum')
+            ->where('jenis', 'pemasukan')
+            ->where('YEAR(tanggal)', date('Y'))
+            ->where('MONTH(tanggal)', date('m'))
+            ->selectSum('jumlah')
+            ->get()->getRow()->jumlah ?? 0;
+
+        $pengeluaranBulanIni = $db->table('transaksi_umum')
+            ->where('jenis', 'pengeluaran')
+            ->where('YEAR(tanggal)', date('Y'))
+            ->where('MONTH(tanggal)', date('m'))
+            ->selectSum('jumlah')
+            ->get()->getRow()->jumlah ?? 0;
 
         // ==========================================
-        // 5. POTENSI MARGIN & REALISASI MARGIN (CARD 4 & 5)
+        // 5. PROFIT REALISASI & POTENSI MARGIN
         // ==========================================
-        // 1. Ambil total akumulasi angsuran terbayar yang ada margin (Murabahah & Mudharabah)
         $terbayarMurabahah = $db->table('murabahah')
             ->whereIn('status', ['aktif', 'lunas'])
             ->selectSum('jml_terbayar', 'total')
@@ -249,10 +263,10 @@ class AdminDashboard extends BaseController
 
         $totalTerbayarBerMargin = (float)$terbayarMurabahah + (float)$terbayarMudharabah;
 
-        // Realisasi Keuntungan (Profit Murni Terkumpul dari Margin 10%)
+        // Profit Realisasi (Margin 10% dari angsuran terbayar)
         $realisasiMargin = $totalTerbayarBerMargin - ($totalTerbayarBerMargin / 1.10);
 
-        // Potensi Keuntungan Total dari Pinjaman Aktif
+        // Potensi Margin dari Pinjaman Aktif
         $pinjamMurabahah = $db->table('murabahah')->where('status', 'aktif')->selectSum('jml_pinjam')->get()->getRow()->jml_pinjam ?? 0;
         $pinjamMudharabah = $db->table('mudharabah')->where('status', 'aktif')->selectSum('jml_pinjam')->get()->getRow()->jml_pinjam ?? 0;
         $totalPinjamBerMargin = (float)$pinjamMurabahah + (float)$pinjamMudharabah;
@@ -260,8 +274,19 @@ class AdminDashboard extends BaseController
         $potensiMargin = $totalPinjamBerMargin - ($totalPinjamBerMargin / 1.10);
 
         // ==========================================
-        // 6. ESTIMASI TAGIHAN BULAN INI (CARD 6)
-        // Hitung kisaran angsuran yang harus dibayar bulan ini dari pembiayaan aktif
+        // 6. KAS REAL, ESTIMASI SHU, & TOTAL ASET
+        // ==========================================
+        // Kas Real = Total Simpanan + Margin Terkumpul + Pemasukan Umum - Pokok Pinjaman Beredar - Pengeluaran Umum
+        $kasReal = max(0, ($totalSimpanan + $realisasiMargin + (float)$pemasukanUmum) - ($sisaPokokPinjaman + (float)$pengeluaranUmum));
+
+        // SHU (Sisa Hasil Usaha Berjalan) = Margin Realisasi + Pemasukan Umum - Pengeluaran Umum
+        $shuTahunBerjalan = ($realisasiMargin + (float)$pemasukanUmum) - (float)$pengeluaranUmum;
+
+        // Valuasi Total Aset Koperasi = Kas Real + Piutang Pokok Beredar
+        $totalAset = $kasReal + $sisaPokokPinjaman;
+
+        // ==========================================
+        // 7. ESTIMASI TAGIHAN BULAN INI
         // ==========================================
         $tablesPembiayaan = ['qard', 'murabahah', 'mudharabah'];
         $tagihanBulanIni = 0;
@@ -278,13 +303,7 @@ class AdminDashboard extends BaseController
         }
 
         // ==========================================
-        // 7. VALUASI TOTAL ASET KOPERASI (CARD 7)
-        // Total Aset = Kas Real + Pokok Beredar + Profit Realisasi
-        // ==========================================
-        $totalAset = $kasReal + $sisaPokokPinjaman + $realisasiMargin;
-
-        // ==========================================
-        // 8. HITUNG NOTIFIKASI PENDING
+        // 8. NOTIFIKASI PENDING
         // ==========================================
         $pendingSimpananCount      = $db->table('simpanan_sukarela')->where('status', 'pending')->countAllResults();
         $pendingSimpananPokokCount = $db->table('simpanan_pokok')->where('status', 'pending')->countAllResults();
@@ -331,7 +350,6 @@ class AdminDashboard extends BaseController
             $pembiayaanData[$row['bulan'] - 1] = (int)$row['total'];
         }
 
-        // Send All Data to View
         $data = [
             'kasReal'                   => $kasReal,
             'totalSimpanan'             => $totalSimpanan,
@@ -341,6 +359,9 @@ class AdminDashboard extends BaseController
             'tagihanBulanIni'           => $tagihanBulanIni,
             'totalAset'                 => $totalAset,
             'totalAnggota'              => $totalAnggota,
+            'pemasukanBulanIni'         => $pemasukanBulanIni,
+            'pengeluaranBulanIni'       => $pengeluaranBulanIni,
+            'shuTahunBerjalan'          => $shuTahunBerjalan,
 
             'pendingPinjamanCount'      => $pendingPinjamanCount,
             'pendingSimpananCount'      => $pendingSimpananCount,
@@ -1882,34 +1903,101 @@ class AdminDashboard extends BaseController
         try {
             $request = $this->request;
 
+            // Bersihkan semua karakter selain angka
+            $jumlahClean = preg_replace('/[^0-9]/', '', $request->getPost('jumlah'));
+
             $data = [
                 'deskripsi' => $request->getPost('deskripsi'),
-                'kategori' => $request->getPost('kategori'),
-                'jumlah' => str_replace('.', '', $request->getPost('jumlah')),
-                'jenis' => $request->getPost('jenis'),
-                'tanggal' => date('Y-m-d H:i:s')
+                'kategori'  => $request->getPost('kategori'),
+                'jumlah'    => (float)$jumlahClean,
+                'jenis'     => $request->getPost('jenis'),
+                'tanggal'   => date('Y-m-d H:i:s')
             ];
 
             $db = \Config\Database::connect();
             if ($db->table('transaksi_umum')->insert($data)) {
                 return $this->response->setJSON([
-                    'status' => 'success',
+                    'status'  => 'success',
                     'message' => 'Transaksi berhasil disimpan'
                 ]);
             } else {
                 return $this->response->setJSON([
-                    'status' => 'error',
+                    'status'  => 'error',
                     'message' => 'Gagal menyimpan transaksi'
                 ]);
             }
         } catch (\Exception $e) {
             return $this->response->setJSON([
-                'status' => 'error',
+                'status'  => 'error',
                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()
             ]);
         }
     }
 
+    // ==========================================
+    // UPDATE TRANSAKSI UMUM
+    // ==========================================
+    public function updateTransaksi($id)
+    {
+        try {
+            $db = \Config\Database::connect();
+            $request = $this->request;
+
+            // Bersihkan format angka
+            $jumlahClean = preg_replace('/[^0-9]/', '', $request->getPost('jumlah'));
+
+            $data = [
+                'deskripsi' => $request->getPost('deskripsi'),
+                'kategori'  => $request->getPost('kategori'),
+                'jumlah'    => (float)$jumlahClean,
+                'jenis'     => $request->getPost('jenis'),
+            ];
+
+            if ($db->table('transaksi_umum')->where('id', $id)->update($data)) {
+                return $this->response->setJSON([
+                    'status'  => 'success',
+                    'message' => 'Transaksi berhasil diperbarui'
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status'  => 'error',
+                    'message' => 'Gagal memperbarui transaksi'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    // ==========================================
+    // DELETE TRANSAKSI UMUM
+    // ==========================================
+    public function deleteTransaksi($id)
+    {
+        try {
+            $db = \Config\Database::connect();
+
+            if ($db->table('transaksi_umum')->where('id', $id)->delete()) {
+                return $this->response->setJSON([
+                    'status'  => 'success',
+                    'message' => 'Transaksi berhasil dihapus'
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status'  => 'error',
+                    'message' => 'Gagal menghapus transaksi'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
+    }
 
     public function reports()
     {
@@ -1918,28 +2006,30 @@ class AdminDashboard extends BaseController
 
         $db = \Config\Database::connect();
 
-        // 2. Hitung Margin Murabahah (Hanya status 'aktif' di tahun terpilih agar sinkron dengan financing)
-        $murabahah = $db->table('murabahah')
-            ->where('status', 'aktif')
+        // =========================================================
+        // 2. HITUNG MARGIN REALISASI (UANG MASUK DARI ANGSURAN TERBAYAR)
+        // =========================================================
+
+        // Murabahah: Ambil total jml_terbayar pada tahun terpilih
+        $mrbTerbayar = $db->table('murabahah')
+            ->whereIn('status', ['aktif', 'lunas'])
             ->where('YEAR(tanggal)', $tahun)
-            ->selectSum('jml_pinjam', 'total_pinjam')
-            ->get()->getRowArray();
+            ->selectSum('jml_terbayar', 'total')
+            ->get()->getRowArray()['total'] ?? 0;
 
-        $totalPinjamMurabahah = (float)($murabahah['total_pinjam'] ?? 0);
-        // Mengeluarkan komponen pokok murni untuk mendapatkan nilai margin murni 10%
-        $margin_murabahah = $totalPinjamMurabahah - ($totalPinjamMurabahah / 1.10);
+        // Margin murni 10% dari angsuran terbayar
+        $margin_murabahah = (float)$mrbTerbayar - ((float)$mrbTerbayar / 1.10);
 
-        // 3. Hitung Margin Mudharabah
-        $mudharabah = $db->table('mudharabah')
-            ->where('status', 'aktif')
+        // Mudharabah: Ambil total jml_terbayar pada tahun terpilih
+        $mdhTerbayar = $db->table('mudharabah')
+            ->whereIn('status', ['aktif', 'lunas'])
             ->where('YEAR(tanggal)', $tahun)
-            ->selectSum('jml_pinjam', 'total_pinjam')
-            ->get()->getRowArray();
+            ->selectSum('jml_terbayar', 'total')
+            ->get()->getRowArray()['total'] ?? 0;
 
-        $totalPinjamMudharabah = (float)($mudharabah['total_pinjam'] ?? 0);
-        $margin_mudharabah = $totalPinjamMudharabah - ($totalPinjamMudharabah / 1.10);
+        $margin_mudharabah = (float)$mdhTerbayar - ((float)$mdhTerbayar / 1.10);
 
-        // 4. Hitung Pemasukan & Pengeluaran Umum
+        // 3. Hitung Pemasukan & Pengeluaran Umum
         $pemasukan_umum = $db->table('transaksi_umum')
             ->where('jenis', 'pemasukan')
             ->where('YEAR(tanggal)', $tahun)
@@ -1952,20 +2042,25 @@ class AdminDashboard extends BaseController
             ->selectSum('jumlah')
             ->get()->getRowArray()['jumlah'] ?? 0;
 
-        // 5. Kalkulasi SHU Total
+        // =========================================================
+        // 4. KALKULASI SHU TOTAL
+        // =========================================================
         $totalPendapatan = $margin_murabahah + $margin_mudharabah + (float)$pemasukan_umum;
         $shu = max(0, $totalPendapatan - (float)$pengeluaran_umum);
 
-        // 6. Bagi Hasil SHU (50% Jasa Modal, 50% Jasa Usaha)
+        // 5. Pembagian SHU (50% Jasa Modal, 50% Jasa Usaha)
         $jasaModal = $shu * 0.5;
         $jasaUsaha = $shu * 0.5;
 
-        // 7. Data Grafik Bulanan
+        // =========================================================
+        // 6. DATA GRAFIK BULANAN (SINKRON DENGAN MARGIN REALISASI)
+        // =========================================================
         $pendapatanGrafik = array_fill(0, 12, 0);
         $pengeluaranGrafik = array_fill(0, 12, 0);
         $shuGrafik = array_fill(0, 12, 0);
 
         for ($m = 1; $m <= 12; $m++) {
+            // Pemasukan Umum Bulanan
             $p_m = $db->table('transaksi_umum')
                 ->where('jenis', 'pemasukan')
                 ->where('MONTH(tanggal)', $m)
@@ -1973,6 +2068,25 @@ class AdminDashboard extends BaseController
                 ->selectSum('jumlah')
                 ->get()->getRowArray()['jumlah'] ?? 0;
 
+            // Margin Murabahah Bulanan (10% dari angsuran terbayar di bulan tersebut)
+            $mrb_m = $db->table('murabahah')
+                ->whereIn('status', ['aktif', 'lunas'])
+                ->where('MONTH(tanggal)', $m)
+                ->where('YEAR(tanggal)', $tahun)
+                ->selectSum('jml_terbayar', 'total')
+                ->get()->getRowArray()['total'] ?? 0;
+            $margin_mrb_m = (float)$mrb_m - ((float)$mrb_m / 1.10);
+
+            // Margin Mudharabah Bulanan
+            $mdh_m = $db->table('mudharabah')
+                ->whereIn('status', ['aktif', 'lunas'])
+                ->where('MONTH(tanggal)', $m)
+                ->where('YEAR(tanggal)', $tahun)
+                ->selectSum('jml_terbayar', 'total')
+                ->get()->getRowArray()['total'] ?? 0;
+            $margin_mdh_m = (float)$mdh_m - ((float)$mdh_m / 1.10);
+
+            // Pengeluaran Umum Bulanan
             $k_m = $db->table('transaksi_umum')
                 ->where('jenis', 'pengeluaran')
                 ->where('MONTH(tanggal)', $m)
@@ -1980,9 +2094,11 @@ class AdminDashboard extends BaseController
                 ->selectSum('jumlah')
                 ->get()->getRowArray()['jumlah'] ?? 0;
 
-            $pendapatanGrafik[$m - 1] = (float)$p_m;
+            $total_pendapatan_m = (float)$p_m + $margin_mrb_m + $margin_mdh_m;
+
+            $pendapatanGrafik[$m - 1] = $total_pendapatan_m;
             $pengeluaranGrafik[$m - 1] = (float)$k_m;
-            $shuGrafik[$m - 1] = max(0, (float)($p_m - $k_m));
+            $shuGrafik[$m - 1] = max(0, $total_pendapatan_m - (float)$k_m);
         }
 
         $grafikData = [
@@ -1991,7 +2107,7 @@ class AdminDashboard extends BaseController
             'shu'         => $shuGrafik
         ];
 
-        // 8. Opsi Dropdown Tahun
+        // 7. Opsi Dropdown Tahun
         $tahunOptions = [];
         for ($i = 0; $i < 5; $i++) {
             $year = date('Y') - $i;
@@ -3048,7 +3164,9 @@ class AdminDashboard extends BaseController
             'mudharabah' => $mudharabahModel->getAngsuranWithAnggota()
         ];
 
-        return view('dashboard_admin/installments', $data);
+        return view('layouts/header', $data)
+            . view('dashboard_admin/installments', $data)
+            . view('layouts/footer');
     }
 
     public function bayarAngsuran()

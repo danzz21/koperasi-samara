@@ -13,13 +13,14 @@
         <p class="text-gray-600">Kelola pemasukan dan pengeluaran operasional</p>
     </div>
 
+    <!-- Info Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div class="bg-white p-6 rounded-xl shadow-md">
             <h3 class="text-lg font-bold text-gray-800 mb-4">Total Pemasukan Bulan Ini</h3>
             <p class="text-3xl font-bold text-green-600">Rp <?= number_format($total_pemasukan, 0, ',', '.') ?></p>
             <div class="mt-2 flex items-center">
                 <i class="fas fa-arrow-up text-green-500 mr-1"></i>
-                <span class="text-sm text-green-600">+12% dari bulan lalu</span>
+                <span class="text-sm text-green-600">Bulan <?= date('F Y') ?></span>
             </div>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md">
@@ -27,89 +28,69 @@
             <p class="text-3xl font-bold text-red-600">Rp <?= number_format($total_pengeluaran, 0, ',', '.') ?></p>
             <div class="mt-2 flex items-center">
                 <i class="fas fa-arrow-down text-red-500 mr-1"></i>
-                <span class="text-sm text-red-600">-5% dari bulan lalu</span>
+                <span class="text-sm text-red-600">Bulan <?= date('F Y') ?></span>
             </div>
         </div>
     </div>
 
-<div class="bg-white rounded-xl shadow-md max-w-7xl mx-auto overflow-hidden">
-    <div class="p-6 border-b border-gray-200 space-y-4">
-        
-        <!-- Baris 1: Judul -->
-        <div class="flex justify-between items-center">
-            <h3 class="text-xl font-bold text-gray-800">Riwayat Transaksi</h3>
-        </div>
-
-        <!-- Baris 2: Filter & Tombol -->
-        <div class="flex flex-wrap items-center justify-between gap-3">
-            
-            <!-- Bagian Kiri: Filter -->
-            <div class="flex flex-wrap items-center gap-3">
-                <!-- Filter Jenis -->
-                <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-700">Jenis:</label>
-                    <select id="filterJenis" 
-                        class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
-                        <option value="all">Semua Jenis</option>
-                        <option value="pemasukan">Pemasukan</option>
-                        <option value="pengeluaran">Pengeluaran</option>
-                    </select>
-                </div>
-
-                <!-- Filter Kategori -->
-                <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-700">Kategori:</label>
-                    <select id="filterKategori" 
-                        class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
-                        <option value="all">Semua Kategori</option>
-                        <option value="Bagi Hasil">Bagi Hasil</option>
-                        <option value="Jasa Administrasi">Jasa Administrasi</option>
-                        <option value="Operasional">Operasional</option>
-                        <option value="Pemeliharaan">Pemeliharaan</option>
-                        <option value="Gaji">Gaji</option>
-                        <option value="Lain-lain">Lain-lain</option>
-                    </select>
-                </div>
-
-                <!-- Search Deskripsi -->
-                <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-700">Cari:</label>
-                    <input type="text" id="searchDeskripsi" placeholder="Deskripsi..." 
-                        class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm w-40">
-                </div>
-
-                <!-- Filter Bulan -->
-                <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-700">Bulan:</label>
-                    <input type="month" id="filterBulan" value="<?= date('Y-m') ?>" 
-                        class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
-                </div>
-
-                <!-- Tombol Reset -->
-                <button onclick="resetFilter()" 
-                    class="px-3 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm flex items-center">
-                    <i class="fas fa-refresh mr-1"></i>Reset
-                </button>
+    <!-- Table Container -->
+    <div class="bg-white rounded-xl shadow-md max-w-7xl mx-auto overflow-hidden">
+        <div class="p-6 border-b border-gray-200 space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold text-gray-800">Riwayat Transaksi</h3>
             </div>
 
-            <!-- Bagian Kanan: Tombol Tambah -->
-            <div class="flex items-center gap-2 ml-auto">
-                <button onclick="openModal('incomeModal')" 
-                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm">
-                    <i class="fas fa-plus mr-2"></i>Pemasukan
-                </button>
-                <button onclick="openModal('expenseModal')" 
-                    class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center text-sm">
-                    <i class="fas fa-minus mr-2"></i>Pengeluaran
-                </button>
+            <!-- Filter & Action Buttons -->
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm font-medium text-gray-700">Jenis:</label>
+                        <select id="filterJenis" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                            <option value="all">Semua Jenis</option>
+                            <option value="pemasukan">Pemasukan</option>
+                            <option value="pengeluaran">Pengeluaran</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm font-medium text-gray-700">Kategori:</label>
+                        <select id="filterKategori" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                            <option value="all">Semua Kategori</option>
+                            <option value="Bagi Hasil">Bagi Hasil</option>
+                            <option value="Jasa Administrasi">Jasa Administrasi</option>
+                            <option value="Operasional">Operasional</option>
+                            <option value="Pemeliharaan">Pemeliharaan</option>
+                            <option value="Gaji">Gaji</option>
+                            <option value="Lain-lain">Lain-lain</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm font-medium text-gray-700">Cari:</label>
+                        <input type="text" id="searchDeskripsi" placeholder="Deskripsi..." class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm w-40">
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm font-medium text-gray-700">Bulan:</label>
+                        <input type="month" id="filterBulan" value="<?= date('Y-m') ?>" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    </div>
+
+                    <button onclick="resetFilter()" class="px-3 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors text-sm flex items-center">
+                        <i class="fas fa-refresh mr-1"></i>Reset
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 ml-auto">
+                    <button onclick="openModal('incomeModal')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center text-sm">
+                        <i class="fas fa-plus mr-2"></i>Pemasukan
+                    </button>
+                    <button onclick="openModal('expenseModal')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center text-sm">
+                        <i class="fas fa-minus mr-2"></i>Pengeluaran
+                    </button>
+                </div>
             </div>
-
         </div>
-    </div>
-</div>
 
-
-        
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead class="bg-gray-50">
@@ -119,6 +100,7 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
+                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200" id="tableBody">
@@ -147,11 +129,19 @@
                                     <?= ucfirst($transaksi['jenis']) ?>
                                 </span>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                <button onclick="editTransaksi(<?= htmlspecialchars(json_encode($transaksi)) ?>)" class="text-blue-600 hover:text-blue-900 mr-3">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button onclick="deleteTransaksi(<?= $transaksi['id'] ?>)" class="text-red-600 hover:text-red-900">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
                                 Belum ada transaksi
                             </td>
                         </tr>
@@ -160,7 +150,6 @@
             </table>
         </div>
         
-        <!-- Empty State -->
         <div id="emptyState" class="hidden p-8 text-center">
             <i class="fas fa-search text-gray-400 text-4xl mb-4"></i>
             <p class="text-gray-500 text-lg">Tidak ada data yang sesuai dengan filter</p>
@@ -245,19 +234,188 @@
         </div>
     </div>
 
-    <script>
-    // ========== GLOBAL FUNCTIONS ==========
-    
-    // Format currency
-    function formatCurrency(input) {
-        let value = input.value.replace(/\D/g, '');
-        if (value) {
-            value = parseInt(value).toLocaleString('id-ID');
-            input.value = value;
+    <!-- MODAL EDIT TRANSAKSI -->
+    <div id="editModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-xl shadow-xl max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Edit Transaksi</h3>
+            <form id="formEdit" class="space-y-4">
+                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                <input type="hidden" id="edit_id" name="id">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Jenis *</label>
+                    <select id="edit_jenis" name="jenis" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
+                        <option value="pemasukan">Pemasukan</option>
+                        <option value="pengeluaran">Pengeluaran</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi *</label>
+                    <input type="text" id="edit_deskripsi" name="deskripsi" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Kategori *</label>
+                    <select id="edit_kategori" name="kategori" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
+                        <option value="Bagi Hasil">Bagi Hasil</option>
+                        <option value="Jasa Administrasi">Jasa Administrasi</option>
+                        <option value="Operasional">Operasional</option>
+                        <option value="Pemeliharaan">Pemeliharaan</option>
+                        <option value="Gaji">Gaji</option>
+                        <option value="Lain-lain">Lain-lain</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Jumlah *</label>
+                    <input type="number" id="edit_jumlah" name="jumlah" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500" min="1000" required>
+                </div>
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" onclick="closeModal('editModal')" class="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors">
+                        Batal
+                    </button>
+                    <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+    let isSubmitting = false;
+
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
         }
     }
 
-    // ========== FILTER FUNCTIONS ==========
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            const form = modal.querySelector('form');
+            if (form) form.reset();
+        }
+    }
+
+    // Save Transaksi Baru
+    function saveTransaksi(formElement) {
+        if (isSubmitting) return;
+
+        const submitBtn = formElement.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+
+        isSubmitting = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
+        submitBtn.disabled = true;
+
+        const formData = new FormData(formElement);
+
+        fetch('<?= base_url('admin/saveTransaksi') ?>', {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                showNotification(data.message, 'success');
+                closeModal(formElement.closest('.modal').id);
+                setTimeout(() => location.reload(), 800);
+            } else {
+                alert('Gagal: ' + data.message);
+                isSubmitting = false;
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan koneksi.');
+            isSubmitting = false;
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    }
+
+    // Open Modal & Populate Edit Data
+    function editTransaksi(data) {
+        document.getElementById('edit_id').value = data.id;
+        document.getElementById('edit_jenis').value = data.jenis;
+        document.getElementById('edit_deskripsi').value = data.deskripsi;
+        document.getElementById('edit_kategori').value = data.kategori;
+        document.getElementById('edit_jumlah').value = data.jumlah;
+        openModal('editModal');
+    }
+
+    // Update Transaksi AJAX
+    function updateTransaksi(formElement) {
+        if (isSubmitting) return;
+
+        const id = document.getElementById('edit_id').value;
+        const submitBtn = formElement.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+
+        isSubmitting = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengupdate...';
+        submitBtn.disabled = true;
+
+        const formData = new FormData(formElement);
+
+        fetch('<?= base_url('admin/updateTransaksi') ?>/' + id, {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                showNotification(data.message, 'success');
+                closeModal('editModal');
+                setTimeout(() => location.reload(), 800);
+            } else {
+                alert('Gagal: ' + data.message);
+                isSubmitting = false;
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat mengupdate.');
+            isSubmitting = false;
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    }
+
+    // Delete Transaksi AJAX
+    function deleteTransaksi(id) {
+        if (!confirm('Apakah Anda yakin ingin menghapus transaksi ini?')) return;
+
+        fetch('<?= base_url('admin/deleteTransaksi') ?>/' + id, {
+            method: 'POST',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                showNotification(data.message, 'success');
+                setTimeout(() => location.reload(), 800);
+            } else {
+                alert('Gagal: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menghapus.');
+        });
+    }
+
+    // Filter Table
     function applyFilter() {
         const jenisFilter = document.getElementById('filterJenis').value;
         const kategoriFilter = document.getElementById('filterKategori').value;
@@ -286,19 +444,18 @@
             }
         });
         
-        // Toggle empty state
         const emptyState = document.getElementById('emptyState');
         const tableBody = document.getElementById('tableBody');
         
         if (visibleCount === 0) {
-            tableBody.style.display = 'none';
-            emptyState.classList.remove('hidden');
+            if (tableBody) tableBody.style.display = 'none';
+            if (emptyState) emptyState.classList.remove('hidden');
         } else {
-            tableBody.style.display = '';
-            emptyState.classList.add('hidden');
+            if (tableBody) tableBody.style.display = '';
+            if (emptyState) emptyState.classList.add('hidden');
         }
     }
-    
+
     function resetFilter() {
         document.getElementById('filterJenis').value = 'all';
         document.getElementById('filterKategori').value = 'all';
@@ -307,246 +464,41 @@
         applyFilter();
     }
 
-    // ========== MODAL FUNCTIONS ==========
-    function openModal(id) {
-        document.getElementById(id).classList.remove("hidden");
-        document.getElementById(id).classList.add("flex");
-        
-        // Reset form validation styles
-        const form = document.querySelector(`#${id} form`);
-        if (form) {
-            const inputs = form.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                input.style.borderColor = '';
-            });
-        }
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).classList.add("hidden");
-        document.getElementById(id).classList.remove("flex");
-        resetForm(id);
-    }
-
-    function resetForm(modalId) {
-        const form = document.querySelector(`#${modalId} form`);
-        if (form) {
-            form.reset();
-            // Reset validation styles
-            const inputs = form.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                input.style.borderColor = '';
-            });
-        }
-    }
-
-    // ========== FORM VALIDATION ==========
-    function validateForm(form) {
-        const requiredFields = form.querySelectorAll('[required]');
-        let isValid = true;
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                isValid = false;
-                field.style.borderColor = 'red';
-                
-                // Scroll ke field yang error
-                field.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                field.style.borderColor = '';
-            }
-        });
-        
-        return isValid;
-    }
-
-    // ========== FORM SUBMISSION ==========
-    function saveTransaksi(form) {
-        console.log('saveTransaksi function called');
-        
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        
-        // Validasi form sebelum submit
-        if (!validateForm(form)) {
-            alert('Harap isi semua field yang wajib diisi!');
-            return;
-        }
-        
-        // Loading state
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
-        submitBtn.disabled = true;
-
-        const formData = new FormData(form);
-        
-        // Debug: lihat data yang akan dikirim
-        console.log('Data yang dikirim:');
-        for (let [key, value] of formData.entries()) {
-            console.log(key + ': ' + value);
-        }
-
-        fetch('<?= base_url('admin/saveTransaksi') ?>', {
-            method: 'POST',
-            body: formData
-        })
-        .then(res => {
-            console.log('Response status:', res.status);
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return res.json();
-        })
-        .then(response => {
-            console.log('Response data:', response);
-            if (response.status === 'success') {
-                // Sweet alert atau notifikasi yang lebih baik
-                showNotification('Transaksi berhasil disimpan!', 'success');
-                const modalId = form.closest('.modal').id;
-                closeModal(modalId);
-                
-                // Refresh halaman setelah 1 detik
-                setTimeout(() => {
-                    location.reload();
-                }, 1000);
-            } else {
-                throw new Error(response.message || 'Terjadi kesalahan saat menyimpan');
-            }
-        })
-        .catch(err => {
-            console.error('Error:', err);
-            showNotification('Gagal menyimpan transaksi: ' + err.message, 'error');
-        })
-        .finally(() => {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        });
-    }
-
-    // ========== NOTIFICATION ==========
-    function showNotification(message, type = 'info') {
-        // Buat notifikasi sederhana
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
-            type === 'success' ? 'bg-green-500 text-white' : 
-            type === 'error' ? 'bg-red-500 text-white' : 
-            'bg-blue-500 text-white'
-        }`;
-        notification.innerHTML = `
-            <div class="flex items-center">
-                <i class="fas ${type === 'success' ? 'fa-check' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-info'} mr-2"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Hapus notifikasi setelah 3 detik
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
-
-    // ========== EVENT LISTENER SETUP ==========
-    function setupFormHandlers() {
-        // Form Pemasukan
-        const formPemasukan = document.getElementById('formPemasukan');
-        if (formPemasukan) {
-            formPemasukan.addEventListener('submit', function(e) {
-                e.preventDefault();
-                console.log('Form pemasukan submitted');
-                saveTransaksi(this);
-            });
-        }
-
-        // Form Pengeluaran
-        const formPengeluaran = document.getElementById('formPengeluaran');
-        if (formPengeluaran) {
-            formPengeluaran.addEventListener('submit', function(e) {
-                e.preventDefault();
-                console.log('Form pengeluaran submitted');
-                saveTransaksi(this);
-            });
-        }
-        
-        // Enter key support untuk semua input field
-        const allInputs = document.querySelectorAll('#formPemasukan input, #formPengeluaran input, #formPemasukan select, #formPengeluaran select');
-        allInputs.forEach(input => {
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const form = this.closest('form');
-                    if (form) {
-                        saveTransaksi(form);
-                    }
-                }
-            });
-        });
-    }
-
-    // ========== INITIALIZATION ==========
+    // Event Listeners Setup
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, initializing...');
-        
-        // Setup filter event listeners
-        const filterJenis = document.getElementById('filterJenis');
-        const filterKategori = document.getElementById('filterKategori');
-        const searchDeskripsi = document.getElementById('searchDeskripsi');
-        const filterBulan = document.getElementById('filterBulan');
-        
-        if (filterJenis) filterJenis.addEventListener('change', applyFilter);
-        if (filterKategori) filterKategori.addEventListener('change', applyFilter);
-        if (searchDeskripsi) searchDeskripsi.addEventListener('input', applyFilter);
-        if (filterBulan) filterBulan.addEventListener('change', applyFilter);
-        
-        // Setup form handlers
-        setupFormHandlers();
-        
-        // Auto-format currency inputs
-        const amountInputs = document.querySelectorAll('input[name="jumlah"]');
-        amountInputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                formatCurrency(this);
-            });
-            
-            input.addEventListener('focus', function() {
-                this.value = this.value.replace(/\D/g, '');
-            });
-            
-            // Prevent negative values
-            input.addEventListener('input', function() {
-                if (this.value < 0) {
-                    this.value = '';
-                }
-            });
+        document.getElementById('formPemasukan')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            saveTransaksi(this);
         });
-        
-        // Close modal ketika klik di luar modal
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal(this.id);
-                }
-            });
+
+        document.getElementById('formPengeluaran')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            saveTransaksi(this);
         });
-        
-        // Escape key untuk close modal
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const openModal = document.querySelector('.modal.flex');
-                if (openModal) {
-                    closeModal(openModal.id);
-                }
-            }
+
+        document.getElementById('formEdit')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            updateTransaksi(this);
         });
-        
-        console.log('Initialization complete');
+
+        document.getElementById('filterJenis')?.addEventListener('change', applyFilter);
+        document.getElementById('filterKategori')?.addEventListener('change', applyFilter);
+        document.getElementById('searchDeskripsi')?.addEventListener('input', applyFilter);
+        document.getElementById('filterBulan')?.addEventListener('change', applyFilter);
     });
 
-    // ========== ERROR HANDLING ==========
-    window.addEventListener('error', function(e) {
-        console.error('Global error:', e.error);
-    });
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 text-white font-semibold ${
+            type === 'success' ? 'bg-green-600' : 'bg-red-600'
+        }`;
+        notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${message}`;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+    }
 </script>
 </body>
 </html>

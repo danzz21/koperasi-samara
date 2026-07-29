@@ -151,6 +151,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     // Transaksi Umum
     $routes->get('transactions', 'AdminDashboard::transactions');
     $routes->post('saveTransaksi', 'AdminDashboard::saveTransaksi');
+    $routes->post('updateTransaksi/(:num)', 'AdminDashboard::updateTransaksi/$1');
+    $routes->post('deleteTransaksi/(:num)', 'AdminDashboard::deleteTransaksi/$1');
 
     $routes->get('pembayaran-pending', 'AdminDashboard::pembayaranPending');
     $routes->post('pembayaran/verifikasi/(:num)', 'AdminDashboard::verifikasiPembayaran/$1');
