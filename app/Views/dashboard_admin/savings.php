@@ -1439,7 +1439,7 @@
         }
 
         function setupFormSubmit() {
-            // kosongkan dulu
+            
         }
 
         document.addEventListener('DOMContentLoaded', function() {

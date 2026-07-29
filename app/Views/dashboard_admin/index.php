@@ -7,21 +7,12 @@
     <!-- CDN Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .card-gradient {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            border: 1px solid #10b981;
+        .stat-card {
+            transition: all 0.3s ease;
         }
-        .card-blue {
-            background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%);
-            border: 1px solid #3b82f6;
-        }
-        .card-purple {
-            background: linear-gradient(135deg, #e9d5ff 0%, #c4b5fd 100%);
-            border: 1px solid #8b5cf6;
-        }
-        .card-orange {
-            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
-            border: 1px solid #f59e0b;
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
         .notification-card {
             transition: all 0.3s ease;
@@ -34,129 +25,209 @@
 </head>
 <body>
     <!-- Header -->
-    <div class="mb-6">
-        <h2 class="text-3xl font-bold text-gray-800 mb-2">Dashboard Utama</h2>
-        <p class="text-gray-600">Ringkasan cepat kondisi koperasi saat ini</p>
+    <div class="mb-6 flex justify-between items-center flex-wrap gap-4">
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-1">Dashboard Utama</h2>
+            <p class="text-gray-600 text-sm">Ringkasan rinci arus kas, pembiayaan, dan performa koperasi</p>
+        </div>
+        <div class="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 text-xs font-semibold text-gray-600">
+            <i class="fas fa-clock text-emerald-600 mr-1.5"></i>Update: <?= date('d M Y, H:i') ?> WIB
+        </div>
     </div>
 
-    <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Total Anggota Aktif -->
-        <div class="card-gradient p-6 rounded-xl shadow-md">
-            <div class="flex items-center justify-between">
+    <!-- 8 STAT CARDS GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+
+        <!-- CARD 1: Kas Real / Saldo Fisik -->
+        <div class="stat-card bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-5 rounded-2xl shadow-lg relative overflow-hidden">
+            <div class="flex justify-between items-start relative z-10">
                 <div>
-                    <p class="text-emerald-700 text-sm font-medium">Total Anggota Aktif</p>
-                    <p class="text-2xl font-bold text-emerald-900"><?= number_format($totalAnggota) ?></p>
+                    <p class="text-emerald-100 text-xs font-medium uppercase tracking-wider">Saldo Kas Real (Saat Ini)</p>
+                    <h3 class="text-2xl font-extrabold mt-1">Rp <?= number_format($kasReal ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-[11px] text-emerald-100 mt-2 opacity-90"><i class="fas fa-info-circle mr-1"></i>(Total Simpanan - Pokok Dipinjam)</p>
                 </div>
-                <i class="fas fa-users text-3xl text-emerald-500 opacity-80"></i>
+                <div class="p-3 bg-white/20 backdrop-blur-md rounded-xl text-white">
+                    <i class="fas fa-wallet text-2xl"></i>
+                </div>
+            </div>
+            <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        </div>
+
+        <!-- CARD 2: Total Simpanan Anggota -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-blue-500 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Total Simpanan</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Rp <?= number_format($totalSimpanan ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-xs text-blue-600 font-medium mt-2"><i class="fas fa-piggy-bank mr-1"></i>Pokok + Wajib + Sukarela</p>
+                </div>
+                <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                    <i class="fas fa-coins text-2xl"></i>
+                </div>
             </div>
         </div>
 
-        <!-- Total Simpanan -->
-        <div class="card-blue p-6 rounded-xl shadow-md">
-            <div class="flex items-center justify-between">
+        <!-- CARD 3: Pokok Pinjaman Beredar -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-amber-500 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
                 <div>
-                    <p class="text-blue-700 text-sm font-medium">Total Simpanan</p>
-                    <p class="text-2xl font-bold text-blue-900">Rp <?= number_format($totalSimpanan, 0, ',', '.') ?></p>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Pokok Pinjaman Beredar</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Rp <?= number_format($sisaPokokPinjaman ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-xs text-amber-600 font-medium mt-2"><i class="fas fa-hand-holding-usd mr-1"></i>Uang Asli Dipinjam Anggota</p>
                 </div>
-                <i class="fas fa-coins text-3xl text-blue-500 opacity-80"></i>
+                <div class="p-3 bg-amber-50 text-amber-600 rounded-xl">
+                    <i class="fas fa-file-invoice-dollar text-2xl"></i>
+                </div>
             </div>
         </div>
 
-        <!-- Pembiayaan Berjalan -->
-        <div class="card-purple p-6 rounded-xl shadow-md">
-            <div class="flex items-center justify-between">
+        <!-- CARD 4: Realisasi Keuntungan (Profit Terkumpul) -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-indigo-500 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
                 <div>
-                    <p class="text-purple-700 text-sm font-medium">Pembiayaan Berjalan</p>
-                    <p class="text-2xl font-bold text-purple-900">Rp <?= number_format($totalPembiayaan, 0, ',', '.') ?></p>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Profit Realisasi (Terbayar)</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Rp <?= number_format($realisasiMargin ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-xs text-indigo-600 font-medium mt-2"><i class="fas fa-check-circle mr-1"></i>Margin Masuk dari Cicilan</p>
                 </div>
-                <i class="fas fa-hand-holding-usd text-3xl text-purple-500 opacity-80"></i>
+                <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
+                    <i class="fas fa-chart-line text-2xl"></i>
+                </div>
             </div>
         </div>
 
-        <!-- Pendapatan Margin Bulanan -->
-        <div class="card-orange p-6 rounded-xl shadow-md">
-            <div class="flex items-center justify-between">
+        <!-- CARD 5: Potensi Keuntungan TOTAL -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-purple-500 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
                 <div>
-                    <p class="text-orange-700 text-sm font-medium">Pendapatan Bulanan</p>
-                    <p class="text-2xl font-bold text-orange-900">Rp <?= number_format($totalMargin, 0, ',', '.') ?></p>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Potensi Total Margin</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Rp <?= number_format($potensiMargin ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-xs text-purple-600 font-medium mt-2"><i class="fas fa-bullseye mr-1"></i>Proyeksi Margin Pinjaman Aktif</p>
                 </div>
-                <i class="fas fa-chart-line text-3xl text-orange-500 opacity-80"></i>
+                <div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
+                    <i class="fas fa-percentage text-2xl"></i>
+                </div>
             </div>
         </div>
+
+        <!-- CARD 6: Estimasi Tagihan Bulan Ini -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-rose-500 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Tagihan Angsuran Bulan Ini</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Rp <?= number_format($tagihanBulanIni ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-xs text-rose-600 font-medium mt-2"><i class="fas fa-calendar-alt mr-1"></i>Ekspektasi Arus Masuk</p>
+                </div>
+                <div class="p-3 bg-rose-50 text-rose-600 rounded-xl">
+                    <i class="fas fa-receipt text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 7: Valuasi Total Aset -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-cyan-500 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Valuasi Total Aset</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Rp <?= number_format($totalAset ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-xs text-cyan-600 font-medium mt-2"><i class="fas fa-building mr-1"></i>Kas + Piutang + Profit</p>
+                </div>
+                <div class="p-3 bg-cyan-50 text-cyan-600 rounded-xl">
+                    <i class="fas fa-vault text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 8: Total Anggota Aktif -->
+        <div class="stat-card bg-white p-5 rounded-2xl shadow-md border-l-4 border-slate-600 border-y border-r border-gray-100">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Total Anggota Aktif</p>
+                    <h3 class="text-2xl font-extrabold text-gray-800 mt-1"><?= number_format($totalAnggota ?? 0) ?> <span class="text-sm font-semibold text-gray-500">Orang</span></h3>
+                    <p class="text-xs text-slate-600 font-medium mt-2"><i class="fas fa-users-check mr-1"></i>Anggota Terverifikasi</p>
+                </div>
+                <div class="p-3 bg-slate-100 text-slate-700 rounded-xl">
+                    <i class="fas fa-users text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Charts and Notifications -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <!-- Chart -->
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Perkembangan Simpanan & Pembiayaan</h3>
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="fas fa-chart-area text-emerald-600"></i>Perkembangan Simpanan & Pembiayaan
+            </h3>
             <div class="h-64">
                 <canvas id="growthChart"></canvas>
             </div>
         </div>
 
         <!-- Notifikasi Penting -->
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Notifikasi Penting</h3>
-            <div class="space-y-4">
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="fas fa-bell text-amber-500"></i>Notifikasi Penting
+            </h3>
+            <div class="space-y-3">
                 <!-- Anggota Baru Pending -->
                 <a href="<?= base_url('admin/pending-members') ?>" class="block notification-card">
-                    <div class="flex items-center p-4 bg-green-50 border-l-4 border-green-500 rounded-lg hover:bg-green-100 transition-colors">
-                        <i class="fas fa-user-plus text-green-500 text-xl mr-4"></i>
+                    <div class="flex items-center p-3.5 bg-green-50 border-l-4 border-green-500 rounded-xl hover:bg-green-100/80 transition-colors">
+                        <i class="fas fa-user-plus text-green-500 text-lg mr-3"></i>
                         <div class="flex-1">
-                            <p class="font-semibold text-green-800"><?= $pendingCount ?> Anggota Baru</p>
-                            <p class="text-sm text-green-600">Menunggu verifikasi</p>
+                            <p class="font-bold text-green-900 text-sm"><?= $pendingCount ?? 0 ?> Anggota Baru</p>
+                            <p class="text-xs text-green-700">Menunggu verifikasi</p>
                         </div>
-                        <i class="fas fa-chevron-right text-green-400"></i>
+                        <i class="fas fa-chevron-right text-green-400 text-xs"></i>
                     </div>
                 </a>
 
                 <!-- Simpanan Sukarela Pending -->
                 <a href="<?= base_url('admin/pending-sukarela') ?>" class="block notification-card">
-                    <div class="flex items-center p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg hover:bg-yellow-100 transition-colors">
-                        <i class="fas fa-hourglass-half text-yellow-500 text-xl mr-4"></i>
+                    <div class="flex items-center p-3.5 bg-yellow-50 border-l-4 border-yellow-500 rounded-xl hover:bg-yellow-100/80 transition-colors">
+                        <i class="fas fa-hourglass-half text-yellow-500 text-lg mr-3"></i>
                         <div class="flex-1">
-                            <p class="font-semibold text-yellow-800"><?= $pendingSimpananCount ?> Simpanan Sukarela</p>
-                            <p class="text-sm text-yellow-600">Menunggu persetujuan admin</p>
+                            <p class="font-bold text-yellow-900 text-sm"><?= $pendingSimpananCount ?? 0 ?> Simpanan Sukarela</p>
+                            <p class="text-xs text-yellow-700">Menunggu persetujuan admin</p>
                         </div>
-                        <i class="fas fa-chevron-right text-yellow-400"></i>
+                        <i class="fas fa-chevron-right text-yellow-400 text-xs"></i>
                     </div>
                 </a>
 
                 <!-- Simpanan Pokok Pending -->
                 <a href="<?= base_url('admin/pending-simpanan-pokok') ?>" class="block notification-card">
-                    <div class="flex items-center p-4 bg-amber-50 border-l-4 border-amber-500 rounded-lg hover:bg-amber-100 transition-colors">
-                        <i class="fas fa-landmark text-amber-500 text-xl mr-4"></i>
+                    <div class="flex items-center p-3.5 bg-amber-50 border-l-4 border-amber-500 rounded-xl hover:bg-amber-100/80 transition-colors">
+                        <i class="fas fa-landmark text-amber-500 text-lg mr-3"></i>
                         <div class="flex-1">
-                            <p class="font-semibold text-amber-800"><?= $pendingSimpananPokokCount ?> Simpanan Pokok</p>
-                            <p class="text-sm text-amber-600">Menunggu verifikasi</p>
+                            <p class="font-bold text-amber-900 text-sm"><?= $pendingSimpananPokokCount ?? 0 ?> Simpanan Pokok</p>
+                            <p class="text-xs text-amber-700">Menunggu verifikasi</p>
                         </div>
-                        <i class="fas fa-chevron-right text-amber-400"></i>
+                        <i class="fas fa-chevron-right text-amber-400 text-xs"></i>
                     </div>
                 </a>
 
                 <!-- Pinjaman Pending -->
                 <a href="<?= base_url('admin/pending-pinjaman') ?>" class="block notification-card">
-                    <div class="flex items-center p-4 bg-orange-50 border-l-4 border-orange-500 rounded-lg hover:bg-orange-100 transition-colors">
-                        <i class="fas fa-money-check-alt text-orange-500 text-xl mr-4"></i>
+                    <div class="flex items-center p-3.5 bg-orange-50 border-l-4 border-orange-500 rounded-xl hover:bg-orange-100/80 transition-colors">
+                        <i class="fas fa-money-check-alt text-orange-500 text-lg mr-3"></i>
                         <div class="flex-1">
-                            <p class="font-semibold text-orange-800"><?= $pendingPinjamanCount ?> Pinjaman</p>
-                            <p class="text-sm text-orange-600">Belum disetujui oleh admin</p>
+                            <p class="font-bold text-orange-900 text-sm"><?= $pendingPinjamanCount ?? 0 ?> Pinjaman</p>
+                            <p class="text-xs text-orange-700">Belum disetujui oleh admin</p>
                         </div>
-                        <i class="fas fa-chevron-right text-orange-400"></i>
+                        <i class="fas fa-chevron-right text-orange-400 text-xs"></i>
                     </div>
                 </a>
 
                 <!-- Pembayaran Cicilan Pending -->
                 <a href="<?= base_url('admin/pembayaran-pending') ?>" class="block notification-card">
-                    <div class="flex items-center p-4 bg-purple-50 border-l-4 border-purple-500 rounded-lg hover:bg-purple-100 transition-colors">
-                        <i class="fas fa-credit-card text-purple-500 text-xl mr-4"></i>
+                    <div class="flex items-center p-3.5 bg-purple-50 border-l-4 border-purple-500 rounded-xl hover:bg-purple-100/80 transition-colors">
+                        <i class="fas fa-credit-card text-purple-500 text-lg mr-3"></i>
                         <div class="flex-1">
-                            <p class="font-semibold text-purple-800"><?= $pendingPembayaranCount ?> Pembayaran Cicilan</p>
-                            <p class="text-sm text-purple-600">Menunggu verifikasi admin</p>
+                            <p class="font-bold text-purple-900 text-sm"><?= $pendingPembayaranCount ?? 0 ?> Pembayaran Cicilan</p>
+                            <p class="text-xs text-purple-700">Menunggu verifikasi admin</p>
                         </div>
-                        <i class="fas fa-chevron-right text-purple-400"></i>
+                        <i class="fas fa-chevron-right text-purple-400 text-xs"></i>
                     </div>
                 </a>
             </div>
@@ -164,24 +235,24 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="bg-white p-6 rounded-xl shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Aksi Cepat</h3>
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Aksi Cepat</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?= base_url('admin/members') ?>" class="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                <i class="fas fa-users text-blue-500 mr-3"></i>
-                <span class="font-medium text-blue-800">Kelola Anggota</span>
+            <a href="<?= base_url('admin/members') ?>" class="flex items-center p-4 bg-blue-50/80 rounded-xl hover:bg-blue-100 transition-colors border border-blue-100">
+                <i class="fas fa-users text-blue-600 text-xl mr-3"></i>
+                <span class="font-bold text-sm text-blue-900">Kelola Anggota</span>
             </a>
-            <a href="<?= base_url('admin/savings') ?>" class="flex items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                <i class="fas fa-coins text-3xl text-blue-500 mr-3"></i>
-                <span class="font-medium text-green-800">Kelola Simpanan</span>
+            <a href="<?= base_url('admin/savings') ?>" class="flex items-center p-4 bg-emerald-50/80 rounded-xl hover:bg-emerald-100 transition-colors border border-emerald-100">
+                <i class="fas fa-coins text-emerald-600 text-xl mr-3"></i>
+                <span class="font-bold text-sm text-emerald-900">Kelola Simpanan</span>
             </a>
-            <a href="<?= base_url('admin/financing') ?>" class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
-                <i class="fas fa-hand-holding-usd text-purple-500 mr-3"></i>
-                <span class="font-medium text-purple-800">Kelola Pembiayaan</span>
+            <a href="<?= base_url('admin/financing') ?>" class="flex items-center p-4 bg-purple-50/80 rounded-xl hover:bg-purple-100 transition-colors border border-purple-100">
+                <i class="fas fa-hand-holding-usd text-purple-600 text-xl mr-3"></i>
+                <span class="font-bold text-sm text-purple-900">Kelola Pembiayaan</span>
             </a>
-            <a href="<?= base_url('admin/transactions') ?>" class="flex items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
-                <i class="fas fa-receipt text-orange-500 mr-3"></i>
-                <span class="font-medium text-orange-800">Transaksi Umum</span>
+            <a href="<?= base_url('admin/transactions') ?>" class="flex items-center p-4 bg-orange-50/80 rounded-xl hover:bg-orange-100 transition-colors border border-orange-100">
+                <i class="fas fa-receipt text-orange-600 text-xl mr-3"></i>
+                <span class="font-bold text-sm text-orange-900">Transaksi Umum</span>
             </a>
         </div>
     </div>
@@ -193,11 +264,11 @@
             const growthChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: <?= $chartLabels ?>,
+                    labels: <?= $chartLabels ?? '[]' ?>,
                     datasets: [
                         {
                             label: 'Simpanan',
-                            data: <?= $chartSimpanan ?>,
+                            data: <?= $chartSimpanan ?? '[]' ?>,
                             borderColor: '#10b981',
                             backgroundColor: 'rgba(16, 185, 129, 0.1)',
                             borderWidth: 2,
@@ -206,7 +277,7 @@
                         },
                         {
                             label: 'Pembiayaan',
-                            data: <?= $chartPembiayaan ?>,
+                            data: <?= $chartPembiayaan ?? '[]' ?>,
                             borderColor: '#3b82f6',
                             backgroundColor: 'rgba(59, 130, 246, 0.1)',
                             borderWidth: 2,
@@ -229,9 +300,7 @@
                             callbacks: {
                                 label: function(context) {
                                     let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
+                                    if (label) label += ': ';
                                     if (context.parsed.y !== null) {
                                         label += new Intl.NumberFormat('id-ID', {
                                             style: 'currency',
