@@ -125,6 +125,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     // ✅ PERBAIKI ROUTES MANAJEMEN ANGSURAN - GUNAKAN DASHBOARD_ADMIN
     $routes->get('dashboard_admin/installments', 'AdminDashboard::installments');
     $routes->post('dashboard_admin/angsuran/bayar', 'AdminDashboard::bayarAngsuran');
+    $routes->post('dashboard_admin/angsuran/edit', 'AdminDashboard::editAngsuran');
     $routes->get('dashboard_admin/angsuran/detail', 'AdminDashboard::getDetailAngsuran');
 
     // Simpanan
@@ -145,6 +146,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     
     // Pembiayaan
     $routes->post('savePembiayaan', 'AdminDashboard::savePembiayaan');
+    $routes->post('deletePembiayaan', 'AdminDashboard::deletePembiayaan');
     $routes->post('approvePembiayaan', 'AdminDashboard::approvePembiayaan');
     $routes->post('rejectPembiayaan', 'AdminDashboard::rejectPembiayaan');
 

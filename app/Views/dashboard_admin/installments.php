@@ -147,6 +147,57 @@
     </div>
 </div>
 
+<!-- MODAL EDIT ANGSURAN -->
+<div id="editAngsuranModal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm items-center justify-center z-[60] hidden p-4">
+    <div class="bg-white p-6 rounded-3xl shadow-2xl max-w-sm w-full mx-auto border border-amber-100">
+        <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+            <h3 class="text-base font-bold text-gray-800 flex items-center">
+                <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mr-2 text-sm">
+                    <i class="fas fa-edit"></i>
+                </div>
+                Edit Angsuran
+            </h3>
+            <button type="button" onclick="closeEditModal()" class="text-gray-400 hover:text-gray-600 transition-colors w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100">
+                <i class="fas fa-times text-base"></i>
+            </button>
+        </div>
+
+        <form action="<?= base_url('admin/dashboard_admin/angsuran/edit') ?>" method="POST" class="mt-4 space-y-4">
+            <?= csrf_field() ?>
+            <input type="hidden" name="id_detail" id="edit_id_detail">
+
+            <div class="bg-amber-50/60 border border-amber-200/80 rounded-2xl p-3 text-xs space-y-1">
+                <div class="flex justify-between text-gray-600">
+                    <span>Angsuran Ke:</span>
+                    <span id="edit_text_ke" class="font-bold text-amber-800">-</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>Tanggal Bayar:</span>
+                    <span id="edit_text_tgl" class="font-bold text-gray-800">-</span>
+                </div>
+            </div>
+
+            <div>
+                <label for="jumlah_bayar_edit" class="block text-xs font-bold text-gray-700 mb-1">Nominal Pembayaran Baru *</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-2.5 text-gray-400 font-bold text-sm">Rp</span>
+                    <input type="number" name="jumlah_bayar_edit" id="jumlah_bayar_edit" class="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold text-gray-800 text-sm" required min="1">
+                </div>
+            </div>
+
+            <div>
+                <label for="keterangan" class="block text-xs font-bold text-gray-700 mb-1">Alasan Edit / Keterangan</label>
+                <input type="text" name="keterangan" id="edit_keterangan" placeholder="Contoh: Salah input nominal awal" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs text-gray-800">
+            </div>
+
+            <div class="flex space-x-2 pt-2">
+                <button type="button" onclick="closeEditModal()" class="flex-1 bg-gray-500 text-white py-2 rounded-xl text-xs font-semibold hover:bg-gray-600 transition">Batal</button>
+                <button type="submit" class="flex-1 bg-amber-600 text-white py-2 rounded-xl text-xs font-bold shadow-sm hover:bg-amber-700 transition"><i class="fas fa-save mr-1"></i> Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- ========================================== -->
 <!-- MODAL BAYAR ANGSURAN (PEMBAYARAN LOGIC)    -->
 <!-- ========================================== -->
@@ -286,7 +337,9 @@
             this.disabled = true;
 
             fetch(`<?= base_url('admin/dashboard_admin/angsuran/detail') ?>?jenis=${jenis}&id=${id}`, {
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -326,85 +379,107 @@
         loadingOverlay.classList.remove('hidden');
 
         fetch(`<?= base_url('admin/dashboard_admin/angsuran/detail') ?>?jenis=${jenis}&id=${id}`, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest' }
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.success) {
-                const item = res.data;
-                const history = res.history || [];
-                const totalTenor = res.jml_angsuran || 1;
-                const totalPinjam = parseFloat(item.jml_pinjam) || 0;
-                const terbayar = parseFloat(item.jml_terbayar) || 0;
-                const sisa = res.sisa_pembayaran || 0;
-                const nominalPerBulan = Math.round(totalPinjam / totalTenor);
-                const tenorTerbayar = Math.min(totalTenor, Math.floor(terbayar / nominalPerBulan));
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    const item = res.data;
+                    const history = res.history || [];
+                    const totalTenor = res.jml_angsuran || 1;
+                    const totalPinjam = parseFloat(item.jml_pinjam) || 0;
+                    const terbayar = parseFloat(item.jml_terbayar) || 0;
+                    const sisa = res.sisa_pembayaran || 0;
+                    const nominalPerBulan = Math.round(totalPinjam / totalTenor);
+                    const tenorTerbayar = Math.min(totalTenor, Math.floor(terbayar / nominalPerBulan));
 
-                // Populate Header Card
-                document.getElementById('hist_nama_anggota').innerText = item.nama_lengkap || 'Anggota';
-                document.getElementById('hist_no_anggota').innerText = `No. Anggota: ${item.nomor_anggota || '-'}`;
-                document.getElementById('hist_total_pinjam').innerText = 'Rp ' + totalPinjam.toLocaleString('id-ID');
-                document.getElementById('hist_terbayar').innerText = 'Rp ' + terbayar.toLocaleString('id-ID');
-                document.getElementById('hist_sisa').innerText = 'Rp ' + sisa.toLocaleString('id-ID');
-                document.getElementById('hist_tenor_text').innerText = `${tenorTerbayar} / ${totalTenor} Bln`;
+                    // Populate Header Card
+                    document.getElementById('hist_nama_anggota').innerText = item.nama_lengkap || 'Anggota';
+                    document.getElementById('hist_no_anggota').innerText = `No. Anggota: ${item.nomor_anggota || '-'}`;
+                    document.getElementById('hist_total_pinjam').innerText = 'Rp ' + totalPinjam.toLocaleString('id-ID');
+                    document.getElementById('hist_terbayar').innerText = 'Rp ' + terbayar.toLocaleString('id-ID');
+                    document.getElementById('hist_sisa').innerText = 'Rp ' + sisa.toLocaleString('id-ID');
+                    document.getElementById('hist_tenor_text').innerText = `${tenorTerbayar} / ${totalTenor} Bln`;
 
-                // Render Visual Grid Matriks Tenor Bulan
-                const grid = document.getElementById('gridTenorBulan');
-                grid.innerHTML = '';
+                    // Render Visual Grid Matriks Tenor Bulan
+                    const grid = document.getElementById('gridTenorBulan');
+                    grid.innerHTML = '';
 
-                const tglAkad = item.tanggal ? new Date(item.tanggal) : new Date();
+                    const tglAkad = item.tanggal ? new Date(item.tanggal) : new Date();
 
-                for (let i = 1; i <= totalTenor; i++) {
-                    // Hitung estimasi tgl jatuh tempo per bulan
-                    let estTgl = new Date(tglAkad);
-                    estTgl.setMonth(estTgl.getMonth() + i);
-                    let formatTgl = estTgl.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+                    for (let i = 1; i <= totalTenor; i++) {
+                        // Hitung estimasi tgl jatuh tempo per bulan
+                        let estTgl = new Date(tglAkad);
+                        estTgl.setMonth(estTgl.getMonth() + i);
+                        let formatTgl = estTgl.toLocaleDateString('id-ID', {
+                            day: '2-digit',
+                            month: 'short'
+                        });
 
-                    let isLunas = i <= tenorTerbayar;
-                    let bgClass = isLunas 
-                        ? 'bg-emerald-100 text-emerald-800 border-emerald-300' 
-                        : 'bg-gray-100 text-gray-500 border-gray-200';
-                    let icon = isLunas ? '<i class="fas fa-check-circle text-emerald-600 mr-1"></i>' : '<i class="far fa-clock text-gray-400 mr-1"></i>';
+                        let isLunas = i <= tenorTerbayar;
+                        let bgClass = isLunas ?
+                            'bg-emerald-100 text-emerald-800 border-emerald-300' :
+                            'bg-gray-100 text-gray-500 border-gray-200';
+                        let icon = isLunas ? '<i class="fas fa-check-circle text-emerald-600 mr-1"></i>' : '<i class="far fa-clock text-gray-400 mr-1"></i>';
 
-                    grid.innerHTML += `
+                        grid.innerHTML += `
                         <div class="p-2 border rounded-xl text-center ${bgClass} flex flex-col justify-between">
                             <span class="text-[10px] font-bold block">Bulan Ke-${i}</span>
                             <span class="text-[9px] text-gray-500 block mb-1">${formatTgl}</span>
                             <span class="text-[10px] font-extrabold flex items-center justify-center">${icon}${isLunas ? 'Lunas' : 'Belum'}</span>
                         </div>
                     `;
-                }
+                    }
 
-                // Render Table History
-                const tbody = document.getElementById('tableHistoryBody');
-                tbody.innerHTML = '';
+                    // Render Table History
+                    const tbody = document.getElementById('tableHistoryBody');
+                    tbody.innerHTML = '';
 
-                if (history.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-400 text-xs">Belum ada riwayat transaksi pembayaran</td></tr>`;
+                    if (history.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-400 text-xs">Belum ada riwayat transaksi pembayaran</td></tr>`;
+                    } else {
+                        
+                        history.forEach(h => {
+                            const tgl = h.tanggal_bayar ? new Date(h.tanggal_bayar).toLocaleDateString('id-ID', {
+                                day: '2-digit',
+                                month: 'short',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            }) : '-';
+
+                            // Escape quote untuk Keterangan
+                            const ketEscaped = (h.keterangan || '').replace(/'/g, "\\'");
+
+                            tbody.innerHTML += `
+        <tr class="hover:bg-gray-50/50 transition">
+            <td class="p-2.5 font-bold text-gray-800">Ke-${h.angsuran_ke}</td>
+            <td class="p-2.5 text-gray-600">${tgl}</td>
+            <td class="p-2.5 font-bold text-emerald-700">Rp ${parseFloat(h.jumlah_bayar).toLocaleString('id-ID')}</td>
+            <td class="p-2.5 text-right flex items-center justify-end gap-2">
+                <button type="button" onclick="openEditModal(${h.id}, ${h.angsuran_ke}, '${tgl}', ${h.jumlah_bayar}, '${ketEscaped}')" 
+                        class="bg-amber-100 hover:bg-amber-200 text-amber-800 p-1.5 rounded-lg text-[10px] font-bold transition flex items-center gap-1"
+                        title="Edit Angsuran Ini">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+            </td>
+        </tr>
+    `;
+                        });
+                    }
+
+                    historyModal.classList.remove('hidden');
+                    historyModal.classList.add('flex');
                 } else {
-                    history.forEach(h => {
-                        const tgl = h.tanggal_bayar ? new Date(h.tanggal_bayar).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-';
-                        tbody.innerHTML += `
-                            <tr class="hover:bg-gray-50/50 transition">
-                                <td class="p-2.5 font-bold text-gray-800">Ke-${h.angsuran_ke}</td>
-                                <td class="p-2.5 text-gray-600">${tgl}</td>
-                                <td class="p-2.5 font-bold text-emerald-700">Rp ${parseFloat(h.jumlah_bayar).toLocaleString('id-ID')}</td>
-                                <td class="p-2.5 text-right"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded-full font-bold">Berhasil</span></td>
-                            </tr>
-                        `;
-                    });
+                    alert('Gagal mengambil data history.');
                 }
-
-                historyModal.classList.remove('hidden');
-                historyModal.classList.add('flex');
-            } else {
-                alert('Gagal mengambil data history.');
-            }
-        })
-        .catch(err => console.error(err))
-        .finally(() => {
-            loadingOverlay.classList.add('hidden');
-        });
+            })
+            .catch(err => console.error(err))
+            .finally(() => {
+                loadingOverlay.classList.add('hidden');
+            });
     }
 
     function closeHistoryModal() {
@@ -477,6 +552,24 @@
     window.addEventListener('load', () => {
         loadingOverlay.classList.add('hidden');
     });
+
+    function openEditModal(idDetail, ke, tgl, jumlah, keterangan) {
+    document.getElementById('edit_id_detail').value = idDetail;
+    document.getElementById('edit_text_ke').innerText = `Ke-${ke}`;
+    document.getElementById('edit_text_tgl').innerText = tgl;
+    document.getElementById('jumlah_bayar_edit').value = jumlah;
+    document.getElementById('edit_keterangan').value = keterangan || '';
+
+    const editModal = document.getElementById('editAngsuranModal');
+    editModal.classList.remove('hidden');
+    editModal.classList.add('flex');
+}
+
+function closeEditModal() {
+    const editModal = document.getElementById('editAngsuranModal');
+    editModal.classList.add('hidden');
+    editModal.classList.remove('flex');
+}
 </script>
 
 <?php
@@ -513,35 +606,39 @@ function renderTable($data, $type, $idField)
     ';
 
     foreach ($data as $item) {
-        $jml_angsuran = isset($item['jml_angsuran']) && (int)$item['jml_angsuran'] > 0 ? (int)$item['jml_angsuran'] : 1;
-        $jml_pinjam = (float)($item['jml_pinjam'] ?? 0);
-        $jml_terbayar = (float)($item['jml_terbayar'] ?? 0);
+        $jml_pinjam  = (float) ($item['jml_pinjam'] ?? 0);
+        $jml_terbayar = (float) ($item['jml_terbayar'] ?? 0);
+        $jml_angsuran = (int) ($item['jml_angsuran'] ?? 1);
+        if ($jml_angsuran <= 0) $jml_angsuran = 1;
+
         $angsuran_per_bulan = $jml_pinjam / $jml_angsuran;
+        $sisa_pinjaman      = max(0, $jml_pinjam - $jml_terbayar);
+        $isLunas            = ($sisa_pinjaman <= 0 && $jml_terbayar > 0) || (strtolower($item['status'] ?? '') === 'lunas');
 
-        // Hitung Tenor Terbayar
-        if ($type === 'qard') {
-            $tenor_dibayar = (int)($item['tenor_dibayar'] ?? 0);
+        // --- KALKULASI TENOR DIBAYAR YANG KONSISTEN UNTUK SEMUA AKAD ---
+        if ($isLunas) {
+            // Jika LUNAS, paksa tenor dibayar sama dengan total tenor (misal: 12/12)
+            $tenor_dibayar = $jml_angsuran;
+            $persenProgres = 100;
+            $posisiText    = 'Lunas';
+            $status_class  = 'bg-emerald-100 text-emerald-800 border border-emerald-200';
+            $status_label  = 'Lunas';
         } else {
-            if (isset($item['sisa_tenor'])) {
-                $tenor_dibayar = max(0, $jml_angsuran - (int)$item['sisa_tenor']);
-            } else {
-                $tenor_dibayar = $angsuran_per_bulan > 0 ? (int)floor($jml_terbayar / $angsuran_per_bulan) : 0;
-            }
-        }
-
-        $tenor_dibayar = min($tenor_dibayar, $jml_angsuran);
-        $sisa_pinjaman = max(0, $jml_pinjam - $jml_terbayar);
-        $persenProgres = min(100, round(($jml_terbayar / ($jml_pinjam > 0 ? $jml_pinjam : 1)) * 100));
-
-        if ($sisa_pinjaman <= 0 && $jml_terbayar > 0) {
-            $posisiText = 'Lunas';
-            $status = 'lunas';
-            $status_class = 'bg-emerald-100 text-emerald-800 border border-emerald-200';
-        } else {
-            $angsuranKe = min($tenor_dibayar + 1, $jml_angsuran);
-            $posisiText = 'Ke-' . $angsuranKe;
-            $status = $item['status'] ?? 'aktif';
-            $status_class = strtolower($status) == 'aktif' ? 'bg-blue-100 text-blue-800 border border-blue-200' : 'bg-amber-100 text-amber-800 border border-amber-200';
+            // Hitung tenor terbayar secara umum & aman
+            $tenor_dibayar = $angsuran_per_bulan > 0 ? (int) floor($jml_terbayar / $angsuran_per_bulan) : 0;
+            $tenor_dibayar = min($tenor_dibayar, $jml_angsuran); // Batasi maks sebesar total tenor
+            
+            // Persentase Berdasarkan Nominal Terbayar
+            $persenProgres = $jml_pinjam > 0 ? min(100, round(($jml_terbayar / $jml_pinjam) * 100)) : 0;
+            
+            $angsuranKe    = min($tenor_dibayar + 1, $jml_angsuran);
+            $posisiText    = 'Ke-' . $angsuranKe;
+            
+            $status        = $item['status'] ?? 'aktif';
+            $status_label  = ucfirst($status);
+            $status_class  = strtolower($status) === 'aktif' 
+                ? 'bg-blue-100 text-blue-800 border border-blue-200' 
+                : 'bg-amber-100 text-amber-800 border border-amber-200';
         }
 
         $itemId = $item[$idField] ?? null;
@@ -566,14 +663,14 @@ function renderTable($data, $type, $idField)
                     <div class="text-[10px] text-gray-500">Rp ' . number_format($angsuran_per_bulan, 0, ',', '.') . '/bln</div>
                 </td>
 
-                <!-- 4. Progres Tenor -->
+                <!-- 4. Progres Tenor (Tampilan Dibuat Konsisten & Rapi) -->
                 <td class="px-3.5 py-3 whitespace-nowrap w-48">
                     <div class="flex items-center justify-between text-[10px] mb-1 gap-1">
                         <span class="font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">' . $posisiText . '</span>
                         <span class="font-bold text-gray-600 text-[10px]">' . $tenor_dibayar . '/' . $jml_angsuran . ' bln (' . $persenProgres . '%)</span>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
-                        <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300" style="width: ' . $persenProgres . '%"></div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden p-0.5">
+                        <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-500" style="width: ' . $persenProgres . '%"></div>
                     </div>
                 </td>
 
@@ -590,11 +687,11 @@ function renderTable($data, $type, $idField)
                 <!-- 7. Status -->
                 <td class="px-3.5 py-3 whitespace-nowrap">
                     <span class="px-2 py-0.5 inline-flex text-[10px] font-bold rounded-full ' . $status_class . '">
-                        ' . ucfirst($status) . '
+                        ' . $status_label . '
                     </span>
                 </td>
 
-                <!-- 8. Aksi (Tombol Detail/History + Bayar) -->
+                <!-- 8. Aksi -->
                 <td class="px-3.5 py-3 whitespace-nowrap text-center text-xs font-medium space-x-1">
                     <button type="button" onclick="showHistoryModal(\'' . $type . '\', \'' . $itemId . '\')" 
                             class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 py-1 rounded-lg text-xs font-bold transition inline-flex items-center space-x-1"
@@ -603,7 +700,7 @@ function renderTable($data, $type, $idField)
                     </button>
         ';
 
-        if ($sisa_pinjaman > 0) {
+        if (!$isLunas) {
             $html .= '
                 <button class="bayar-btn bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded-lg text-xs font-bold transition inline-flex items-center space-x-1 shadow-sm"
                         data-jenis="' . $type . '" 

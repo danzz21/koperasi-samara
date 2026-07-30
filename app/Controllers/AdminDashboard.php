@@ -1701,72 +1701,85 @@ class AdminDashboard extends BaseController
     {
         $db = \Config\Database::connect();
 
-        // Total aktif dan jumlah dari ketiga tabel
-        $aktifQard = $db->table('qard')->select('COUNT(*) as total, SUM(jml_pinjam) as jumlah')->where('status', 'aktif')->get()->getRowArray();
-        $aktifMurabahah = $db->table('murabahah')->select('COUNT(*) as total, SUM(jml_pinjam) as jumlah')->where('status', 'aktif')->get()->getRowArray();
-        $aktifMudharabah = $db->table('mudharabah')->select('COUNT(*) as total, SUM(jml_pinjam) as jumlah')->where('status', 'aktif')->get()->getRowArray();
+        // Helper closure untuk kalkulasi pokok & margin
+        $parsePembiayaan = function ($data, $akad) {
+            return array_map(function ($item) use ($akad) {
+                $item['akad'] = $akad;
+                $total = (float)($item['jml_pinjam'] ?? 0);
 
-        $total_aktif = ($aktifQard['total'] ?? 0) + ($aktifMurabahah['total'] ?? 0) + ($aktifMudharabah['total'] ?? 0);
-        $total_jumlah = ($aktifQard['jumlah'] ?? 0) + ($aktifMurabahah['jumlah'] ?? 0) + ($aktifMudharabah['jumlah'] ?? 0);
+                if ($akad === 'murabahah' || $akad === 'mudharabah') {
+                    // Karena total = pokok + 10% margin (pokok * 1.10)
+                    // Pokok = total / 1.10
+                    $item['pokok']  = round($total / 1.10);
+                    $item['margin'] = $total - $item['pokok'];
+                } else {
+                    // Qard 0% margin
+                    $item['pokok']  = $total;
+                    $item['margin'] = 0;
+                }
 
-        // Total menunggu dari ketiga tabel
-        $menungguQard = $db->table('qard')->select('COUNT(*) as total')->where('status', 'pending')->get()->getRowArray();
-        $menungguMurabahah = $db->table('murabahah')->select('COUNT(*) as total')->where('status', 'pending')->get()->getRowArray(); // PERBAIKI: 'peding' -> 'pending'
-        $menungguMudharabah = $db->table('mudharabah')->select('COUNT(*) as total')->where('status', 'pending')->get()->getRowArray();
+                return $item;
+            }, $data);
+        };
 
-        $total_menunggu = ($menungguQard['total'] ?? 0) + ($menungguMurabahah['total'] ?? 0) + ($menungguMudharabah['total'] ?? 0);
-
-        // Total jatuh tempo (<= +3 hari) dari ketiga tabel dengan status aktif
-        $tanggalLimit = date('Y-m-d', strtotime('+3 days'));
-
-        $jatuhQard = $db->table('qard')
-            ->select('COUNT(*) as total')
-            ->where('tanggal <=', $tanggalLimit) // PERBAIKAN: gunakan tanggal bukan jml_angsuran
-            ->where('status', 'aktif')
-            ->get()
-            ->getRowArray();
-
-        $jatuhMurabahah = $db->table('murabahah')
-            ->select('COUNT(*) as total')
-            ->where('tanggal <=', $tanggalLimit) // PERBAIKAN: gunakan tanggal bukan jml_angsuran
-            ->where('status', 'aktif')
-            ->get()
-            ->getRowArray();
-
-        $jatuhMudharabah = $db->table('mudharabah')
-            ->select('COUNT(*) as total')
-            ->where('tanggal <=', $tanggalLimit) // PERBAIKAN: gunakan tanggal bukan jml_angsuran
-            ->where('status', 'aktif')
-            ->get()
-            ->getRowArray();
-
-        $total_jatuh_tempo = ($jatuhQard['total'] ?? 0) + ($jatuhMurabahah['total'] ?? 0) + ($jatuhMudharabah['total'] ?? 0);
-
-        // Ambil data pembiayaan gabungan dari 3 tabel dengan field yang benar
-        $qard = $db->table('qard')
+        // 1. Ambil Data Gabungan dari 3 Tabel
+        $qardRaw = $db->table('qard')
             ->join('anggota', 'anggota.id_anggota = qard.id_anggota')
-            ->select('qard.id_qard AS id, anggota.nama_lengkap, "qard" as akad, qard.jml_pinjam, qard.tanggal, qard.jml_angsuran as tenor, qard.status') // GUNAKAN: jml_angsuran sebagai tenor
+            ->select('qard.id_qard AS id, qard.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, anggota.no_ktp, qard.jml_pinjam, qard.jml_terbayar, qard.tanggal, qard.jml_angsuran as tenor, qard.keperluan, qard.status')
             ->get()->getResultArray();
 
-        $murabahah = $db->table('murabahah')
+        $murabahahRaw = $db->table('murabahah')
             ->join('anggota', 'anggota.id_anggota = murabahah.id_anggota')
-            ->select('murabahah.id_mr AS id, anggota.nama_lengkap, "murabahah" as akad, murabahah.jml_pinjam, murabahah.tanggal, murabahah.jml_angsuran as tenor, murabahah.status') // GUNAKAN: jml_angsuran sebagai tenor
+            ->select('murabahah.id_mr AS id, murabahah.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, anggota.no_ktp, murabahah.jml_pinjam, murabahah.jml_terbayar, murabahah.tanggal, murabahah.jml_angsuran as tenor, murabahah.keperluan, murabahah.status')
             ->get()->getResultArray();
 
-        $mudharabah = $db->table('mudharabah')
+        $mudharabahRaw = $db->table('mudharabah')
             ->join('anggota', 'anggota.id_anggota = mudharabah.id_anggota')
-            ->select('mudharabah.id_md AS id, anggota.nama_lengkap, "mudharabah" as akad, mudharabah.jml_pinjam, mudharabah.tanggal, mudharabah.jml_angsuran as tenor, mudharabah.status') // GUNAKAN: jml_angsuran sebagai tenor
+            ->select('mudharabah.id_md AS id, mudharabah.id_anggota, anggota.nama_lengkap, anggota.nomor_anggota, anggota.no_ktp, mudharabah.jml_pinjam, mudharabah.jml_terbayar, mudharabah.tanggal, mudharabah.jml_angsuran as tenor, mudharabah.keperluan, mudharabah.status')
             ->get()->getResultArray();
 
-        // Gabungkan data
-        $pembiayaan = array_merge($qard, $murabahah, $mudharabah);
+        $qard       = $parsePembiayaan($qardRaw, 'qard');
+        $murabahah  = $parsePembiayaan($murabahahRaw, 'murabahah');
+        $mudharabah = $parsePembiayaan($mudharabahRaw, 'mudharabah');
+
+        $allPembiayaan = array_merge($qard, $murabahah, $mudharabah);
+        usort($allPembiayaan, function ($a, $b) {
+            return strtotime($b['tanggal'] ?? 0) - strtotime($a['tanggal'] ?? 0);
+        });
+
+        // 2. Metrics Card Counter
+        $total_aktif       = 0;
+        $total_jumlah      = 0;
+        $total_menunggu    = 0;
+        $total_jatuh_tempo = 0;
+        $tanggalLimit      = date('Y-m-d', strtotime('+3 days'));
+
+        foreach ($allPembiayaan as $p) {
+            $st     = strtolower($p['status'] ?? '');
+            $pinjam = (float)($p['jml_pinjam'] ?? 0);
+            $tgl    = $p['tanggal'] ?? '9999-12-31';
+
+            if ($st === 'aktif') {
+                $total_aktif++;
+                $total_jumlah += $pinjam;
+                if ($tgl <= $tanggalLimit) {
+                    $total_jatuh_tempo++;
+                }
+            } elseif ($st === 'pending') {
+                $total_menunggu++;
+            }
+        }
 
         $data = [
-            'total_aktif' => $total_aktif,
-            'total_jumlah' => $total_jumlah,
-            'total_menunggu' => $total_menunggu,
+            'title'             => 'Manajemen Pembiayaan',
+            'total_aktif'       => $total_aktif,
+            'total_jumlah'      => $total_jumlah,
+            'total_menunggu'    => $total_menunggu,
             'total_jatuh_tempo' => $total_jatuh_tempo,
-            'pembiayaan' => $pembiayaan,
+            'qard'              => $qard,
+            'murabahah'         => $murabahah,
+            'mudharabah'        => $mudharabah,
+            'pembiayaan'        => $allPembiayaan
         ];
 
         return view('layouts/header', ['title' => 'Manajemen Pembiayaan'])
@@ -1774,85 +1787,131 @@ class AdminDashboard extends BaseController
             . view('layouts/footer');
     }
     // Simpan pengajuan pembiayaan baru
-    public function savePembiayaan()
-    {
-        try {
-            $request = $this->request;
+   public function savePembiayaan()
+{
+    try {
+        $request = $this->request;
 
-            $id_anggota = $request->getPost('id_anggota');
-            $akad       = $request->getPost('akad');
-            $jml_pinjam = (float) str_replace('.', '', $request->getPost('jml_pinjam'));
-            $tenor      = (int) $request->getPost('tenor');
-            $keperluan  = $request->getPost('keperluan');
-            $tanggal    = $request->getPost('tanggal');
+        $id_anggota = $request->getPost('id_anggota');
+        $akad       = $request->getPost('akad');
+        
+        // Baca nominal pinjam dengan aman (bebas format titik/koma)
+        $rawPinjam  = $request->getPost('jml_pinjam');
+        $jml_pinjam = (float) preg_replace('/[^0-9]/', '', (string)$rawPinjam);
+        
+        $tenor     = (int) $request->getPost('tenor');
+        $keperluan = $request->getPost('keperluan');
+        $tanggal   = $request->getPost('tanggal');
 
-            if (empty($id_anggota) || empty($akad) || $jml_pinjam <= 0 || $tenor <= 0 || empty($tanggal)) {
-                return $this->response->setJSON([
-                    'status'  => 'error',
-                    'message' => 'Data pengajuan belum lengkap atau nilai tidak valid.'
-                ]);
-            }
-
-            $db = \Config\Database::connect();
-            $anggota = $db->table('anggota')->where('id_anggota', $id_anggota)->get()->getRow();
-
-            if (!$anggota) {
-                return $this->response->setJSON([
-                    'status'  => 'error',
-                    'message' => 'Anggota tidak ditemukan.'
-                ]);
-            }
-
-            // Hitung Margin berdasarkan jenis akad
-            $rateMargin = 0;
-            if ($akad === 'murabahah' || $akad === 'mudharabah') {
-                $rateMargin = 0.10; // 10% margin
-            }
-
-            $nominalMargin     = $jml_pinjam * $rateMargin;
-            $totalPinjaman     = $jml_pinjam + $nominalMargin; // Pokok + Margin
-
-            $data = [
-                'id_anggota'   => $anggota->id_anggota,
-                'tanggal'      => $tanggal,
-                'jml_pinjam'   => $totalPinjaman, // Menggunakan total kewajiban bayar
-                'jml_angsuran' => $tenor,
-                'keperluan'    => $keperluan,
-                'status'       => 'aktif',
-                'jml_terbayar' => 0,
-                'sisa_tenor'   => $tenor
-            ];
-
-            if ($akad === 'qard') {
-                $model = new \App\Models\QardModel();
-            } elseif ($akad === 'murabahah') {
-                $model = new \App\Models\MurabahahModel();
-            } elseif ($akad === 'mudharabah') {
-                $model = new \App\Models\MudharabahModel();
-            } else {
-                return $this->response->setJSON([
-                    'status'  => 'error',
-                    'message' => 'Jenis akad tidak valid'
-                ]);
-            }
-
-            if ($model->insert($data)) {
-                return $this->response->setJSON([
-                    'status'  => 'success',
-                    'message' => 'Pembiayaan ' . ucfirst($akad) . ' berhasil disetujui & aktif!'
-                ]);
-            } else {
-                return $this->response->setJSON([
-                    'status'  => 'error',
-                    'message' => 'Gagal menyimpan transaksi.'
-                ]);
-            }
-        } catch (\Exception $e) {
+        // Validasi kelengkapan data
+        if (empty($id_anggota) || empty($akad) || $jml_pinjam < 100000 || $tenor <= 0 || empty($tanggal)) {
             return $this->response->setJSON([
                 'status'  => 'error',
-                'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+                'message' => 'Harap lengkapi semua field dengan benar. Nominal minimal Rp 100.000.'
             ]);
         }
+
+        $db = \Config\Database::connect();
+        $anggota = $db->table('anggota')->where('id_anggota', $id_anggota)->get()->getRow();
+
+        if (!$anggota) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Data anggota tidak ditemukan.'
+            ]);
+        }
+
+        // Hitung Margin (Murabahah & Mudharabah 10%, Qard 0%)
+        $rateMargin     = ($akad === 'murabahah' || $akad === 'mudharabah') ? 0.10 : 0;
+        $nominalMargin  = $jml_pinjam * $rateMargin;
+        $totalKewajiban = $jml_pinjam + $nominalMargin;
+
+        // Data disesuaikan murni dengan allowedFields di Model Anda
+        $data = [
+            'id_anggota'   => $anggota->id_anggota,
+            'tanggal'      => $tanggal,
+            'jml_pinjam'   => $totalKewajiban, // Pokok + Margin
+            'jml_angsuran' => $tenor,           // Berfungsi sebagai Total Tenor
+            'keperluan'    => $keperluan,
+            'status'       => 'aktif',
+            'jml_terbayar' => 0
+        ];
+
+        // Instansiasi Model Sesuai Akad
+        if ($akad === 'qard') {
+            $model = new \App\Models\QardModel();
+        } elseif ($akad === 'murabahah') {
+            $model = new \App\Models\MurabahahModel();
+        } elseif ($akad === 'mudharabah') {
+            $model = new \App\Models\MudharabahModel();
+        } else {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Jenis akad tidak valid.'
+            ]);
+        }
+
+        if ($model->insert($data)) {
+            return $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Pembiayaan ' . ucfirst($akad) . ' berhasil diajukan dan aktif!'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status'  => 'error',
+            'message' => 'Gagal menyimpan transaksi ke database.'
+        ]);
+
+    } catch (\Exception $e) {
+        return $this->response->setJSON([
+            'status'  => 'error',
+            'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+        ]);
+    }
+}
+
+    // Method Hapus Pembiayaan (Otomatis Bersihkan Detail Angsuran)
+    public function deletePembiayaan()
+    {
+        $id   = $this->request->getPost('id');
+        $akad = $this->request->getPost('akad');
+
+        $tableMap = [
+            'qard'       => ['table' => 'qard', 'pk' => 'id_qard'],
+            'murabahah'  => ['table' => 'murabahah', 'pk' => 'id_mr'],
+            'mudharabah' => ['table' => 'mudharabah', 'pk' => 'id_md']
+        ];
+
+        if (!isset($tableMap[$akad]) || empty($id)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Parameter tidak valid.']);
+        }
+
+        $table = $tableMap[$akad]['table'];
+        $pk    = $tableMap[$akad]['pk'];
+
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        // 1. Hapus riwayat angsuran terkait dari tabel detail_angsuran
+        $db->table('detail_angsuran')
+            ->where('jenis_pembiayaan', $akad)
+            ->where('id_pembiayaan', $id)
+            ->delete();
+
+        // 2. Hapus data master pinjaman
+        $db->table($table)->where($pk, $id)->delete();
+
+        $db->transComplete();
+
+        if ($db->transStatus() === TRUE) {
+            return $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Data pembiayaan beserta seluruh riwayat angsurannya berhasil dihapus!'
+            ]);
+        }
+
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus data.']);
     }
 
 
@@ -3252,6 +3311,92 @@ class AdminDashboard extends BaseController
         }
 
         return redirect()->back()->with('error', 'Gagal memproses pembayaran angsuran.');
+    }
+
+    public function editAngsuran()
+    {
+        $idDetail     = $this->request->getPost('id_detail');
+        $jumlahBaru   = (float) $this->request->getPost('jumlah_bayar_edit');
+        $keterangan   = $this->request->getPost('keterangan');
+
+        if ($jumlahBaru <= 0) {
+            return redirect()->back()->with('error', 'Nominal pembayaran tidak valid.');
+        }
+
+        $db = \Config\Database::connect();
+        $detailModel = new \App\Models\DetailAngsuranModel();
+
+        // 1. Ambil data detail angsuran yang akan diedit
+        $angsuranLama = $detailModel->find($idDetail);
+        if (!$angsuranLama) {
+            return redirect()->back()->with('error', 'Data riwayat angsuran tidak ditemukan.');
+        }
+
+        $jenis = $angsuranLama->jenis_pembiayaan ?? $angsuranLama['jenis_pembiayaan'];
+        $idPembiayaan = $angsuranLama->id_pembiayaan ?? $angsuranLama['id_pembiayaan'];
+
+        $tableMap = [
+            'qard'       => ['table' => 'qard', 'pk' => 'id_qard'],
+            'murabahah'  => ['table' => 'murabahah', 'pk' => 'id_mr'],
+            'mudharabah' => ['table' => 'mudharabah', 'pk' => 'id_md']
+        ];
+
+        if (!isset($tableMap[$jenis])) {
+            return redirect()->back()->with('error', 'Jenis pembiayaan tidak valid.');
+        }
+
+        $table = $tableMap[$jenis]['table'];
+        $pk    = $tableMap[$jenis]['pk'];
+
+        // 2. Ambil data master pinjaman
+        $pinjaman = $db->table($table)->where($pk, $idPembiayaan)->get()->getRow();
+        if (!$pinjaman) {
+            return redirect()->back()->with('error', 'Data master pinjaman tidak ditemukan.');
+        }
+
+        $db->transStart();
+
+        // A. Update record di detail_angsuran
+        $detailModel->update($idDetail, [
+            'jumlah_bayar' => $jumlahBaru,
+            'keterangan'   => $keterangan
+        ]);
+
+        // B. Hitung ULANG Total Terbayar dari seluruh riwayat detail_angsuran agar presisi
+        $totalTerbayarBaru = $detailModel->where('jenis_pembiayaan', $jenis)
+            ->where('id_pembiayaan', $idPembiayaan)
+            ->selectSum('jumlah_bayar')
+            ->first();
+
+        $sumTerbayar  = (float) ($totalTerbayarBaru->jumlah_bayar ?? $totalTerbayarBaru['jumlah_bayar'] ?? 0);
+        $totalPinjam  = (float) $pinjaman->jml_pinjam;
+        $totalTenor   = (int) ($pinjaman->jml_angsuran ?? 1);
+
+        // C. Hitung ulang sisa tenor dan status
+        $angsuranPerBulan = $totalPinjam / max($totalTenor, 1);
+        $tenorTerbayar    = floor($sumTerbayar / max($angsuranPerBulan, 1));
+        $sisaTenor        = max(0, $totalTenor - $tenorTerbayar);
+
+        $updateMaster = [
+            'jml_terbayar' => $sumTerbayar,
+            'sisa_tenor'   => $sisaTenor,
+            'status'       => ($sumTerbayar >= $totalPinjam) ? 'lunas' : 'aktif'
+        ];
+
+        if ($sumTerbayar >= $totalPinjam) {
+            $updateMaster['sisa_tenor'] = 0;
+        }
+
+        // D. Update tabel master pinjaman
+        $db->table($table)->where($pk, $idPembiayaan)->update($updateMaster);
+
+        $db->transComplete();
+
+        if ($db->transStatus() === TRUE) {
+            return redirect()->back()->with('success', 'Riwayat angsuran berhasil diperbarui!');
+        }
+
+        return redirect()->back()->with('error', 'Gagal memperbarui riwayat angsuran.');
     }
     public function getDetailAngsuran()
     {
