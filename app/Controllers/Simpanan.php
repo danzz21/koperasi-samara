@@ -9,35 +9,39 @@ class Simpanan extends BaseController
     public function index()
     {
         $session = session();
-        $id_anggota = $session->get('id');
+        $id_anggota = $session->get('id_anggota') ?? $session->get('id');
 
         $db = \Config\Database::connect();
 
-        // Ambil data anggota
+        // Data anggota
         $anggota = $db->table('anggota')
             ->select('id_anggota, nama_lengkap, nomor_anggota, photo')
             ->where('id_anggota', $id_anggota)
             ->get()
             ->getRowArray();
 
-        // **AMBIL TENOR DARI SIMPANAN_POKOK**
+        // Tenor
         $tenorData = $db->table('simpanan_pokok')
             ->select('tenor')
             ->where('id_anggota', $id_anggota)
+            ->where('tenor IS NOT NULL')
             ->get()
             ->getRowArray();
 
-        // **FILTER: hanya ambil simpanan pokok yang jumlah > 0**
+        // Riwayat Simpanan Pokok (Tampilkan semua riwayat agar transparan)
         $pokok = $db->table('simpanan_pokok')
             ->where('id_anggota', $id_anggota)
-            ->where('jumlah >', 0) // **INI YANG PENTING**
-            ->orderBy('tanggal', 'ASC')
+            ->groupStart()
+                ->where('jumlah >', 0)
+                ->orWhere('status IS NOT NULL')
+            ->groupEnd()
+            ->orderBy('tanggal', 'DESC')
             ->get()->getResultArray();
 
         // Simpanan Wajib
         $wajib = $db->table('simpanan_wajib')
             ->where('id_anggota', $id_anggota)
-            ->orderBy('tanggal', 'ASC')
+            ->orderBy('tanggal', 'DESC')
             ->get()->getResultArray();
 
         // Simpanan Sukarela
@@ -46,9 +50,8 @@ class Simpanan extends BaseController
             ->orderBy('tanggal', 'DESC')
             ->get()->getResultArray();
 
-        // Cek apakah sudah punya tenor
         $showTenorModal = false;
-        if (!$tenorData || $tenorData['tenor'] === null) {
+        if (!$tenorData || empty($tenorData['tenor'])) {
             $showTenorModal = true;
         }
 
@@ -60,7 +63,7 @@ class Simpanan extends BaseController
             'wajib'         => $wajib,
             'sukarela'      => $sukarela,
             'anggota'       => $anggota,
-            'tenor_anggota' => $tenorData['tenor'] ?? null, // **Tenor dari simpanan_pokok**
+            'tenor_anggota' => $tenorData['tenor'] ?? null,
             'showTenorModal'=> $showTenorModal,
         ]);
     }
@@ -68,154 +71,107 @@ class Simpanan extends BaseController
     public function setTenor()
     {
         $session = session();
-        $id_anggota = $session->get('id'); 
+        $id_anggota = $session->get('id_anggota') ?? $session->get('id');
         $tenor = $this->request->getPost('tenor');
 
         $db = \Config\Database::connect();
         
-        // **CEK APAKAH SUDAH ADA DATA DI SIMPANAN_POKOK**
         $existingData = $db->table('simpanan_pokok')
             ->where('id_anggota', $id_anggota)
             ->get()
             ->getRowArray();
 
         if ($existingData) {
-            // **UPDATE TENOR SAJA tanpa buat record baru**
             $db->table('simpanan_pokok')
                 ->where('id_anggota', $id_anggota)
                 ->update(['tenor' => $tenor]);
         } else {
-            // **INSERT HANYA TENOR, TANPA JUMLAH & TANPA STATUS**
             $db->table('simpanan_pokok')->insert([
                 'id_anggota' => $id_anggota,
                 'tenor'      => $tenor,
-                'tanggal'    => date('Y-m-d')
-                // **TIDAK ADA 'jumlah' dan 'status'**
+                'tanggal'    => date('Y-m-d H:i:s')
             ]);
         }
 
         return redirect()->to(base_url('anggota/simpanan'))->with('success', 'Tenor berhasil disimpan.');
     }
 
-    // Method untuk menyimpan simpanan pokok dari anggota
     public function storePokok()
     {
         try {
             $session = session();
-            $id_anggota = $session->get('id');
+            $id_anggota = $session->get('id_anggota') ?? $session->get('id');
 
-            // Validasi CSRF token - CARA YANG LEBIH SEDERHANA
-            if (!$this->request->getPost('csrf_test_name')) {
+            $jumlah = (float) preg_replace('/[^0-9]/', '', (string)$this->request->getPost('jumlah'));
+            $bukti  = $this->request->getFile('bukti');
+
+            if ($jumlah <= 0) {
                 return $this->response->setJSON([
                     'success' => false,
-                    'message' => 'Token CSRF tidak valid'
+                    'message' => 'Jumlah setoran harus lebih dari Rp 0'
                 ]);
             }
 
-            // Ambil data dari form
-            $jumlah = $this->request->getPost('jumlah');
-            $bukti = $this->request->getFile('bukti');
-
-            // Validasi input
-            if (empty($jumlah) || $jumlah <= 0) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Jumlah setoran harus lebih dari 0'
-                ]);
-            }
-
-            // Validasi maksimal simpanan pokok (500.000)
             $db = \Config\Database::connect();
-            $totalPokok = $db->table('simpanan_pokok')
+            
+            // CEK HANYA SIMPANAN POKOK YANG SUDAH DI-ACC / AKTIFF / LUNAS
+            // Transaksi 'pending' atau 'ditolak'TIDAK DITAMBAHKAN ke batas Rp 500.000
+            $totalPokokSah = $db->table('simpanan_pokok')
                 ->selectSum('jumlah')
                 ->where('id_anggota', $id_anggota)
-                ->where('status', 'aktif')
-                ->get()
-                ->getRow()->jumlah ?? 0;
+                ->whereIn('status', ['aktif', 'lunas', 'berhasil', 'disetujui'])
+                ->get()->getRow()->jumlah ?? 0;
 
-            if (($totalPokok + $jumlah) > 500000) {
+            $sisaKekurangan = max(0, 500000 - $totalPokokSah);
+
+            if ($jumlah > $sisaKekurangan) {
                 return $this->response->setJSON([
                     'success' => false,
-                    'message' => 'Total simpanan pokok tidak boleh melebihi Rp 500.000. Sisa yang dapat disetor: Rp ' . number_format(500000 - $totalPokok, 0, ',', '.')
+                    'message' => 'Setoran melebihi sisa kekurangan. Maksimal setoran saat ini: Rp ' . number_format($sisaKekurangan, 0, ',', '.')
                 ]);
             }
 
-            // Validasi file bukti
             if (!$bukti || !$bukti->isValid()) {
                 return $this->response->setJSON([
                     'success' => false,
-                    'message' => 'Bukti transfer harus diupload'
+                    'message' => 'Bukti transfer wajib diupload'
                 ]);
             }
 
-            // Validasi ukuran file (max 2MB)
-            if ($bukti->getSize() > 2097152) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Ukuran file maksimal 2MB'
-                ]);
-            }
-
-            // Validasi tipe file
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
-            if (!in_array($bukti->getMimeType(), $allowedTypes)) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Format file harus JPG, PNG, atau PDF'
-                ]);
-            }
-
-            // Generate nama file unik
             $namaFile = $bukti->getRandomName();
-            
-            // Pindahkan file ke folder uploads
             $uploadPath = ROOTPATH . 'public/uploads/bukti_simpanan/';
+            
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0755, true);
             }
             
             $bukti->move($uploadPath, $namaFile);
 
-            // Data untuk disimpan
             $data = [
-                'id_anggota' => $id_anggota,
-                'jumlah' => $jumlah,
-                'tanggal' => date('Y-m-d H:i:s'),
-                'status' => 'pending', // Status pending menunggu konfirmasi admin
+                'id_anggota'     => $id_anggota,
+                'jumlah'         => $jumlah,
+                'tanggal'        => date('Y-m-d H:i:s'),
+                'status'         => 'pending', // Status awal pengajuan
                 'bukti_transfer' => $namaFile,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'created_at'     => date('Y-m-d H:i:s'),
+                'updated_at'     => date('Y-m-d H:i:s')
             ];
 
-            // Simpan ke database
-            $db = \Config\Database::connect();
             $result = $db->table('simpanan_pokok')->insert($data);
 
             if ($result) {
                 return $this->response->setJSON([
                     'success' => true,
-                    'message' => 'Setoran simpanan pokok berhasil dikirim. Menunggu konfirmasi admin.'
-                ]);
-            } else {
-                // Hapus file yang sudah diupload jika gagal simpan
-                if (file_exists($uploadPath . $namaFile)) {
-                    unlink($uploadPath . $namaFile);
-                }
-                
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Gagal menyimpan data simpanan'
+                    'message' => 'Setoran berhasil dikirim! Menunggu konfirmasi admin.'
                 ]);
             }
 
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Gagal menyimpan transaksi.'
+            ]);
+
         } catch (\Exception $e) {
-            log_message('error', 'Error storePokok: ' . $e->getMessage());
-            
-            // Hapus file jika ada error
-            if (isset($uploadPath) && isset($namaFile) && file_exists($uploadPath . $namaFile)) {
-                unlink($uploadPath . $namaFile);
-            }
-            
             return $this->response->setJSON([
                 'success' => false,
                 'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
@@ -223,122 +179,68 @@ class Simpanan extends BaseController
         }
     }
 
-    // Method untuk menyimpan simpanan sukarela dari anggota
     public function storeSukarela()
     {
         try {
             $session = session();
-            $id_anggota = $session->get('id');
+            $id_anggota = $session->get('id_anggota') ?? $session->get('id');
 
-            // Validasi CSRF token - CARA YANG LEBIH SEDERHANA
-            if (!$this->request->getPost('csrf_test_name')) {
+            $jumlah = (float) preg_replace('/[^0-9]/', '', (string)$this->request->getPost('jumlah'));
+            $bukti  = $this->request->getFile('bukti');
+
+            if ($jumlah <= 0) {
                 return $this->response->setJSON([
                     'success' => false,
-                    'message' => 'Token CSRF tidak valid'
+                    'message' => 'Jumlah setoran harus lebih dari Rp 0'
                 ]);
             }
 
-            // Ambil data dari form
-            $jumlah = $this->request->getPost('jumlah');
-            $bukti = $this->request->getFile('bukti');
-
-            // Validasi input
-            if (empty($jumlah) || $jumlah <= 0) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Jumlah setoran harus lebih dari 0'
-                ]);
-            }
-
-            // Validasi file bukti
             if (!$bukti || !$bukti->isValid()) {
                 return $this->response->setJSON([
                     'success' => false,
-                    'message' => 'Bukti transfer harus diupload'
+                    'message' => 'Bukti transfer wajib diupload'
                 ]);
             }
 
-            // Validasi ukuran file (max 2MB)
-            if ($bukti->getSize() > 2097152) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Ukuran file maksimal 2MB'
-                ]);
-            }
-
-            // Validasi tipe file
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
-            if (!in_array($bukti->getMimeType(), $allowedTypes)) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Format file harus JPG, PNG, atau PDF'
-                ]);
-            }
-
-            // Generate nama file unik
             $namaFile = $bukti->getRandomName();
-            
-            // Pindahkan file ke folder uploads
             $uploadPath = ROOTPATH . 'public/uploads/bukti_simpanan/';
+            
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0755, true);
             }
             
             $bukti->move($uploadPath, $namaFile);
 
-            // Data untuk disimpan
             $data = [
-                'id_anggota' => $id_anggota,
-                'jumlah' => $jumlah,
-                'tanggal' => date('Y-m-d H:i:s'),
-                'status' => 'pending', // Status pending menunggu konfirmasi admin
+                'id_anggota'     => $id_anggota,
+                'jumlah'         => $jumlah,
+                'tanggal'        => date('Y-m-d H:i:s'),
+                'status'         => 'pending',
                 'bukti_transfer' => $namaFile,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'created_at'     => date('Y-m-d H:i:s'),
+                'updated_at'     => date('Y-m-d H:i:s')
             ];
 
-            // Simpan ke database
             $db = \Config\Database::connect();
             $result = $db->table('simpanan_sukarela')->insert($data);
 
             if ($result) {
                 return $this->response->setJSON([
                     'success' => true,
-                    'message' => 'Setoran simpanan sukarela berhasil dikirim. Menunggu konfirmasi admin.'
-                ]);
-            } else {
-                // Hapus file yang sudah diupload jika gagal simpan
-                if (file_exists($uploadPath . $namaFile)) {
-                    unlink($uploadPath . $namaFile);
-                }
-                
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Gagal menyimpan data simpanan'
+                    'message' => 'Setoran simpanan sukarela berhasil dikirim!'
                 ]);
             }
 
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Gagal menyimpan transaksi.'
+            ]);
+
         } catch (\Exception $e) {
-            log_message('error', 'Error storeSukarela: ' . $e->getMessage());
-            
-            // Hapus file jika ada error
-            if (isset($uploadPath) && isset($namaFile) && file_exists($uploadPath . $namaFile)) {
-                unlink($uploadPath . $namaFile);
-            }
-            
             return $this->response->setJSON([
                 'success' => false,
                 'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
             ]);
         }
-    }
-
-    // ATAU JIKA MAU VALIDASI CSRF YANG LEBIH KETAT, GUNAKAN INI:
-    private function validateCSRF()
-    {
-        $csrf_token = $this->request->getPost('csrf_test_name');
-        $current_token = csrf_hash();
-        
-        return hash_equals($current_token, $csrf_token);
     }
 }

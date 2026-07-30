@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Simpanan</title>
+  <title>Simpanan Koperasi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -10,49 +10,40 @@
   <style>
     :root {
       --primary: #10b981;
-      --primary-light: #34d399;
       --primary-dark: #059669;
       --secondary: #06b6d4;
-      --secondary-light: #22d3ee;
-      --accent: #0ea5e9;
-      --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
-      --dark: #1e293b;
-      --light: #f8fafc;
+      --dark: #0f172a;
       --gray: #64748b;
-      --gray-light: #cbd5e1;
-      --border-radius: 20px;
-      --border-radius-sm: 12px;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-        }
-    body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(135deg, #f0fdf9 0%, #f0fdf4 100%);
-      color: var(--dark);
-      min-height: 100vh;
-      padding-bottom: 80px;
-      line-height: 1.6;
+      --gray-light: #e2e8f0;
+      --border-radius: 18px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      --gradient-primary: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
     }
 
-    /* Header */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #f8fafc;
+      color: var(--dark);
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
     .header-simpan {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 1.5rem 1rem;
+      padding: 1.1rem 1.25rem;
       background: var(--gradient-primary);
       color: white;
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -62,136 +53,91 @@
     .header-info {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .header-info img {
-      width: 50px;
-      height: 50px;
+    .header-info img, .profile-avatar {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.8);
     }
 
     .profile-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: bold;
-      font-size: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 17px;
     }
 
     .header-name {
       font-weight: 700;
-      font-size: 18px;
-      letter-spacing: -0.3px;
-    }
-
-    .icon {
-      width: 24px;
-      height: 24px;
-      color: white;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .icon:hover {
-      transform: scale(1.1);
+      font-size: 15px;
+      line-height: 1.2;
     }
 
     .page-title {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
       text-align: center;
-      margin: 1.5rem 0;
+      margin: 1.25rem 0 1rem;
       color: var(--dark);
     }
 
-    /* Tabs */
     .tab-simpanan {
       display: flex;
       background: white;
-      margin: 0 1.5rem 1.5rem;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      margin: 0 1rem 1.25rem;
+      border-radius: 14px;
+      padding: 4px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
     }
 
     .tab-simpanan button {
       flex: 1;
-      padding: 1rem;
+      padding: 0.7rem;
       border: none;
       background: transparent;
       color: var(--gray);
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 700;
+      font-size: 13px;
       cursor: pointer;
-      transition: var(--transition);
-      position: relative;
+      border-radius: 10px;
+      transition: all 0.2s ease;
     }
 
     .tab-simpanan button.active {
-      color: var(--primary);
-      background: rgba(16, 185, 129, 0.1);
+      color: white;
+      background: var(--gradient-primary);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
-    .tab-simpanan button.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 2px;
-    }
-
-    .tab-simpanan button:hover:not(.active) {
-      background: rgba(16, 185, 129, 0.05);
-      color: var(--primary-dark);
-    }
-
-    .tab-simpanan button.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    /* Content */
     .tab-content {
       display: none;
-      padding: 0 1.5rem;
+      padding: 0 1rem;
     }
 
     .tab-content.active {
       display: block;
+      animation: fadeIn 0.25s ease;
     }
 
     .card {
       background: white;
       border-radius: var(--border-radius);
-      padding: 1.5rem;
+      padding: 1.25rem;
       margin-bottom: 1rem;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      transition: var(--transition);
-    }
-
-    .card:hover {
-      box-shadow: var(--shadow-lg);
+      border: 1px solid #f1f5f9;
     }
 
     .card-title {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 15px;
+      font-weight: 800;
       color: var(--dark);
       margin-bottom: 1rem;
       display: flex;
@@ -203,250 +149,171 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
     }
 
-    .k {
-      color: var(--gray);
-      font-size: 14px;
-    }
-
-    .v {
-      color: var(--dark);
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
+    .k { color: var(--gray); font-size: 13px; font-weight: 500; }
+    .v { color: var(--dark); font-weight: 700; font-size: 14px; }
 
     .badge {
-      padding: 0.3rem 0.8rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
       gap: 4px;
     }
 
-    .badge-lunas {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--primary);
-    }
+    .badge-lunas { background: #dcfce7; color: #15803d; }
+    .badge-pending { background: #fef3c7; color: #b45309; }
+    .badge-ditolak { background: #fee2e2; color: #b91c1c; }
+    .badge-gaji { background: #e0f2fe; color: #0369a1; }
 
-    .badge-belum {
-      background: rgba(245, 158, 11, 0.1);
-      color: var(--warning);
-    }
+    .divider { height: 1px; background: #f1f5f9; margin: 0.8rem 0; }
 
-    .badge-ditolak {
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--danger);
-    }
-
-    .badge-gaji {
-      background: rgba(6, 182, 212, 0.1);
-      color: var(--secondary);
-    }
-
-    .badge-pending {
-      background: rgba(245, 158, 11, 0.1);
-      color: var(--warning);
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--gray-light);
-      margin: 1rem 0;
-    }
-
-    /* Bill Items */
     .bill {
       display: flex;
       align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--gray-light);
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed #e2e8f0;
     }
 
-    .bill:last-child {
-      border-bottom: none;
-    }
+    .bill:last-child { border-bottom: none; }
 
     .bill-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 1rem;
-      background: rgba(16, 185, 129, 0.1);
+      margin-right: 0.8rem;
+      background: #ecfdf5;
       color: var(--primary);
     }
 
-    .bill-main {
-      flex: 1;
-    }
+    .bill-main { flex: 1; }
+    .bill-title { font-weight: 700; font-size: 13px; color: var(--dark); }
+    .bill-sub { font-size: 11px; color: var(--gray); }
+    .bill-amount { text-align: right; }
+    .nominal { font-weight: 800; font-size: 13px; color: var(--dark); margin-bottom: 2px; }
 
-    .bill-title {
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 2px;
-    }
-
-    .bill-sub {
-      font-size: 12px;
-      color: var(--gray);
-    }
-
-    .bill-amount {
-      text-align: right;
-    }
-
-    .nominal {
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 4px;
-    }
-
-    /* Button Setor */
     .btn-setor {
-      width: calc(100% - 3rem);
-      margin: 0 1.5rem 1rem;
-      padding: 1rem;
+      width: 100%;
+      padding: 0.85rem;
       background: var(--gradient-primary);
       color: white;
       border: none;
-      border-radius: var(--border-radius);
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: var(--shadow);
-    }
-
-    .btn-setor:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .btn-setor.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .note {
-      text-align: center;
-      color: var(--gray);
+      border-radius: 14px;
+      font-weight: 700;
       font-size: 14px;
-      margin-bottom: 1.5rem;
-      padding: 0 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      margin-bottom: 0.5rem;
+      transition: transform 0.15s ease;
     }
 
-    /* Modal */
+    .btn-setor:active { transform: scale(0.98); }
+
+    .note { text-align: center; color: var(--gray); font-size: 11px; margin-bottom: 1.25rem; }
+
+    /* Modal Glassmorphism UI */
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
     }
 
     .modal-content {
       background-color: #fff;
-      margin: 10% auto;
-      padding: 2rem;
-      border-radius: var(--border-radius);
+      margin: 15% auto;
+      padding: 1.5rem;
+      border-radius: 20px;
       width: 90%;
       max-width: 400px;
       position: relative;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
     .close {
-      color: var(--gray);
       position: absolute;
-      right: 20px;
-      top: 15px;
-      font-size: 24px;
+      right: 18px; top: 14px;
+      font-size: 22px;
       font-weight: bold;
+      color: var(--gray);
       cursor: pointer;
-      transition: var(--transition);
     }
 
-    .close:hover {
-      color: var(--danger);
-    }
-
-    .form-group {
+    .modal-info-box {
+      background: #f0fdf4;
+      border: 1px dashed #34d399;
+      padding: 10px 12px;
+      border-radius: 12px;
       margin-bottom: 1rem;
+      font-size: 12px;
+      color: #065f46;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
+    .form-group { margin-bottom: 1rem; }
     .form-group label {
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 12px;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       color: var(--dark);
     }
 
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group input {
       width: 100%;
-      padding: 0.8rem;
+      padding: 0.75rem;
       border: 1px solid var(--gray-light);
-      border-radius: var(--border-radius-sm);
-      transition: var(--transition);
+      border-radius: 10px;
+      font-size: 13px;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    .input-error-msg {
+      color: #ef4444;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 4px;
+      display: none;
     }
 
     .btn-submit {
       width: 100%;
       background: var(--gradient-primary);
       color: white;
-      padding: 1rem;
+      padding: 0.85rem;
       border: none;
-      border-radius: var(--border-radius-sm);
-      font-weight: 600;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
       cursor: pointer;
-      transition: var(--transition);
     }
 
-    .btn-submit:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow);
+    .btn-submit:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
     }
 
-    /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       background: white;
       display: flex;
       justify-content: space-around;
-      padding: 15px 0;
-      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+      padding: 8px 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
       z-index: 100;
-      border-radius: 25px 25px 0 0;
+      border-radius: 18px 18px 0 0;
     }
 
     .bottom-nav a {
@@ -455,90 +322,35 @@
       align-items: center;
       text-decoration: none;
       color: var(--gray);
-      transition: var(--transition);
-      padding: 8px 12px;
-      border-radius: 16px;
-      flex: 1;
-      text-align: center;
-    }
-
-    .bottom-nav a i {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-
-    .bottom-nav a p {
-      font-size: 12px;
-      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 10px;
     }
 
     .bottom-nav a.active {
       color: var(--primary);
       background: rgba(16, 185, 129, 0.1);
     }
-    /* Alert Styles */
-    .alert {
-      padding: 1rem 1.5rem;
-      margin: 1rem 1.5rem;
-      border-radius: var(--border-radius);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: slideDown 0.3s ease-out;
-    }
 
-    .alert-warning {
-      background: linear-gradient(135deg, #fef3c7 0%, #fef7cd 100%);
-      color: #92400e;
-      border-left: 4px solid var(--warning);
-    }
+    .bottom-nav a p { font-size: 10px; font-weight: 600; margin-top: 2px; }
 
-    .alert-success {
-      background: linear-gradient(135deg, #d1fae5 0%, #dcfce7 100%);
-      color: #065f46;
-      border-left: 4px solid var(--success);
-    }
-
-    .alert-danger {
-      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-      color: #991b1b;
-      border-left: 4px solid var(--danger);
-    }
-
-    .alert-icon {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
-    }
-    /* Responsive */
-    @media (max-width: 480px) {
-      .header-simpan, .tab-simpanan, .tab-content {
-        padding-left: 1.2rem;
-        padding-right: 1.2rem;
-      }
-      
-      .btn-setor {
-        width: calc(100% - 2.4rem);
-        margin: 0 1.2rem 1rem;
-      }
-      
-      .page-title {
-        font-size: 22px;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-   <header class="header-simpan">
+
+  <!-- Header Profil -->
+  <header class="header-simpan">
     <div class="header-info">
-        <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
-          <img id="preview" src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
-        <?php else: ?>
+      <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
+        <img src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
+      <?php else: ?>
         <?php 
-          $firstLetter = strtoupper(substr($anggota['nama_lengkap'], 0, 1));
+          $firstLetter = strtoupper(substr($nama ?? 'A', 0, 1));
           $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
-          $bgColor = $colors[crc32($anggota['nomor_anggota']) % count($colors)];
+          $bgColor = $colors[crc32($nomor_anggota ?? '1') % count($colors)];
         ?>
         <div class="profile-avatar" style="background:<?= $bgColor ?>;">
           <?= $firstLetter ?>
@@ -547,559 +359,385 @@
 
       <div>
         <div class="header-name"><?= htmlspecialchars($nama ?? '-') ?></div>
-        <div style="font-size:12px;opacity:.9;">ID: <?= htmlspecialchars($nomor_anggota ?? '-') ?></div>
+        <div style="font-size:11px; opacity:.9;">ID: <?= htmlspecialchars($nomor_anggota ?? '-') ?></div>
       </div>
     </div>
-    <i data-lucide="bell" class="icon"></i>
+    <i data-lucide="bell" style="width:20px; height:20px; cursor:pointer;"></i>
   </header>
   
   <h2 class="page-title">Simpanan</h2>
-  <!-- Flash Messages -->
-  <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success">
-      <i data-lucide="check-circle" class="alert-icon"></i>
-      <div><?= session()->getFlashdata('success') ?></div>
-    </div>
-  <?php endif; ?>
-  
-  <!-- Alert untuk simpanan pokok belum mencukupi -->
+
+  <!-- Hitung Akumulasi Pokok Yang Benar-Benar Sudah Di-ACC (Aktif) -->
   <?php
-    // Hitung total simpanan pokok yang sudah aktif (dikonfirmasi)
-    $pokok_approved = array_filter($pokok, fn($item) => $item['status'] === 'aktif');
-    $totalPokok = array_sum(array_column($pokok_approved, 'jumlah'));
+    $totalPokok = 0;
+    if (!empty($pokok)) {
+        foreach ($pokok as $p) {
+            $st = strtolower($p['status'] ?? '');
+            if (in_array($st, ['aktif', 'lunas', 'berhasil', 'disetujui'])) {
+                $totalPokok += (float)($p['jumlah'] ?? 0);
+            }
+        }
+    }
+    $kekurangan = max(0, 500000 - $totalPokok);
     $isPokokComplete = $totalPokok >= 500000;
   ?>
-  
-  <?php if (!$isPokokComplete): ?>
-    <div class="alert alert-info">
-      <i data-lucide="info" class="alert-icon"></i>
-      <div>Simpanan Pokok saat ini: Rp <?= number_format($totalPokok, 0, ',', '.') ?>. Target: Rp 500.000</div>
-    </div>
-  <?php endif; ?>
 
-  <!-- ===== Tabs ===== -->
+  <!-- Navigation Tabs -->
   <div class="tab-simpanan">
     <button id="tab-pokok" class="active" onclick="showTab('pokok')">Pokok</button>
     <button id="tab-wajib" onclick="showTab('wajib')">Wajib</button>
     <button id="tab-sukarela" onclick="showTab('sukarela')">Sukarela</button>
   </div>
 
-  <!-- ===== POKOK ===== -->
+  <!-- TAB SIMPANAN POKOK -->
   <section id="pokok" class="tab-content active">
     <div class="card">
         <div class="card-title">
-            <i data-lucide="landmark" width="20" height="20"></i>
+            <i data-lucide="landmark" width="18" height="18" style="color:#10b981;"></i>
             Rangkuman Simpanan Pokok
         </div>
         <div class="kv">
-            <span class="k">Total Simpanan</span>
-            <span class="v">
-                Rp <?= number_format($totalPokok, 0, ',', '.') ?>
-            </span>
+            <span class="k">Total Terkumpul</span>
+            <span class="v" style="color:#059669;">Rp <?= number_format($totalPokok, 0, ',', '.') ?></span>
         </div>
         <div class="kv">
-            <span class="k">Target</span>
+            <span class="k">Target Wajib</span>
             <span class="v">Rp 500.000</span>
         </div>
         <div class="kv">
-            <span class="k">Kekurangan</span>
-            <span class="v">
-                <?php
-                    $kekurangan = 500000 - $totalPokok;
-                    if ($kekurangan > 0) {
-                        echo 'Rp ' . number_format($kekurangan, 0, ',', '.');
-                    } else {
-                        echo 'Lunas';
-                    }
-                ?>
-            </span>
-        </div>
-        <div class="row" style="margin-top:8px;">
-            <span class="k">Status</span>
-            <span class="badge <?= $isPokokComplete ? 'badge-lunas' : 'badge-belum' ?>">
-                <i class="fa-regular fa-clock"></i>
-                <?= $isPokokComplete ? 'Lunas' : 'Belum Lunas' ?>
+            <span class="k">Sisa Kekurangan</span>
+            <span class="v" style="color:#d97706;">
+                <?= ($kekurangan > 0) ? 'Rp ' . number_format($kekurangan, 0, ',', '.') : 'Lunas' ?>
             </span>
         </div>
         <div class="divider"></div>
-        <div class="row">
-            <span class="k">Tenor Dipilih</span>
+        <div class="kv">
+            <span class="k">Status Keanggotaan</span>
+            <span class="badge <?= $isPokokComplete ? 'badge-lunas' : 'badge-pending' ?>">
+                <i class="fa-regular <?= $isPokokComplete ? 'fa-check-circle' : 'fa-clock' ?>"></i>
+                <?= $isPokokComplete ? 'Lunas' : 'Belum Lunas' ?>
+            </span>
+        </div>
+        <div class="kv">
+            <span class="k">Tenor Dicicil</span>
             <span class="v"><?= $tenor_anggota ? $tenor_anggota . ' Bulan' : 'Belum dipilih' ?></span>
         </div>
     </div>
 
-    <!-- Button Setor Simpanan Pokok -->
     <?php if (!$isPokokComplete): ?>
-      <button class="btn-setor" id="btn-setor-pokok">
-        <i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan Pokok
+      <button class="btn-setor" onclick="openModal('modalPokok')">
+        <i class="fa-solid fa-plus-circle mr-1"></i> Setor Simpanan Pokok
       </button>
-      <div class="note">Setoran akan masuk ke pending dan menunggu konfirmasi admin.</div>
+      <div class="note">Setoran akan diverifikasi otomatis oleh admin.</div>
     <?php endif; ?>
 
-    <!-- Riwayat Setoran Pokok -->
+    <!-- Riwayat Transaksi Pokok -->
     <div class="card">
         <div class="card-title">
-            <i data-lucide="history" width="20" height="20"></i>
+            <i data-lucide="history" width="18" height="18" style="color:#0ea5e9;"></i>
             Riwayat Setoran Pokok
         </div>
         <?php if (!empty($pokok)): ?>
           <?php foreach ($pokok as $item): ?>
+            <?php 
+              $st = strtolower($item['status'] ?? 'pending');
+              $badgeClass = in_array($st, ['aktif', 'lunas', 'berhasil', 'disetujui']) ? 'badge-lunas' : ($st == 'pending' ? 'badge-pending' : 'badge-ditolak');
+              $statusLabel = in_array($st, ['aktif', 'lunas', 'berhasil', 'disetujui']) ? 'Terkonfirmasi' : ($st == 'pending' ? 'Pending' : 'Ditolak');
+            ?>
             <div class="bill">
-                <div class="bill-icon" style="background:#f0fdf4;color:#16a34a;">
+                <div class="bill-icon">
                   <i class="fa-solid fa-arrow-down"></i>
                 </div>
                 <div class="bill-main">
-                    <div class="bill-title">Setor Pokok</div>
-                    <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?> • Ref: PK-<?= date('md', strtotime($item['tanggal'])) ?></div>
+                    <div class="bill-title">Setor Simpanan Pokok</div>
+                    <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?></div>
                 </div>
                 <div class="bill-amount">
-                    <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
-                    <span class="badge 
-                      <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-pending' : 'badge-ditolak') ?>">
-                      <i class="fa-regular 
-                         <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
-                      </i>
-                      <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Pending' : 'Ditolak') ?>
+                    <div class="nominal">+ Rp <?= number_format($item['jumlah'] ?? 0, 0, ',', '.') ?></div>
+                    <span class="badge <?= $badgeClass ?>">
+                      <?= $statusLabel ?>
                     </span>
                 </div>
             </div>
           <?php endforeach; ?>
         <?php else: ?>
-          <div style="padding:16px;text-align:center;color:#888;">Belum ada setoran pokok.</div>
+          <div style="padding:16px; text-align:center; color:#94a3b8; font-size:12px;">Belum ada riwayat setoran pokok.</div>
         <?php endif; ?>
     </div>
   </section>
 
-  <!-- ===== WAJIB ===== -->
+  <!-- TAB SIMPANAN WAJIB -->
   <section id="wajib" class="tab-content">
     <div class="card">
       <div class="card-title">
-        <i data-lucide="calendar" width="20" height="20"></i>
+        <i data-lucide="calendar" width="18" height="18" style="color:#10b981;"></i>
         Rangkuman Simpanan Wajib
       </div>
-      <div class="kv"><span class="k">Nominal / Bulan</span>
-        <span class="v">
-          Rp <?= count($wajib) > 0 ? number_format($wajib[0]['jumlah'], 0, ',', '.') : '0' ?>
-        </span>
+      <div class="kv">
+        <span class="k">Nominal per Bulan</span>
+        <span class="v">Rp <?= !empty($wajib) ? number_format($wajib[0]['jumlah'] ?? 0, 0, ',', '.') : '0' ?></span>
       </div>
-      <div class="row" style="margin-top:8px;">
-        <span class="k">Sumber</span>
+      <div class="kv">
+        <span class="k">Sistem Pemotongan</span>
         <span class="badge badge-gaji"><i class="fa-solid fa-money-bill-wave"></i> Potong Gaji</span>
       </div>
     </div>
 
     <div class="card">
       <div class="card-title">
-        <i data-lucide="list-checks" width="20" height="20"></i>
+        <i data-lucide="list-checks" width="18" height="18" style="color:#0ea5e9;"></i>
         Status Bulanan
       </div>
-      <?php foreach ($wajib as $item): ?>
-        <div class="bill">
-          <div class="bill-icon"><i class="fa-solid fa-calendar-week"></i></div>
-          <div class="bill-main">
-            <div class="bill-title"><?= date('F Y', strtotime($item['tanggal'])) ?></div>
-            <div class="bill-sub">Pembayaran otomatis</div>
+      <?php if (!empty($wajib)): ?>
+        <?php foreach ($wajib as $item): ?>
+          <div class="bill">
+            <div class="bill-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="bill-main">
+              <div class="bill-title"><?= date('F Y', strtotime($item['tanggal'])) ?></div>
+              <div class="bill-sub">Potongan Otomatis</div>
+            </div>
+            <div class="bill-amount">
+              <div class="nominal">Rp <?= number_format($item['jumlah'] ?? 0, 0, ',', '.') ?></div>
+              <span class="badge badge-lunas">Lunas</span>
+            </div>
           </div>
-          <div class="bill-amount">
-            <div class="nominal">Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
-            <span class="badge <?= $item['status']=='lunas' ? 'badge-lunas' : 'badge-belum' ?>">
-              <i class="fa-regular <?= $item['status']=='lunas' ? 'fa-check' : 'fa-clock' ?>"></i>
-              <?= ucfirst($item['status']) ?>
-            </span>
-          </div>
-        </div>
-      <?php endforeach; ?>
-      <?php if (empty($wajib)): ?>
-        <div style="padding:16px;text-align:center;color:#888;">Belum ada data simpanan wajib.</div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div style="padding:16px; text-align:center; color:#94a3b8; font-size:12px;">Belum ada data simpanan wajib.</div>
       <?php endif; ?>
     </div>
   </section>
 
-  <!-- ===== SUKARELA ===== -->
+  <!-- TAB SIMPANAN SUKARELA -->
   <section id="sukarela" class="tab-content">
+    <?php
+      $totalSukarela = 0;
+      if (!empty($sukarela)) {
+          foreach ($sukarela as $s) {
+              $st = strtolower($s['status'] ?? '');
+              if (in_array($st, ['aktif', 'lunas', 'berhasil', 'disetujui'])) {
+                  $totalSukarela += (float)($s['jumlah'] ?? 0);
+              }
+          }
+      }
+    ?>
     <div class="card">
       <div class="card-title">
-        <i data-lucide="gift" width="20" height="20"></i>
+        <i data-lucide="gift" width="18" height="18" style="color:#10b981;"></i>
         Simpanan Sukarela
       </div>
-      <?php
-        $sukarela_approved = array_filter($sukarela, fn($item) => $item['status'] === 'aktif');
-        $total_sukarela = array_sum(array_column($sukarela_approved, 'jumlah'));
-      ?>
-      <div class="kv"><span class="k">Saldo Saat Ini</span>
-        <span class="v">
-          Rp <?= number_format($total_sukarela, 0, ',', '.') ?>
-        </span>
-      </div>
-      <div class="kv"><span class="k">Keterangan</span>
-        <span class="v" style="color:var(--gray-700);font-weight:600;">Setor kapan saja</span>
+      <div class="kv">
+        <span class="k">Total Saldo Terkumpul</span>
+        <span class="v" style="color:#059669;">Rp <?= number_format($totalSukarela, 0, ',', '.') ?></span>
       </div>
     </div>
 
-    <!-- Button Setor -->
-    <button class="btn-setor" id="btn-setor-sukarela">
-      <i class="fa-solid fa-circle-plus"></i> &nbsp; + Setor Simpanan
+    <button class="btn-setor" onclick="openModal('modalSukarela')">
+      <i class="fa-solid fa-plus-circle mr-1"></i> Setor Simpanan Sukarela
     </button>
-    <div class="note">Penarikan tidak tersedia untuk Simpanan Sukarela.</div>
+    <div class="note">Fleksibel dapat disetor kapan saja.</div>
 
     <div class="card">
       <div class="card-title">
-        <i data-lucide="history" width="20" height="20"></i>
-        Riwayat Setoran
+        <i data-lucide="history" width="18" height="18" style="color:#0ea5e9;"></i>
+        Riwayat Setoran Sukarela
       </div>
-      <?php foreach ($sukarela as $item): ?>
-        <div class="bill">
-          <div class="bill-icon" style="background:#f0fdf4;color:#16a34a;">
-            <i class="fa-solid fa-arrow-down"></i>
+      <?php if (!empty($sukarela)): ?>
+        <?php foreach ($sukarela as $item): ?>
+          <?php 
+            $st = strtolower($item['status'] ?? 'pending');
+            $badgeClass = in_array($st, ['aktif', 'lunas', 'berhasil', 'disetujui']) ? 'badge-lunas' : ($st == 'pending' ? 'badge-pending' : 'badge-ditolak');
+            $statusLabel = in_array($st, ['aktif', 'lunas', 'berhasil', 'disetujui']) ? 'Terkonfirmasi' : ($st == 'pending' ? 'Pending' : 'Ditolak');
+          ?>
+          <div class="bill">
+            <div class="bill-icon"><i class="fa-solid fa-arrow-down"></i></div>
+            <div class="bill-main">
+              <div class="bill-title">Setor Sukarela</div>
+              <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?></div>
+            </div>
+            <div class="bill-amount">
+              <div class="nominal">+ Rp <?= number_format($item['jumlah'] ?? 0, 0, ',', '.') ?></div>
+              <span class="badge <?= $badgeClass ?>"><?= $statusLabel ?></span>
+            </div>
           </div>
-          <div class="bill-main">
-            <div class="bill-title">Setor</div>
-            <div class="bill-sub"><?= date('d M Y', strtotime($item['tanggal'])) ?> • Ref: SR-<?= date('md', strtotime($item['tanggal'])) ?></div>
-          </div>
-          <div class="bill-amount">
-            <div class="nominal">+ Rp <?= number_format($item['jumlah'], 0, ',', '.') ?></div>
-            <span class="badge 
-              <?= $item['status']=='aktif' ? 'badge-lunas' : ($item['status']=='pending' ? 'badge-pending' : 'badge-ditolak') ?>">
-              <i class="fa-regular 
-                 <?= $item['status']=='aktif' ? 'fa-check' : ($item['status']=='pending' ? 'fa-clock' : 'fa-xmark') ?>">
-              </i>
-              <?= $item['status']=='aktif' ? 'Terkonfirmasi' : ($item['status']=='pending' ? 'Pending' : 'Ditolak') ?>
-            </span>
-          </div>
-        </div>
-      <?php endforeach; ?>
-      <?php if (empty($sukarela)): ?>
-        <div style="padding:16px;text-align:center;color:#888;">Belum ada setoran sukarela.</div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div style="padding:16px; text-align:center; color:#94a3b8; font-size:12px;">Belum ada setoran sukarela.</div>
       <?php endif; ?>
     </div>
   </section>
 
-  <!-- Modal Input Setoran Pokok -->
-<div id="modalPokok" class="modal">
+  <!-- Modal Setoran Pokok dengan Validasi Otomatis -->
+  <div id="modalPokok" class="modal">
     <div class="modal-content">
-        <span class="close" data-modal="modalPokok">&times;</span>
-        <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Pokok</h3>
-        <form id="formSimpananPokok" method="POST" enctype="multipart/form-data">
-            <!-- TAMBAHKAN CSRF TOKEN -->
+        <span class="close" onclick="closeModal('modalPokok')">&times;</span>
+        <h3 style="margin-bottom:0.75rem; font-size:16px; font-weight:800; color:var(--dark);">Setor Simpanan Pokok</h3>
+        
+        <!-- Info Sisa Kekurangan Otomatis -->
+        <div class="modal-info-box">
+            <span>Sisa Kekurangan:</span>
+            <strong id="labelSisa">Rp <?= number_format($kekurangan, 0, ',', '.') ?></strong>
+        </div>
+
+        <form id="formSimpananPokok">
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-            
             <div class="form-group">
-                <label for="jumlah_pokok">Jumlah Setoran (Rp)</label>
-                <input type="number" name="jumlah" id="jumlah_pokok" required min="10000" max="500000" />
-                <small style="color:var(--gray);">Maksimal: Rp 500.000</small>
+                <label>Jumlah Setoran (Rp)</label>
+                <input type="number" name="jumlah" id="inputJumlahPokok" required min="10000" max="<?= $kekurangan ?>" placeholder="Masukkan nominal" />
+                <div class="input-error-msg" id="errorPokok">Nominal melebihi sisa kekurangan!</div>
             </div>
             <div class="form-group">
-                <label for="bukti_pokok">Upload Bukti Transfer</label>
-                <input type="file" name="bukti" id="bukti_pokok" accept="image/*,application/pdf" required />
+                <label>Upload Bukti Transfer</label>
+                <input type="file" name="bukti" accept="image/*,application/pdf" required />
+            </div>
+            <button type="submit" class="btn-submit" id="btnSubmitPokok">Kirim Setoran</button>
+        </form>
+    </div>
+  </div>
+
+  <!-- Modal Setoran Sukarela -->
+  <div id="modalSukarela" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalSukarela')">&times;</span>
+        <h3 style="margin-bottom:1rem; font-size:16px; font-weight:800; color:var(--dark);">Setor Simpanan Sukarela</h3>
+        <form id="formSimpananSukarela">
+            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+            <div class="form-group">
+                <label>Jumlah Setoran (Rp)</label>
+                <input type="number" name="jumlah" required min="10000" placeholder="Masukkan nominal" />
+            </div>
+            <div class="form-group">
+                <label>Upload Bukti Transfer</label>
+                <input type="file" name="bukti" accept="image/*,application/pdf" required />
             </div>
             <button type="submit" class="btn-submit">Kirim Setoran</button>
         </form>
     </div>
-</div>
+  </div>
 
-<!-- Modal Input Setoran Sukarela -->
-<div id="modalSukarela" class="modal">
-    <div class="modal-content">
-        <span class="close" data-modal="modalSukarela">&times;</span>
-        <h3 style="margin-bottom:1rem;color:var(--dark);">Setor Simpanan Sukarela</h3>
-        <form id="formSimpananSukarela" method="POST" enctype="multipart/form-data">
-            <!-- TAMBAHKAN CSRF TOKEN -->
-            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-            
-            <div class="form-group">
-                <label for="jumlah_sukarela">Jumlah Setoran (Rp)</label>
-                <input type="number" name="jumlah" id="jumlah_sukarela" required min="10000" />
-            </div>
-            <div class="form-group">
-                <label for="bukti_sukarela">Upload Bukti Transfer</label>
-                <input type="file" name="bukti" id="bukti_sukarela" accept="image/*,application/pdf" required />
-            </div>
-            <button type="submit" class="btn-submit">Kirim Setoran</button>
-        </form>
-    </div>
-</div>
-
-  <!-- Bottom Nav -->
+  <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <a href="<?= base_url('anggota/dashboard') ?>">
-      <i data-lucide="home"></i>
+      <i data-lucide="home" style="width:18px; height:18px;"></i>
       <p>Beranda</p>
     </a>
     <a href="<?= base_url('anggota/simpanan') ?>" class="active">
-      <i data-lucide="wallet"></i>
+      <i data-lucide="wallet" style="width:18px; height:18px;"></i>
       <p>Simpan</p>
     </a>
     <a href="<?= base_url('anggota/pinjaman') ?>">
-      <i data-lucide="hand-coins"></i>
+      <i data-lucide="hand-coins" style="width:18px; height:18px;"></i>
       <p>Pinjam</p>
     </a>
     <a href="<?= base_url('anggota/cicilan') ?>">
-            <i data-lucide="calendar-check"></i>
-            <p>Cicilan</p>
-        </a>
+      <i data-lucide="calendar-check" style="width:18px; height:18px;"></i>
+      <p>Cicilan</p>
+    </a>
     <a href="<?= base_url('anggota/profil') ?>">
-      <i data-lucide="user"></i>
+      <i data-lucide="user" style="width:18px; height:18px;"></i>
       <p>Profil</p>
     </a>
   </nav>
 
-<?php if ($showTenorModal): ?>
-<style>
-  /* === STYLE MODAL TENOR (background berhenti di atas bottom nav) === */
-  #tenorOverlay {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    bottom: 80px; /* kasih jarak sesuai tinggi bottom nav */
-    background: rgba(0, 0, 0, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1999; /* di bawah bottom nav */
-    pointer-events: auto;
-  }
-
-  .bottom-nav {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 2001 !important;
-  }
-
-  #tenorBox {
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    padding: 2rem;
-    max-width: 450px;
-    width: 90%;
-    text-align: center;
-    animation: fadeIn 0.3s ease;
-    z-index: 2000;
-  }
-
-  #tenorBox h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 1rem;
-  }
-
-  #tenorBox p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    color: #4b5563;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  #tenorBox select {
-    width: 100%;
-    border: 1px solid #d1d5db;
-    border-radius: 12px;
-    padding: 0.75rem;
-    text-align: center;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 1.25rem;
-    transition: border 0.2s ease;
-  }
-
-  #tenorBox select:focus {
-    border-color: #0d9488;
-    outline: none;
-  }
-
-  #tenorBox button {
-    width: 100%;
-    background: linear-gradient(135deg, #16a34a, #0d9488);
-    border: none;
-    border-radius: 12px;
-    padding: 0.75rem;
-    color: #fff;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  #tenorBox button:hover {
-    background: linear-gradient(135deg, #16a34a, #0d9488);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
-
-<!-- Overlay + Modal -->
-<div id="tenorOverlay">
-  <div id="tenorBox">
-    <h2>Pilih Tenor Simpanan Pokok</h2>
-    <p><strong>Apa itu Simpanan Pokok?</strong><br>
-      Simpanan Pokok adalah setoran awal wajib sebesar <b>Rp 500.000</b> 
-      yang harus dibayarkan oleh setiap anggota baru saat pertama kali menjadi anggota koperasi.<br><br>
-      Simpanan ini <b>wajib</b> dan <b>tidak bisa diambil kembali</b> selama masih menjadi anggota.
-      Kamu bisa mencicil <strong>1 bulan</strong>, <strong>2 bulan</strong>, atau <strong>5 bulan.</strong>
-    </p>
-
-    <form action="<?= base_url('anggota/simpanan/setTenor') ?>" method="post">
-      <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-      <select name="tenor" required>
-        <option value="">-- Pilih Tenor --</option>
-        <option value="1">1 Bulan</option>
-        <option value="2">2 Bulan</option>
-        <option value="5">5 Bulan</option>
-      </select>
-      <button type="submit">Simpan Tenor</button>
-    </form>
-  </div>
-</div>
-
-<script>
-  document.body.style.overflow = 'hidden';
-</script>
-<?php endif; ?>
-
   <script>
     lucide.createIcons();
 
-    // Cek apakah simpanan pokok sudah mencapai 500.000
-    const isPokokComplete = <?= $isPokokComplete ? 'true' : 'false' ?>;
-    
-    function showTab(name){
-        // content
-        document.querySelectorAll('.tab-content').forEach(el=>{
-            el.classList.remove('active');
+    // Sisa Kekurangan dari PHP
+    const maxKekurangan = <?= $kekurangan ?>;
+
+    // Detection Real-time Input Jumlah Pokok
+    const inputPokok = document.getElementById('inputJumlahPokok');
+    const errorPokok = document.getElementById('errorPokok');
+    const btnSubmitPokok = document.getElementById('btnSubmitPokok');
+
+    if (inputPokok) {
+        inputPokok.addEventListener('input', function() {
+            const val = parseFloat(this.value) || 0;
+            if (val > maxKekurangan) {
+                errorPokok.style.display = 'block';
+                btnSubmitPokok.disabled = true;
+            } else {
+                errorPokok.style.display = 'none';
+                btnSubmitPokok.disabled = false;
+            }
         });
-        document.getElementById(name).classList.add('active');
-
-        // tabs
-        document.querySelectorAll('.tab-simpanan button').forEach(el=>el.classList.remove('active'));
-        if(name==='pokok') document.getElementById('tab-pokok').classList.add('active');
-        if(name==='wajib') document.getElementById('tab-wajib').classList.add('active');
-        if(name==='sukarela') document.getElementById('tab-sukarela').classList.add('active');
     }
 
-    // Modal logic
-    const modalPokok = document.getElementById('modalPokok');
-    const modalSukarela = document.getElementById('modalSukarela');
-    const btnPokok = document.getElementById('btn-setor-pokok');
-    const btnSukarela = document.getElementById('btn-setor-sukarela');
-    const closeButtons = document.querySelectorAll('.close');
-
-    if (btnPokok) {
-        btnPokok.onclick = () => {
-            modalPokok.style.display = "block";
-        }
+    // Switch Tabs
+    function showTab(name) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-simpanan button').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(name).classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
     }
 
-    if (btnSukarela) {
-        btnSukarela.onclick = () => {
-            modalSukarela.style.display = "block";
-        }
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
     }
 
-    closeButtons.forEach(btn => {
-        btn.onclick = (e) => {
-            const modalId = e.target.getAttribute('data-modal');
-            document.getElementById(modalId).style.display = "none";
-        }
-    });
-
-    window.onclick = (event) => {
-        if (event.target == modalPokok) {
-            modalPokok.style.display = "none";
-        }
-        if (event.target == modalSukarela) {
-            modalSukarela.style.display = "none";
-        }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
     }
-    
-    // Handle Form Submission dengan AJAX - DIPERBAIKI
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+      }
+    }
+
+    // AJAX Form Submit Handling
     document.addEventListener('DOMContentLoaded', function() {
-        // Form Simpanan Pokok
-        const formPokok = document.getElementById('formSimpananPokok');
-        if (formPokok) {
-            formPokok.addEventListener('submit', function(e) {
-                e.preventDefault();
-                submitForm(this, '<?= base_url('anggota/simpanan/pokok/store') ?>');
-            });
-        }
-
-        // Form Simpanan Sukarela
-        const formSukarela = document.getElementById('formSimpananSukarela');
-        if (formSukarela) {
-            formSukarela.addEventListener('submit', function(e) {
-                e.preventDefault();
-                submitForm(this, '<?= base_url('anggota/simpanan/sukarela/store') ?>');
-            });
-        }
-
-        function submitForm(form, url) {
-            const formData = new FormData(form);
-            const submitButton = form.querySelector('.btn-submit');
-            const originalText = submitButton.textContent;
-
-            // Disable button dan show loading
-            submitButton.disabled = true;
-            submitButton.textContent = 'Mengirim...';
-            submitButton.style.opacity = '0.7';
-
-            fetch(url, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => {
-                // Cek jika response adalah JSON
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    return response.text().then(text => {
-                        console.error('Server returned HTML instead of JSON:', text.substring(0, 200));
-                        throw new Error('Server error: Expected JSON but got HTML response');
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    // Tutup modal
-                    form.closest('.modal').style.display = 'none';
-                    // Reset form
-                    form.reset();
-                    // Refresh halaman setelah 2 detik
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
-                } else {
-                    alert('Error: ' + (data.message || 'Terjadi kesalahan'));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan: ' + error.message + '. Silakan coba lagi atau hubungi admin.');
-            })
-            .finally(() => {
-                // Enable button kembali
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
-                submitButton.style.opacity = '1';
-            });
-        }
-    });
-
-    // Auto-hide alerts
-    setTimeout(() => {
-        document.querySelectorAll('.alert').forEach(alert => {
-            alert.style.opacity = '0';
-            alert.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => alert.remove(), 500);
+      const formPokok = document.getElementById('formSimpananPokok');
+      if (formPokok) {
+        formPokok.addEventListener('submit', function(e) {
+          e.preventDefault();
+          submitForm(this, '<?= base_url('anggota/simpanan/pokok/store') ?>');
         });
-    }, 5000);
-</script>
+      }
+
+      const formSukarela = document.getElementById('formSimpananSukarela');
+      if (formSukarela) {
+        formSukarela.addEventListener('submit', function(e) {
+          e.preventDefault();
+          submitForm(this, '<?= base_url('anggota/simpanan/sukarela/store') ?>');
+        });
+      }
+
+      function submitForm(form, url) {
+        const formData = new FormData(form);
+        const submitBtn = form.querySelector('.btn-submit');
+        const origText = submitBtn.textContent;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Mengirim...';
+
+        fetch(url, {
+          method: 'POST',
+          body: formData,
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            alert(data.message);
+            closeModal(form.closest('.modal').id);
+            form.reset();
+            location.reload();
+          } else {
+            alert('Gagal: ' + (data.message || 'Terjadi kesalahan.'));
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Terjadi kesalahan koneksi.');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+        });
+      }
+    });
+  </script>
 </body>
 </html>

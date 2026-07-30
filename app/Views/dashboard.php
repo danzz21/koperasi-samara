@@ -9,254 +9,235 @@
     <style>
         :root {
             --primary: #10b981;
-            --primary-light: #34d399;
             --primary-dark: #059669;
             --secondary: #06b6d4;
-            --secondary-light: #22d3ee;
-            --accent: #0ea5e9;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --dark: #1e293b;
-            --light: #f8fafc;
+            --dark: #0f172a;
             --gray: #64748b;
-            --gray-light: #cbd5e1;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
             --border-radius: 20px;
-            --border-radius-sm: 12px;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #f0fdf9 0%, #f0fdf4 100%);
+            background: #f8fafc;
             color: var(--dark);
             min-height: 100vh;
             padding-bottom: 90px;
-            line-height: 1.6;
         }
 
-        /* Header */
+        /* Header Utama Koperasi */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 1.5rem 1rem;
-            background: var(--gradient-primary);
+            padding: 1.1rem 1.25rem;
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
             color: white;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
             border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
         }
 
         .profile {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
-        .profile img {
-            width: 50px;
-            height: 50px;
+        .profile img, .profile-avatar {
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .profile-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-info {
-            display: flex;
-            flex-direction: column;
+            font-size: 17px;
         }
 
         .header-name {
             font-weight: 700;
-            font-size: 18px;
-            letter-spacing: -0.3px;
+            font-size: 15px;
+            line-height: 1.2;
         }
 
         .header-id {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-top: 2px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .icon {
-            width: 24px;
-            height: 24px;
-            color: white;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .icon:hover {
-            transform: scale(1.1);
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
             font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Saldo Container */
-        .saldo-container {
-            display: flex;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            margin-top: 0;
-            flex-wrap: wrap;
-        }
-
-        .saldo-card {
-            flex: 1;
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 1.8rem 1.5rem;
-            position: relative;
-            box-shadow: var(--shadow);
-            min-width: 170px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .saldo-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .saldo-card.simpanan {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .saldo-card.pinjaman {
-            background: var(--gradient-secondary);
-            color: white;
-        }
-
-        .saldo-card .card-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .saldo-card .card-icon i {
-            font-size: 24px;
-        }
-
-        .saldo-card .label {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 10px;
             opacity: 0.9;
+        }
+
+        /* Container Card */
+        .summary-container {
+            padding: 1.25rem 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .card-box {
+            border-radius: var(--border-radius);
+            padding: 1.15rem;
+            color: white;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-box:active {
+            transform: scale(0.98);
+        }
+
+        /* Warna Card 1: Emerald Green (Simpanan) */
+        .card-simpanan {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* Warna Card 2: Teal Cyan (Pinjaman - Senada dengan Header) */
+        .card-pinjaman {
+            background: linear-gradient(135deg, #06b6d4 0%, #0369a1 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .card-title-text {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-icon-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .main-amount {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.12);
+        }
+
+        /* Breakdown Transparan (Glassmorphism Effect) */
+        .breakdown-grid {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .breakdown-item-box {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            padding: 7px 4px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .b-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .b-val {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        .sisa-tagihan-box {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 7px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Judul Layanan Koperasi */
+        .section-title {
+            padding: 0.85rem 1rem 0.35rem;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--dark);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .saldo-card .amount {
-            font-size: 26px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        /* Section Title */
-        .section-title {
-            padding: 1rem 1.5rem 0.5rem;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .section-title i {
             color: var(--primary);
+            font-size: 18px;
         }
 
-        .section-subtitle {
-            padding: 0 1.5rem 1.5rem;
-            font-size: 15px;
-            color: var(--gray);
-            margin-top: -5px;
-        }
-
-        /* Menu Container */
         .menu-container {
-            padding: 0 1.5rem 2rem;
+            padding: 0 1rem 1.5rem;
         }
 
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 12px;
         }
 
         .menu-item {
             background: white;
-            border-radius: var(--border-radius);
-            padding: 2rem 1rem;
+            border-radius: 16px;
+            padding: 1.1rem 0.5rem;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             position: relative;
             overflow: hidden;
-            min-height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .menu-item::before {
@@ -264,14 +245,13 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 6px;
-            background: var(--gradient-primary);
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981 0%, #06b6d4 100%);
         }
 
-        .menu-item:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+        .menu-item:active {
+            transform: scale(0.95);
         }
 
         .menu-item a {
@@ -280,23 +260,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
-            width: 100%;
+            gap: 8px;
         }
 
         .menu-item i {
-            font-size: 32px;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .menu-item:hover i {
-            transform: scale(1.2);
-            color: var(--secondary);
+            font-size: 24px;
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .menu-item p {
-            font-size: 16px;
+            font-size: 11.5px;
             font-weight: 700;
             color: var(--dark);
         }
@@ -310,10 +285,10 @@
             background: white;
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+            padding: 8px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
             z-index: 100;
-            border-radius: 25px 25px 0 0;
+            border-radius: 18px 18px 0 0;
         }
 
         .bottom-nav a {
@@ -322,10 +297,8 @@
             align-items: center;
             text-decoration: none;
             color: var(--gray);
-            transition: var(--transition);
-            padding: 8px 12px;
-            border-radius: 16px;
-            position: relative;
+            padding: 4px 10px;
+            border-radius: 10px;
         }
 
         .bottom-nav a.active {
@@ -333,227 +306,147 @@
             background: rgba(16, 185, 129, 0.1);
         }
 
-        .bottom-nav a i {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-
         .bottom-nav a p {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
+            margin-top: 2px;
         }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .saldo-container {
-                flex-direction: column;
-            }
-            
-            .saldo-card {
-                min-width: 100%;
-            }
-            
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            .header {
-                padding: 1.2rem 1.2rem 0.8rem;
-            }
-            
-            .saldo-container, .section-title, .section-subtitle, .menu-container {
-                padding-left: 1.2rem;
-                padding-right: 1.2rem;
-            }
-            
-            .menu-item {
-                padding: 1.5rem 0.8rem;
-                min-height: 120px;
-            }
-            
-            .menu-item i {
-                font-size: 28px;
-            }
-            
-            .menu-item p {
-                font-size: 14px;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 767px) {
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 18px;
-            }
-            
-            .menu-item {
-                padding: 1.8rem 1rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
-            }
-            
-            .saldo-card .amount {
-                font-size: 28px;
-            }
-            
-            .menu-item {
-                padding: 2.5rem 1.5rem;
-                min-height: 160px;
-            }
-            
-            .menu-item i {
-                font-size: 36px;
-            }
-            
-            .menu-item p {
-                font-size: 18px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .menu-container {
-                max-width: 1000px;
-                margin: 0 auto;
-            }
-            
-            .menu-grid {
-                gap: 30px;
-            }
-            
-            .menu-item {
-                padding: 3rem 2rem;
-                min-height: 180px;
-            }
-            
-            .menu-item i {
-                font-size: 40px;
-            }
-            
-            .menu-item p {
-                font-size: 20px;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
     </style>
 </head>
 <body>
-    <!-- Header -->
+
+    <!-- Header Profil -->
     <header class="header">
         <div class="profile">
             <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
-                <img id="preview" src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
+                <img src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
             <?php else: ?>
                 <?php 
-                    $firstLetter = strtoupper(substr($anggota['nama_lengkap'], 0, 1));
+                    $firstLetter = strtoupper(substr($anggota['nama_lengkap'] ?? 'A', 0, 1));
                     $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
-                    $bgColor = $colors[crc32($anggota['nomor_anggota']) % count($colors)];
+                    $bgColor = $colors[crc32($anggota['nomor_anggota'] ?? '1') % count($colors)];
                 ?>
                 <div class="profile-avatar" style="background:<?= $bgColor ?>;">
                     <?= $firstLetter ?>
                 </div>
             <?php endif; ?>
             <div class="profile-info">
-                <div class="header-name"><?= esc($anggota['nama_lengkap']) ?></div>
-                <div class="header-id">ID: <?= esc($anggota['nomor_anggota']) ?></div>
+                <div class="header-name"><?= esc($anggota['nama_lengkap'] ?? 'Anggota') ?></div>
+                <div class="header-id">ID: <?= esc($anggota['nomor_anggota'] ?? '-') ?></div>
             </div>
         </div>
         <div class="header-actions">
-            <div style="position: relative;">
-                <i data-lucide="bell" class="icon"></i>
-                <div class="notification-badge">3</div>
-            </div>
-            <i data-lucide="settings" class="icon"></i>
+            <i data-lucide="bell" style="width:20px; height:20px; cursor:pointer;"></i>
         </div>
     </header>
 
-    <!-- Card Saldo & Pinjaman -->
-    <div class="saldo-container">
-        <!-- Card Simpanan -->
-        <section class="saldo-card simpanan fade-in">
-            <div class="card-icon">
-                <i class="fas fa-sack-dollar"></i>
-            </div>
-            <p class="label">
-                <i data-lucide="trending-up" width="16" height="16"></i>
-                Total Simpanan
-            </p>
-            <h2 class="amount">Rp <?= number_format($total_saldo, 0, ',', '.') ?></h2>
-        </section>
+    <!-- CARD RINGKASAN SALDO & PINJAMAN -->
+    <div class="summary-container">
 
-        <!-- Card Pinjaman -->
-        <section class="saldo-card pinjaman fade-in delay-1">
-            <div class="card-icon">
-                <i class="fas fa-hand-holding-usd"></i>
+        <!-- CARD 1: TOTAL SIMPANAN (EMERALD GREEN) -->
+        <div class="card-box card-simpanan">
+            <div class="card-header-flex">
+                <span class="card-title-text">
+                    <i class="fas fa-wallet"></i> Total Simpanan
+                </span>
+                <div class="card-icon-circle">
+                    <i class="fas fa-sack-dollar"></i>
+                </div>
             </div>
-            <p class="label">
-                <i data-lucide="trending-down" width="16" height="16"></i>
-                Total Pinjaman
-            </p>
-            <h2 class="amount">Rp <?= number_format($total_pinjaman, 0, ',', '.') ?></h2>
-        </section>
+            
+            <div class="main-amount">Rp <?= number_format($total_saldo, 0, ',', '.') ?></div>
+            
+            <div class="breakdown-grid">
+                <div class="breakdown-item-box">
+                    <span class="b-label">Pokok</span>
+                    <span class="b-val">Rp <?= number_format($sim_pokok, 0, ',', '.') ?></span>
+                </div>
+                <div class="breakdown-item-box">
+                    <span class="b-label">Wajib</span>
+                    <span class="b-val">Rp <?= number_format($sim_wajib, 0, ',', '.') ?></span>
+                </div>
+                <div class="breakdown-item-box">
+                    <span class="b-label">Sukarela</span>
+                    <span class="b-val">Rp <?= number_format($sim_sukarela, 0, ',', '.') ?></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2: TOTAL PINJAMAN (TEAL CYAN SENADA HEADER) -->
+        <div class="card-box card-pinjaman">
+            <div class="card-header-flex">
+                <span class="card-title-text">
+                    <i class="fas fa-hand-holding-usd"></i> Total Pinjaman
+                </span>
+                <div class="card-icon-circle">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+            </div>
+
+            <div class="main-amount">Rp <?= number_format($total_pinjaman, 0, ',', '.') ?></div>
+
+            <div class="breakdown-grid">
+                <div class="breakdown-item-box">
+                    <span class="b-label">Qard</span>
+                    <span class="b-val">Rp <?= number_format($qard_total, 0, ',', '.') ?></span>
+                </div>
+                <div class="breakdown-item-box">
+                    <span class="b-label">Murabahah</span>
+                    <span class="b-val">Rp <?= number_format($muro_total, 0, ',', '.') ?></span>
+                </div>
+                <div class="breakdown-item-box">
+                    <span class="b-label">Mudharabah</span>
+                    <span class="b-val">Rp <?= number_format($mudh_total, 0, ',', '.') ?></span>
+                </div>
+            </div>
+
+            <div class="sisa-tagihan-box">
+                <span style="opacity: 0.92;">Sisa Tagihan Belum Terbayar:</span>
+                <span style="font-weight: 800; color: #fef08a;">Rp <?= number_format($sisa_kewajiban, 0, ',', '.') ?></span>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Menu Section -->
+    <!-- LAYANAN KOPERASI -->
     <h3 class="section-title">
         <i data-lucide="grid"></i>
         Layanan Koperasi
     </h3>
-    <p class="section-subtitle">Kelola simpanan dan pinjaman Anda dengan mudah</p>
     
     <div class="menu-container">
         <div class="menu-grid">
-            <div class="menu-item fade-in">
+            <div class="menu-item">
                 <a href="<?= base_url('anggota/sim_pokok') ?>">
                     <i class="fas fa-landmark"></i>
-                    <p>Simpanan Pokok</p>
+                    <p>Sim. Pokok</p>
                 </a>
             </div>
-            <div class="menu-item fade-in delay-1">
+            <div class="menu-item">
                 <a href="<?= base_url('anggota/sim_wajib') ?>">
                     <i class="fas fa-calendar-alt"></i>
-                    <p>Simpanan Wajib</p>
+                    <p>Sim. Wajib</p>
                 </a>
             </div>
-            <div class="menu-item fade-in delay-2">
+            <div class="menu-item">
                 <a href="<?= base_url('anggota/sim_sukarela') ?>">
                     <i class="fas fa-gift"></i>
-                    <p>Simpanan Sukarela</p>
+                    <p>Sim. Sukarela</p>
                 </a>
             </div>
-            <div class="menu-item fade-in delay-3">
+            <div class="menu-item">
                 <a href="<?= base_url('anggota/pin_alqordh') ?>">
                     <i class="fas fa-handshake"></i>
-                    <p>Al-Qordhu</p>
+                    <p>Al-Qordh</p>
                 </a>
             </div>
-            <div class="menu-item fade-in delay-4">
+            <div class="menu-item">
                 <a href="<?= base_url('anggota/pin_murobahah') ?>">
                     <i class="fas fa-file-contract"></i>
                     <p>Murobahah</p>
                 </a>
             </div>
-            <div class="menu-item fade-in delay-5">
+            <div class="menu-item">
                 <a href="<?= base_url('anggota/pin_mudhorobah') ?>">
                     <i class="fas fa-chart-line"></i>
                     <p>Mudhorobah</p>
@@ -562,64 +455,32 @@
         </div>
     </div>
 
-    <!-- Bottom Nav -->
-<nav class="bottom-nav">
-    <a href="<?= base_url('anggota/dashboard') ?>" class="active">
-        <i data-lucide="home"></i>
-        <p>Beranda</p>
-    </a>
-    <a href="<?= base_url('anggota/simpanan') ?>">
-        <i data-lucide="wallet"></i>
-        <p>Simpan</p>
-    </a>
-    <a href="<?= base_url('anggota/pinjaman') ?>">
-        <i data-lucide="hand-coins"></i>
-        <p>Pinjam</p>
-    </a>
-    <!-- TAMBAHKAN MENU CICILAN DI SINI -->
-    <a href="<?= base_url('anggota/cicilan') ?>">
-        <i data-lucide="calendar-check"></i>
-        <p>Cicilan</p>
-    </a>
-    <a href="<?= base_url('anggota/profil') ?>">
-        <i data-lucide="user"></i>
-        <p>Profil</p>
-    </a>
-</nav>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="<?= base_url('anggota/dashboard') ?>" class="active">
+            <i data-lucide="home" style="width:18px; height:18px;"></i>
+            <p>Beranda</p>
+        </a>
+        <a href="<?= base_url('anggota/simpanan') ?>">
+            <i data-lucide="wallet" style="width:18px; height:18px;"></i>
+            <p>Simpan</p>
+        </a>
+        <a href="<?= base_url('anggota/pinjaman') ?>">
+            <i data-lucide="hand-coins" style="width:18px; height:18px;"></i>
+            <p>Pinjam</p>
+        </a>
+        <a href="<?= base_url('anggota/cicilan') ?>">
+            <i data-lucide="calendar-check" style="width:18px; height:18px;"></i>
+            <p>Cicilan</p>
+        </a>
+        <a href="<?= base_url('anggota/profil') ?>">
+            <i data-lucide="user" style="width:18px; height:18px;"></i>
+            <p>Profil</p>
+        </a>
+    </nav>
 
     <script>
         lucide.createIcons();
-        
-        // Tambahkan efek interaktif pada menu item
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-        
-        // Animasi scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(el => {
-                el.style.opacity = 0;
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        });
     </script>
 </body>
 </html>

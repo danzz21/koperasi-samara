@@ -144,42 +144,37 @@ class AdminDashboard extends BaseController
         return $this->response->setJSON($result);
     }
 
-    public function index()
+   public function index()
     {
         $db = \Config\Database::connect();
 
-        // ==========================================
+        // Status sah untuk simpanan (Mencegah pending / ditolak ikut masuk)
+        $validSimpananStatus = ['aktif', 'lunas', 'berhasil', 'disetujui'];
+
         // 1. TOTAL ANGGOTA AKTIF
-        // ==========================================
         $totalAnggota = $db->table('anggota')
             ->where('status', 'aktif')
             ->countAllResults();
 
-        // ==========================================
-        // 2. TOTAL SIMPANAN ANGGOTA
-        // Pokok + Wajib + Sukarela (Aktif & Lunas)
-        // ==========================================
+        // 2. TOTAL SIMPANAN ANGGOTA (Hanya status SAH)
         $totalSimpananPokok = $db->table('simpanan_pokok')
-            ->whereIn('status', ['aktif', 'lunas'])
+            ->whereIn('status', $validSimpananStatus)
             ->selectSum('jumlah')
             ->get()->getRow()->jumlah ?? 0;
 
         $totalSimpananWajib = $db->table('simpanan_wajib')
-            ->whereIn('status', ['aktif', 'lunas'])
+            ->whereIn('status', $validSimpananStatus)
             ->selectSum('jumlah')
             ->get()->getRow()->jumlah ?? 0;
 
         $totalSimpananSukarela = $db->table('simpanan_sukarela')
-            ->whereIn('status', ['aktif', 'lunas'])
+            ->whereIn('status', $validSimpananStatus)
             ->selectSum('jumlah')
             ->get()->getRow()->jumlah ?? 0;
 
         $totalSimpanan = (float)$totalSimpananPokok + (float)$totalSimpananWajib + (float)$totalSimpananSukarela;
 
-        // ==========================================
         // 3. PEMBIAYAAN & POKOK PINJAMAN BEREDAR
-        // ==========================================
-        // Qard
         $qardRow = $db->table('qard')
             ->where('status', 'aktif')
             ->selectSum('jml_pinjam', 'pinjam')
@@ -189,7 +184,6 @@ class AdminDashboard extends BaseController
         $pokokQard = (float)($qardRow->pinjam ?? 0);
         $terbayarQard = (float)($qardRow->terbayar ?? 0);
 
-        // Murabahah (Keluarkan 10% Margin)
         $mrbRow = $db->table('murabahah')
             ->where('status', 'aktif')
             ->selectSum('jml_pinjam', 'pinjam')
@@ -202,7 +196,6 @@ class AdminDashboard extends BaseController
         $pokokMrbMurni = $totalMrbWithMargin / 1.10;
         $terbayarMrbMurni = $terbayarMrbWithMargin / 1.10;
 
-        // Mudharabah (Keluarkan 10% Margin)
         $mdhRow = $db->table('mudharabah')
             ->where('status', 'aktif')
             ->selectSum('jml_pinjam', 'pinjam')
@@ -218,12 +211,9 @@ class AdminDashboard extends BaseController
         $totalPokokMurniPinjam = $pokokQard + $pokokMrbMurni + $pokokMdhMurni;
         $totalTerbayarPokokMurni = $terbayarQard + $terbayarMrbMurni + $terbayarMdhMurni;
 
-        // Sisa Pokok Pinjaman Beredar (Piutang Koperasi)
         $sisaPokokPinjaman = max(0, $totalPokokMurniPinjam - $totalTerbayarPokokMurni);
 
-        // ==========================================
-        // 4. PEMASUKAN & PENGELUARAN UMUM (TRANSAKSI OPERASIONAL)
-        // ==========================================
+        // 4. PEMASUKAN & PENGELUARAN UMUM
         $pemasukanUmum = $db->table('transaksi_umum')
             ->where('jenis', 'pemasukan')
             ->selectSum('jumlah')
@@ -234,7 +224,6 @@ class AdminDashboard extends BaseController
             ->selectSum('jumlah')
             ->get()->getRow()->jumlah ?? 0;
 
-        // Pemasukan & Pengeluaran Bulan Ini saja
         $pemasukanBulanIni = $db->table('transaksi_umum')
             ->where('jenis', 'pemasukan')
             ->where('YEAR(tanggal)', date('Y'))
@@ -249,9 +238,7 @@ class AdminDashboard extends BaseController
             ->selectSum('jumlah')
             ->get()->getRow()->jumlah ?? 0;
 
-        // ==========================================
         // 5. PROFIT REALISASI & POTENSI MARGIN
-        // ==========================================
         $terbayarMurabahah = $db->table('murabahah')
             ->whereIn('status', ['aktif', 'lunas'])
             ->selectSum('jml_terbayar', 'total')
@@ -263,32 +250,20 @@ class AdminDashboard extends BaseController
             ->get()->getRow()->total ?? 0;
 
         $totalTerbayarBerMargin = (float)$terbayarMurabahah + (float)$terbayarMudharabah;
-
-        // Profit Realisasi (Margin 10% dari angsuran terbayar)
         $realisasiMargin = $totalTerbayarBerMargin - ($totalTerbayarBerMargin / 1.10);
 
-        // Potensi Margin dari Pinjaman Aktif
         $pinjamMurabahah = $db->table('murabahah')->where('status', 'aktif')->selectSum('jml_pinjam')->get()->getRow()->jml_pinjam ?? 0;
         $pinjamMudharabah = $db->table('mudharabah')->where('status', 'aktif')->selectSum('jml_pinjam')->get()->getRow()->jml_pinjam ?? 0;
         $totalPinjamBerMargin = (float)$pinjamMurabahah + (float)$pinjamMudharabah;
 
         $potensiMargin = $totalPinjamBerMargin - ($totalPinjamBerMargin / 1.10);
 
-        // ==========================================
         // 6. KAS REAL, ESTIMASI SHU, & TOTAL ASET
-        // ==========================================
-        // Kas Real = Total Simpanan + Margin Terkumpul + Pemasukan Umum - Pokok Pinjaman Beredar - Pengeluaran Umum
         $kasReal = max(0, ($totalSimpanan + $realisasiMargin + (float)$pemasukanUmum) - ($sisaPokokPinjaman + (float)$pengeluaranUmum));
-
-        // SHU (Sisa Hasil Usaha Berjalan) = Margin Realisasi + Pemasukan Umum - Pengeluaran Umum
         $shuTahunBerjalan = ($realisasiMargin + (float)$pemasukanUmum) - (float)$pengeluaranUmum;
-
-        // Valuasi Total Aset Koperasi = Kas Real + Piutang Pokok Beredar
         $totalAset = $kasReal + $sisaPokokPinjaman;
 
-        // ==========================================
         // 7. ESTIMASI TAGIHAN BULAN INI
-        // ==========================================
         $tablesPembiayaan = ['qard', 'murabahah', 'mudharabah'];
         $tagihanBulanIni = 0;
 
@@ -303,9 +278,7 @@ class AdminDashboard extends BaseController
             }
         }
 
-        // ==========================================
         // 8. NOTIFIKASI PENDING
-        // ==========================================
         $pendingSimpananCount      = $db->table('simpanan_sukarela')->where('status', 'pending')->countAllResults();
         $pendingSimpananPokokCount = $db->table('simpanan_pokok')->where('status', 'pending')->countAllResults();
         $pendingCount              = $this->userModel->where('role', 'anggota')->where('status', 'pending')->countAllResults();
@@ -315,27 +288,25 @@ class AdminDashboard extends BaseController
         $pendingPinjamanCount      = $pendingQard + $pendingMurabahah + $pendingMudharabah;
         $pendingPembayaranCount    = $db->table('pembayaran_pending')->where('status', 'pending')->countAllResults();
 
-        // ==========================================
-        // 9. DATA CHART BULANAN
-        // ==========================================
+        // 9. DATA CHART BULANAN (FILTER STATUS PENDING & DITOLAK)
         $simpanan = $db->query("
             SELECT bulan, SUM(total) AS total FROM (
-                SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_pokok WHERE YEAR(tanggal) = YEAR(CURDATE()) GROUP BY bulan
+                SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_pokok WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status IN ('aktif', 'lunas', 'berhasil', 'disetujui') GROUP BY bulan
                 UNION ALL
-                SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_sukarela WHERE YEAR(tanggal) = YEAR(CURDATE()) GROUP BY bulan
+                SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_sukarela WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status IN ('aktif', 'lunas', 'berhasil', 'disetujui') GROUP BY bulan
                 UNION ALL
-                SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_wajib WHERE YEAR(tanggal) = YEAR(CURDATE()) GROUP BY bulan
+                SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_wajib WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status IN ('aktif', 'lunas', 'berhasil', 'disetujui') GROUP BY bulan
             ) AS gabungan
             GROUP BY bulan ORDER BY bulan
         ")->getResultArray();
 
         $pembiayaan = $db->query("
             SELECT bulan, SUM(total) AS total FROM (
-                SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total FROM mudharabah WHERE YEAR(tanggal) = YEAR(CURDATE()) GROUP BY bulan
+                SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total FROM mudharabah WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status = 'aktif' GROUP BY bulan
                 UNION ALL
-                SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total FROM murabahah WHERE YEAR(tanggal) = YEAR(CURDATE()) GROUP BY bulan
+                SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total FROM murabahah WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status = 'aktif' GROUP BY bulan
                 UNION ALL
-                SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total FROM qard WHERE YEAR(tanggal) = YEAR(CURDATE()) GROUP BY bulan
+                SELECT MONTH(tanggal) AS bulan, SUM(jml_pinjam) AS total FROM qard WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status = 'aktif' GROUP BY bulan
             ) AS gabungan
             GROUP BY bulan ORDER BY bulan
         ")->getResultArray();
@@ -379,7 +350,6 @@ class AdminDashboard extends BaseController
             . view('dashboard_admin/index', $data)
             . view('layouts/footer');
     }
-
 
     public function pendingMembers()
     {
@@ -1126,52 +1096,52 @@ class AdminDashboard extends BaseController
     public function savings()
     {
         $db = \Config\Database::connect();
+        $validStatus = ['aktif', 'lunas', 'berhasil', 'disetujui'];
 
         try {
-            // **PERBAIKAN: Ambil data simpanan pokok dengan filter jumlah > 0**
             $simpananPokok = $db->table('simpanan_pokok')
                 ->select('simpanan_pokok.*, anggota.nama_lengkap')
                 ->join('anggota', 'anggota.id_anggota = simpanan_pokok.id_anggota')
-                ->where('simpanan_pokok.jumlah >', 0)  // **FILTER PENTING**
+                ->where('simpanan_pokok.jumlah >', 0)
+                ->whereIn('simpanan_pokok.status', $validStatus) // Filter Status Sah
                 ->get()->getResultArray();
 
             $simpananWajib = $db->table('simpanan_wajib')
                 ->select('simpanan_wajib.*, anggota.nama_lengkap')
                 ->join('anggota', 'anggota.id_anggota = simpanan_wajib.id_anggota')
+                ->whereIn('simpanan_wajib.status', $validStatus) // Filter Status Sah
                 ->get()->getResultArray();
 
             $simpananSukarela = $db->table('simpanan_sukarela')
                 ->select('simpanan_sukarela.*, anggota.nama_lengkap')
                 ->join('anggota', 'anggota.id_anggota = simpanan_sukarela.id_anggota')
+                ->whereIn('simpanan_sukarela.status', $validStatus) // Filter Status Sah
                 ->get()->getResultArray();
 
-            // Hitung total masing-masing (sudah terfilter jumlah > 0)
             $totalPokok = array_sum(array_column($simpananPokok, 'jumlah')) ?? 0;
             $totalWajib = array_sum(array_column($simpananWajib, 'jumlah')) ?? 0;
             $totalSukarela = array_sum(array_column($simpananSukarela, 'jumlah')) ?? 0;
 
-            // **PERBAIKAN: Hitung anggota unik yang punya simpanan pokok > 0**
             $anggotaPokok = $db->table('simpanan_pokok')
                 ->select('id_anggota')
-                ->where('jumlah >', 0)  // **FILTER PENTING**
+                ->where('jumlah >', 0)
+                ->whereIn('status', $validStatus)
                 ->groupBy('id_anggota')
                 ->countAllResults();
 
-            // **PERBAIKAN: Hitung anggota lunas (total simpanan pokok >= 500000)**
             $anggotaLunas = $db->table('simpanan_pokok')
                 ->select('id_anggota, SUM(jumlah) as total')
-                ->where('jumlah >', 0)  // **FILTER PENTING**
+                ->where('jumlah >', 0)
+                ->whereIn('status', $validStatus)
                 ->groupBy('id_anggota')
                 ->having('total >=', 500000)
                 ->countAllResults();
 
-            // Ambil data anggota untuk filter
             $anggotaList = $db->table('anggota')
                 ->select('id_anggota, nama_lengkap')
                 ->where('status', 'aktif')
                 ->get()->getResultArray();
         } catch (\Exception $e) {
-            // Jika error, set default values
             $totalPokok = 0;
             $totalWajib = 0;
             $totalSukarela = 0;
@@ -1181,8 +1151,6 @@ class AdminDashboard extends BaseController
             $simpananWajib = [];
             $simpananSukarela = [];
             $anggotaList = [];
-
-            log_message('error', 'Error in savings method: ' . $e->getMessage());
         }
 
         return view('layouts/header', ['title' => 'Manajemen Simpanan'])

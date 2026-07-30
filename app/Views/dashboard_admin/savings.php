@@ -171,6 +171,44 @@
             color: #6b7280;
             margin-bottom: 8px;
         }
+
+        /* Badge Status Interaktif */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .status-badge.pending {
+            background-color: #fef3c7;
+            color: #d97706;
+            border: 1px solid #fcd34d;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .status-badge.ditolak {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+        }
+
+        .status-badge.lunas,
+        .status-badge.disetujui {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .status-badge.aktif {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
+        }
     </style>
 </head>
 
@@ -1150,7 +1188,6 @@
 
             tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr>';
 
-            // TAMBAHKAN PANGGILAN INI AGAR CARD STAT DI ATAS SELALU REFRESH OTOMATIS
             updateStatCardsFromData();
 
             let url = `<?= base_url('admin/getSimpananList') ?>?jenis=${jenisFilter}`;
@@ -1161,21 +1198,19 @@
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
-
                     rawSimpananData = data || [];
 
                     if (!data || data.length === 0) {
                         tbody.innerHTML = `
-                        <tr>
-                            <td colspan="6" class="px-6 py-4 text-center">
-                                <div class="empty-state">
-                                    <i class="fas fa-inbox"></i>
-                                    <p class="text-sm font-medium">Tidak ada data simpanan</p>
-                                    <p class="text-xs">Mulai input simpanan dengan menekan tombol "Input Simpanan"</p>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
+                <tr>
+                    <td colspan="6" class="px-6 py-4 text-center">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p class="text-sm font-medium">Tidak ada data simpanan</p>
+                            <p class="text-xs">Mulai input simpanan dengan menekan tombol "Input Simpanan"</p>
+                        </div>
+                    </td>
+                </tr>`;
                         return;
                     }
 
@@ -1184,6 +1219,7 @@
                     data.forEach(row => {
                         const idAnggota = row.id_anggota || row.nama_lengkap;
                         const jenis = row.jenis || 'pokok';
+                        const statusRow = String(row.status || '').toLowerCase().trim();
                         const key = `${idAnggota}_${jenis}`;
 
                         if (!groupedData[key]) {
@@ -1193,16 +1229,22 @@
                                 id_anggota: idAnggota,
                                 nama_lengkap: row.nama_lengkap || '-',
                                 jenis: jenis,
-                                total_jumlah: 0,
-                                count: 0,
+                                total_jumlah: 0, // Hanya menampung nominal transaksi yang Sah (ACC)
+                                approved_count: 0, // Hanya menghitung transaksi Sah
                                 tanggal_terakhir: row.tanggal || '-',
-                                status: row.status || 'aktif',
                                 id_terakhir: idField
                             };
                         }
 
-                        groupedData[key].total_jumlah += parseFloat(row.jumlah || row.nominal || 0);
-                        groupedData[key].count += 1;
+                        // =========================================================================
+                        // KUNCI UTAMA (SYARAT MUTLAK):
+                        // HANYA JUMLAHKAN SALDO DAN TINGKATKAN URUTAN JIKA STATUS = 'aktif' / 'lunas'
+                        // Status selain itu ('pending', 'ditolak', 'rejected', dll) TENTU SAJA DIABAIKAN!
+                        // =========================================================================
+                        if (['aktif', 'lunas', 'disetujui', 'approved'].includes(statusRow)) {
+                            groupedData[key].total_jumlah += parseFloat(row.jumlah || row.nominal || 0);
+                            groupedData[key].approved_count += 1;
+                        }
 
                         if (row.tanggal && row.tanggal > groupedData[key].tanggal_terakhir) {
                             groupedData[key].tanggal_terakhir = row.tanggal;
@@ -1213,85 +1255,103 @@
                     tbody.innerHTML = '';
 
                     Object.values(groupedData).forEach(row => {
-                        let statusClass = 'bg-gray-100 text-gray-800';
-                        let statusIcon = 'fas fa-circle';
-                        let statusText = row.status;
+                        let statusBadge = '';
+                        let subInfoText = '';
+                        const BATAS_LUNAS_POKOK = 500000; // Standar maksimal simpanan pokok
 
-                        if (row.status === 'lunas') {
-                            statusClass = 'bg-green-100 text-green-800';
-                            statusIcon = 'fas fa-check-circle';
-                            statusText = 'LUNAS';
-                        } else if (row.status === 'aktif') {
-                            statusClass = 'bg-blue-100 text-blue-800';
-                            statusIcon = 'fas fa-play-circle';
-                            statusText = 'Aktif';
+                        // -------------------------------------------------------------
+                        // LOGIKA STATUS & INFORMASI BERDASARKAN JENIS SIMPANAN
+                        // -------------------------------------------------------------
+                        if (row.jenis === 'pokok') {
+                            subInfoText = `<i class="fas fa-money-bill-wave mr-1"></i>Angsuran Pokok Ke-${row.approved_count}`;
+
+                            // Cek apakah total simpanan pokok sudah mencapai Rp 500.000
+                            if (row.total_jumlah >= BATAS_LUNAS_POKOK) {
+                                statusBadge = `
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-300">
+                                <i class="fas fa-check-circle"></i> LUNAS
+                            </span>`;
+                            } else {
+                                const sisa = BATAS_LUNAS_POKOK - row.total_jumlah;
+                                statusBadge = `
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 border border-blue-200" title="Sisa kekurangan: ${formatRupiah(sisa)}">
+                                <i class="fas fa-spinner"></i> Dicicil (${formatRupiah(row.total_jumlah)})
+                            </span>`;
+                            }
+                        } else if (row.jenis === 'wajib') {
+                            const nominalAcuanStandard = 50000;
+                            const totalUangSah = parseFloat(row.total_jumlah || 0);
+                            const bulanTercover = Math.floor(totalUangSah / nominalAcuanStandard);
+
+                            subInfoText = `<i class="fas fa-calendar-check mr-1 text-blue-600"></i>Simpanan Wajib Ke-<b>${bulanTercover}</b> (${row.approved_count}x Lunas)`;
+
+                            statusBadge = `
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            <i class="fas fa-check-circle"></i> Aktif
+                        </span>`;
+                        } else if (row.jenis === 'sukarela') {
+                            subInfoText = `<i class="fas fa-history mr-1"></i>${row.approved_count}x Transaksi Sah`;
+
+                            statusBadge = `
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 border border-purple-200">
+                            <i class="fas fa-check-circle"></i> Fleksibel
+                        </span>`;
+                        }
+
+                        // Indikator tambahan jika ada pengajuan simpanan yang masih PENDING dari user
+                        let pendingNotification = '';
+                        if (row.has_pending) {
+                            pendingNotification = `
+                        <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 animate-pulse" title="Ada ${row.pending_count} transaksi belum di-ACC">
+                            <i class="fas fa-clock mr-1"></i>${row.pending_count} Pending
+                        </span>`;
                         }
 
                         let jenisBadgeClass = 'jenis-badge pokok';
                         if (row.jenis === 'wajib') jenisBadgeClass = 'jenis-badge wajib';
                         else if (row.jenis === 'sukarela') jenisBadgeClass = 'jenis-badge sukarela';
 
-                        let subInfoText = `<i class="fas fa-history mr-1"></i>${row.count}x Transaksi`;
-
-                        if (row.jenis === 'wajib') {
-                            const nominalAcuanStandard = 50000;
-                            const totalUang = parseFloat(row.total_jumlah || 0);
-                            const bulanTercover = Math.floor(totalUang / nominalAcuanStandard);
-                            const sisaUangPecahan = totalUang % nominalAcuanStandard;
-
-                            if (bulanTercover > 0) {
-                                subInfoText = `<i class="fas fa-calendar-check mr-1 text-blue-600"></i>Simpanan Wajib Ke-<b>${bulanTercover}</b> (${row.count}x Input)`;
-                                if (sisaUangPecahan > 0) {
-                                    subInfoText += ` <span class="text-xs text-amber-600 font-normal">(+${formatRupiah(sisaUangPecahan)})</span>`;
-                                }
-                            } else {
-                                subInfoText = `<i class="fas fa-history mr-1"></i>Simpanan Wajib Ke-1 (${row.count}x Input)`;
-                            }
-                        } else if (row.jenis === 'pokok') {
-                            subInfoText = `<i class="fas fa-money-bill-wave mr-1"></i>Simpanan Pokok Ke-${row.count}`;
-                        }
-
                         tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 font-medium">${row.tanggal_terakhir}</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm font-semibold text-gray-900">${row.nama_lengkap}</div>
-                                <div class="text-xs text-blue-600 font-medium">${subInfoText}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="${jenisBadgeClass}">
-                                    <i class="fas fa-tag"></i>
-                                    ${row.jenis.charAt(0).toUpperCase() + row.jenis.slice(1)}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="text-sm font-bold text-gray-900">${formatRupiah(row.total_jumlah)}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${statusClass}">
-                                    <i class="${statusIcon}"></i>
-                                    ${statusText}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="action-buttons">
-                                    <button class="btn-detail" onclick="viewHistory('${row.id_anggota}', '${row.jenis}', '${row.nama_lengkap}')" title="Lihat Riwayat Pembayaran">
-                                        <i class="fas fa-eye"></i>Detail
-                                    </button>
-                                    <button class="btn-delete" onclick="deleteSimpanan('${row.jenis}', '${row.id_terakhir}')" title="Hapus Transaksi Terakhir">
-                                        <i class="fas fa-trash"></i>Hapus
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900 font-medium">${row.tanggal_terakhir}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <span class="text-sm font-semibold text-gray-900">${row.nama_lengkap}</span>
+                            ${pendingNotification}
+                        </div>
+                        <div class="text-xs text-blue-600 font-medium mt-1">${subInfoText}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="${jenisBadgeClass}">
+                            <i class="fas fa-tag"></i>
+                            ${row.jenis.charAt(0).toUpperCase() + row.jenis.slice(1)}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="text-sm font-bold text-gray-900">${formatRupiah(row.total_jumlah)}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        ${statusBadge}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="action-buttons">
+                            <button class="btn-detail" onclick="viewHistory('${row.id_anggota}', '${row.jenis}', '${row.nama_lengkap}')" title="Lihat Riwayat Pembayaran">
+                                <i class="fas fa-eye"></i>Detail
+                            </button>
+                            <button class="btn-delete" onclick="deleteSimpanan('${row.jenis}', '${row.id_terakhir}')" title="Hapus Transaksi Terakhir">
+                                <i class="fas fa-trash"></i>Hapus
+                            </button>
+                        </div>
+                    </td>
+                </tr>`;
                     });
                 });
         }
 
         function viewHistory(idAnggota, jenis, namaLengkap) {
+            // Ambil data transaksi milik anggota & jenis yang sesuai
             const userTransactions = rawSimpananData.filter(row => {
                 const matchUser = (row.id_anggota == idAnggota || row.nama_lengkap === namaLengkap);
                 const matchJenis = row.jenis === jenis;
@@ -1303,65 +1363,86 @@
             document.getElementById('detailNamaAnggota').textContent = namaLengkap;
             document.getElementById('detailJenisSimpanan').textContent = `Rincian Seluruh Riwayat Simpanan ${jenis.toUpperCase()}`;
 
-            let totalAmount = 0;
+            let totalAmountACC = 0; // Total saldo khusus transaksi sah (ACC)
+            let totalCountACC = 0; // Hitungan frekuensi khusus transaksi sah (ACC)
+
             const historyTbody = document.getElementById('historyTableBody');
             historyTbody.innerHTML = '';
 
             if (userTransactions.length === 0) {
                 historyTbody.innerHTML = `
-                <tr>
-                    <td colspan="4" class="px-4 py-8 text-center text-gray-400">
-                        <i class="fas fa-folder-open text-3xl mb-2 block"></i>
-                        <span class="text-sm">Belum ada riwayat transaksi ditemukan.</span>
-                    </td>
-                </tr>
-            `;
+        <tr>
+            <td colspan="4" class="px-4 py-8 text-center text-gray-400">
+                <i class="fas fa-folder-open text-3xl mb-2 block"></i>
+                <span class="text-sm">Belum ada riwayat transaksi ditemukan.</span>
+            </td>
+        </tr>`;
             } else {
-                userTransactions.forEach((tx, index) => {
+                userTransactions.forEach((tx) => {
                     const amount = parseFloat(tx.jumlah || tx.nominal || 0);
-                    totalAmount += amount;
+                    const status = (tx.status || 'approved').toLowerCase();
                     const idTx = tx.id_sp || tx.id_sw || tx.id_ss || tx.id;
 
+                    let statusTag = '';
+                    let urutanBadge = '';
+
+                    // PERBAIKAN LOGIKA STATUS PADA RIWAYAT:
+                    if (['approved', 'disetujui', 'lunas', 'aktif'].includes(status)) {
+                        totalAmountACC += amount;
+                        totalCountACC += 1; // Hanya naikkan urutan jika status ACC!
+
+                        urutanBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Ke-${totalCountACC}</span>`;
+                        statusTag = `<span class="text-[11px] px-2 py-0.5 rounded bg-green-100 text-green-800 font-semibold"><i class="fas fa-check-circle mr-1"></i>Disetujui</span>`;
+                    } else if (['pending', 'menunggu'].includes(status)) {
+                        urutanBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Pengajuan</span>`;
+                        statusTag = `<span class="text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold animate-pulse"><i class="fas fa-clock mr-1"></i>Pending</span>`;
+                    } else { // status 'ditolak' / 'rejected'
+                        urutanBadge = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-800">Batal</span>`;
+                        statusTag = `<span class="text-[11px] px-2 py-0.5 rounded bg-red-100 text-red-800 font-semibold"><i class="fas fa-times-circle mr-1"></i>Ditolak</span>`;
+                    }
+
+                    const alasanDitolak = tx.catatan || tx.alasan ? `<div class="text-[10px] text-red-500 font-normal mt-0.5"><i class="fas fa-info-circle mr-1"></i>${tx.catatan || tx.alasan}</div>` : '';
+
                     historyTbody.innerHTML += `
-                    <tr class="hover:bg-gray-50/80 transition-colors">
-                        <td class="px-5 py-3.5 whitespace-nowrap">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
-                                Ke-${index + 1}
-                            </span>
-                        </td>
-                        <td class="px-5 py-3.5 text-gray-700 font-medium whitespace-nowrap">
-                            <i class="far fa-calendar-alt mr-2 text-gray-400"></i>${tx.tanggal || '-'}
-                        </td>
-                        <td class="px-5 py-3.5 font-bold text-gray-900 text-right whitespace-nowrap">
-                            ${formatRupiah(amount)}
-                        </td>
-                        <td class="px-5 py-3.5 text-center whitespace-nowrap">
-                            <button onclick="deleteSimpananDetail('${jenis}', '${idTx}')" class="text-red-500 hover:text-red-700 hover:bg-red-50 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all" title="Hapus transaksi ini">
-                                <i class="fas fa-trash-alt mr-1"></i>Hapus
-                            </button>
-                        </td>
-                    </tr>
-                `;
+            <tr class="hover:bg-gray-50/80 transition-colors">
+                <td class="px-5 py-3.5 whitespace-nowrap">
+                    ${urutanBadge}
+                </td>
+                <td class="px-5 py-3.5 text-gray-700 font-medium whitespace-nowrap">
+                    <i class="far fa-calendar-alt mr-2 text-gray-400"></i>${tx.tanggal || '-'}
+                </td>
+                <td class="px-5 py-3.5 font-bold text-gray-900 text-right whitespace-nowrap">
+                    <div>${formatRupiah(amount)}</div>
+                    <div class="mt-0.5">${statusTag}</div>
+                    ${alasanDitolak}
+                </td>
+                <td class="px-5 py-3.5 text-center whitespace-nowrap">
+                    <button onclick="deleteSimpananDetail('${jenis}', '${idTx}')" class="text-red-500 hover:text-red-700 hover:bg-red-50 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all" title="Hapus transaksi ini">
+                        <i class="fas fa-trash-alt mr-1"></i>Hapus
+                    </button>
+                </td>
+            </tr>`;
                 });
             }
 
-            document.getElementById('detailTotalNominal').textContent = formatRupiah(totalAmount);
-            document.getElementById('detailTotalFrekuensi').textContent = `${userTransactions.length}x Transaksi`;
+            // Hanya tampilkan akumulasi total nominal & frekuensi transaksi yang SAH (ACC)
+            document.getElementById('detailTotalNominal').textContent = formatRupiah(totalAmountACC);
+            document.getElementById('detailTotalFrekuensi').textContent = `${totalCountACC}x Transaksi Sah`;
 
             const labelEl = document.getElementById('detailLabelKeBerapa');
             const valueEl = document.getElementById('detailStatusKeBerapa');
 
             if (jenis === 'wajib') {
                 const standarWajib = 50000;
-                const keBerapa = Math.floor(totalAmount / standarWajib);
+                const keBerapa = Math.floor(totalAmountACC / standarWajib);
                 labelEl.textContent = "Simpanan Wajib Ke-";
                 valueEl.textContent = `Ke-${keBerapa > 0 ? keBerapa : 1}`;
             } else if (jenis === 'pokok') {
                 labelEl.textContent = "Simpanan Pokok Ke-";
-                valueEl.textContent = `Ke-${userTransactions.length}`;
+                valueEl.textContent = `Ke-${totalCountACC}`;
             } else if (jenis === 'sukarela') {
                 labelEl.textContent = "Status Sukarela";
-                valueEl.textContent = userTransactions.length > 0 ? "Fleksibel / Aktif" : "Belum Ada";
+                valueEl.textContent = totalCountACC > 0 ? "Aktif / Sah" : "Belum Ada";
             }
 
             openModal('historyModal');
@@ -1439,7 +1520,7 @@
         }
 
         function setupFormSubmit() {
-            
+
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1522,7 +1603,6 @@
         //refresh halaman
 
         function updateStatCardsFromData() {
-            // Selalu minta seluruh data simpanan ('all') tanpa filter agar akumulasi semua card akurat
             const filterAnggota = document.getElementById('filterAnggota')?.value || 'all';
             let url = `<?= base_url('admin/getSimpananList') ?>?jenis=all`;
             if (filterAnggota && filterAnggota !== 'all') {
@@ -1541,19 +1621,25 @@
                     data.forEach(row => {
                         const amount = parseFloat(row.jumlah || row.nominal || 0) || 0;
                         const jenis = row.jenis || 'pokok';
+                        const status = (row.status || 'approved').toLowerCase();
 
-                        if (jenis === 'pokok') {
-                            totalPokok += amount;
-                        } else if (jenis === 'wajib') {
-                            totalWajib += amount;
-                        } else if (jenis === 'sukarela') {
-                            totalSukarela += amount;
+                        // PERBAIKAN UTAMA:
+                        // Hanya tambahkan nominal ke Card Stat jika statusnya SUDAH ACC / SAH!
+                        // Abaikan jika status 'pending', 'menunggu', 'ditolak', atau 'rejected'
+                        if (['approved', 'disetujui', 'lunas', 'aktif'].includes(status)) {
+                            if (jenis === 'pokok') {
+                                totalPokok += amount;
+                            } else if (jenis === 'wajib') {
+                                totalWajib += amount;
+                            } else if (jenis === 'sukarela') {
+                                totalSukarela += amount;
+                            }
                         }
                     });
 
                     const totalSemua = totalPokok + totalWajib + totalSukarela;
 
-                    // Update DOM Card secara otomatis tanpa reload page!
+                    // Update DOM Card Stat
                     const elPokok = document.getElementById('statTotalPokok');
                     const elWajib = document.getElementById('statTotalWajib');
                     const elSukarela = document.getElementById('statTotalSukarela');
@@ -1568,62 +1654,62 @@
         }
 
         function submitSimpananForm() {
-    if (isSubmitting) return;
+            if (isSubmitting) return;
 
-    const form = document.getElementById('formSimpanan');
-    const submitBtn = document.getElementById('simpanBtn');
-    const formData = new FormData(form);
+            const form = document.getElementById('formSimpanan');
+            const submitBtn = document.getElementById('simpanBtn');
+            const formData = new FormData(form);
 
-    const jenisVal = document.getElementById('jenisSelect')?.value;
-    const idAnggotaVal = document.getElementById('anggotaSelect')?.value;
-    const jumlahVal = document.getElementById('jumlahInput')?.value;
+            const jenisVal = document.getElementById('jenisSelect')?.value;
+            const idAnggotaVal = document.getElementById('anggotaSelect')?.value;
+            const jumlahVal = document.getElementById('jumlahInput')?.value;
 
-    const tenorSelectVal = document.getElementById('tenorSelect')?.value;
-    const tenorHiddenVal = document.getElementById('tenorHidden')?.value;
-    const activeTenor = tenorSelectVal || tenorHiddenVal;
+            const tenorSelectVal = document.getElementById('tenorSelect')?.value;
+            const tenorHiddenVal = document.getElementById('tenorHidden')?.value;
+            const activeTenor = tenorSelectVal || tenorHiddenVal;
 
-    // Validasi Field
-    if (!idAnggotaVal || !jenisVal || !jumlahVal || parseFloat(jumlahVal) <= 0) {
-        showNotification('error', 'Gagal!', 'Harap lengkapi semua field!');
-        return;
-    }
+            // Validasi Field
+            if (!idAnggotaVal || !jenisVal || !jumlahVal || parseFloat(jumlahVal) <= 0) {
+                showNotification('error', 'Gagal!', 'Harap lengkapi semua field!');
+                return;
+            }
 
-    if (jenisVal === 'pokok') {
-        if (!activeTenor || parseInt(activeTenor) <= 0) {
-            showNotification('error', 'Gagal!', 'Tenor simpanan pokok wajib diisi!');
-            return;
+            if (jenisVal === 'pokok') {
+                if (!activeTenor || parseInt(activeTenor) <= 0) {
+                    showNotification('error', 'Gagal!', 'Tenor simpanan pokok wajib diisi!');
+                    return;
+                }
+                formData.set('tenor', activeTenor);
+            }
+
+            isSubmitting = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
+            submitBtn.disabled = true;
+
+            fetch('<?= base_url('admin/inputSimpanan') ?>', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        showNotification('success', 'Berhasil!', result.message);
+                        closeModal('savingsModal');
+                        loadSimpanan();
+                    } else {
+                        showNotification('error', 'Gagal!', result.message);
+                    }
+                })
+                .catch(err => {
+                    console.error('Fetch error:', err);
+                    showNotification('error', 'Error!', 'Terjadi kesalahan sistem.');
+                })
+                .finally(() => {
+                    isSubmitting = false;
+                    submitBtn.innerHTML = 'Simpan';
+                    submitBtn.disabled = false;
+                });
         }
-        formData.set('tenor', activeTenor);
-    }
-
-    isSubmitting = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
-    submitBtn.disabled = true;
-
-    fetch('<?= base_url('admin/inputSimpanan') ?>', {
-        method: 'POST',
-        body: formData
-    })
-    .then(res => res.json())
-    .then(result => {
-        if (result.success) {
-            showNotification('success', 'Berhasil!', result.message);
-            closeModal('savingsModal');
-            loadSimpanan();
-        } else {
-            showNotification('error', 'Gagal!', result.message);
-        }
-    })
-    .catch(err => {
-        console.error('Fetch error:', err);
-        showNotification('error', 'Error!', 'Terjadi kesalahan sistem.');
-    })
-    .finally(() => {
-        isSubmitting = false;
-        submitBtn.innerHTML = 'Simpan';
-        submitBtn.disabled = false;
-    });
-}
     </script>
 
 </body>
