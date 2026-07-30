@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AngsuranQardModel extends Model
+class AngsuranQardModel_old extends Model
 {
     protected $table = 'angsuran_qard';
     protected $primaryKey = 'id';

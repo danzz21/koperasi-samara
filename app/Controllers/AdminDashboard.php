@@ -8,6 +8,7 @@ use App\Models\QardModel;
 use App\Models\ShuModel;
 use App\Models\MurabahahModel;
 use App\Models\MudharabahModel;
+use App\Models\DetailAngsuranModel;
 
 class AdminDashboard extends BaseController
 {
@@ -3180,8 +3181,8 @@ class AdminDashboard extends BaseController
         }
 
         $db = \Config\Database::connect();
+        $detailAngsuranModel = new DetailAngsuranModel();
 
-        // Tentukan tabel & Primary Key
         $tableMap = [
             'qard'       => ['table' => 'qard', 'pk' => 'id_qard'],
             'murabahah'  => ['table' => 'murabahah', 'pk' => 'id_mr'],
@@ -3201,13 +3202,20 @@ class AdminDashboard extends BaseController
             return redirect()->back()->with('error', 'Data pinjaman tidak ditemukan.');
         }
 
-        // Kalkulasi Terbayar Baru & Sisa Tenor
+        // Hitung hitungan dasar
         $terbayarLama = (float) ($pinjaman->jml_terbayar ?? 0);
         $terbayarBaru = $terbayarLama + $jumlah_bayar;
         $totalPinjam  = (float) $pinjaman->jml_pinjam;
         $totalTenor   = (int) ($pinjaman->jml_angsuran ?? 1);
 
-        // Hitung sisa tenor otomatis
+        // Hitung angsuran ke-berapa via Model Baru
+        $countAngsuran = $detailAngsuranModel
+            ->where('jenis_pembiayaan', $jenis)
+            ->where('id_pembiayaan', $id)
+            ->countAllResults();
+        $angsuranKe = $countAngsuran + 1;
+
+        // Sisa tenor
         $angsuranPerBulan = $totalPinjam / max($totalTenor, 1);
         $tenorTerbayar    = floor($terbayarBaru / max($angsuranPerBulan, 1));
         $sisaTenor        = max(0, $totalTenor - $tenorTerbayar);
@@ -3217,43 +3225,63 @@ class AdminDashboard extends BaseController
             'sisa_tenor'   => $sisaTenor
         ];
 
-        // Cek jika sudah Lunas
         if ($terbayarBaru >= $totalPinjam) {
             $updateData['status']     = 'lunas';
             $updateData['sisa_tenor'] = 0;
         }
 
-        $updated = $db->table($table)->where($pk, $id)->update($updateData);
+        $db->transStart();
 
-        if ($updated) {
-            return redirect()->back()->with('success', "Pembayaran angsuran berhasil disimpan! " . ($terbayarBaru >= $totalPinjam ? "(Pinjaman Lunas)" : ""));
+        // Update tabel master
+        $db->table($table)->where($pk, $id)->update($updateData);
+
+        // Simpan ke detail_angsuran via Model Baru
+        $detailAngsuranModel->insert([
+            'jenis_pembiayaan' => $jenis,
+            'id_pembiayaan'    => $id,
+            'id_anggota'       => $pinjaman->id_anggota,
+            'angsuran_ke'      => $angsuranKe,
+            'jumlah_bayar'     => $jumlah_bayar,
+            'tanggal_bayar'    => date('Y-m-d H:i:s')
+        ]);
+
+        $db->transComplete();
+
+        if ($db->transStatus() === TRUE) {
+            return redirect()->back()->with('success', 'Pembayaran angsuran berhasil disimpan!');
         }
 
         return redirect()->back()->with('error', 'Gagal memproses pembayaran angsuran.');
     }
-
     public function getDetailAngsuran()
     {
-        $qardModel = new QardModel();
-        $murabahahModel = new MurabahahModel();
-        $mudharabahModel = new MudharabahModel();
+        $db = \Config\Database::connect();
+        $detailAngsuranModel = new \App\Models\DetailAngsuranModel();
 
         $jenis = $this->request->getGet('jenis');
-        $id = $this->request->getGet('id');
+        $id    = $this->request->getGet('id');
 
-        switch ($jenis) {
-            case 'qard':
-                $data = $qardModel->find($id);
-                break;
-            case 'murabahah':
-                $data = $murabahahModel->find($id);
-                break;
-            case 'mudharabah':
-                $data = $mudharabahModel->find($id);
-                break;
-            default:
-                return $this->response->setJSON(['error' => 'Jenis pembiayaan tidak valid']);
+        $tableMap = [
+            'qard'       => ['table' => 'qard', 'pk' => 'id_qard', 'prefix' => 'QRD'],
+            'murabahah'  => ['table' => 'murabahah', 'pk' => 'id_mr', 'prefix' => 'MRB'],
+            'mudharabah' => ['table' => 'mudharabah', 'pk' => 'id_md', 'prefix' => 'MDB']
+        ];
+
+        if (!isset($tableMap[$jenis])) {
+            return $this->response->setJSON(['error' => 'Jenis pembiayaan tidak valid']);
         }
+
+        $table  = $tableMap[$jenis]['table'];
+        $pk     = $tableMap[$jenis]['pk'];
+        $prefix = $tableMap[$jenis]['prefix'];
+
+        // Join dengan tabel anggota agar nama_lengkap & nomor_anggota terambil!
+        $data = $db->table($table)
+            ->select("{$table}.*, anggota.nama_lengkap, anggota.nomor_anggota")
+            ->join('anggota', "anggota.id_anggota = {$table}.id_anggota", 'left')
+            ->where("{$table}.{$pk}", $id)
+            ->get()
+            ->getRowArray();
 
         if ($data) {
             $total_pinjaman = (float)($data['jml_pinjam'] ?? 0);
@@ -3261,11 +3289,22 @@ class AdminDashboard extends BaseController
             $sisa           = max(0, $total_pinjaman - $terbayar);
             $total_tenor    = (int)($data['jml_angsuran'] ?? 1);
 
+            // Akali Nomor Pinjaman Otomatis (Format: QRD-202600001 / MRB-202600005)
+            $tanggalAkad     = isset($data['tanggal']) ? date('Y', strtotime($data['tanggal'])) : date('Y');
+            $data['no_pinjam_formatted'] = $prefix . '-' . $tanggalAkad . str_pad($data[$pk], 5, '0', STR_PAD_LEFT);
+
+            // Ambil Riwayat Real dari detail_angsuran
+            $riwayat = $detailAngsuranModel->where('jenis_pembiayaan', $jenis)
+                ->where('id_pembiayaan', $id)
+                ->orderBy('angsuran_ke', 'ASC')
+                ->findAll();
+
             return $this->response->setJSON([
                 'success'         => true,
                 'data'            => $data,
                 'sisa_pembayaran' => $sisa,
-                'jml_angsuran'    => $total_tenor
+                'jml_angsuran'    => $total_tenor,
+                'history'         => $riwayat
             ]);
         }
 
