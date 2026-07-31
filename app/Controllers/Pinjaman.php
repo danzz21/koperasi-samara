@@ -19,11 +19,13 @@ class Pinjaman extends BaseController
         $user = $userModel->find($id_user);
         $anggota = $anggotaModel->find($id_user);
 
-        $nama = $user['nama_lengkap'] ?? '-';
+        // Ambil nama dari anggota_lengkap jika ada, jika tidak pakai user
+        $nama = $anggota['nama_lengkap'] ?? $user['nama_lengkap'] ?? '-';
         $nomor_anggota = $anggota['nomor_anggota'] ?? $user['id'] ?? '-';
 
         $hasNoRekening = !empty($anggota['no_rek']);
-        $hasActiveLoan = $this->hasActiveLoan($id_user);
+        $loanStatus = $this->getLoanStatusDetail($id_user); // Cek status 'pending', 'aktif', atau 'none'
+        $hasActiveLoan = ($loanStatus !== 'none');
         $pendingLoansCount = $this->getPendingLoans($id_user);
 
         // Cek tenor simpanan pokok anggota
@@ -47,178 +49,187 @@ class Pinjaman extends BaseController
         
         $hasPin = !empty($pinData);
 
+        // AMBIL RIWAYAT PINJAMAN (Diurutkan murni dari tanggal terbaru)
+        $riwayatPinjaman = $db->query("
+            SELECT 'Al-Qord' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, LOWER(TRIM(status)) AS status, tanggal, COALESCE(deskripsi, '') AS alasan FROM qard WHERE id_anggota = '$id_user'
+            UNION ALL
+            SELECT 'Murabahah' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, LOWER(TRIM(status)) AS status, tanggal, COALESCE(deskripsi, '') AS alasan FROM murabahah WHERE id_anggota = '$id_user'
+            UNION ALL
+            SELECT 'Mudharabah' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, LOWER(TRIM(status)) AS status, tanggal, COALESCE(deskripsi, '') AS alasan FROM mudharabah WHERE id_anggota = '$id_user'
+            ORDER BY tanggal DESC LIMIT 10
+        ")->getResultArray();
+
         return view('pinjaman', [
-            'nama' => $nama,
-            'nomor_anggota' => $nomor_anggota,
-            'user' => $user,
-            'anggota' => $anggota,
-            'hasActiveLoan' => $hasActiveLoan,
-            'hasNoRekening' => $hasNoRekening,
+            'nama'              => $nama,
+            'nomor_anggota'     => $nomor_anggota,
+            'user'              => $user,
+            'anggota'           => $anggota,
+            'hasActiveLoan'     => $hasActiveLoan,
+            'loanStatus'        => $loanStatus, 
+            'hasNoRekening'     => $hasNoRekening,
             'pendingLoansCount' => $pendingLoansCount,
-            'showTenorModal'=> $showTenorModal,
-            'hasPin' => $hasPin,
+            'showTenorModal'    => $showTenorModal,
+            'hasPin'            => $hasPin,
+            'riwayatPinjaman'   => $riwayatPinjaman
         ]);
     }
 
- public function ajukan()
-{
-    $id_user = session()->get('id');
+    public function ajukan()
+    {
+        $id_user = session()->get('id');
 
-    // Cek apakah anggota sudah mengisi nomor rekening
-    $anggotaModel = new AnggotaModel();
-    $anggota = $anggotaModel->find($id_user);
-    
-    if (empty($anggota) || empty($anggota['no_rek'])) {
-        return redirect()->back()->withInput()->with('error', 'Anda belum mengisi nomor rekening. Harap lengkapi data rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.');
-    }
-
-    // Cek apakah sudah ada pinjaman AKTIF
-    if ($this->hasActiveLoan($id_user)) {
-        return redirect()->back()->with('error', 'Anda sudah memiliki pinjaman yang aktif. Silakan selesaikan pinjaman terlebih dahulu sebelum mengajukan pinjaman baru.');
-    }
-
-    // Validasi input pinjaman
-    $validation = \Config\Services::validation();
-    $validation->setRules([
-        'jenis' => 'required|in_list[qard,murabahah,mudharabah]',
-        'jumlah' => 'required',
-        'lama_cicilan' => 'required|numeric|greater_than[0]|less_than_equal_to[12]',
-        'deskripsi' => 'required|min_length[10]|max_length[500]'
-    ]);
-
-    if (!$validation->withRequest($this->request)->run()) {
-        return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-    }
-
-    $jenis = $this->request->getPost('jenis');
-    $jumlah = preg_replace('/[^0-9]/', '', $this->request->getPost('jumlah'));
-    $lama_cicilan = $this->request->getPost('lama_cicilan');
-    $deskripsi = $this->request->getPost('deskripsi');
-    
-    // Validasi jumlah setelah di-parse
-    if ($jumlah == '' || $jumlah == 0) {
-        return redirect()->back()->withInput()->with('error', 'Nominal pinjaman tidak valid');
-    }
-
-    // Validasi maksimal pinjaman
-    if ($jumlah > 4000000) {
-        return redirect()->back()->withInput()->with('error', 'Nominal pinjaman melebihi batas maksimum Rp 4.000.000');
-    }
-
-    // Validasi minimal pinjaman
-    if ($jumlah < 100000) {
-        return redirect()->back()->withInput()->with('error', 'Nominal pinjaman minimal Rp 100.000');
-    }
-
-    // Simpan data pinjaman ke session untuk diproses setelah verifikasi PIN
-    $session = session();
-    $pinjamanData = [
-        'id_anggota' => $id_user,
-        'jenis' => $jenis,
-        'jumlah' => $jumlah,
-        'lama_cicilan' => $lama_cicilan,
-        'deskripsi' => $deskripsi,
-        'tanggal' => date('Y-m-d'),
-        'status' => 'pending'
-    ];
-    
-    // Debug: tampilkan data yang akan disimpan
-    // var_dump($pinjamanData); die();
-    
-    // Simpan ke session dengan key yang unik
-    $sessionKey = 'pending_pinjaman_' . $id_user . '_' . time();
-    $session->set($sessionKey, $pinjamanData);
-    
-    // Simpan session key untuk referensi
-    $session->set('current_pinjaman_key', $sessionKey);
-
-    // Redirect ke halaman yang sama dengan flag untuk show modal PIN
-    return redirect()->to('pinjaman')
-                    ->with('show_pin_modal', true)
-                    ->with('pinjaman_session_key', $sessionKey);
-}
-
-    // Method baru untuk proses pinjaman setelah PIN diverifikasi
-  public function processAfterPin()
-{
-    $id_user = session()->get('id');
-    
-    // Validasi PIN
-    $pin_input = $this->request->getPost('pin');
-    
-    if (empty($pin_input) || strlen($pin_input) !== 6) {
-        return redirect()->to('pinjaman')->withInput()->with('error', 'PIN harus 6 digit');
-    }
-
-    // Verifikasi PIN
-    if (!$this->verifyPin($id_user, $pin_input)) {
-        return redirect()->to('pinjaman')->withInput()->with('error', 'PIN yang Anda masukkan salah.');
-    }
-
-    // Ambil data dari form POST (dari hidden inputs)
-    $jenis = $this->request->getPost('pinjaman_jenis');
-    $jumlah = preg_replace('/[^0-9]/', '', $this->request->getPost('pinjaman_jumlah'));
-    $lama_cicilan = $this->request->getPost('pinjaman_lama_cicilan');
-    $deskripsi = $this->request->getPost('pinjaman_deskripsi');
-    
-    // Validasi data
-    if (!$jenis || !$jumlah || !$lama_cicilan || !$deskripsi) {
-        return redirect()->to('pinjaman')->with('error', 'Data pinjaman tidak lengkap. Silakan ulangi pengajuan.');
-    }
-
-    // Validasi jumlah
-    if ($jumlah == '' || $jumlah == 0) {
-        return redirect()->to('pinjaman')->withInput()->with('error', 'Nominal pinjaman tidak valid');
-    }
-
-    if ($jumlah > 4000000) {
-        return redirect()->to('pinjaman')->withInput()->with('error', 'Nominal pinjaman melebihi batas maksimum Rp 4.000.000');
-    }
-
-    if ($jumlah < 100000) {
-        return redirect()->to('pinjaman')->withInput()->with('error', 'Nominal pinjaman minimal Rp 100.000');
-    }
-
-    $db = \Config\Database::connect();
-
-    try {
-        if ($jenis == 'qard') {
-            $db->table('qard')->insert([
-                'id_anggota' => $id_user,
-                'jml_pinjam' => $jumlah,
-                'jml_angsuran' => $lama_cicilan,
-                'deskripsi' => $deskripsi,
-                'tanggal' => date('Y-m-d'),
-                'status' => 'pending'
-            ]);
-        } elseif ($jenis == 'murabahah') {
-            $db->table('murabahah')->insert([
-                'id_anggota' => $id_user,
-                'jml_pinjam' => $jumlah,
-                'jml_angsuran' => $lama_cicilan,
-                'deskripsi' => $deskripsi,
-                'tanggal' => date('Y-m-d'),
-                'status' => 'pending'
-            ]);
-        } elseif ($jenis == 'mudharabah') {
-            $db->table('mudharabah')->insert([
-                'id_anggota' => $id_user,
-                'jml_pinjam' => $jumlah,
-                'jml_angsuran' => $lama_cicilan,
-                'deskripsi' => $deskripsi,
-                'tanggal' => date('Y-m-d'),
-                'status' => 'pending'
-            ]);
+        $anggotaModel = new AnggotaModel();
+        $anggota = $anggotaModel->find($id_user);
+        
+        if (empty($anggota) || empty($anggota['no_rek'])) {
+            return redirect()->back()->withInput()->with('error', 'Anda belum mengisi nomor rekening. Harap lengkapi data rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.');
         }
 
-        return redirect()->to('pinjaman')->with('pinjaman_success', true);
+        if ($this->hasActiveLoan($id_user)) {
+            return redirect()->back()->with('error', 'Anda masih memiliki pengajuan pending atau pinjaman aktif yang sedang berjalan.');
+        }
 
-    } catch (\Exception $e) {
-        return redirect()->to('pinjaman')->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'jenis' => 'required|in_list[qard,murabahah,mudharabah]',
+            'jumlah' => 'required',
+            'lama_cicilan' => 'required|numeric|greater_than[0]|less_than_equal_to[12]',
+            'deskripsi' => 'required|min_length[10]|max_length[500]'
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
+        $jenis = $this->request->getPost('jenis');
+        $jumlah = preg_replace('/[^0-9]/', '', $this->request->getPost('jumlah'));
+        $lama_cicilan = $this->request->getPost('lama_cicilan');
+        $deskripsi = $this->request->getPost('deskripsi');
+        
+        if ($jumlah == '' || $jumlah == 0) {
+            return redirect()->back()->withInput()->with('error', 'Nominal pinjaman tidak valid');
+        }
+
+        $maxLimit = 4000000;
+        if ($jenis === 'murabahah') {
+            $maxLimit = 10000000;
+        } elseif ($jenis === 'mudharabah') {
+            $maxLimit = 20000000;
+        }
+
+        if ($jumlah > $maxLimit) {
+            return redirect()->back()->withInput()->with('error', 'Nominal pinjaman ' . strtoupper($jenis) . ' melebihi batas maksimum Rp ' . number_format($maxLimit, 0, ',', '.'));
+        }
+
+        if ($jumlah < 100000) {
+            return redirect()->back()->withInput()->with('error', 'Nominal pinjaman minimal Rp 100.000');
+        }
+
+        $session = session();
+        $pinjamanData = [
+            'id_anggota' => $id_user,
+            'jenis' => $jenis,
+            'jumlah' => $jumlah,
+            'lama_cicilan' => $lama_cicilan,
+            'deskripsi' => $deskripsi,
+            'tanggal' => date('Y-m-d'),
+            'status' => 'pending'
+        ];
+        
+        $sessionKey = 'pending_pinjaman_' . $id_user . '_' . time();
+        $session->set($sessionKey, $pinjamanData);
+        $session->set('current_pinjaman_key', $sessionKey);
+
+        return redirect()->to('pinjaman')
+                        ->with('show_pin_modal', true)
+                        ->with('pinjaman_session_key', $sessionKey);
     }
-}
 
-    // Method untuk membuat PIN baru
+    public function processAfterPin()
+    {
+        $id_user = session()->get('id');
+        
+        if ($this->hasActiveLoan($id_user)) {
+            return redirect()->to('pinjaman')->with('error', 'Anda masih memiliki pengajuan pending atau pinjaman aktif.');
+        }
+
+        $pin_input = $this->request->getPost('pin');
+        
+        if (empty($pin_input) || strlen($pin_input) !== 6) {
+            return redirect()->to('pinjaman')->withInput()->with('error', 'PIN harus 6 digit');
+        }
+
+        if (!$this->verifyPin($id_user, $pin_input)) {
+            return redirect()->to('pinjaman')->withInput()->with('error', 'PIN yang Anda masukkan salah.');
+        }
+
+        $jenis = $this->request->getPost('pinjaman_jenis');
+        $jumlah = preg_replace('/[^0-9]/', '', $this->request->getPost('pinjaman_jumlah'));
+        $lama_cicilan = $this->request->getPost('pinjaman_lama_cicilan');
+        $deskripsi = $this->request->getPost('pinjaman_deskripsi');
+        
+        if (!$jenis || !$jumlah || !$lama_cicilan || !$deskripsi) {
+            return redirect()->to('pinjaman')->with('error', 'Data pinjaman tidak lengkap. Silakan ulangi pengajuan.');
+        }
+
+        if ($jumlah == '' || $jumlah == 0) {
+            return redirect()->to('pinjaman')->withInput()->with('error', 'Nominal pinjaman tidak valid');
+        }
+
+        $maxLimit = 4000000;
+        if ($jenis === 'murabahah') {
+            $maxLimit = 10000000;
+        } elseif ($jenis === 'mudharabah') {
+            $maxLimit = 20000000;
+        }
+
+        if ($jumlah > $maxLimit) {
+            return redirect()->to('pinjaman')->withInput()->with('error', 'Nominal pinjaman ' . strtoupper($jenis) . ' melebihi batas maksimum Rp ' . number_format($maxLimit, 0, ',', '.'));
+        }
+
+        if ($jumlah < 100000) {
+            return redirect()->to('pinjaman')->withInput()->with('error', 'Nominal pinjaman minimal Rp 100.000');
+        }
+
+        $db = \Config\Database::connect();
+
+        try {
+            if ($jenis == 'qard') {
+                $db->table('qard')->insert([
+                    'id_anggota' => $id_user,
+                    'jml_pinjam' => $jumlah,
+                    'jml_angsuran' => $lama_cicilan,
+                    'deskripsi' => $deskripsi,
+                    'tanggal' => date('Y-m-d'),
+                    'status' => 'pending'
+                ]);
+            } elseif ($jenis == 'murabahah') {
+                $db->table('murabahah')->insert([
+                    'id_anggota' => $id_user,
+                    'jml_pinjam' => $jumlah,
+                    'jml_angsuran' => $lama_cicilan,
+                    'deskripsi' => $deskripsi,
+                    'tanggal' => date('Y-m-d'),
+                    'status' => 'pending'
+                ]);
+            } elseif ($jenis == 'mudharabah') {
+                $db->table('mudharabah')->insert([
+                    'id_anggota' => $id_user,
+                    'jml_pinjam' => $jumlah,
+                    'jml_angsuran' => $lama_cicilan,
+                    'deskripsi' => $deskripsi,
+                    'tanggal' => date('Y-m-d'),
+                    'status' => 'pending'
+                ]);
+            }
+
+            return redirect()->to('pinjaman')->with('pinjaman_success', true);
+
+        } catch (\Exception $e) {
+            return redirect()->to('pinjaman')->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
     public function createPin()
     {
         $id_user = session()->get('id');
@@ -237,21 +248,17 @@ class Pinjaman extends BaseController
         }
         
         $new_pin = $this->request->getPost('new_pin');
-        
         $db = \Config\Database::connect();
         
         try {
-            // Hash PIN sebelum disimpan
             $pin_hash = password_hash($new_pin, PASSWORD_DEFAULT);
             
-            // Cek apakah sudah ada PIN
             $existing = $db->table('user_pin')
                 ->where('user_id', $id_user)
                 ->get()
                 ->getRowArray();
             
             if ($existing) {
-                // Update PIN
                 $db->table('user_pin')
                     ->where('user_id', $id_user)
                     ->update([
@@ -259,7 +266,6 @@ class Pinjaman extends BaseController
                         'updated_at' => date('Y-m-d H:i:s')
                     ]);
             } else {
-                // Insert PIN baru
                 $db->table('user_pin')->insert([
                     'user_id' => $id_user,
                     'pin_hash' => $pin_hash,
@@ -280,7 +286,6 @@ class Pinjaman extends BaseController
         }
     }
 
-    // Method untuk validasi PIN via AJAX
     public function verifyPinAjax()
     {
         $id_user = session()->get('id');
@@ -322,26 +327,23 @@ class Pinjaman extends BaseController
     {
         $id_user = session()->get('id');
         
-        // Cek apakah sudah buat PIN
         $hasPin = $this->hasPinCreated($id_user);
         
-        // Cek nomor rekening dari table anggota
         $anggotaModel = new AnggotaModel();
         $anggota = $anggotaModel->find($id_user);
         $hasNoRekening = !empty($anggota['no_rek']);
         
-        // Cek pinjaman aktif (hanya status 'aktif')
         $hasActiveLoan = $this->hasActiveLoan($id_user);
         
         $canSubmit = $hasNoRekening && !$hasActiveLoan;
         
         $messages = [];
         if (!$hasNoRekening) $messages[] = 'Nomor rekening belum diisi';
-        if ($hasActiveLoan) $messages[] = 'Ada pinjaman aktif';
+        if ($hasActiveLoan) $messages[] = 'Anda masih memiliki pengajuan pending atau pinjaman aktif';
         
         return $this->response->setJSON([
             'success' => true,
-            'hasPin' => $hasPin, // Info apakah sudah punya PIN
+            'hasPin' => $hasPin,
             'hasNoRekening' => $hasNoRekening,
             'hasActiveLoan' => $hasActiveLoan,
             'canSubmit' => $canSubmit,
@@ -349,70 +351,62 @@ class Pinjaman extends BaseController
         ]);
     }
 
-    /**
-     * Cek apakah ada pinjaman aktif
-     */
     private function hasActiveLoan($id_anggota)
     {
         $db = \Config\Database::connect();
         
         $qard = $db->table('qard')
             ->where('id_anggota', $id_anggota)
-            ->where('status', 'aktif')
+            ->whereIn('status', ['aktif', 'pending', 'menunggu'])
             ->countAllResults();
         
         $murabahah = $db->table('murabahah')
             ->where('id_anggota', $id_anggota)
-            ->where('status', 'aktif')
+            ->whereIn('status', ['aktif', 'pending', 'menunggu'])
             ->countAllResults();
         
         $mudharabah = $db->table('mudharabah')
             ->where('id_anggota', $id_anggota)
-            ->where('status', 'aktif')
+            ->whereIn('status', ['aktif', 'pending', 'menunggu'])
             ->countAllResults();
 
         return ($qard > 0 || $murabahah > 0 || $mudharabah > 0);
     }
 
-    /**
-     * Cek total pinjaman pending
-     */
     private function getPendingLoans($id_anggota)
     {
         $db = \Config\Database::connect();
         
         $qard = $db->table('qard')
             ->where('id_anggota', $id_anggota)
-            ->where('status', 'pending')
+            ->whereIn('status', ['pending', 'menunggu'])
             ->countAllResults();
         
         $murabahah = $db->table('murabahah')
             ->where('id_anggota', $id_anggota)
-            ->where('status', 'pending')
+            ->whereIn('status', ['pending', 'menunggu'])
             ->countAllResults();
         
         $mudharabah = $db->table('mudharabah')
             ->where('id_anggota', $id_anggota)
-            ->where('status', 'pending')
+            ->whereIn('status', ['pending', 'menunggu'])
             ->countAllResults();
 
         return ($qard + $murabahah + $mudharabah);
     }
 
-    // Method untuk mendapatkan data pinjaman aktif
     public function getActiveLoan()
     {
         $id_user = session()->get('id');
         $db = \Config\Database::connect();
         
         $activeLoans = [];
-        
         $tables = ['qard', 'murabahah', 'mudharabah'];
         
         foreach ($tables as $table) {
             $loan = $db->table($table)
                 ->where('id_anggota', $id_user)
-                ->where('status', 'aktif')
+                ->whereIn('status', ['aktif', 'pending', 'menunggu'])
                 ->get()
                 ->getRowArray();
                 
@@ -428,9 +422,6 @@ class Pinjaman extends BaseController
         ]);
     }
 
-    /**
-     * Cek apakah user sudah membuat PIN
-     */
     private function hasPinCreated($user_id)
     {
         $db = \Config\Database::connect();
@@ -443,9 +434,6 @@ class Pinjaman extends BaseController
         return !empty($pinData);
     }
 
-    /**
-     * Verifikasi PIN
-     */
     private function verifyPin($user_id, $pin_input)
     {
         $db = \Config\Database::connect();
@@ -459,12 +447,28 @@ class Pinjaman extends BaseController
             return false;
         }
         
-        // Verifikasi PIN yang di-hash
         if (isset($pinData['pin_hash']) && password_verify($pin_input, $pinData['pin_hash'])) {
             return true;
         }
         
         return false;
     }
-    
+
+    private function getLoanStatusDetail($id_anggota)
+    {
+        $db = \Config\Database::connect();
+        $tables = ['qard', 'murabahah', 'mudharabah'];
+
+        foreach ($tables as $t) {
+            $count = $db->table($t)->where('id_anggota', $id_anggota)->whereIn('status', ['pending', 'menunggu'])->countAllResults();
+            if ($count > 0) return 'pending';
+        }
+
+        foreach ($tables as $t) {
+            $count = $db->table($t)->where('id_anggota', $id_anggota)->where('status', 'aktif')->countAllResults();
+            if ($count > 0) return 'aktif';
+        }
+
+        return 'none';
+    }
 }

@@ -1,0 +1,740 @@
+DEBUG - 2026-07-31 02:23:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:23:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:31:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:31:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:31:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:31:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:31:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:32:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:32:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:32:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:32:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:36:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:36:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:37:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:37:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:37:12 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-07-31 02:37:12 --> ID Anggota: 46
+DEBUG - 2026-07-31 02:37:12 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2026-07-31 02:37:12 --> 🔍 DETAIL QARD:
+DEBUG - 2026-07-31 02:37:12 -->   - ID: 41
+DEBUG - 2026-07-31 02:37:12 -->   - Jumlah Pinjam: 2000000.00
+DEBUG - 2026-07-31 02:37:12 -->   - Jumlah Terbayar: 200000.00
+DEBUG - 2026-07-31 02:37:12 -->   - Jumlah Angsuran: 10
+DEBUG - 2026-07-31 02:37:12 -->   - Status: aktif
+DEBUG - 2026-07-31 02:37:12 -->   - Tanggal: 2026-07-30
+DEBUG - 2026-07-31 02:37:12 --> hitungAngsuranBerjalanFix: Terbayar=200000, Pinjam=2000000, Tenor=10
+DEBUG - 2026-07-31 02:37:12 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=200000, Hasil=1
+DEBUG - 2026-07-31 02:37:12 -->   - Angsuran Berjalan: 1
+DEBUG - 2026-07-31 02:37:12 -->   - Angsuran per Bulan: 200000
+DEBUG - 2026-07-31 02:37:12 -->   - Bisa Bayar: YA ✅
+DEBUG - 2026-07-31 02:37:12 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-07-31 02:37:12 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-07-31 02:37:12 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2026-07-31 02:37:12 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 02:37:12 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 02:37:12 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 02:37:12 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 02:37:12 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 02:37:12 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-07-31 02:37:12 --> Total pinjaman aktif: 1
+DEBUG - 2026-07-31 02:37:12 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2026-07-31 02:37:12 --> Jatuh tempo: 2026-09-30, Today: 2026-07-31
+DEBUG - 2026-07-31 02:37:12 --> Jatuh tempo terdekat diupdate: 2026-09-30
+DEBUG - 2026-07-31 02:37:12 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 200000
+    [jatuh_tempo_terdekat] => 2026-09-30
+    [total_qard] => 2000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-07-31 02:37:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:37:24 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 02:37:24 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 02:37:24 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 02:37:24 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 02:37:24 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 02:38:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:38:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:38:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:38:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:38:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:39:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:39:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:40:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:40:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 02:40:34 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-07-31 02:40:34 --> ID Anggota: 46
+DEBUG - 2026-07-31 02:40:34 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2026-07-31 02:40:34 --> 🔍 DETAIL QARD:
+DEBUG - 2026-07-31 02:40:34 -->   - ID: 41
+DEBUG - 2026-07-31 02:40:34 -->   - Jumlah Pinjam: 2000000.00
+DEBUG - 2026-07-31 02:40:34 -->   - Jumlah Terbayar: 200000.00
+DEBUG - 2026-07-31 02:40:34 -->   - Jumlah Angsuran: 10
+DEBUG - 2026-07-31 02:40:34 -->   - Status: aktif
+DEBUG - 2026-07-31 02:40:34 -->   - Tanggal: 2026-07-30
+DEBUG - 2026-07-31 02:40:34 --> hitungAngsuranBerjalanFix: Terbayar=200000, Pinjam=2000000, Tenor=10
+DEBUG - 2026-07-31 02:40:34 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=200000, Hasil=1
+DEBUG - 2026-07-31 02:40:34 -->   - Angsuran Berjalan: 1
+DEBUG - 2026-07-31 02:40:34 -->   - Angsuran per Bulan: 200000
+DEBUG - 2026-07-31 02:40:34 -->   - Bisa Bayar: YA ✅
+DEBUG - 2026-07-31 02:40:34 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-07-31 02:40:34 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-07-31 02:40:34 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2026-07-31 02:40:34 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 02:40:34 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 02:40:34 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 02:40:34 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 02:40:34 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 02:40:34 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-07-31 02:40:34 --> Total pinjaman aktif: 1
+DEBUG - 2026-07-31 02:40:34 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2026-07-31 02:40:34 --> Jatuh tempo: 2026-09-30, Today: 2026-07-31
+DEBUG - 2026-07-31 02:40:34 --> Jatuh tempo terdekat diupdate: 2026-09-30
+DEBUG - 2026-07-31 02:40:34 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 200000
+    [jatuh_tempo_terdekat] => 2026-09-30
+    [total_qard] => 2000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-07-31 02:42:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:41:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:41:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:42:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:42:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:42:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:44:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:45:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:46:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:48:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:51:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:51:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:51:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:51:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:51:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:52:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:53:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:54:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:54:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:54:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:54:11 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-07-31 21:54:11 --> ID Anggota: 46
+DEBUG - 2026-07-31 21:54:11 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2026-07-31 21:54:11 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-07-31 21:54:11 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-07-31 21:54:11 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2026-07-31 21:54:11 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 21:54:11 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 21:54:11 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 21:54:11 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 21:54:11 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 21:54:11 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-07-31 21:54:11 --> Total pinjaman aktif: 0
+DEBUG - 2026-07-31 21:54:11 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-07-31 21:54:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:54:20 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 21:54:20 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 21:54:20 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 21:54:20 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 21:54:20 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 21:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:55:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:55:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:55:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:55:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:56:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:56:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:56:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:56:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:58:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:58:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:58:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 21:58:37 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-07-31 21:58:37 --> ID Anggota: 46
+DEBUG - 2026-07-31 21:58:37 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2026-07-31 21:58:37 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-07-31 21:58:37 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-07-31 21:58:37 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2026-07-31 21:58:37 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 21:58:37 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 21:58:37 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 21:58:37 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 21:58:37 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 21:58:37 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-07-31 21:58:37 --> Total pinjaman aktif: 0
+DEBUG - 2026-07-31 21:58:37 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-07-31 22:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:00:21 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-07-31 22:00:21 --> Data Qard lunas: 0
+DEBUG - 2026-07-31 22:00:21 --> Data Murabahah lunas: 1
+DEBUG - 2026-07-31 22:00:21 --> Data Mudharabah lunas: 0
+DEBUG - 2026-07-31 22:00:21 --> Total semua pinjaman lunas: 1
+DEBUG - 2026-07-31 22:01:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:01:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:02:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:02:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:02:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:03:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:05:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:06:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:06:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:06:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:06:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:06:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:07:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:07:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:07:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:07:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:07:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:28:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-07-31 22:28:52 --> mysqli_sql_exception: Unknown column 'catatan' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('\r\n            S...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('\r\n            S...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('\r\n            S...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('\r\n            S...')
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#11 {main}
+CRITICAL - 2026-07-31 22:28:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+[Method: GET, Route: anggota/pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:28:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:28:52 --> [Caused by] mysqli_sql_exception: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-07-31 22:28:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-07-31 22:28:55 --> mysqli_sql_exception: Unknown column 'catatan' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('\r\n            S...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('\r\n            S...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('\r\n            S...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('\r\n            S...')
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#11 {main}
+CRITICAL - 2026-07-31 22:28:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+[Method: GET, Route: anggota/pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:28:55 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:28:55 --> [Caused by] mysqli_sql_exception: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-07-31 22:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-07-31 22:29:08 --> mysqli_sql_exception: Unknown column 'catatan' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('\r\n            S...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('\r\n            S...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('\r\n            S...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('\r\n            S...')
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#11 {main}
+CRITICAL - 2026-07-31 22:29:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+[Method: GET, Route: anggota/pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:29:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:29:08 --> [Caused by] mysqli_sql_exception: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-07-31 22:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-07-31 22:29:08 --> mysqli_sql_exception: Unknown column 'catatan' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('\r\n            S...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('\r\n            S...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('\r\n            S...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('\r\n            S...')
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#11 {main}
+CRITICAL - 2026-07-31 22:29:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+[Method: GET, Route: anggota/pinjaman]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:29:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-07-31 22:29:08 --> [Caused by] mysqli_sql_exception: Unknown column 'catatan' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 4 APPPATH\Controllers\Pinjaman.php(52): CodeIgniter\Database\BaseConnection->query('
+            SELECT \'Al-Qord\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM qard WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Murabahah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM murabahah WHERE id_anggota = \'46\'
+            UNION ALL
+            SELECT \'Mudharabah\' AS akad, jml_pinjam AS nominal, jml_angsuran AS tenor, status, tanggal, COALESCE(catatan, \'\') AS alasan FROM mudharabah WHERE id_anggota = \'46\'
+            ORDER BY tanggal DESC, status ASC LIMIT 10
+        ')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pinjaman->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pinjaman))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-07-31 22:32:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:33:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:33:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:33:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:33:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:33:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:33:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:34:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:34:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:34:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:34:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:34:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:34:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:39:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:40:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:40:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:40:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:43:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:44:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:45:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:47:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:48:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-07-31 22:49:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

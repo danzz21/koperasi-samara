@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <title>Pinjaman</title>
@@ -10,7 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     :root {
       --primary: #10b981;
@@ -22,43 +23,42 @@
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
-      --dark: #1e293b;
+      --dark: #0f172a;
       --light: #f8fafc;
       --gray: #64748b;
-      --gray-light: #cbd5e1;
+      --gray-light: #e2e8f0;
       --border-radius: 20px;
       --border-radius-sm: 12px;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
       --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     }
 
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
-  
+
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(135deg, #f0fdf9 0%, #f0fdf4 100%);
+      background: #f8fafc;
       color: var(--dark);
       min-height: 100vh;
-      padding-bottom: 80px;
+      padding-bottom: 90px;
       line-height: 1.6;
     }
 
-    /* ==================== HEADER YANG DIUBAH ==================== */
+    /* HEADER UTAMA KOPERASI */
     .header-pinjam {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 1.5rem 1rem;
+      padding: 1.1rem 1.25rem;
       background: var(--gradient-primary);
       color: white;
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -68,16 +68,26 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .header-left img {
-      width: 50px;
-      height: 50px;
+    .header-left img,
+    .profile-avatar {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .profile-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
     }
 
     .profile-info {
@@ -85,35 +95,20 @@
       flex-direction: column;
     }
 
-    .profile-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
     .header-name {
       font-weight: 700;
-      font-size: 18px;
-      letter-spacing: -0.3px;
+      font-size: 15px;
+      line-height: 1.2;
     }
 
     .header-id {
-      font-size: 13px;
+      font-size: 11px;
       opacity: 0.9;
-      margin-top: 2px;
     }
 
     .header-actions {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       align-items: center;
     }
 
@@ -123,14 +118,14 @@
 
     .notification-badge {
       position: absolute;
-      top: -5px;
-      right: -5px;
+      top: -4px;
+      right: -4px;
       background: var(--danger);
       color: white;
       border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 11px;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -138,8 +133,8 @@
     }
 
     .icon {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       color: white;
       cursor: pointer;
       transition: var(--transition);
@@ -148,149 +143,146 @@
     .icon:hover {
       transform: scale(1.1);
     }
-    /* ==================== AKHIR HEADER ==================== */
 
-    /* SEMUA STYLE LAIN TETAP SAMA */
-    .page-title {
-      font-size: 24px;
-      font-weight: 800;
+    .page-title-container {
+      padding: 1.25rem 1rem 0.5rem;
       text-align: center;
-      margin: 1.5rem 0;
-      color: var(--dark);
     }
 
-    /* Alert Styles */
-    .alert {
-      padding: 1rem 1.5rem;
-      margin: 1rem 1.5rem;
-      border-radius: var(--border-radius);
-      display: flex;
+    .page-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      display: inline-flex;
       align-items: center;
+      gap: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .alert {
+      padding: 0.9rem 1.2rem;
+      margin: 0.75rem 1rem;
+      border-radius: 16px;
+      display: flex;
+      align-items: flex-start;
       gap: 12px;
       animation: slideDown 0.3s ease-out;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     }
 
     .alert-warning {
-      background: linear-gradient(135deg, #fef3c7 0%, #fef7cd 100%);
-      color: #92400e;
+      background: #fffbeb;
+      color: #b45309;
       border-left: 4px solid var(--warning);
     }
 
     .alert-success {
-      background: linear-gradient(135deg, #d1fae5 0%, #dcfce7 100%);
-      color: #065f46;
+      background: #ecfdf5;
+      color: #047857;
       border-left: 4px solid var(--success);
     }
 
     .alert-danger {
-      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-      color: #991b1b;
+      background: #fef2f2;
+      color: #b91c1c;
       border-left: 4px solid var(--danger);
     }
 
     .alert-info {
-      background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
-      color: #1e40af;
+      background: #f0f9ff;
+      color: #0369a1;
       border-left: 4px solid var(--accent);
     }
 
     .alert-icon {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
+      margin-top: 2px;
     }
 
     @keyframes slideDown {
       from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-8px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    /* Success Message Styles */
     .success-message {
-      background: linear-gradient(135deg, #d1fae5 0%, #bbf7d0 100%);
-      border: 1px solid var(--success);
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
       border-radius: var(--border-radius);
-      padding: 1.5rem;
-      margin: 1rem 1.5rem;
+      padding: 1.25rem 1rem;
+      margin: 1rem;
       text-align: center;
       box-shadow: var(--shadow);
       animation: slideDown 0.5s ease-out;
     }
 
     .success-icon {
-      font-size: 3rem;
-      color: var(--success);
-      margin-bottom: 1rem;
-    }
-
-    .success-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--dark);
+      font-size: 2.5rem;
+      color: var(--primary-dark);
       margin-bottom: 0.5rem;
     }
 
-    .success-desc {
-      color: var(--gray);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+    .success-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #064e3b;
+      margin-bottom: 0.25rem;
     }
 
-    /* Tabs */
+    .success-desc {
+      color: #047857;
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
     .tab-akad {
       display: flex;
-      background: white;
-      margin: 0 1.5rem 1.5rem;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      background: #e2e8f0;
+      padding: 4px;
+      margin: 0.5rem 1rem 1.25rem;
+      border-radius: 16px;
+      gap: 4px;
     }
 
     .tab-akad button {
       flex: 1;
-      padding: 1rem;
+      padding: 0.75rem 0.5rem;
       border: none;
       background: transparent;
       color: var(--gray);
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 700;
+      font-size: 13px;
       cursor: pointer;
       transition: var(--transition);
-      position: relative;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .tab-akad button.active {
-      color: var(--primary);
-      background: rgba(16, 185, 129, 0.1);
-    }
-
-    .tab-akad button.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 2px;
-    }
-
-    .tab-akad button:hover:not(.active) {
-      background: rgba(16, 185, 129, 0.05);
       color: var(--primary-dark);
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
-    /* Content */
     .tab-content {
       display: none;
-      padding: 0 1.5rem;
+      padding: 0 1rem;
     }
 
     .tab-content.active {
@@ -300,16 +292,16 @@
     .card {
       background: white;
       border-radius: var(--border-radius);
-      padding: 1.5rem;
+      padding: 1.25rem;
       margin-bottom: 1rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid #f1f5f9;
       transition: var(--transition);
       position: relative;
     }
 
     .card.disabled {
-      opacity: 0.7;
+      opacity: 0.75;
       pointer-events: none;
     }
 
@@ -320,232 +312,253 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(2px);
       border-radius: var(--border-radius);
-      z-index: 1;
+      z-index: 10;
     }
 
-    .card:hover {
-      box-shadow: var(--shadow-lg);
+    .akad-info-box {
+      background: #f0fdf4;
+      border: 1px dashed #bbf7d0;
+      border-radius: var(--border-radius-sm);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .akad-info-box i {
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .akad-info-text {
+      font-size: 12px;
+      color: #166534;
+      line-height: 1.4;
     }
 
     .card-title {
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
       color: var(--dark);
-      margin-bottom: 1.5rem;
-      text-align: center;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* Form Styles */
     .form-input {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.1rem;
     }
 
     .form-input label {
       display: block;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--dark);
-      margin-bottom: 0.5rem;
-      font-size: 14px;
+      margin-bottom: 0.4rem;
+      font-size: 13px;
     }
 
     .input-rupiah {
       display: flex;
       align-items: center;
-      border: 1px solid var(--gray-light);
+      border: 1.5px solid var(--gray-light);
       border-radius: var(--border-radius-sm);
       overflow: hidden;
       transition: var(--transition);
+      background: white;
     }
 
     .input-rupiah:focus-within {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
     }
 
     .input-rupiah span {
-      padding: 0.8rem 1rem;
-      background: var(--light);
+      padding: 0.75rem 0.9rem;
+      background: #f8fafc;
       color: var(--gray);
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 14px;
       border-right: 1px solid var(--gray-light);
     }
 
     .input-rupiah input {
       flex: 1;
-      padding: 0.8rem;
+      padding: 0.75rem 0.9rem;
       border: none;
       outline: none;
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       color: var(--dark);
     }
 
-    .input-rupiah input:disabled,
-    .form-input select:disabled,
-    .form-input textarea:disabled {
-      background-color: #f8fafc;
-      color: #94a3b8;
-      cursor: not-allowed;
-    }
-
-    .form-input select {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid var(--gray-light);
-      border-radius: var(--border-radius-sm);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--dark);
-      background: white;
-      transition: var(--transition);
-      cursor: pointer;
-    }
-
-    .form-input select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-    }
-
-    /* Textarea Styles */
+    .form-input select,
     .form-input textarea {
       width: 100%;
-      padding: 0.8rem;
-      border: 1px solid var(--gray-light);
+      padding: 0.75rem 0.9rem;
+      border: 1.5px solid var(--gray-light);
       border-radius: var(--border-radius-sm);
       font-size: 14px;
+      font-weight: 600;
       color: var(--dark);
       background: white;
       transition: var(--transition);
-      resize: vertical;
-      min-height: 80px;
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      line-height: 1.5;
     }
 
+    .form-input select:focus,
     .form-input textarea:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-    }
-
-    .form-input textarea::placeholder {
-      color: var(--gray-light);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
     }
 
     .character-count {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--gray);
       text-align: right;
       margin-top: 4px;
-    }
-
-    .character-count.warning {
-      color: var(--warning);
-    }
-
-    .character-count.danger {
-      color: var(--danger);
-    }
-
-    .kv {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid var(--gray-light);
-    }
-
-    .kv:last-child {
-      border-bottom: none;
-    }
-
-    .kv span:first-child {
-      color: var(--gray);
-      font-size: 14px;
-    }
-
-    .kv span:last-child {
-      color: var(--dark);
-      font-weight: 700;
-      font-size: 15px;
+      font-weight: 600;
     }
 
     .note {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--gray);
-      margin: 1rem 0;
-      text-align: center;
+      margin-top: 4px;
       font-style: italic;
     }
 
-    /* Checkboxes */
-    .form-checkboxes {
-      margin: 1.5rem 0;
-      padding: 1rem;
-      background: rgba(16, 185, 129, 0.05);
-      border-radius: var(--border-radius-sm);
-      border-left: 4px solid var(--primary);
+    .calc-summary-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 16px;
+      padding: 1rem 1.15rem;
+      color: white;
+      margin: 1.25rem 0;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+    }
+
+    .calc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .calc-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .calc-badge {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 700;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    .calc-row.total-row {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      color: white;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .calc-value-highlight {
+      color: #34d399;
+      font-weight: 800;
+    }
+
+    .terms-box {
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 0.9rem;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 1.25rem;
+    }
+
+    .terms-box-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .form-checkboxes label {
       display: flex;
       align-items: flex-start;
-      gap: 0.8rem;
-      margin-bottom: 0.8rem;
-      font-size: 14px;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 12px;
       color: var(--dark);
       cursor: pointer;
+      font-weight: 500;
+      line-height: 1.4;
     }
 
     .form-checkboxes input[type="checkbox"] {
-      margin-top: 0.2rem;
+      margin-top: 2px;
       accent-color: var(--primary);
+      width: 15px;
+      height: 15px;
     }
 
-    .form-checkboxes input[type="checkbox"]:disabled {
-      accent-color: var(--gray);
-      cursor: not-allowed;
-    }
-
-    /* Button Ajukan */
     .btn-ajukan {
       width: 100%;
-      padding: 1rem;
+      padding: 0.9rem;
       background: var(--gradient-primary);
       color: white;
       border: none;
-      border-radius: var(--border-radius);
-      font-weight: 700;
-      font-size: 16px;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 15px;
       cursor: pointer;
       transition: var(--transition);
-      box-shadow: var(--shadow);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       position: relative;
-      z-index: 2;
+      z-index: 20;
     }
 
     .btn-ajukan:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .btn-ajukan:active:not(:disabled) {
-      transform: translateY(0);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
     }
 
     .btn-ajukan:disabled {
-      background: var(--gray-light);
-      color: var(--gray);
+      background: #cbd5e1;
+      color: #64748b;
       cursor: not-allowed;
-      transform: none;
       box-shadow: none;
     }
 
-    /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -554,10 +567,10 @@
       background: white;
       display: flex;
       justify-content: space-around;
-      padding: 15px 0;
-      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+      padding: 8px 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
       z-index: 100;
-      border-radius: 25px 25px 0 0;
+      border-radius: 18px 18px 0 0;
     }
 
     .bottom-nav a {
@@ -566,21 +579,8 @@
       align-items: center;
       text-decoration: none;
       color: var(--gray);
-      transition: var(--transition);
-      padding: 8px 12px;
-      border-radius: 16px;
-      flex: 1;
-      text-align: center;
-    }
-
-    .bottom-nav a i {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-
-    .bottom-nav a p {
-      font-size: 12px;
-      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 10px;
     }
 
     .bottom-nav a.active {
@@ -588,11 +588,17 @@
       background: rgba(16, 185, 129, 0.1);
     }
 
-    /* Error Message */
+    .bottom-nav a p {
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
     .error-message {
       color: var(--danger);
-      font-size: 12px;
-      margin-top: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 4px;
       display: none;
     }
 
@@ -601,91 +607,78 @@
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
     }
 
-    /* Loading State */
-    .loading {
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    /* Custom Modal Styles */
     .modal-content {
-      border-radius: var(--border-radius);
+      border-radius: 20px;
       border: none;
       box-shadow: var(--shadow-lg);
+      overflow: hidden;
     }
 
     .modal-header {
-      border-bottom: 1px solid var(--gray-light);
-      background: var(--light);
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      background: #f8fafc;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 1rem 1.25rem;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .modal-body {
+      padding: 1.25rem;
     }
 
     .modal-footer {
-      border-top: 1px solid var(--gray-light);
-      background: var(--light);
-      border-radius: 0 0 var(--border-radius) var(--border-radius);
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .header-pinjam, .tab-akad, .tab-content {
-        padding-left: 1.2rem;
-        padding-right: 1.2rem;
-      }
-      
-      .page-title {
-        font-size: 22px;
-      }
-      
-      .card-title {
-        font-size: 18px;
-      }
-      
-      .alert {
-        margin: 1rem 1.2rem;
-        padding: 1rem;
-      }
-      
-      .success-message {
-        margin: 1rem 1.2rem;
-        padding: 1rem;
-      }
+      background: #f8fafc;
+      border-top: 1px solid #f1f5f9;
+      padding: 0.85rem 1.25rem;
     }
   </style>
 </head>
+
 <body>
-  <!-- HEADER YANG SUDAH DIUBAH -->
+
+  <!-- HEADER UTAMA KOPERASI (NAMA USER SINKRON DENGAN ANGGOTA) -->
   <header class="header-pinjam">
     <div class="header-left">
-        <?php if (!empty($user['photo']) && file_exists(FCPATH . 'uploads/profile/' . $user['photo'])): ?>
-            <img id="preview" src="<?= base_url('uploads/profile/' . $user['photo']) ?>" alt="Foto Profil">
-        <?php else: ?>
-        <?php 
-            $firstLetter = strtoupper(substr($user['nama_lengkap'] ?? 'U', 0, 1));
-            $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
-            $uniqueId = $anggota['nomor_anggota'] ?? $user['id'] ?? 'default';
-            $bgColor = $colors[crc32($uniqueId) % count($colors)];
+      <?php if (!empty($anggota['photo']) && file_exists(FCPATH . 'uploads/profile/' . $anggota['photo'])): ?>
+        <img id="preview" src="<?= base_url('uploads/profile/' . $anggota['photo']) ?>" alt="Foto Profil">
+      <?php elseif (!empty($user['photo']) && file_exists(FCPATH . 'uploads/profile/' . $user['photo'])): ?>
+        <img id="preview" src="<?= base_url('uploads/profile/' . $user['photo']) ?>" alt="Foto Profil">
+      <?php else: ?>
+        <?php
+        $namaUser = $anggota['nama_lengkap'] ?? $user['nama_lengkap'] ?? $nama ?? 'User';
+        $firstLetter = strtoupper(substr($namaUser, 0, 1));
+        $colors = ['#10b981', '#06b6d4', '#0ea5e9', '#8b5cf6', '#f59e0b'];
+        $uniqueId = $anggota['nomor_anggota'] ?? $nomor_anggota ?? 'default';
+        $bgColor = $colors[crc32($uniqueId) % count($colors)];
         ?>
         <div class="profile-avatar" style="background:<?= $bgColor ?>;">
-            <?= $firstLetter ?>
+          <?= $firstLetter ?>
         </div>
-        <?php endif; ?>
+      <?php endif; ?>
 
-        <div class="profile-info">
-            <div class="header-name"><?= htmlspecialchars($nama ?? 'User') ?></div>
-            <div class="header-id">ID: <?= htmlspecialchars($nomor_anggota ?? '-') ?></div>
-        </div>
+      <div class="profile-info">
+        <div class="header-name"><?= htmlspecialchars($anggota['nama_lengkap'] ?? $user['nama_lengkap'] ?? $nama ?? 'User') ?></div>
+        <div class="header-id">ID: <?= htmlspecialchars($anggota['nomor_anggota'] ?? $nomor_anggota ?? '-') ?></div>
+      </div>
     </div>
-    
+
     <div class="header-actions">
-        <div class="notification-wrapper">
-            <i data-lucide="bell" class="icon"></i>
-            <div class="notification-badge">3</div>
-        </div>
-        <i data-lucide="settings" class="icon"></i>
+      <div class="notification-wrapper">
+        <i data-lucide="bell" class="icon"></i>
+        <div class="notification-badge">3</div>
+      </div>
+      <i data-lucide="settings" class="icon"></i>
     </div>
   </header>
-  <h2 class="page-title">Pinjaman</h2>
+
+  <div class="page-title-container">
+    <h2 class="page-title"><i data-lucide="hand-coins" style="color: var(--primary);"></i> Layanan Pinjaman</h2>
+    <p class="page-subtitle">Pengajuan pembiayaan syariah secara cepat dan transparan</p>
+  </div>
 
   <!-- Flash Messages -->
   <?php if (session()->getFlashdata('success')): ?>
@@ -702,1192 +695,1034 @@
     </div>
   <?php endif; ?>
 
-  <!-- Alert No Rekening -->
   <?php if (isset($hasNoRekening) && !$hasNoRekening): ?>
     <div class="alert alert-info">
-      <i data-lucide="info" class="alert-icon"></i>
+      <i data-lucide="credit-card" class="alert-icon"></i>
       <div>
-        <strong>Nomor Rekening Belum Diisi</strong>
-        <div style="font-size: 14px; margin-top: 4px;">
-          Anda belum mengisi nomor rekening. Harap lengkapi data rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.
-          <br>
-          <a href="<?= base_url('anggota/profil/edit') ?>" class="btn-update-rekening" style="display: inline-block; margin-top: 8px; padding: 8px 16px; background: var(--accent); color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">
-            <i data-lucide="edit-3" style="width: 16px; height: 16px; margin-right: 5px;"></i>
-            Ke Menu Profil
-          </a>
+        <strong>Nomor Rekening Belum Lengkap</strong>
+        <div style="font-size: 12px; margin-top: 2px;">
+          Lengkapi data rekening bank Anda terlebih dahulu di menu Profil agar dana pinjaman dapat dicairkan.
+        </div>
+        <a href="<?= base_url('anggota/profil/edit') ?>" style="display: inline-flex; align-items: center; gap:4px; margin-top: 8px; padding: 6px 12px; background: var(--accent); color: white; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 12px;">
+          <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i> Edit Profil Sekarang
+        </a>
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <!-- Active Loan / Pending Loan Warning (DIBEDAKAN UI DUA STATUS) -->
+  <?php if (isset($loanStatus) && $loanStatus === 'pending'): ?>
+    <div class="alert alert-warning alert-persistent">
+      <i data-lucide="clock" class="alert-icon"></i>
+      <div>
+        <strong>Pengajuan Sedang Menunggu Verifikasi Admin</strong>
+        <div style="font-size: 12px; margin-top: 2px;">
+          Pengajuan pembiayaan Anda telah diterima dan saat ini sedang ditinjau oleh tim admin koperasi. Form pengajuan baru akan dibuka kembali setelah pengajuan ini disetujui atau ditolak.
+        </div>
+      </div>
+    </div>
+  <?php elseif (isset($loanStatus) && $loanStatus === 'aktif'): ?>
+    <div class="alert alert-danger alert-persistent">
+      <i data-lucide="alert-circle" class="alert-icon"></i>
+      <div>
+        <strong>Pinjaman Masih Berjalan (Aktif)</strong>
+        <div style="font-size: 12px; margin-top: 2px;">
+          Anda masih memiliki kontrak pinjaman aktif yang sedang berjalan. Harap selesaikan/lunasi angsuran pinjaman Anda terlebih dahulu sebelum membuat pengajuan baru.
         </div>
       </div>
     </div>
   <?php endif; ?>
 
-  <!-- Active Loan Warning -->
-  <?php if (isset($hasActiveLoan) && $hasActiveLoan): ?>
-    <div class="alert alert-warning">
-      <i data-lucide="alert-triangle" class="alert-icon"></i>
-      <div>
-        <strong>Pinjaman Aktif Ditemukan</strong>
-        <div style="font-size: 14px; margin-top: 4px;">Anda sudah memiliki pinjaman yang aktif. Silakan selesaikan pinjaman terlebih dahulu sebelum mengajukan pinjaman baru.</div>
-      </div>
-    </div>
-  <?php endif; ?>
-
-  <!-- Success Message Box -->
   <?php if (session()->getFlashdata('pinjaman_success')): ?>
     <div class="success-message">
       <div class="success-icon">
         <i class="bi bi-check-circle-fill"></i>
       </div>
-      <div class="success-title">Pengajuan Pinjaman Berhasil!</div>
-      <div class="success-desc">Pengajuan berhasil, mohon tunggu verifikasi admin. Anda akan mendapatkan notifikasi setelah pinjaman diverifikasi.</div>
-      <div class="success-info">
-        <small><i class="bi bi-clock"></i> Estimasi verifikasi: 1-3 hari kerja</small>
+      <div class="success-title">Pengajuan Berhasil Dikirim!</div>
+      <div class="success-desc">Permohonan Anda sedang dalam tahap peninjauan oleh tim admin koperasi.</div>
+      <div style="font-size: 11px; color: #047857; font-weight: 700;">
+        <i class="bi bi-clock-history mr-1"></i> Estimasi proses verifikasi: 1 - 3 hari kerja
       </div>
     </div>
   <?php endif; ?>
 
-  <!-- Tab akad -->
   <div class="tab-akad">
-  <button id="tab-alqord" class="active" data-tab="alqord">Al-Qord</button>
-  <button id="tab-murabahah" data-tab="murabahah">Murabahah</button>
-  <button id="tab-mudharabah" data-tab="mudharabah">Mudharabah</button>
-</div>
+    <button id="tab-alqord" class="active" data-tab="alqord"><i data-lucide="heart-handshake" style="width: 16px;"></i> Al-Qord</button>
+    <button id="tab-murabahah" data-tab="murabahah"><i data-lucide="shopping-bag" style="width: 16px;"></i> Murabahah</button>
+    <button id="tab-mudharabah" data-tab="mudharabah"><i data-lucide="trending-up" style="width: 16px;"></i> Mudharabah</button>
+  </div>
 
   <?php
-  // Helper variables
   $hasNoRekening = isset($hasNoRekening) ? $hasNoRekening : false;
-  $hasActiveLoan = isset($hasActiveLoan) ? $hasActiveLoan : false;
-  
-  // Disabled jika: memiliki pinjaman aktif ATAU belum isi no rekening
-  $isDisabled = $hasActiveLoan || !$hasNoRekening;
+  $loanStatus = isset($loanStatus) ? $loanStatus : 'none';
+
+  $isDisabled = ($loanStatus !== 'none') || !$hasNoRekening;
   $disabledAttr = $isDisabled ? 'disabled' : '';
   $cardDisabledClass = $isDisabled ? 'disabled' : '';
-  
-  // Text untuk tombol disabled
+
   $disabledText = '';
-  if ($hasActiveLoan) {
-      $disabledText = '⛔ Pinjaman Aktif Ditemukan';
+  if ($loanStatus === 'pending') {
+    $disabledText = '⏳ Menunggu ACC / Verifikasi Admin';
+  } elseif ($loanStatus === 'aktif') {
+    $disabledText = '⛔ Pinjaman Aktif Masih Berjalan';
   } elseif (!$hasNoRekening) {
-      $disabledText = '📝 Lengkapi Nomor Rekening';
+    $disabledText = '📝 Lengkapi Rekening di Profil';
   }
   ?>
 
-  <!-- Al-Qord -->
+  <!-- SECTION 1: AL-QORD (LIMIT MAX 4 JUTA) -->
   <section id="alqord" class="tab-content active">
     <div class="card <?= $cardDisabledClass ?>">
-      <div class="card-title">Ajukan Pinjaman Al-Qord</div>
+      <div class="akad-info-box">
+        <i data-lucide="info"></i>
+        <div class="akad-info-text">
+          <b>Akad Al-Qordh (Pinjaman Kebajikan):</b> Pinjaman dana darurat murni tanpa ada imbalan atau penambahan margin/bunga.
+        </div>
+      </div>
+
+      <div class="card-title"><i data-lucide="file-edit" style="color:var(--primary); width:18px;"></i> Form Pengajuan Al-Qord</div>
+
       <form id="form-alqord" action="<?= base_url('anggota/ajukan-pinjaman') ?>" method="post">
         <div class="form-input">
-          <label>Nominal Pinjaman (Maks Rp 4.000.000)</label>
+          <label>Nominal Pinjaman <span class="text-xs text-gray-400 font-normal">(Maks Rp 4.000.000)</span></label>
           <div class="input-rupiah">
             <span>Rp</span>
-            <input type="text" id="alqord-nominal" name="jumlah" placeholder="Masukkan jumlah" required maxlength="10" data-max="4000000" <?= $disabledAttr ?>/>
+            <input type="text" id="alqord-nominal" name="jumlah" placeholder="0" required maxlength="10" data-max="4000000" <?= $disabledAttr ?> />
           </div>
-          <div class="error-message" id="alqord-error">Maksimal pinjaman adalah Rp 4.000.000</div>
+          <div class="error-message" id="alqord-error">Maksimal pengajuan Al-Qord adalah Rp 4.000.000</div>
         </div>
 
         <div class="form-input">
-          <label>Lama Cicilan (maks 12 bulan)</label>
+          <label>Jangka Waktu Cicilan</label>
           <select id="alqord-bulan" name="lama_cicilan" required <?= $disabledAttr ?>>
-            <option value="" disabled selected>Pilih lama cicilan</option>
+            <option value="" disabled selected>-- Pilih lama tenor --</option>
             <?php for ($i = 1; $i <= 12; $i++): ?>
-              <option value="<?= $i ?>"><?= $i ?> bulan</option>
+              <option value="<?= $i ?>"><?= $i ?> Bulan</option>
             <?php endfor; ?>
           </select>
         </div>
 
         <div class="form-input">
-          <label>Deskripsi Penggunaan Pinjaman</label>
-          <textarea 
-            id="alqord-deskripsi" 
-            name="deskripsi" 
-            placeholder="Jelaskan untuk apa pinjaman ini akan digunakan (contoh: untuk biaya pendidikan, modal usaha, renovasi rumah, dll.)" 
+          <label>Tujuan Penggunaan Pinjaman</label>
+          <textarea
+            id="alqord-deskripsi"
+            name="deskripsi"
+            placeholder="Jelaskan kebutuhan pengajuan pinjaman (misal: biaya sekolah, perbaikan rumah, dll)"
             required
             maxlength="500"
-            <?= $disabledAttr ?>
-          ></textarea>
+            <?= $disabledAttr ?>></textarea>
           <div class="character-count" id="alqord-charcount">0/500 karakter</div>
-          <div class="note">* Wajib diisi. Minimal 10 karakter.</div>
+          <div class="note">* Minimal 10 karakter penjelasan deskripsi.</div>
         </div>
 
-        <div class="kv"><span>Cicilan / Bulan</span><span id="alqord-cicilan">-</span></div>
+        <div class="calc-summary-card">
+          <div class="calc-header">
+            <span class="calc-title">Simulasi Angsuran</span>
+            <span class="calc-badge">Tanpa Bunga / Margin</span>
+          </div>
+          <div class="calc-row">
+            <span>Angsuran Pokok / Bulan</span>
+            <span id="alqord-cicilan" class="calc-value-highlight">-</span>
+          </div>
+        </div>
+
         <input type="hidden" name="jenis" value="qard">
-        
-        <div class="form-checkboxes">
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Apakah Anda yakin ingin mengajukan pinjaman ini?</label>
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Apakah Anda sudah membaca syarat dan ketentuan?</label>
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Anda dengan sadar melakukan pengajuan ini.</label>
-          <a href="<?= base_url('anggota/pin_alqordh')?>" style="color: var(--primary); text-decoration: none; font-weight: 600;">📋 Syarat dan Persetujuan</a>
+
+        <div class="terms-box">
+          <div class="terms-box-title"><i data-lucide="shield-check" style="width:16px; color:var(--primary);"></i> Persetujuan Anggota</div>
+          <div class="form-checkboxes">
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Saya menyatakan data nominal dan keperluan pengajuan sudah benar.</label>
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Saya telah membaca & menyetujui ketentuan akad Al-Qordh.</label>
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Pengajuan ini dibuat secara sadar tanpa paksaan pihak lain.</label>
+            <div style="margin-top: 6px;">
+              <a href="<?= base_url('anggota/pin_alqordh') ?>" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 11px;"><i data-lucide="external-link" style="width:12px; display:inline;"></i> BACA SK & SYARAT LENGKAP</a>
+            </div>
+          </div>
         </div>
 
         <button type="submit" class="btn-ajukan" <?= $disabledAttr ?>>
-          <?= $isDisabled ? $disabledText : '✅ Ajukan Pinjaman' ?>
+          <?= $isDisabled ? $disabledText : '<i data-lucide="send" style="width:18px;"></i> Kirim Pengajuan Pinjaman' ?>
         </button>
       </form>
     </div>
   </section>
 
-  <!-- Murabahah -->
+  <!-- SECTION 2: MURABAHAH (LIMIT MAX 10 JUTA) -->
   <section id="murabahah" class="tab-content">
     <div class="card <?= $cardDisabledClass ?>">
-      <div class="card-title">Ajukan Pinjaman Murabahah</div>
+      <div class="akad-info-box" style="background:#f0f9ff; border-color:#bae6fd;">
+        <i data-lucide="info" style="color:var(--secondary);"></i>
+        <div class="akad-info-text" style="color:#0369a1;">
+          <b>Akad Murabahah (Jual Beli):</b> Pembiayaan barang dengan pengembalian ditambah margin keuntungan transparan sebesar 10%.
+        </div>
+      </div>
+
+      <div class="card-title"><i data-lucide="shopping-cart" style="color:var(--secondary); width:18px;"></i> Form Pengajuan Murabahah</div>
+
       <form id="form-murabahah" action="<?= base_url('anggota/ajukan-pinjaman') ?>" method="post">
         <div class="form-input">
-          <label>Harga Barang (Maks Rp 4.000.000)</label>
+          <label>Harga Barang <span class="text-xs text-gray-400 font-normal">(Maks Rp 10.000.000)</span></label>
           <div class="input-rupiah">
             <span>Rp</span>
-            <input type="text" id="murabahah-harga" name="jumlah" placeholder="Masukkan harga" required maxlength="10" data-max="4000000" <?= $disabledAttr ?>/>
+            <input type="text" id="murabahah-harga" name="jumlah" placeholder="0" required maxlength="12" data-max="10000000" <?= $disabledAttr ?> />
           </div>
-          <div class="error-message" id="murabahah-error">Maksimal pinjaman adalah Rp 4.000.000</div>
+          <div class="error-message" id="murabahah-error">Maksimal pembiayaan Murabahah adalah Rp 10.000.000</div>
         </div>
 
         <div class="form-input">
-          <label>Lama Cicilan (maks 12 bulan)</label>
+          <label>Jangka Waktu Cicilan</label>
           <select id="murabahah-bulan" name="lama_cicilan" required <?= $disabledAttr ?>>
-            <option value="" disabled selected>Pilih lama cicilan</option>
+            <option value="" disabled selected>-- Pilih lama tenor --</option>
             <?php for ($i = 1; $i <= 12; $i++): ?>
-              <option value="<?= $i ?>"><?= $i ?> bulan</option>
+              <option value="<?= $i ?>"><?= $i ?> Bulan</option>
             <?php endfor; ?>
           </select>
         </div>
 
         <div class="form-input">
-          <label>Deskripsi Barang yang Dibeli</label>
-          <textarea 
-            id="murabahah-deskripsi" 
-            name="deskripsi" 
-            placeholder="Jelaskan barang apa yang akan dibeli dengan pinjaman ini (contoh: laptop untuk kerja, mesin cuci, peralatan elektronik, dll.)" 
+          <label>Deskripsi & Spesifikasi Barang</label>
+          <textarea
+            id="murabahah-deskripsi"
+            name="deskripsi"
+            placeholder="Jelaskan jenis barang yang dibeli (contoh: Laptop kerja, Peralatan Usaha, Mesin Cuci, dll.)"
             required
             maxlength="500"
-            <?= $disabledAttr ?>
-          ></textarea>
+            <?= $disabledAttr ?>></textarea>
           <div class="character-count" id="murabahah-charcount">0/500 karakter</div>
-          <div class="note">* Wajib diisi. Minimal 10 karakter.</div>
+          <div class="note">* Minimal 10 karakter deskripsi barang.</div>
         </div>
 
-        <div class="kv"><span>Total + Margin (10%)</span><span id="murabahah-total">-</span></div>
-        <div class="kv"><span>Cicilan / Bulan</span><span id="murabahah-cicilan">-</span></div>
-        <p class="note">* Akan ditambah margin 10% dari harga.</p>
+        <div class="calc-summary-card">
+          <div class="calc-header">
+            <span class="calc-title">Simulasi Murabahah</span>
+            <span class="calc-badge" style="background:rgba(6,182,212,0.2); color:#22d3ee; border-color:rgba(34,211,238,0.3);">Margin Jual Beli 10%</span>
+          </div>
+          <div class="calc-row">
+            <span>Total Pembayaran (+ Margin)</span>
+            <span id="murabahah-total" style="font-weight:700; color:white;">-</span>
+          </div>
+          <div class="calc-row total-row">
+            <span>Cicilan / Bulan</span>
+            <span id="murabahah-cicilan" class="calc-value-highlight">-</span>
+          </div>
+        </div>
+
         <input type="hidden" name="jenis" value="murabahah">
-        
-        <div class="form-checkboxes">
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Apakah Anda yakin ingin mengajukan pinjaman ini?</label>
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Apakah Anda sudah membaca syarat dan ketentuan?</label>
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Anda dengan sadar melakukan pengajuan ini.</label>
-          <a href="<?= base_url('anggota/pin_murobahah')?>" style="color: var(--primary); text-decoration: none; font-weight: 600;">📋 Syarat dan Persetujuan</a>
+
+        <div class="terms-box">
+          <div class="terms-box-title"><i data-lucide="shield-check" style="width:16px; color:var(--primary);"></i> Persetujuan Anggota</div>
+          <div class="form-checkboxes">
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Saya menyatakan rincian pembiayaan barang ini akurat.</label>
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Saya sepakat dengan skema harga jual & margin 10% Murabahah.</label>
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Pengajuan ini dibuat secara sadar tanpa paksaan pihak lain.</label>
+            <div style="margin-top: 6px;">
+              <a href="<?= base_url('anggota/pin_murobahah') ?>" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 11px;"><i data-lucide="external-link" style="width:12px; display:inline;"></i> BACA SK & SYARAT LENGKAP</a>
+            </div>
+          </div>
         </div>
 
         <button type="submit" class="btn-ajukan" <?= $disabledAttr ?>>
-          <?= $isDisabled ? $disabledText : '✅ Ajukan Pinjaman' ?>
+          <?= $isDisabled ? $disabledText : '<i data-lucide="send" style="width:18px;"></i> Kirim Pengajuan Pinjaman' ?>
         </button>
       </form>
     </div>
   </section>
 
-  <!-- Mudharabah -->
+  <!-- SECTION 3: MUDHARABAH (LIMIT MAX 20 JUTA) -->
   <section id="mudharabah" class="tab-content">
     <div class="card <?= $cardDisabledClass ?>">
-      <div class="card-title">Ajukan Pinjaman Mudharabah</div>
+      <div class="akad-info-box" style="background:#faf5ff; border-color:#e9d5ff;">
+        <i data-lucide="info" style="color:#a855f7;"></i>
+        <div class="akad-info-text" style="color:#7e22ce;">
+          <b>Akad Mudharabah (Kerjasama Usaha):</b> Pembiayaan modal usaha dengan penyertaan nisbah bagi hasil sebesar 10%.
+        </div>
+      </div>
+
+      <div class="card-title"><i data-lucide="briefcase" style="color:#a855f7; width:18px;"></i> Form Pengajuan Mudharabah</div>
+
       <form id="form-mudharabah" action="<?= base_url('anggota/ajukan-pinjaman') ?>" method="post">
         <div class="form-input">
-          <label>Nominal Pinjaman (Maks Rp 4.000.000)</label>
+          <label>Nominal Modal Usaha <span class="text-xs text-gray-400 font-normal">(Maks Rp 20.000.000)</span></label>
           <div class="input-rupiah">
             <span>Rp</span>
-            <input type="text" id="mudharabah-nominal" name="jumlah" placeholder="Masukkan jumlah" required maxlength="10" data-max="4000000" <?= $disabledAttr ?>/>
+            <input type="text" id="mudharabah-nominal" name="jumlah" placeholder="0" required maxlength="12" data-max="20000000" <?= $disabledAttr ?> />
           </div>
-          <div class="error-message" id="mudharabah-error">Maksimal pinjaman adalah Rp 4.000.000</div>
+          <div class="error-message" id="mudharabah-error">Maksimal pembiayaan Mudharabah adalah Rp 20.000.000</div>
         </div>
 
         <div class="form-input">
-          <label>Lama Cicilan (maks 12 bulan)</label>
+          <label>Jangka Waktu Kerjasama</label>
           <select id="mudharabah-bulan" name="lama_cicilan" required <?= $disabledAttr ?>>
-            <option value="" disabled selected>Pilih lama cicilan</option>
+            <option value="" disabled selected>-- Pilih lama tenor --</option>
             <?php for ($i = 1; $i <= 12; $i++): ?>
-              <option value="<?= $i ?>"><?= $i ?> bulan</option>
+              <option value="<?= $i ?>"><?= $i ?> Bulan</option>
             <?php endfor; ?>
           </select>
         </div>
 
         <div class="form-input">
-          <label>Deskripsi Usaha / Proyek</label>
-          <textarea 
-            id="mudharabah-deskripsi" 
-            name="deskripsi" 
-            placeholder="Jelaskan usaha atau proyek apa yang akan dibiayai dengan pinjaman ini (contoh: modal usaha warung, proyek jasa kontraktor, dagang online, dll.)" 
+          <label>Deskripsi Proyek / Usaha</label>
+          <textarea
+            id="mudharabah-deskripsi"
+            name="deskripsi"
+            placeholder="Jelaskan proyek usaha yang dibiayai (misal: Modal stok barang toko, usaha catering, dll)"
             required
             maxlength="500"
-            <?= $disabledAttr ?>
-          ></textarea>
+            <?= $disabledAttr ?>></textarea>
           <div class="character-count" id="mudharabah-charcount">0/500 karakter</div>
-          <div class="note">* Wajib diisi. Minimal 10 karakter.</div>
+          <div class="note">* Minimal 10 karakter deskripsi usaha.</div>
         </div>
 
-        <div class="kv"><span>Total + Bagi Hasil (10%)</span><span id="mudharabah-total">-</span></div>
-        <div class="kv"><span>Cicilan / Bulan</span><span id="mudharabah-cicilan">-</span></div>
-        <p class="note">* Pengembalian ditambah bagi hasil 10%.</p>
+        <div class="calc-summary-card">
+          <div class="calc-header">
+            <span class="calc-title">Simulasi Mudharabah</span>
+            <span class="calc-badge" style="background:rgba(168,85,247,0.2); color:#c084fc; border-color:rgba(192,132,252,0.3);">Nisbah Bagi Hasil 10%</span>
+          </div>
+          <div class="calc-row">
+            <span>Total Pengembalian (+ Bagi Hasil)</span>
+            <span id="mudharabah-total" style="font-weight:700; color:white;">-</span>
+          </div>
+          <div class="calc-row total-row">
+            <span>Cicilan / Bulan</span>
+            <span id="mudharabah-cicilan" class="calc-value-highlight">-</span>
+          </div>
+        </div>
+
         <input type="hidden" name="jenis" value="mudharabah">
-        
-        <div class="form-checkboxes">
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Apakah Anda yakin ingin mengajukan pinjaman ini?</label>
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Apakah Anda sudah membaca syarat dan ketentuan?</label>
-          <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Anda dengan sadar melakukan pengajuan ini.</label>
-          <a href="<?= base_url('anggota/pin_mudhorobah')?>" style="color: var(--primary); text-decoration: none; font-weight: 600;">📋 Syarat dan Persetujuan</a>
+
+        <div class="terms-box">
+          <div class="terms-box-title"><i data-lucide="shield-check" style="width:16px; color:var(--primary);"></i> Persetujuan Anggota</div>
+          <div class="form-checkboxes">
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Saya menyatakan informasi usaha yang disampaikan benar.</label>
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Saya sepakat dengan nisbah bagi hasil 10% yang ditentukan.</label>
+            <label><input type="checkbox" class="confirm-checkbox" required <?= $disabledAttr ?>> Pengajuan ini dibuat secara sadar tanpa paksaan pihak lain.</label>
+            <div style="margin-top: 6px;">
+              <a href="<?= base_url('anggota/pin_mudhorobah') ?>" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 11px;"><i data-lucide="external-link" style="width:12px; display:inline;"></i> BACA SK & SYARAT LENGKAP</a>
+            </div>
+          </div>
         </div>
 
         <button type="submit" class="btn-ajukan" <?= $disabledAttr ?>>
-          <?= $isDisabled ? $disabledText : '✅ Ajukan Pinjaman' ?>
+          <?= $isDisabled ? $disabledText : '<i data-lucide="send" style="width:18px;"></i> Kirim Pengajuan Pinjaman' ?>
         </button>
       </form>
     </div>
   </section>
 
-  <!-- Bottom Navigation -->
+  <!-- Bottom Navigation Menu -->
   <nav class="bottom-nav">
-    <a href="<?= base_url('anggota/dashboard')?>">
-      <i data-lucide="home"></i>
+    <a href="<?= base_url('anggota/dashboard') ?>">
+      <i data-lucide="home" style="width:18px; height:18px;"></i>
       <p>Beranda</p>
     </a>
-    <a href="<?= base_url('anggota/simpanan')?>">
-      <i data-lucide="wallet"></i>
+    <a href="<?= base_url('anggota/simpanan') ?>">
+      <i data-lucide="wallet" style="width:18px; height:18px;"></i>
       <p>Simpan</p>
     </a>
-    <a href="<?= base_url('anggota/pinjaman')?>" class="active">
-      <i data-lucide="hand-coins"></i>
+    <a href="<?= base_url('anggota/pinjaman') ?>" class="active">
+      <i data-lucide="hand-coins" style="width:18px; height:18px;"></i>
       <p>Pinjam</p>
     </a>
     <a href="<?= base_url('anggota/cicilan') ?>">
-      <i data-lucide="calendar-check"></i>
+      <i data-lucide="calendar-check" style="width:18px; height:18px;"></i>
       <p>Cicilan</p>
     </a>
-    <a href="<?= base_url('anggota/profil')?>">
-      <i data-lucide="user"></i>
+    <a href="<?= base_url('anggota/profil') ?>">
+      <i data-lucide="user" style="width:18px; height:18px;"></i>
       <p>Profil</p>
     </a>
   </nav>
 
-  <!-- Modal untuk input PIN -->
-  <!-- Modal untuk input PIN -->
-<div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pinModalLabel">Verifikasi PIN</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="pinVerificationForm" action="<?= base_url('pinjaman/process-after-pin') ?>" method="POST">
-                <!-- Data pinjaman akan ditambahkan secara dinamis oleh JavaScript -->
-                
-                <div class="modal-body">
-                    <p>Masukkan 6 digit PIN untuk melanjutkan pengajuan pinjaman:</p>
-                    <div class="mb-3">
-                        <label for="pin" class="form-label">PIN</label>
-                        <input type="password" class="form-control" id="pin" name="pin" 
-                               placeholder="Masukkan 6 digit PIN" maxlength="6" 
-                               pattern="\d{6}" title="Harus 6 digit angka" required>
-                        <div class="invalid-feedback" id="pinError"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Verifikasi dan Ajukan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-  <!-- Modal untuk buat PIN (jika belum punya) -->
-  <div class="modal fade" id="createPinModal" tabindex="-1" aria-labelledby="createPinModalLabel" aria-hidden="true">
+  <!-- MODAL VERIFIKASI PIN -->
+  <div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="createPinModalLabel">Buat PIN Baru</h5>
+          <h5 class="modal-title" id="pinModalLabel"><i data-lucide="lock" style="width:16px; display:inline; color:var(--primary);"></i> Verifikasi PIN Transaksi</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="createPinForm">
+        <form id="pinVerificationForm" action="<?= base_url('pinjaman/process-after-pin') ?>" method="POST">
           <div class="modal-body">
-            <p>Anda belum memiliki PIN. Harap buat PIN 6 digit terlebih dahulu.</p>
+            <p style="font-size:13px; color:var(--gray);">Masukkan 6 digit PIN keamanan akun Anda untuk otorisasi pengajuan pinjaman:</p>
             <div class="mb-3">
-              <label for="new_pin" class="form-label">PIN Baru (6 digit)</label>
-              <input type="password" class="form-control" id="new_pin" name="new_pin" 
-                     placeholder="Masukkan 6 digit PIN" maxlength="6" required
-                     pattern="\d{6}" title="Harus 6 digit angka">
+              <label for="pin" class="form-label" style="font-weight:700; font-size:12px;">PIN KOPERASI (6 Digit)</label>
+              <input type="password" class="form-control text-center font-bold" id="pin" name="pin"
+                placeholder="******" maxlength="6"
+                style="letter-spacing: 6px; font-size: 20px; border-radius: 12px;"
+                pattern="\d{6}" title="Harus 6 digit angka" required>
+              <div class="invalid-feedback" id="pinError"></div>
             </div>
-            <div class="mb-3">
-              <label for="confirm_pin" class="form-label">Konfirmasi PIN</label>
-              <input type="password" class="form-control" id="confirm_pin" name="confirm_pin" 
-                     placeholder="Konfirmasi 6 digit PIN" maxlength="6" required
-                     pattern="\d{6}" title="Harus 6 digit angka">
-            </div>
-            <div id="pinMessage" class="alert" style="display:none;"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Buat PIN</button>
+            <button type="button" class="btn btn-light btn-sm font-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-emerald btn-sm font-bold text-white" style="background:var(--primary);">Verifikasi & Ajukan</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-<?php if ($showTenorModal): ?>
-<style>
-  /* === STYLE MODAL TENOR (background berhenti di atas bottom nav) === */
-  #tenorOverlay {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    bottom: 80px; /* kasih jarak sesuai tinggi bottom nav */
-    background: rgba(0, 0, 0, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1999; /* di bawah bottom nav */
-    pointer-events: auto;
-  }
+  <!-- ==================== KARTU RIWAYAT & STATUS PENGAJUAN TERAKHIR ==================== -->
+  <?php if (!empty($riwayatPinjaman)): ?>
+    <div style="padding: 0 1rem; margin-bottom: 1.25rem;">
+      <div style="background: white; border-radius: var(--border-radius); padding: 1.1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f1f5f9;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
+          <span style="font-size: 13px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="history" style="width:16px; color:var(--primary);"></i> Status Pengajuan Pinjaman
+          </span>
+          <span style="font-size: 11px; color: var(--gray); font-weight: 600;">Terbaru</span>
+        </div>
 
-  .bottom-nav {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 2001 !important;
-  }
+        <?php foreach ($riwayatPinjaman as $p): ?>
+          <?php
+          // Normalisasi string status ke huruf kecil
+          $st = strtolower(trim($p['status']));
+          $statusBadge = '';
+          $statusBoxBg = '';
 
-  #tenorBox {
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    padding: 2rem;
-    max-width: 450px;
-    width: 90%;
-    text-align: center;
-    animation: fadeIn 0.3s ease;
-    z-index: 2000;
-  }
+          if (in_array($st, ['pending', 'menunggu', 'waiting'])) {
+            $statusBadge = '<span style="background:#fef3c7; color:#d97706; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #fcd34d; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-clock fa-spin"></i> Menunggu ACC</span>';
+            $statusBoxBg = '#fffbeb';
+          } elseif (in_array($st, ['aktif', 'disetujui', 'approved', 'berjalan'])) {
+            $statusBadge = '<span style="background:#dcfce7; color:#15803d; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #86efac; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-check-circle"></i> Disetujui (Aktif)</span>';
+            $statusBoxBg = '#f0fdf4';
+          } elseif (in_array($st, ['lunas', 'selesai', 'paid'])) {
+            $statusBadge = '<span style="background:#e0f2fe; color:#0369a1; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #bae6fd; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-check-double"></i> Lunas</span>';
+            $statusBoxBg = '#f0f9ff';
+          } else {
+            // Hanya jika benar-benar berstatus ditolak / rejected
+            $statusBadge = '<span style="background:#fee2e2; color:#dc2626; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #fca5a5; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-times-circle"></i> Ditolak</span>';
+            $statusBoxBg = '#fef2f2';
+          }
+          ?>
 
-  #tenorBox h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 1rem;
-  }
+          <div style="background: <?= $statusBoxBg ?>; border-radius: 12px; padding: 0.85rem; margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span style="font-size: 13px; font-weight: 800; color: var(--dark);"><?= esc($p['akad']) ?></span>
+                <div style="font-size: 11px; color: var(--gray); font-weight: 600; margin-top: 2px;">
+                  Tenor: <b><?= esc($p['tenor']) ?> Bulan</b> • Tanggal: <?= date('d M Y', strtotime($p['tanggal'])) ?>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 14px; font-weight: 800; color: var(--dark);">Rp <?= number_format($p['nominal'], 0, ',', '.') ?></div>
+                <div style="margin-top: 4px;"><?= $statusBadge ?></div>
+              </div>
+            </div>
 
-  #tenorBox p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    color: #4b5563;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
+            <?php if (in_array($st, ['ditolak', 'rejected']) && !empty($p['alasan'])): ?>
+              <div style="margin-top: 8px; font-size: 11px; color: #b91c1c; background: rgba(239, 68, 68, 0.08); padding: 6px 10px; border-radius: 8px;">
+                <i class="fas fa-info-circle mr-1"></i> <b>Alasan Ditolak:</b> <?= esc($p['alasan']) ?>
+              </div>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  <?php endif; ?>
 
-  #tenorBox select {
-    width: 100%;
-    border: 1px solid #d1d5db;
-    border-radius: 12px;
-    padding: 0.75rem;
-    text-align: center;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 1.25rem;
-    transition: border 0.2s ease;
-  }
-
-  #tenorBox select:focus {
-    border-color: #0d9488;
-    outline: none;
-  }
-
-  #tenorBox button {
-    width: 100%;
-    background: linear-gradient(135deg, #16a34a, #0d9488);
-    border: none;
-    border-radius: 12px;
-    padding: 0.75rem;
-    color: #fff;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  #tenorBox button:hover {
-    background: linear-gradient(135deg, #16a34a, #0d9488);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
-
-<!-- Overlay + Modal -->
-<div id="tenorOverlay">
-  <div id="tenorBox">
-    <h2>Pilih Tenor Simpanan Pokok</h2>
-    <p><strong>Apa itu Simpanan Pokok?</strong><br>
-      Simpanan Pokok adalah setoran awal wajib sebesar <b>Rp 500.000</b> 
-      yang harus dibayarkan oleh setiap anggota baru saat pertama kali menjadi anggota koperasi.<br><br>
-      Simpanan ini <b>wajib</b> dan <b>tidak bisa diambil kembali</b> selama masih menjadi anggota.
-      Kamu bisa mencicil <strong>1 bulan</strong>, <strong>2 bulan</strong>, atau <strong>5 bulan.</strong>
-    </p>
-
-    <form action="<?= base_url('anggota/pinjaman/setTenor') ?>" method="post">
-      <select name="tenor" required>
-        <option value="">-- Pilih Tenor --</option>
-        <option value="1">1 Bulan</option>
-        <option value="2">2 Bulan</option>
-        <option value="5">5 Bulan</option>
-      </select>
-      <button type="submit">Simpan Tenor</button>
-    </form>
+  <!-- MODAL BUAT PIN -->
+  <div class="modal fade" id="createPinModal" tabindex="-1" aria-labelledby="createPinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createPinModalLabel"><i data-lucide="key" style="width:16px; display:inline; color:var(--primary);"></i> Buat PIN Keamanan Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="createPinForm">
+          <div class="modal-body">
+            <p style="font-size:13px; color:var(--gray);">Buat 6 digit PIN rahasia untuk mengamankan transaksi pengajuan pinjaman Anda.</p>
+            <div class="mb-3">
+              <label for="new_pin" class="form-label" style="font-weight:700; font-size:12px;">PIN Baru (6 Digit)</label>
+              <input type="password" class="form-control text-center font-bold" id="new_pin" name="new_pin"
+                placeholder="******" maxlength="6" required style="letter-spacing: 6px; font-size: 18px; border-radius: 12px;"
+                pattern="\d{6}" title="Harus 6 digit angka">
+            </div>
+            <div class="mb-3">
+              <label for="confirm_pin" class="form-label" style="font-weight:700; font-size:12px;">Konfirmasi PIN Baru</label>
+              <input type="password" class="form-control text-center font-bold" id="confirm_pin" name="confirm_pin"
+                placeholder="******" maxlength="6" required style="letter-spacing: 6px; font-size: 18px; border-radius: 12px;"
+                pattern="\d{6}" title="Harus 6 digit angka">
+            </div>
+            <div id="pinMessage" class="alert" style="display:none;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light btn-sm font-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-emerald btn-sm font-bold text-white" style="background:var(--primary);">Simpan PIN</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-  document.body.style.overflow = 'hidden';
-</script>
-<?php endif; ?>
-
-  <!-- Bootstrap 5 JS Bundle with Popper -->
+  <!-- JS Scripts Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
- <script>
-// Pastikan jQuery tersedia
-if (typeof jQuery === 'undefined') {
-    // Load jQuery jika belum ada
-    const script = document.createElement('script');
-    script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
-    script.onload = function() {
+  <script>
+    if (typeof jQuery === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+      script.onload = function() {
         initializeApp();
-    };
-    document.head.appendChild(script);
-} else {
-    // jQuery sudah tersedia, langsung initialize
-    $(document).ready(function() {
+      };
+      document.head.appendChild(script);
+    } else {
+      $(document).ready(function() {
         initializeApp();
-    });
-}
+      });
+    }
 
-function initializeApp() {
-    console.log('Initializing app...');
-    
-    // Global function untuk tab switching
-    window.showTab = function(name){
-        console.log('Switching to tab:', name);
-        document.querySelectorAll('.tab-content').forEach(el=>{
-            el.classList.remove('active');
+    function initializeApp() {
+      console.log('Initializing application JS logic...');
+
+      window.showTab = function(name) {
+        document.querySelectorAll('.tab-content').forEach(el => {
+          el.classList.remove('active');
         });
-        
         const tabContent = document.getElementById(name);
         if (tabContent) {
-            tabContent.classList.add('active');
+          tabContent.classList.add('active');
         }
-        
-        document.querySelectorAll('.tab-akad button').forEach(el=>{
-            el.classList.remove('active');
+
+        document.querySelectorAll('.tab-akad button').forEach(el => {
+          el.classList.remove('active');
         });
-        
-        const tabButton = document.getElementById('tab-'+name);
+        const tabButton = document.getElementById('tab-' + name);
         if (tabButton) {
-            tabButton.classList.add('active');
+          tabButton.classList.add('active');
         }
-    };
-    
-    lucide.createIcons();
+      };
 
-    const MAX_PINJAMAN = 4000000;
-    const isDisabled = <?= $isDisabled ? 'true' : 'false' ?>;
-    const hasNoRekening = <?= $hasNoRekening ? 'true' : 'false' ?>;
+      lucide.createIcons();
 
-    // Fungsi validasi nominal
-    function validateNominal(input, errorElement) {
+      // KONFIGURASI LIMIT MAKSIMAL NOMINAL PINJAMAN PER AKAD
+      const LIMITS = {
+        alqord: 4000000, // Max 4 Juta
+        murabahah: 10000000, // Max 10 Juta
+        mudharabah: 20000000 // Max 20 Juta
+      };
+
+      const isDisabled = <?= $isDisabled ? 'true' : 'false' ?>;
+      const hasNoRekening = <?= $hasNoRekening ? 'true' : 'false' ?>;
+
+      function validateNominal(input, errorElement, maxLimit) {
         const raw = input.value.replace(/\./g, "");
         const nominal = parseInt(raw) || 0;
-        
-        if (nominal > MAX_PINJAMAN) {
-            if (errorElement) {
-                errorElement.style.display = 'block';
-            }
-            input.parentElement.classList.add('input-error');
-            return false;
-        } else {
-            if (errorElement) {
-                errorElement.style.display = 'none';
-            }
-            input.parentElement.classList.remove('input-error');
-            return true;
-        }
-    }
 
-    // Fungsi update character count
-    function updateCharacterCount(textarea, counter) {
+        if (nominal > maxLimit) {
+          if (errorElement) errorElement.style.display = 'block';
+          input.parentElement.classList.add('input-error');
+          return false;
+        } else {
+          if (errorElement) errorElement.style.display = 'none';
+          input.parentElement.classList.remove('input-error');
+          return true;
+        }
+      }
+
+      function updateCharacterCount(textarea, counter) {
         const length = textarea.value.length;
         if (counter) {
-            counter.textContent = `${length}/500 karakter`;
-            
-            if (length > 450) {
-                counter.classList.add('warning');
-                counter.classList.remove('danger');
-            } else if (length > 490) {
-                counter.classList.add('danger');
-                counter.classList.remove('warning');
-            } else {
-                counter.classList.remove('warning', 'danger');
-            }
+          counter.textContent = `${length}/500 karakter`;
+          if (length > 450) {
+            counter.style.color = 'var(--warning)';
+          } else if (length > 490) {
+            counter.style.color = 'var(--danger)';
+          } else {
+            counter.style.color = 'var(--gray)';
+          }
         }
-    }
+      }
 
-    // Inisialisasi Al-Qord
-    const alqordNominal = document.getElementById("alqord-nominal");
-    const alqordBulan = document.getElementById("alqord-bulan");
-    const alqordDeskripsi = document.getElementById("alqord-deskripsi");
-    
-    if (alqordNominal) {
+      // 1. Al-Qord Listener (Max 4 Juta)
+      const alqordNominal = document.getElementById("alqord-nominal");
+      const alqordBulan = document.getElementById("alqord-bulan");
+      const alqordDeskripsi = document.getElementById("alqord-deskripsi");
+
+      if (alqordNominal) {
         alqordNominal.addEventListener("input", function() {
-            validateNominal(this, document.getElementById("alqord-error"));
-            updateAlqord();
+          validateNominal(this, document.getElementById("alqord-error"), LIMITS.alqord);
+          updateAlqord();
         });
-    }
-    
-    if (alqordBulan) {
-        alqordBulan.addEventListener("change", updateAlqord);
-    }
-    
-    if (alqordDeskripsi) {
+      }
+      if (alqordBulan) alqordBulan.addEventListener("change", updateAlqord);
+      if (alqordDeskripsi) {
         alqordDeskripsi.addEventListener("input", function() {
-            updateCharacterCount(this, document.getElementById("alqord-charcount"));
+          updateCharacterCount(this, document.getElementById("alqord-charcount"));
         });
-    }
+      }
 
-    function updateAlqord(){
+      function updateAlqord() {
         const nominalInput = document.getElementById("alqord-nominal");
         const bulanSelect = document.getElementById("alqord-bulan");
         const cicilanSpan = document.getElementById("alqord-cicilan");
-        
         if (!nominalInput || !bulanSelect || !cicilanSpan) return;
-        
+
         let raw = nominalInput.value;
         const n = parseInt(raw.replace(/\./g, "")) || 0;
         const b = parseInt(bulanSelect.value) || 0;
-        
-        if(n > 0 && b > 0 && b <= 12 && n <= MAX_PINJAMAN){
-            const cicilan = Math.round(n / b);
-            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString();
+
+        if (n > 0 && b > 0 && b <= 12 && n <= LIMITS.alqord) {
+          const cicilan = Math.round(n / b);
+          cicilanSpan.textContent = "Rp " + cicilan.toLocaleString('id-ID');
         } else {
-            cicilanSpan.textContent = "-";
+          cicilanSpan.textContent = "-";
         }
-    }
+      }
 
-    // Inisialisasi Murabahah
-    const murabahahHarga = document.getElementById("murabahah-harga");
-    const murabahahBulan = document.getElementById("murabahah-bulan");
-    const murabahahDeskripsi = document.getElementById("murabahah-deskripsi");
-    
-    if (murabahahHarga) {
+      // 2. Murabahah Listener (Max 10 Juta)
+      const murabahahHarga = document.getElementById("murabahah-harga");
+      const murabahahBulan = document.getElementById("murabahah-bulan");
+      const murabahahDeskripsi = document.getElementById("murabahah-deskripsi");
+
+      if (murabahahHarga) {
         murabahahHarga.addEventListener("input", function() {
-            validateNominal(this, document.getElementById("murabahah-error"));
-            updateMurabahah();
+          validateNominal(this, document.getElementById("murabahah-error"), LIMITS.murabahah);
+          updateMurabahah();
         });
-    }
-    
-    if (murabahahBulan) {
-        murabahahBulan.addEventListener("change", updateMurabahah);
-    }
-
-    if (murabahahDeskripsi) {
+      }
+      if (murabahahBulan) murabahahBulan.addEventListener("change", updateMurabahah);
+      if (murabahahDeskripsi) {
         murabahahDeskripsi.addEventListener("input", function() {
-            updateCharacterCount(this, document.getElementById("murabahah-charcount"));
+          updateCharacterCount(this, document.getElementById("murabahah-charcount"));
         });
-    }
+      }
 
-    function updateMurabahah(){
+      function updateMurabahah() {
         const hargaInput = document.getElementById("murabahah-harga");
         const bulanSelect = document.getElementById("murabahah-bulan");
         const totalSpan = document.getElementById("murabahah-total");
         const cicilanSpan = document.getElementById("murabahah-cicilan");
-        
         if (!hargaInput || !bulanSelect || !totalSpan || !cicilanSpan) return;
-        
+
         let raw = hargaInput.value;
         const h = parseInt(raw.replace(/\./g, "")) || 0;
         const b = parseInt(bulanSelect.value) || 0;
-        
-        if(h > 0 && h <= MAX_PINJAMAN){
-            const total = Math.round(h + (h * 0.1));
+
+        if (h > 0 && h <= LIMITS.murabahah) {
+          const total = Math.round(h + (h * 0.1));
+          totalSpan.textContent = "Rp " + total.toLocaleString('id-ID');
+          if (b > 0) {
             const cicilan = Math.round(total / b);
-            totalSpan.textContent = "Rp " + total.toLocaleString();
-            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString();
-        } else {
-            totalSpan.textContent = "-";
+            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString('id-ID');
+          } else {
             cicilanSpan.textContent = "-";
+          }
+        } else {
+          totalSpan.textContent = "-";
+          cicilanSpan.textContent = "-";
         }
-    }
+      }
 
-    // Inisialisasi Mudharabah
-    const mudharabahNominal = document.getElementById("mudharabah-nominal");
-    const mudharabahBulan = document.getElementById("mudharabah-bulan");
-    const mudharabahDeskripsi = document.getElementById("mudharabah-deskripsi");
-    
-    if (mudharabahNominal) {
+      // 3. Mudharabah Listener (Max 20 Juta)
+      const mudharabahNominal = document.getElementById("mudharabah-nominal");
+      const mudharabahBulan = document.getElementById("mudharabah-bulan");
+      const mudharabahDeskripsi = document.getElementById("mudharabah-deskripsi");
+
+      if (mudharabahNominal) {
         mudharabahNominal.addEventListener("input", function() {
-            validateNominal(this, document.getElementById("mudharabah-error"));
-            updateMudharabah();
+          validateNominal(this, document.getElementById("mudharabah-error"), LIMITS.mudharabah);
+          updateMudharabah();
         });
-    }
-    
-    if (mudharabahBulan) {
-        mudharabahBulan.addEventListener("change", updateMudharabah);
-    }
-
-    if (mudharabahDeskripsi) {
+      }
+      if (mudharabahBulan) mudharabahBulan.addEventListener("change", updateMudharabah);
+      if (mudharabahDeskripsi) {
         mudharabahDeskripsi.addEventListener("input", function() {
-            updateCharacterCount(this, document.getElementById("mudharabah-charcount"));
+          updateCharacterCount(this, document.getElementById("mudharabah-charcount"));
         });
-    }
+      }
 
-    function updateMudharabah(){
+      function updateMudharabah() {
         const nominalInput = document.getElementById("mudharabah-nominal");
         const bulanSelect = document.getElementById("mudharabah-bulan");
         const totalSpan = document.getElementById("mudharabah-total");
         const cicilanSpan = document.getElementById("mudharabah-cicilan");
-        
         if (!nominalInput || !bulanSelect || !totalSpan || !cicilanSpan) return;
-        
+
         let raw = nominalInput.value;
         const n = parseInt(raw.replace(/\./g, "")) || 0;
         const b = parseInt(bulanSelect.value) || 0;
-        
-        if(n > 0 && n <= MAX_PINJAMAN){
-            const total = Math.round(n + (n * 0.1));
+
+        if (n > 0 && n <= LIMITS.mudharabah) {
+          const total = Math.round(n + (n * 0.1));
+          totalSpan.textContent = "Rp " + total.toLocaleString('id-ID');
+          if (b > 0) {
             const cicilan = Math.round(total / b);
-            totalSpan.textContent = "Rp " + total.toLocaleString();
-            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString();
-        } else {
-            totalSpan.textContent = "-";
+            cicilanSpan.textContent = "Rp " + cicilan.toLocaleString('id-ID');
+          } else {
             cicilanSpan.textContent = "-";
+          }
+        } else {
+          totalSpan.textContent = "-";
+          cicilanSpan.textContent = "-";
         }
-    }
+      }
 
-    // Setup event listeners untuk tab buttons
-    document.querySelectorAll('.tab-akad button[data-tab]').forEach(button => {
+      // Tab switcher event
+      document.querySelectorAll('.tab-akad button[data-tab]').forEach(button => {
         button.addEventListener('click', function() {
-            const tabName = this.getAttribute('data-tab');
-            showTab(tabName);
+          showTab(this.getAttribute('data-tab'));
         });
-    });
+      });
 
-    // ======================= SIMPAN DATA FORM =======================
-    // Simpan data form ke localStorage
-    function saveFormDataToLocalStorage(form) {
+      function saveFormDataToLocalStorage(form) {
         const formData = {};
         const formElements = form.elements;
-        
         for (let i = 0; i < formElements.length; i++) {
-            const element = formElements[i];
-            if (element.name && element.type !== 'button' && element.type !== 'submit') {
-                if (element.type === 'checkbox') {
-                    formData[element.name] = element.checked;
-                } else {
-                    formData[element.name] = element.value;
-                }
-            }
+          const element = formElements[i];
+          if (element.name && element.type !== 'button' && element.type !== 'submit') {
+            formData[element.name] = (element.type === 'checkbox') ? element.checked : element.value;
+          }
         }
-        
-        // Tambahkan timestamp untuk uniqueness
         formData['timestamp'] = Date.now();
-        
-        // Simpan ke localStorage
         localStorage.setItem('pending_pinjaman', JSON.stringify(formData));
-        console.log('Form data saved to localStorage:', formData);
         return formData;
-    }
-    
-    // Restore form data dari localStorage ke modal PIN
-    function restoreFormDataToPinModal() {
+      }
+
+      function restoreFormDataToPinModal() {
         const savedData = JSON.parse(localStorage.getItem('pending_pinjaman') || '{}');
         if (savedData && Object.keys(savedData).length > 0) {
-            const pinForm = document.getElementById('pinVerificationForm');
-            if (!pinForm) return;
-            
-            // Hapus dulu jika ada hidden inputs sebelumnya
-            const existingHiddenInputs = pinForm.querySelectorAll('input[name^="pinjaman_"]');
-            existingHiddenInputs.forEach(el => el.remove());
-            
-            // Tambahkan hidden inputs untuk semua data form
-            for (const [key, value] of Object.entries(savedData)) {
-                if (key !== 'timestamp') {
-                    const hiddenInput = document.createElement('input');
-                    hiddenInput.type = 'hidden';
-                    hiddenInput.name = 'pinjaman_' + key;
-                    hiddenInput.value = value;
-                    pinForm.appendChild(hiddenInput);
-                }
+          const pinForm = document.getElementById('pinVerificationForm');
+          if (!pinForm) return;
+
+          const existingHiddenInputs = pinForm.querySelectorAll('input[name^="pinjaman_"]');
+          existingHiddenInputs.forEach(el => el.remove());
+
+          for (const [key, value] of Object.entries(savedData)) {
+            if (key !== 'timestamp') {
+              const hiddenInput = document.createElement('input');
+              hiddenInput.type = 'hidden';
+              hiddenInput.name = 'pinjaman_' + key;
+              hiddenInput.value = value;
+              pinForm.appendChild(hiddenInput);
             }
-            console.log('Form data restored to PIN modal');
+          }
         }
-    }
+      }
 
-    // ======================= KONFIRMASI FORM =======================
-    // Konfirmasi sebelum submit form pinjaman
-    document.querySelectorAll('form[id^="form-"]').forEach(function(form){
-        form.addEventListener('submit', function(e){
-            e.preventDefault();
+      // Form Confirmation & Submit Handler
+      document.querySelectorAll('form[id^="form-"]').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
 
-            if (isDisabled) {
-                if (!hasNoRekening) {
-                    alert('Harap lengkapi nomor rekening di menu Profil terlebih dahulu sebelum mengajukan pinjaman.');
-                    window.location.href = '<?= base_url('anggota/profil/edit') ?>';
+          if (isDisabled) {
+            if (!hasNoRekening) {
+              alert('Harap lengkapi nomor rekening di menu Profil terlebih dahulu.');
+              window.location.href = '<?= base_url('anggota/profil/edit') ?>';
+            } else {
+              alert('Anda memiliki pinjaman aktif yang belum lunas.');
+            }
+            return;
+          }
+
+          const checkboxes = form.querySelectorAll('.confirm-checkbox');
+          let allChecked = true;
+          checkboxes.forEach(cb => {
+            if (!cb.checked) allChecked = false;
+          });
+
+          const nominalInput = form.querySelector('input[type="text"]');
+          const rawNominal = nominalInput.value.replace(/\./g, "");
+          const nominal = parseInt(rawNominal) || 0;
+
+          // Deteksi batas limit sesuai form akad
+          const jenisAkad = form.querySelector('input[name="jenis"]').value;
+          let currentMaxLimit = LIMITS.alqord;
+          if (jenisAkad === 'murabahah') currentMaxLimit = LIMITS.murabahah;
+          else if (jenisAkad === 'mudharabah') currentMaxLimit = LIMITS.mudharabah;
+
+          const deskripsiInput = form.querySelector('textarea');
+          const deskripsi = deskripsiInput.value.trim();
+
+          if (!allChecked) {
+            alert('Harap centang semua pernyataan persetujuan.');
+            return;
+          }
+
+          if (nominal > currentMaxLimit) {
+            alert('Nominal pinjaman melebihi batas maksimum Rp ' + currentMaxLimit.toLocaleString('id-ID'));
+            return;
+          }
+
+          if (nominal <= 0) {
+            alert('Nominal pinjaman harus lebih dari 0');
+            return;
+          }
+
+          if (deskripsi.length < 10) {
+            alert('Deskripsi penggunaan pinjaman minimal 10 karakter');
+            deskripsiInput.focus();
+            return;
+          }
+
+          const submitBtn = form.querySelector('.btn-ajukan');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '⏳ Processing...';
+          submitBtn.disabled = true;
+
+          saveFormDataToLocalStorage(form);
+
+          $.ajax({
+            url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
+            type: 'GET',
+            success: function(response) {
+              if (response.canSubmit) {
+                if (response.hasPin) {
+                  const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+                  restoreFormDataToPinModal();
+
+                  $.ajax({
+                    url: form.action,
+                    type: 'POST',
+                    data: $(form).serialize(),
+                    success: function() {
+                      pinModal.show();
+                    },
+                    error: function() {
+                      alert('Gagal menyimpan data pengajuan.');
+                      submitBtn.innerHTML = originalText;
+                      submitBtn.disabled = false;
+                    }
+                  });
                 } else {
-                    alert('Anda memiliki pinjaman aktif. Silakan selesaikan pinjaman terlebih dahulu sebelum mengajukan pinjaman baru.');
+                  const createPinModal = new bootstrap.Modal(document.getElementById('createPinModal'));
+                  createPinModal.show();
+                  submitBtn.innerHTML = originalText;
+                  submitBtn.disabled = false;
                 }
-                return;
+              } else {
+                let errorMsg = 'Gagal mengajukan pinjaman:\n';
+                response.messages.forEach(function(msg) {
+                  if (msg) errorMsg += '- ' + msg + '\n';
+                });
+                alert(errorMsg);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+              }
+            },
+            error: function() {
+              alert('Terjadi kesalahan validasi.');
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
             }
-
-            const checkboxes = form.querySelectorAll('.confirm-checkbox');
-            let allChecked = true;
-
-            checkboxes.forEach(cb => {
-                if (!cb.checked) {
-                    allChecked = false;
-                }
-            });
-
-            // Validasi nominal
-            const nominalInput = form.querySelector('input[type="text"]');
-            const rawNominal = nominalInput.value.replace(/\./g, "");
-            const nominal = parseInt(rawNominal) || 0;
-
-            // Validasi deskripsi
-            const deskripsiInput = form.querySelector('textarea');
-            const deskripsi = deskripsiInput.value.trim();
-
-            if (!allChecked) {
-                alert('Harap centang semua pernyataan sebelum mengajukan pinjaman.');
-                return;
-            }
-
-            if (nominal > MAX_PINJAMAN) {
-                alert('Nominal pinjaman melebihi batas maksimum Rp 4.000.000');
-                return;
-            }
-
-            if (nominal <= 0) {
-                alert('Nominal pinjaman harus lebih dari 0');
-                return;
-            }
-
-            if (deskripsi === '') {
-                alert('Harap isi deskripsi penggunaan pinjaman');
-                deskripsiInput.focus();
-                return;
-            }
-
-            if (deskripsi.length < 10) {
-                alert('Deskripsi penggunaan pinjaman minimal 10 karakter');
-                deskripsiInput.focus();
-                return;
-            }
-
-            // Show loading state
-            const submitBtn = form.querySelector('.btn-ajukan');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Mengajukan...';
-            submitBtn.disabled = true;
-
-            // Simpan data form ke localStorage
-            const formData = saveFormDataToLocalStorage(form);
-
-            // Validasi sebelum submit via AJAX
-            console.log('Validating before submit...');
-            $.ajax({
-                url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
-                type: 'GET',
-                success: function(response) {
-                    console.log('Validation response:', response);
-                    if (response.canSubmit) {
-                        // Cek apakah sudah punya PIN
-                        if (response.hasPin) {
-                            // Tampilkan modal PIN
-                            const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
-                            
-                            // Restore form data ke modal PIN
-                            restoreFormDataToPinModal();
-                            
-                            // Submit form secara normal (bukan AJAX) untuk menyimpan di session
-                            // Kita akan submit form via JavaScript biasa
-                            const submitForm = function() {
-                                // Buat form sementara untuk submit
-                                const tempForm = document.createElement('form');
-                                tempForm.method = 'POST';
-                                tempForm.action = form.action;
-                                tempForm.style.display = 'none';
-                                
-                                // Tambahkan semua field dari form asli
-                                const formElements = form.elements;
-                                for (let i = 0; i < formElements.length; i++) {
-                                    const element = formElements[i];
-                                    if (element.name && element.type !== 'button' && element.type !== 'submit') {
-                                        const newElement = document.createElement('input');
-                                        newElement.type = 'hidden';
-                                        newElement.name = element.name;
-                                        newElement.value = element.value;
-                                        tempForm.appendChild(newElement);
-                                    }
-                                }
-                                
-                                document.body.appendChild(tempForm);
-                                tempForm.submit();
-                            };
-                            
-                            // Coba submit dulu untuk menyimpan di session backend
-                            $.ajax({
-                                url: form.action,
-                                type: 'POST',
-                                data: $(form).serialize(), // Gunakan serialize() bukan FormData
-                                success: function() {
-                                    console.log('Form submitted to backend, showing PIN modal');
-                                    pinModal.show();
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error('Submit error:', error);
-                                    alert('Gagal menyimpan data pinjaman.');
-                                    submitBtn.innerHTML = originalText;
-                                    submitBtn.disabled = false;
-                                }
-                            });
-                        } else {
-                            // Tampilkan modal buat PIN
-                            const createPinModal = new bootstrap.Modal(document.getElementById('createPinModal'));
-                            createPinModal.show();
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.disabled = false;
-                        }
-                    } else {
-                        // Tampilkan pesan error
-                        let errorMsg = 'Tidak dapat mengajukan pinjaman karena:\n';
-                        response.messages.forEach(function(msg) {
-                            if (msg) errorMsg += '- ' + msg + '\n';
-                        });
-                        alert(errorMsg);
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', error);
-                    alert('Terjadi kesalahan saat validasi. Silakan coba lagi.');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
+          });
         });
-    });
+      });
 
-    // ======================= VERIFIKASI PIN =======================
-    // Handle verifikasi PIN
-    const pinVerificationForm = document.getElementById('pinVerificationForm');
-    if (pinVerificationForm) {
+      // PIN Verification Handler
+      const pinVerificationForm = document.getElementById('pinVerificationForm');
+      if (pinVerificationForm) {
         pinVerificationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const pin = document.getElementById('pin').value;
-            const pinError = document.getElementById('pinError');
-            
-            if (pin.length !== 6) {
-                pinError.textContent = 'PIN harus 6 digit';
+          e.preventDefault();
+          const pin = document.getElementById('pin').value;
+          const pinError = document.getElementById('pinError');
+
+          if (pin.length !== 6) {
+            pinError.textContent = 'PIN harus 6 digit';
+            pinError.style.display = 'block';
+            return;
+          }
+
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '⏳ Memproses...';
+          submitBtn.disabled = true;
+
+          $.ajax({
+            url: '<?= base_url("pinjaman/verify-pin") ?>',
+            type: 'POST',
+            data: {
+              pin: pin
+            },
+            success: function(response) {
+              if (response.success) {
+                pinVerificationForm.submit();
+              } else {
+                pinError.textContent = response.message;
                 pinError.style.display = 'block';
-                return;
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+              }
+            },
+            error: function() {
+              pinError.textContent = 'Kesalahan saat memverifikasi PIN';
+              pinError.style.display = 'block';
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
             }
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Memproses...';
-            submitBtn.disabled = true;
-            
-            // Verifikasi PIN via AJAX
-            $.ajax({
-                url: '<?= base_url("pinjaman/verify-pin") ?>',
-                type: 'POST',
-                data: {pin: pin},
-                success: function(response) {
-                    console.log('PIN verification response:', response);
-                    if (response.success) {
-                        // Jika PIN valid, submit form PIN verification
-                        pinVerificationForm.submit();
-                    } else {
-                        pinError.textContent = response.message;
-                        pinError.style.display = 'block';
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('PIN verification error:', error);
-                    pinError.textContent = 'Terjadi kesalahan saat verifikasi PIN';
-                    pinError.style.display = 'block';
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
+          });
         });
-    }
-    
-    // ======================= BUAT PIN =======================
-    // Handle buat PIN
-    const createPinForm = document.getElementById('createPinForm');
-    if (createPinForm) {
+      }
+
+      // Create PIN Handler
+      const createPinForm = document.getElementById('createPinForm');
+      if (createPinForm) {
         createPinForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const newPin = document.getElementById('new_pin').value;
-            const confirmPin = document.getElementById('confirm_pin').value;
-            
-            // Validasi
-            if (newPin.length !== 6) {
-                showPinMessage('PIN harus 6 digit', 'danger');
-                return;
+          e.preventDefault();
+          const newPin = document.getElementById('new_pin').value;
+          const confirmPin = document.getElementById('confirm_pin').value;
+
+          if (newPin.length !== 6 || newPin !== confirmPin) {
+            showPinMessage(newPin.length !== 6 ? 'PIN harus 6 digit' : 'Konfirmasi PIN tidak cocok', 'danger');
+            return;
+          }
+
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '⏳ Membuat PIN...';
+          submitBtn.disabled = true;
+
+          $.ajax({
+            url: '<?= base_url("pinjaman/create-pin") ?>',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+              if (response.success) {
+                showPinMessage(response.message, 'success');
+                setTimeout(function() {
+                  const createPinModal = bootstrap.Modal.getInstance(document.getElementById('createPinModal'));
+                  const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+                  if (createPinModal) createPinModal.hide();
+                  restoreFormDataToPinModal();
+                  pinModal.show();
+                  submitBtn.innerHTML = originalText;
+                  submitBtn.disabled = false;
+                }, 1500);
+              } else {
+                showPinMessage(response.message, 'danger');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+              }
+            },
+            error: function() {
+              showPinMessage('Gagal membuat PIN baru', 'danger');
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
             }
-            
-            if (newPin !== confirmPin) {
-                showPinMessage('PIN tidak cocok', 'danger');
-                return;
-            }
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Membuat PIN...';
-            submitBtn.disabled = true;
-            
-            // Submit buat PIN menggunakan serialize() bukan FormData
-            $.ajax({
-                url: '<?= base_url("pinjaman/create-pin") ?>',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    console.log('Create PIN response:', response);
-                    if (response.success) {
-                        showPinMessage(response.message, 'success');
-                        
-                        // Tutup modal buat PIN dan buka modal verifikasi PIN
-                        setTimeout(function() {
-                            const createPinModal = bootstrap.Modal.getInstance(document.getElementById('createPinModal'));
-                            const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
-                            if (createPinModal) createPinModal.hide();
-                            
-                            // Restore form data dari localStorage ke modal PIN
-                            restoreFormDataToPinModal();
-                            
-                            pinModal.show();
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.disabled = false;
-                        }, 1500);
-                    } else {
-                        showPinMessage(response.message, 'danger');
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Create PIN error:', error);
-                    showPinMessage('Terjadi kesalahan. Silakan coba lagi.', 'danger');
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
+          });
         });
-    }
-    
-    function showPinMessage(message, type) {
+      }
+
+      function showPinMessage(message, type) {
         const messageDiv = document.getElementById('pinMessage');
         if (messageDiv) {
-            // Hapus semua alert classes
-            messageDiv.className = 'alert alert-' + type;
-            messageDiv.textContent = message;
-            messageDiv.style.display = 'block';
-            
-            // Auto hide setelah 3 detik
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 3000);
+          messageDiv.className = 'alert alert-' + type;
+          messageDiv.textContent = message;
+          messageDiv.style.display = 'block';
+          setTimeout(() => {
+            messageDiv.style.display = 'none';
+          }, 3000);
         }
-    }
+      }
 
-    // ======================= FORMAT RUPIAH =======================
-    // Fungsi format rupiah
-    function formatRupiah(angka) {
+      function formatRupiah(angka) {
         if (!angka) return '';
         return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
+      }
 
-    // Format input rupiah
-    document.querySelectorAll('input[id$="-nominal"], input[id$="-harga"]').forEach(input => {
-        input.addEventListener('input', function(e) {
-            let value = this.value.replace(/\D/g, '');
-            if (value) {
-                this.value = formatRupiah(value);
-                
-                // Validasi real-time
-                const nominal = parseInt(value) || 0;
-                const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
-                const errorElement = document.getElementById(errorId);
-                
-                if (nominal > MAX_PINJAMAN) {
-                    if (errorElement) {
-                        errorElement.style.display = 'block';
-                    }
-                    this.parentElement.classList.add('input-error');
-                } else {
-                    if (errorElement) {
-                        errorElement.style.display = 'none';
-                    }
-                    this.parentElement.classList.remove('input-error');
-                }
+      // Format Input Rupiah Realtime Sesuai Limit Masing-Masing
+      document.querySelectorAll('input[id$="-nominal"], input[id$="-harga"]').forEach(input => {
+        input.addEventListener('input', function() {
+          let value = this.value.replace(/\D/g, '');
+          const form = this.closest('form');
+          const jenisAkad = form.querySelector('input[name="jenis"]').value;
+
+          let currentMax = LIMITS.alqord;
+          if (jenisAkad === 'murabahah') currentMax = LIMITS.murabahah;
+          else if (jenisAkad === 'mudharabah') currentMax = LIMITS.mudharabah;
+
+          if (value) {
+            this.value = formatRupiah(value);
+            const nominal = parseInt(value) || 0;
+            const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
+            const errorElement = document.getElementById(errorId);
+
+            if (nominal > currentMax) {
+              if (errorElement) errorElement.style.display = 'block';
+              this.parentElement.classList.add('input-error');
             } else {
-                this.value = '';
-                const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
-                const errorElement = document.getElementById(errorId);
-                if (errorElement) {
-                    errorElement.style.display = 'none';
-                }
-                this.parentElement.classList.remove('input-error');
+              if (errorElement) errorElement.style.display = 'none';
+              this.parentElement.classList.remove('input-error');
             }
+          } else {
+            this.value = '';
+            const errorId = this.id.replace('-nominal', '-error').replace('-harga', '-error');
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) errorElement.style.display = 'none';
+            this.parentElement.classList.remove('input-error');
+          }
         });
-    });
+      });
 
-    // Validasi real-time untuk textarea
-    document.querySelectorAll('textarea').forEach(textarea => {
-        textarea.addEventListener('input', function() {
-            const length = this.value.trim().length;
-            if (length > 0 && length < 10) {
-                this.classList.add('input-error');
-            } else {
-                this.classList.remove('input-error');
-            }
-        });
-    });
-
-    // Initialize character counts
-    document.querySelectorAll('textarea').forEach(textarea => {
+      document.querySelectorAll('textarea').forEach(textarea => {
         const id = textarea.id;
         const counterId = id.replace('-deskripsi', '-charcount');
         const counter = document.getElementById(counterId);
-        if (counter) {
-            updateCharacterCount(textarea, counter);
-        }
-    });
+        if (counter) updateCharacterCount(textarea, counter);
+      });
 
-    // Initialize semua perhitungan saat load
-    updateAlqord();
-    updateMurabahah();
-    updateMudharabah();
-    
-    // Auto-hide alerts after 5 seconds
-    setTimeout(() => {
-        document.querySelectorAll('.alert:not(.success-message .alert)').forEach(alert => {
-            if (alert.style) {
-                alert.style.opacity = '0';
-                alert.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => {
-                    if (alert.parentElement) alert.remove();
-                }, 500);
-            }
+      updateAlqord();
+      updateMurabahah();
+      updateMudharabah();
+
+      setTimeout(() => {
+        // Alert dengan class .alert-persistent tidak akan dihapus
+        document.querySelectorAll('.alert:not(.alert-persistent)').forEach(alert => {
+          if (alert.style) {
+            alert.style.opacity = '0';
+            alert.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+              if (alert.parentElement) alert.remove();
+            }, 500);
+          }
         });
-    }, 5000);
+      }, 5000);
 
-    // Jika ada flash data show_pin_modal, tampilkan modal
-    <?php if (session()->getFlashdata('show_pin_modal')): ?>
+      <?php if (session()->getFlashdata('show_pin_modal')): ?>
         setTimeout(function() {
-            // Restore form data dari localStorage
-            restoreFormDataToPinModal();
-            
-            $.ajax({
-                url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
-                type: 'GET',
-                success: function(response) {
-                    console.log('Auto-show modal response:', response);
-                    if (response.hasPin) {
-                        const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
-                        pinModal.show();
-                    } else {
-                        const createPinModal = new bootstrap.Modal(document.getElementById('createPinModal'));
-                        createPinModal.show();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Auto-show modal error:', error);
-                }
-            });
+          restoreFormDataToPinModal();
+          $.ajax({
+            url: '<?= base_url("pinjaman/validateBeforeSubmit") ?>',
+            type: 'GET',
+            success: function(response) {
+              if (response.hasPin) {
+                const pinModal = new bootstrap.Modal(document.getElementById('pinModal'));
+                pinModal.show();
+              } else {
+                const createPinModal = new bootstrap.Modal(document.getElementById('createPinModal'));
+                createPinModal.show();
+              }
+            }
+          });
         }, 1000);
-    <?php endif; ?>
+      <?php endif; ?>
 
-    // ======================= CLEANUP =======================
-    // Handle modal hidden events
-    const pinModalElement = document.getElementById('pinModal');
-    if (pinModalElement) {
-        pinModalElement.addEventListener('hidden.bs.modal', function () {
-            // Clear PIN field
-            const pinInput = document.getElementById('pin');
-            if (pinInput) pinInput.value = '';
-            // Clear error
-            const pinError = document.getElementById('pinError');
-            if (pinError) {
-                pinError.textContent = '';
-                pinError.style.display = 'none';
-            }
-            // Hapus data dari localStorage jika modal ditutup tanpa submit
-            localStorage.removeItem('pending_pinjaman');
+      const pinModalElement = document.getElementById('pinModal');
+      if (pinModalElement) {
+        pinModalElement.addEventListener('hidden.bs.modal', function() {
+          const pinInput = document.getElementById('pin');
+          if (pinInput) pinInput.value = '';
+          localStorage.removeItem('pending_pinjaman');
         });
-    }
+      }
 
-    const createPinModalElement = document.getElementById('createPinModal');
-    if (createPinModalElement) {
-        createPinModalElement.addEventListener('hidden.bs.modal', function () {
-            // Clear PIN fields
-            const newPinInput = document.getElementById('new_pin');
-            const confirmPinInput = document.getElementById('confirm_pin');
-            if (newPinInput) newPinInput.value = '';
-            if (confirmPinInput) confirmPinInput.value = '';
-            // Clear message
-            const pinMessage = document.getElementById('pinMessage');
-            if (pinMessage) {
-                pinMessage.textContent = '';
-                pinMessage.style.display = 'none';
-            }
-            // Hapus data dari localStorage jika user membatalkan
-            localStorage.removeItem('pending_pinjaman');
+      const createPinModalElement = document.getElementById('createPinModal');
+      if (createPinModalElement) {
+        createPinModalElement.addEventListener('hidden.bs.modal', function() {
+          const newPinInput = document.getElementById('new_pin');
+          const confirmPinInput = document.getElementById('confirm_pin');
+          if (newPinInput) newPinInput.value = '';
+          if (confirmPinInput) confirmPinInput.value = '';
+          localStorage.removeItem('pending_pinjaman');
         });
-    }
-    
-    // Clean up localStorage saat page unload atau saat success
-    window.addEventListener('beforeunload', function() {
-        // Hanya hapus jika tidak ada success message
-        const successMessage = document.querySelector('.success-message');
-        if (!successMessage) {
-            localStorage.removeItem('pending_pinjaman');
-        }
-    });
-    
-    // Jika ada success message, hapus localStorage
-    const successMessage = document.querySelector('.success-message');
-    if (successMessage) {
+      }
+
+      const successMessage = document.querySelector('.success-message');
+      if (successMessage) {
         localStorage.removeItem('pending_pinjaman');
+      }
     }
-}
-
-// Error handling
-window.addEventListener('error', function(e) {
-    console.error('JavaScript Error:', e.error);
-    console.error('Error message:', e.message);
-    console.error('Error at:', e.filename, 'line:', e.lineno, 'col:', e.colno);
-    
-    // Tangani error Illegal invocation
-    if (e.message && e.message.includes('Illegal invocation')) {
-        console.log('Illegal invocation error detected, reloading page...');
-        setTimeout(() => {
-            location.reload();
-        }, 1000);
-    }
-});
-</script>
+  </script>
 </body>
+
 </html>

@@ -27,9 +27,9 @@ class Cicilan extends BaseController
    public function index()
 {
     // Ambil data anggota dari session
-   $id_anggota = session()->get('id'); // Coba dengan 'id' saja
+   $id_anggota = session()->get('id');
     if (!$id_anggota) {
-        $id_anggota = session()->get('id_anggota'); // Fallback ke 'id_anggota'
+        $id_anggota = session()->get('id_anggota'); 
     }
     $db = \Config\Database::connect();
 
@@ -103,8 +103,8 @@ class Cicilan extends BaseController
     return view('cicilan', [
         'title' => $data['title'],
         'data' => $data,
-        'anggota' => $data['anggota'], // ✅ tambahkan ini
-        'summary' => $data['summary'], // biar bagian totalnya gak error juga
+        'anggota' => $data['anggota'], 
+        'summary' => $data['summary'], 
         'showTenorModal'=> $showTenorModal
     ]);
 
@@ -216,7 +216,7 @@ private function getAllPinjamanAktif($id_anggota)
             $pinjaman_aktif[] = (object)$pinjaman_data;
         }
 
-        // Lakukan hal yang sama untuk Murabahah dan Mudharabah...
+        
         // 2. Ambil dari tabel MURABAHAH
         $murabahah_aktif = $db->table('murabahah')
                              ->where('id_anggota', $id_anggota)
