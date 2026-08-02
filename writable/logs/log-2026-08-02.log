@@ -1,0 +1,975 @@
+DEBUG - 2026-08-02 00:31:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:32:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:32:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:32:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:33:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:33:01 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 00:33:01 --> ID Anggota: 77
+DEBUG - 2026-08-02 00:33:01 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 00:33:01 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 00:33:01 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 00:33:01 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 00:33:01 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 00:33:01 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 00:33:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:33:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:35:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 00:35:11 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(637): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-02 00:35:11 --> Error saveMember: Unknown column 'username' in 'field list'
+DEBUG - 2026-08-02 00:49:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:49:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:49:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:49:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:50:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:50:16 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 00:50:16 --> ID Anggota: 46
+DEBUG - 2026-08-02 00:50:16 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 00:50:16 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 00:50:16 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 00:50:16 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2026-08-02 00:50:16 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 00:50:16 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 00:50:16 --> Data Murabahah lunas: 2
+DEBUG - 2026-08-02 00:50:16 --> Data Mudharabah lunas: 1
+DEBUG - 2026-08-02 00:50:16 --> Total semua pinjaman lunas: 3
+DEBUG - 2026-08-02 00:50:16 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 00:50:16 --> Total pinjaman aktif: 0
+DEBUG - 2026-08-02 00:50:16 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 00:50:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:50:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:50:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:51:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:51:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:51:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:51:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:52:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:58:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:58:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:58:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:58:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:58:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:59:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:59:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:59:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 00:59:33 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 00:59:33 --> ID Anggota: 46
+DEBUG - 2026-08-02 00:59:33 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2026-08-02 00:59:33 --> 🔍 DETAIL QARD:
+DEBUG - 2026-08-02 00:59:33 -->   - ID: 45
+DEBUG - 2026-08-02 00:59:33 -->   - Jumlah Pinjam: 4000000.00
+DEBUG - 2026-08-02 00:59:33 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2026-08-02 00:59:33 -->   - Jumlah Angsuran: 10
+DEBUG - 2026-08-02 00:59:33 -->   - Status: aktif
+DEBUG - 2026-08-02 00:59:33 -->   - Tanggal: 2026-08-02
+DEBUG - 2026-08-02 00:59:33 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=4000000, Tenor=10
+DEBUG - 2026-08-02 00:59:33 -->   - Angsuran Berjalan: 0
+DEBUG - 2026-08-02 00:59:33 -->   - Angsuran per Bulan: 400000
+DEBUG - 2026-08-02 00:59:33 -->   - Bisa Bayar: YA ✅
+DEBUG - 2026-08-02 00:59:34 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 00:59:34 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 00:59:34 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2026-08-02 00:59:34 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 00:59:34 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 00:59:34 --> Data Murabahah lunas: 2
+DEBUG - 2026-08-02 00:59:34 --> Data Mudharabah lunas: 1
+DEBUG - 2026-08-02 00:59:34 --> Total semua pinjaman lunas: 3
+DEBUG - 2026-08-02 00:59:34 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 00:59:34 --> Total pinjaman aktif: 1
+DEBUG - 2026-08-02 00:59:34 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2026-08-02 00:59:34 --> Jatuh tempo: 2026-09-02, Today: 2026-08-02
+DEBUG - 2026-08-02 00:59:34 --> Jatuh tempo terdekat diupdate: 2026-09-02
+DEBUG - 2026-08-02 00:59:34 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 400000
+    [jatuh_tempo_terdekat] => 2026-09-02
+    [total_qard] => 4000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 00:59:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:14 --> === MEMULAI PROSES BAYAR CICILAN ===
+DEBUG - 2026-08-02 01:00:14 --> ID Anggota: 46
+DEBUG - 2026-08-02 01:00:14 --> POST Data: Array
+(
+    [csrf_test_name] => 27dd84042121d6bea344b65c0360ff2f
+    [jenis_pinjaman] => qard
+    [id_pinjaman] => 45
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 400000
+)
+
+DEBUG - 2026-08-02 01:00:14 --> Jumlah bayar input: 400000, Formatted: 400000
+DEBUG - 2026-08-02 01:00:14 --> Data pembayaran: Array
+(
+    [id_anggota] => 46
+    [jenis_pinjaman] => qard
+    [id_pinjaman] => 45
+    [angsuran_ke] => 1
+    [jumlah_bayar] => 400000
+    [tanggal_bayar] => 2026-08-02 01:00:14
+    [status] => pending
+    [created_at] => 2026-08-02 01:00:14
+)
+
+DEBUG - 2026-08-02 01:00:14 --> Uploading file to: D:\Kumpulan Project IT\Project Web\koperasi-samara\public/uploads/bukti_bayar/1785632414_805b7654b6f9945b2f03.png
+DEBUG - 2026-08-02 01:00:15 --> File uploaded successfully: 1785632414_805b7654b6f9945b2f03.png
+DEBUG - 2026-08-02 01:00:15 --> Save result: Success
+DEBUG - 2026-08-02 01:00:15 --> Payment saved successfully, ID: 18
+DEBUG - 2026-08-02 01:00:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:20 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 01:00:20 --> ID Anggota: 46
+DEBUG - 2026-08-02 01:00:20 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2026-08-02 01:00:20 --> 🔍 DETAIL QARD:
+DEBUG - 2026-08-02 01:00:20 -->   - ID: 45
+DEBUG - 2026-08-02 01:00:20 -->   - Jumlah Pinjam: 4000000.00
+DEBUG - 2026-08-02 01:00:20 -->   - Jumlah Terbayar: 0.00
+DEBUG - 2026-08-02 01:00:20 -->   - Jumlah Angsuran: 10
+DEBUG - 2026-08-02 01:00:20 -->   - Status: aktif
+DEBUG - 2026-08-02 01:00:20 -->   - Tanggal: 2026-08-02
+DEBUG - 2026-08-02 01:00:20 --> hitungAngsuranBerjalanFix: Terbayar=0, Pinjam=4000000, Tenor=10
+DEBUG - 2026-08-02 01:00:20 -->   - Angsuran Berjalan: 0
+DEBUG - 2026-08-02 01:00:20 -->   - Angsuran per Bulan: 400000
+DEBUG - 2026-08-02 01:00:20 -->   - Bisa Bayar: YA ✅
+DEBUG - 2026-08-02 01:00:20 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:00:20 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:00:20 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2026-08-02 01:00:20 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 01:00:20 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 01:00:20 --> Data Murabahah lunas: 2
+DEBUG - 2026-08-02 01:00:20 --> Data Mudharabah lunas: 1
+DEBUG - 2026-08-02 01:00:20 --> Total semua pinjaman lunas: 3
+DEBUG - 2026-08-02 01:00:20 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 01:00:20 --> Total pinjaman aktif: 1
+DEBUG - 2026-08-02 01:00:20 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2026-08-02 01:00:20 --> Jatuh tempo: 2026-09-02, Today: 2026-08-02
+DEBUG - 2026-08-02 01:00:20 --> Jatuh tempo terdekat diupdate: 2026-09-02
+DEBUG - 2026-08-02 01:00:20 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 400000
+    [jatuh_tempo_terdekat] => 2026-09-02
+    [total_qard] => 4000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 01:00:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:35 --> Properties available: id, id_anggota, jenis_pinjaman, id_pinjaman, angsuran_ke, jumlah_bayar, tanggal_bayar, bukti_bayar, status, created_at, updated_at
+DEBUG - 2026-08-02 01:00:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:42 --> === VERIFIKASI PEMBAYARAN START ===
+DEBUG - 2026-08-02 01:00:42 --> Verifikasi pembayaran dipanggil, ID: 18
+DEBUG - 2026-08-02 01:00:42 --> Data pembayaran ditemukan: {"id":"18","id_anggota":"46","jenis_pinjaman":"Qard","id_pinjaman":"45","angsuran_ke":"1","jumlah_bayar":"400000.00","tanggal_bayar":"2026-08-02","bukti_bayar":"1785632414_805b7654b6f9945b2f03.png","status":"pending","created_at":"2026-08-02 01:00:14","updated_at":"2026-08-02 08:00:15"}
+DEBUG - 2026-08-02 01:00:42 --> Update status pembayaran_pending result: SUCCESS
+DEBUG - 2026-08-02 01:00:42 --> Memanggil updatePinjamanTerbayar dengan params: jenis=Qard, id_pinjaman=45, jumlah=400000.00
+DEBUG - 2026-08-02 01:00:42 --> === UPDATE PINJAMAN TERBAYAR START ===
+DEBUG - 2026-08-02 01:00:42 --> Jenis: Qard, ID Pinjaman: 45, Jumlah Bayar: 400000.00
+DEBUG - 2026-08-02 01:00:42 --> Table: qard, ID Field: id_qard
+DEBUG - 2026-08-02 01:00:42 --> Data pinjaman ditemukan: {"id_qard":"45","id_anggota":"46","tanggal":"2026-08-02","jml_pinjam":"4000000.00","jml_angsuran":"10","deskripsi":"coba sekalui","jml_terbayar":"0.00","status":"aktif","sisa_tenor":"0","keperluan":null,"tgl_pengajuan":null,"tgl_disetujui":null}
+DEBUG - 2026-08-02 01:00:42 --> Terbayar lama: 0.00, Terbayar baru: 400000, Jml Pinjam: 4000000.00
+DEBUG - 2026-08-02 01:00:42 --> Update data: {"jml_terbayar":400000}
+DEBUG - 2026-08-02 01:00:42 --> Update result: SUCCESS
+DEBUG - 2026-08-02 01:00:42 --> === UPDATE PINJAMAN TERBAYAR END ===
+DEBUG - 2026-08-02 01:00:42 --> Pembayaran berhasil diverifikasi: 18
+DEBUG - 2026-08-02 01:00:42 --> === VERIFIKASI PEMBAYARAN END ===
+DEBUG - 2026-08-02 01:00:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:00:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:01:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:01:38 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 01:01:38 --> ID Anggota: 46
+DEBUG - 2026-08-02 01:01:38 --> Jumlah Qard aktif ditemukan: 1
+DEBUG - 2026-08-02 01:01:38 --> 🔍 DETAIL QARD:
+DEBUG - 2026-08-02 01:01:38 -->   - ID: 45
+DEBUG - 2026-08-02 01:01:38 -->   - Jumlah Pinjam: 4000000.00
+DEBUG - 2026-08-02 01:01:38 -->   - Jumlah Terbayar: 400000.00
+DEBUG - 2026-08-02 01:01:38 -->   - Jumlah Angsuran: 10
+DEBUG - 2026-08-02 01:01:38 -->   - Status: aktif
+DEBUG - 2026-08-02 01:01:38 -->   - Tanggal: 2026-08-02
+DEBUG - 2026-08-02 01:01:38 --> hitungAngsuranBerjalanFix: Terbayar=400000, Pinjam=4000000, Tenor=10
+DEBUG - 2026-08-02 01:01:38 --> hitungAngsuranBerjalanFix: AngsuranPerBulan=400000, Hasil=1
+DEBUG - 2026-08-02 01:01:38 -->   - Angsuran Berjalan: 1
+DEBUG - 2026-08-02 01:01:38 -->   - Angsuran per Bulan: 400000
+DEBUG - 2026-08-02 01:01:38 -->   - Bisa Bayar: YA ✅
+DEBUG - 2026-08-02 01:01:38 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:01:38 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:01:38 --> === TOTAL SEMUA PINJAMAN AKTIF: 1 ===
+DEBUG - 2026-08-02 01:01:38 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 01:01:38 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 01:01:38 --> Data Murabahah lunas: 2
+DEBUG - 2026-08-02 01:01:38 --> Data Mudharabah lunas: 1
+DEBUG - 2026-08-02 01:01:38 --> Total semua pinjaman lunas: 3
+DEBUG - 2026-08-02 01:01:38 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 01:01:38 --> Total pinjaman aktif: 1
+DEBUG - 2026-08-02 01:01:38 --> Processing: qard - Pinjaman Al-Qord, Bisa Bayar: Ya
+DEBUG - 2026-08-02 01:01:38 --> Jatuh tempo: 2026-10-02, Today: 2026-08-02
+DEBUG - 2026-08-02 01:01:38 --> Jatuh tempo terdekat diupdate: 2026-10-02
+DEBUG - 2026-08-02 01:01:38 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 1
+    [total_angsuran_bulanan] => 400000
+    [jatuh_tempo_terdekat] => 2026-10-02
+    [total_qard] => 4000000
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 01:01:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:01:53 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 01:01:53 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 01:01:53 --> Data Murabahah lunas: 2
+DEBUG - 2026-08-02 01:01:53 --> Data Mudharabah lunas: 1
+DEBUG - 2026-08-02 01:01:53 --> Total semua pinjaman lunas: 3
+DEBUG - 2026-08-02 01:02:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:03:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:03:07 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:03:07 --> ID Anggota: 77
+DEBUG - 2026-08-02 01:03:07 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:03:07 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:03:07 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:03:07 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:03:07 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:03:07 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:03:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:04:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:06:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:06:29 --> mysqli_sql_exception: Unknown column 'id_user' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(613): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+DEBUG - 2026-08-02 01:10:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:10:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:10:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:10:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:11:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:11:07 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(612): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+DEBUG - 2026-08-02 01:14:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:14:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:14:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:19:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:19:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:19:19 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:19:19 --> ID Anggota: 77
+DEBUG - 2026-08-02 01:19:19 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:19:19 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:19:19 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:19:19 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:19:19 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:19:19 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:19:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:24:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:24:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:24:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:25:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:25:18 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(612): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+DEBUG - 2026-08-02 01:26:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:27:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:27:24 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(612): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+DEBUG - 2026-08-02 01:29:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:30:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:30:08 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(612): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+DEBUG - 2026-08-02 01:32:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:32:57 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(612): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+DEBUG - 2026-08-02 01:33:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:33:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:34:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:34:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:34:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:34:39 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:34:39 --> ID Anggota: 102
+DEBUG - 2026-08-02 01:34:39 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:34:39 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:34:39 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:34:39 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:34:39 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:34:39 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:34:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:34:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:34:46 --> ID Anggota: 103
+DEBUG - 2026-08-02 01:34:46 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:34:46 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:34:46 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:34:46 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:34:46 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:34:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:38:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:38:49 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:38:49 --> ID Anggota: 103
+DEBUG - 2026-08-02 01:38:49 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:38:49 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:38:49 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:38:49 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:38:49 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:38:49 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:38:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:39:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 01:39:21 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(611): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#12 {main}
+DEBUG - 2026-08-02 01:42:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:42:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:42:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:51:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:51:50 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:51:50 --> ID Anggota: 77
+DEBUG - 2026-08-02 01:51:50 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:51:50 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:51:50 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:51:50 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:51:50 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:51:50 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:51:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:34 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:52:34 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:52:34 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:52:34 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:52:34 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:52:34 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:52:34 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:52:34 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:52:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:52:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:53:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:53:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:53:25 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 01:53:25 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:53:25 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:53:25 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:53:25 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:53:25 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2026-08-02 01:53:25 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 01:53:25 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 01:53:25 --> Data Murabahah lunas: 0
+DEBUG - 2026-08-02 01:53:25 --> Data Mudharabah lunas: 0
+DEBUG - 2026-08-02 01:53:25 --> Total semua pinjaman lunas: 0
+DEBUG - 2026-08-02 01:53:25 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 01:53:25 --> Total pinjaman aktif: 0
+DEBUG - 2026-08-02 01:53:25 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 01:53:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:53:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:53:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:53:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:20 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 01:54:20 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:54:20 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:54:20 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:54:20 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:54:20 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2026-08-02 01:54:20 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 01:54:20 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 01:54:20 --> Data Murabahah lunas: 0
+DEBUG - 2026-08-02 01:54:20 --> Data Mudharabah lunas: 0
+DEBUG - 2026-08-02 01:54:20 --> Total semua pinjaman lunas: 0
+DEBUG - 2026-08-02 01:54:20 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 01:54:20 --> Total pinjaman aktif: 0
+DEBUG - 2026-08-02 01:54:20 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 01:54:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:54:27 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:54:27 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:54:27 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:54:27 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:54:27 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:54:27 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:54:27 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:54:27 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:54:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:17 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:55:17 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:55:17 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:17 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:17 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:17 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:55:17 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:55:17 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:55:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:25 --> === DEBUG DETAIL: MENGAMBIL PINJAMAN AKTIF ===
+DEBUG - 2026-08-02 01:55:25 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:55:25 --> Jumlah Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:25 --> Jumlah Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:25 --> Jumlah Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:25 --> === TOTAL SEMUA PINJAMAN AKTIF: 0 ===
+DEBUG - 2026-08-02 01:55:25 --> === MENGAMBIL PINJAMAN LUNAS DARI 3 TABEL ===
+DEBUG - 2026-08-02 01:55:25 --> Data Qard lunas: 0
+DEBUG - 2026-08-02 01:55:25 --> Data Murabahah lunas: 0
+DEBUG - 2026-08-02 01:55:25 --> Data Mudharabah lunas: 0
+DEBUG - 2026-08-02 01:55:25 --> Total semua pinjaman lunas: 0
+DEBUG - 2026-08-02 01:55:25 --> === MENGHITUNG SUMMARY CICILAN ===
+DEBUG - 2026-08-02 01:55:25 --> Total pinjaman aktif: 0
+DEBUG - 2026-08-02 01:55:25 --> Summary result: Array
+(
+    [total_pinjaman_aktif] => 0
+    [total_angsuran_bulanan] => 0
+    [jatuh_tempo_terdekat] => 
+    [total_qard] => 0
+    [total_murabahah] => 0
+    [total_mudharabah] => 0
+)
+
+DEBUG - 2026-08-02 01:55:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:55:53 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:55:53 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:55:53 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:53 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:53 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:55:53 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:55:53 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:55:53 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:56:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:56:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:56:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:56:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:56:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 01:56:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 01:56:46 --> ID Anggota: 129
+DEBUG - 2026-08-02 01:56:46 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 01:56:46 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:56:46 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 01:56:46 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 01:56:46 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 01:56:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 01:56:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:07:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:07:37 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:07:37 --> ID Anggota: 129
+DEBUG - 2026-08-02 02:07:37 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 02:07:37 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:07:37 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:07:37 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 02:07:37 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 02:07:37 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:07:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:07:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:07:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:07:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:08:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:09:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:09:01 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:09:01 --> ID Anggota: 129
+DEBUG - 2026-08-02 02:09:01 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 02:09:01 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:09:01 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:09:01 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 02:09:01 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 02:09:01 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:09:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:09:37 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:09:37 --> ID Anggota: 129
+DEBUG - 2026-08-02 02:09:37 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 02:09:37 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:09:37 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:09:37 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 02:09:37 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 02:09:37 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:10:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:10:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:10:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 02:10:34 --> mysqli_sql_exception: Column 'nama_lengkap' in where clause is ambiguous in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#14 {main}
+CRITICAL - 2026-08-02 02:10:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'nama_lengkap' in where clause is ambiguous
+[Method: GET, Route: admin/search-anggota]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 4 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-02 02:10:34 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'nama_lengkap' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%yus%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%yus%\' ESCAPE \'!\'
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%yus%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%yus%\' ESCAPE \'!\'
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 6 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-02 02:10:34 --> [Caused by] mysqli_sql_exception: Column 'nama_lengkap' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%yus%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%yus%\' ESCAPE \'!\'
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%yus%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%yus%\' ESCAPE \'!\'
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%yus%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%yus%\' ESCAPE \'!\'
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 7 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-08-02 02:10:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 02:10:36 --> mysqli_sql_exception: Column 'nama_lengkap' in where clause is ambiguous in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#14 {main}
+CRITICAL - 2026-08-02 02:10:36 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'nama_lengkap' in where clause is ambiguous
+[Method: GET, Route: admin/search-anggota]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 4 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-02 02:10:36 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'nama_lengkap' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%y%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%y%\' ESCAPE \'!\'
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%y%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%y%\' ESCAPE \'!\'
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 6 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-02 02:10:36 --> [Caused by] mysqli_sql_exception: Column 'nama_lengkap' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%y%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%y%\' ESCAPE \'!\'
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%y%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%y%\' ESCAPE \'!\'
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%y%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%y%\' ESCAPE \'!\'
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 7 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-08-02 02:10:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:10:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-02 02:10:41 --> mysqli_sql_exception: Column 'nama_lengkap' in where clause is ambiguous in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#14 {main}
+CRITICAL - 2026-08-02 02:10:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'nama_lengkap' in where clause is ambiguous
+[Method: GET, Route: admin/search-anggota]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 4 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-02 02:10:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'nama_lengkap' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%Yusi%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%Yusi%\' ESCAPE \'!\'
+ LIMIT 10')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%Yusi%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%Yusi%\' ESCAPE \'!\'
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 6 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-02 02:10:41 --> [Caused by] mysqli_sql_exception: Column 'nama_lengkap' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%Yusi%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%Yusi%\' ESCAPE \'!\'
+ LIMIT 10', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%Yusi%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%Yusi%\' ESCAPE \'!\'
+ LIMIT 10')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE \'%Yusi%\' ESCAPE \'!\'
+OR  `no_ktp` LIKE \'%Yusi%\' ESCAPE \'!\'
+ LIMIT 10')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `anggota`.*, `users`.`id` AS `id_user`, `users`.`username` AS `username_user`
+FROM `anggota`
+LEFT JOIN `users` ON `users`.`id` = `anggota`.`id_anggota`
+WHERE `nama_lengkap` LIKE :nama_lengkap: ESCAPE \'!\'
+OR  `no_ktp` LIKE :no_ktp: ESCAPE \'!\'
+ LIMIT 10', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(10, 0)
+ 7 APPPATH\Controllers\AdminDashboard.php(115): CodeIgniter\BaseModel->findAll(10)
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->searchAnggota()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-08-02 02:10:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:10:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:10:52 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:10:52 --> ID Anggota: 129
+DEBUG - 2026-08-02 02:10:52 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 02:10:52 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:10:52 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:10:52 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 02:10:52 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 02:10:52 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===

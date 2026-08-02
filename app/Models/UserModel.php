@@ -11,8 +11,8 @@ class UserModel extends Model
 
     protected $allowedFields = [
         'nama_lengkap', 'email', 'username', 'password', 'role', 'created_at',
-        'nomor_ktp', 'foto', 'nomor_hp', 'nomor_hp_keluarga', 'status' // 🔑 tambah ini
+        'nomor_ktp', 'foto', 'nomor_hp', 'nomor_hp_keluarga', 'status' 
     ];
 
-    protected $useTimestamps = false; // kalau pakai created_at manual
+    protected $useTimestamps = false; 
 }

@@ -1,0 +1,516 @@
+DEBUG - 2026-08-01 16:15:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:15:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:15:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:17:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:22:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:23:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:24:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:28:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:28:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:28:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:32:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:33:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:33:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:33:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:40:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:40:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:40:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:40:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:40:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:40:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:41:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:41:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:41:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:41:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:42:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:42:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:43:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:43:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:43:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:43:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:47:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:48:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:48:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:48:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:48:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:49:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:49:00 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 16:49:00 --> ID Anggota: 77
+DEBUG - 2026-08-01 16:49:00 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 16:49:00 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 16:49:00 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 16:49:00 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 16:49:00 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 16:49:00 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 16:49:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:49:17 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 16:49:17 --> ID Anggota: 77
+DEBUG - 2026-08-01 16:49:17 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 16:49:17 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 16:49:17 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 16:49:17 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 16:49:17 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 16:49:17 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 16:53:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:53:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:53:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:57:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:59:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:59:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 16:59:37 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 16:59:37 --> ID Anggota: 77
+DEBUG - 2026-08-01 16:59:37 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 16:59:37 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 16:59:37 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 16:59:37 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 16:59:37 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 16:59:37 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:01:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:01:48 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:01:48 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:01:48 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:48 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:48 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:48 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:01:48 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:01:48 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:01:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:01:55 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:01:55 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:01:55 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:55 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:55 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:55 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:01:55 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:01:55 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:01:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:01:58 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:01:58 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:01:58 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:58 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:58 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:01:58 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:01:58 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:01:58 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:03:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:05:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:05:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:05:10 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:05:10 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:05:10 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:05:10 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:05:10 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:05:10 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:05:10 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:05:10 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:08:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:08:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:16:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:16:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:17:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:17:04 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:17:04 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:17:04 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:17:04 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:17:04 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:17:04 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:17:04 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:17:04 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:21:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:21:42 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:21:42 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:21:42 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:21:42 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:21:42 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:21:42 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:21:42 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:21:42 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:22:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:22:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:22:10 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:22:10 --> ID Anggota: 46
+DEBUG - 2026-08-01 17:22:10 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:22:10 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:22:10 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:22:10 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:22:10 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:22:10 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:26:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:39:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:41:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2026-08-01 17:41:48 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\AdminDashboard.php on line 702.
+ 1 APPPATH\Controllers\AdminDashboard.php(702): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+CRITICAL - 2026-08-01 17:41:48 --> ErrorException: Undefined array key "no_hp_opsional"
+[Method: POST, Route: admin/update-anggota/77]
+in APPPATH\Controllers\AdminDashboard.php on line 703.
+ 1 APPPATH\Controllers\AdminDashboard.php(703): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "no_hp_opsional"', 'D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\app\\Controllers\\AdminDashboard.php', 703)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Kumpulan Project IT\\Project Web\\koperasi-samara\\public\\index.php')
+DEBUG - 2026-08-01 17:41:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:42:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:42:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:43:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:45:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:47:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:49:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:49:06 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:49:06 --> ID Anggota: 77
+DEBUG - 2026-08-01 17:49:06 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:49:06 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:49:06 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:49:06 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:49:06 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:49:06 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:50:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:50:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:50:26 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:50:26 --> ID Anggota: 46
+DEBUG - 2026-08-01 17:50:26 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:50:26 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:50:26 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:50:26 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:50:26 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:50:26 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:51:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:51:05 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:51:05 --> ID Anggota: 46
+DEBUG - 2026-08-01 17:51:05 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:51:05 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:51:05 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:51:05 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:51:05 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:51:05 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:51:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:51:10 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 17:51:10 --> ID Anggota: 46
+DEBUG - 2026-08-01 17:51:10 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 17:51:10 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:51:10 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 17:51:10 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 17:51:10 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 17:51:10 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 17:51:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:51:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:51:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:52:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:52:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:52:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:52:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:52:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:52:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:53:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:53:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:54:28 --> mysqli_sql_exception: Unknown column 'username' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `an...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `an...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `an...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `an...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(639): CodeIgniter\Model->insert(Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->saveMember()
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:54:28 --> Error saveMember: Unknown column 'username' in 'field list'
+DEBUG - 2026-08-01 17:54:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:54:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:54:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:54:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:55:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:55:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:55:37 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:55:37 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:55:37 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:55:37 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:55:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:56:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:56:03 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:56:03 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:56:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:56:03 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:56:03 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:56:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:56:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:56:22 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:56:22 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:56:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:56:22 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:56:22 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:56:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:56:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:56:56 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('81', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('81')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:56:56 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:56:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 17:56:56 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('81', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('81')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 17:56:56 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 17:58:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:59:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 17:59:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:01:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:01:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:01:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:01:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 18:01:46 --> ID Anggota: 77
+DEBUG - 2026-08-01 18:01:46 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 18:01:46 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 18:01:46 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 18:01:46 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 18:01:46 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 18:01:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 18:05:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:05:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:05:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 18:05:46 --> ID Anggota: 77
+DEBUG - 2026-08-01 18:05:46 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 18:05:46 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 18:05:46 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 18:05:46 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 18:05:46 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 18:05:46 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-01 18:06:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:10:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:10:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:10:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 18:10:32 --> mysqli_sql_exception: Unknown column 'no_hp_opsional' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(747): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 18:10:32 --> Error updateAnggota: Unknown column 'no_hp_opsional' in 'field list'
+DEBUG - 2026-08-01 18:16:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:16:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:16:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-08-01 18:16:17 --> mysqli_sql_exception: Unknown column 'instansi' in 'field list' in D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `anggota...', 0)
+#1 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `anggota...')
+#2 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `anggota...')
+#3 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `anggota...', Array, false)
+#4 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\BaseModel.php(1025): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Model.php(860): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\Kumpulan Project IT\Project Web\koperasi-samara\app\Controllers\AdminDashboard.php(744): CodeIgniter\Model->update('77', Array)
+#8 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(933): App\Controllers\AdminDashboard->updateAnggota('77')
+#9 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminDashboard))
+#10 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\Kumpulan Project IT\Project Web\koperasi-samara\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\Kumpulan Project IT\Project Web\koperasi-samara\system\rewrite.php(44): require_once('D:\\Kumpulan Pro...')
+#15 {main}
+ERROR - 2026-08-01 18:16:17 --> Error updateAnggota: Unknown column 'instansi' in 'field list'
+DEBUG - 2026-08-01 18:17:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:28:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:28:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:28:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:28:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:28:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:29:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:29:04 --> === CSRF VALIDATION ===
+DEBUG - 2026-08-01 18:29:04 --> Posted CSRF: 
+DEBUG - 2026-08-01 18:29:04 --> Current CSRF: 2801a977dcc3fa34dd8def68402bcff9
+DEBUG - 2026-08-01 18:29:04 --> Match: NO
+DEBUG - 2026-08-01 18:29:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:29:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:29:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:29:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:29:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:30:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:30:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:31:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:31:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:31:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:31:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:31:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-01 18:31:34 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-01 18:31:34 --> ID Anggota: 77
+DEBUG - 2026-08-01 18:31:34 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-01 18:31:34 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-01 18:31:34 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-01 18:31:34 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-01 18:31:34 --> Total sisa angsuran: 0
+DEBUG - 2026-08-01 18:31:34 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===

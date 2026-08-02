@@ -6,37 +6,37 @@ use CodeIgniter\Model;
 
 class AnggotaModel extends Model
 {
-    protected $table = 'anggota';
+    protected $table      = 'anggota';
+   
     protected $primaryKey = 'id_anggota';
 
-    protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $useAutoIncrement = true;
+
+    protected $useTimestamps = false;
 
     protected $allowedFields = [
-    'id_anggota',  // ✅ Tambahkan ini di baris paling atas atau sesuai urutan
-    'nomor_anggota',
-    'nama_lengkap',
-    'email',
-    'username',
-    'password',
-    'no_ktp',
-    'foto_ktp',
-    'foto_diri',
-    'foto_diri_ktp',
-    'jenis_bank',
-    'no_hp',
-    'no_hp_opsional',
-    'alamat',
-    'atasnama_rekening',
-    'no_rek',
-    'instansi',
-    'tanggal_daftar',
-    'status',
-    'jenis_kelamin',
-    'pekerjaan',
-    'photo'
-];
+        'id_anggota',
+        'nomor_anggota',
+        'nama_lengkap',
+        'email',
+        'username',
+        'password',
+        'no_ktp',
+        'foto_ktp',
+        'foto_diri',
+        'foto_diri_ktp',
+        'photo',
+        'no_hp',
+        'jenis_kelamin',
+        'alamat',
+        'pekerjaan',
+        'instansi',
+        'jenis_bank',
+        'no_rek',
+        'atasnama_rekening',
+        'tanggal_daftar',
+        'status'
+    ];
 
     public function getAnggotaAktif()
     {

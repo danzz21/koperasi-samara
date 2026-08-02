@@ -6,6 +6,12 @@
     <title>Transaksi Umum</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <style>
+        body { font-size: 1rem; }
+        .text-xs, .text-sm { font-size: 1rem !important; }
+        table th, table td { font-size: 0.95rem !important; }
+        label, input, select, button, .modal h3 { font-size: 1rem !important; }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen p-6">
     <div class="mb-6">
@@ -13,24 +19,68 @@
         <p class="text-gray-600">Kelola pemasukan dan pengeluaran operasional</p>
     </div>
 
-    <!-- Info Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-lg font-bold text-gray-800 mb-4">Total Pemasukan Bulan Ini</h3>
-            <p class="text-3xl font-bold text-green-600">Rp <?= number_format($total_pemasukan, 0, ',', '.') ?></p>
-            <div class="mt-2 flex items-center">
-                <i class="fas fa-arrow-up text-green-500 mr-1"></i>
-                <span class="text-sm text-green-600">Bulan <?= date('F Y') ?></span>
+    <!-- Info Cards (4 Card Grid Layout) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+        
+        <!-- Card 1: Total Saldo Kas Akumulasi -->
+        <div class="bg-gradient-to-br from-emerald-600 to-teal-700 p-5 rounded-xl shadow-md text-white">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wider text-emerald-100">Saldo Kas Utama</span>
+                <span class="p-2 bg-white/20 rounded-lg text-white">
+                    <i class="fas fa-wallet fa-fw"></i>
+                </span>
+            </div>
+            <p class="text-2xl font-black">Rp <?= number_format($saldo_kas_total ?? 0, 0, ',', '.') ?></p>
+            <p class="text-xs text-emerald-100 mt-2">Total Sisa Saldo Kumulatif</p>
+        </div>
+
+        <!-- Card 2: Cashflow/Surplus Bulan Ini -->
+        <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Arus Kas Bulan Ini</span>
+                <span class="p-2 bg-blue-50 rounded-lg text-blue-600">
+                    <i class="fas fa-chart-line fa-fw"></i>
+                </span>
+            </div>
+            <p class="text-2xl font-bold <?= ($cashflow_bulan_ini ?? 0) >= 0 ? 'text-blue-600' : 'text-red-600' ?>">
+                Rp <?= number_format($cashflow_bulan_ini ?? 0, 0, ',', '.') ?>
+            </p>
+            <p class="text-xs text-gray-500 mt-2 flex items-center justify-between">
+                <span><?= esc($bulan_transaksi) ?></span>
+                <span class="font-medium text-gray-700"><?= ($cashflow_bulan_ini ?? 0) >= 0 ? 'Surplus' : 'Defisit' ?></span>
+            </p>
+        </div>
+
+        <!-- Card 3: Pemasukan (Bulan Ini & Total Akumulasi) -->
+        <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-green-500">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Pemasukan</span>
+                <span class="p-2 bg-green-50 rounded-lg text-green-600">
+                    <i class="fas fa-arrow-down fa-fw"></i>
+                </span>
+            </div>
+            <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan, 0, ',', '.') ?></p>
+            <div class="mt-3 pt-2 border-t border-gray-100 text-xs flex justify-between text-gray-500">
+                <span>Bulan Ini (<?= date('M Y') ?>)</span>
+                <span class="font-semibold text-gray-700">Total: Rp <?= number_format($total_pemasukan_umum ?? 0, 0, ',', '.') ?></span>
             </div>
         </div>
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h3 class="text-lg font-bold text-gray-800 mb-4">Total Pengeluaran Bulan Ini</h3>
-            <p class="text-3xl font-bold text-red-600">Rp <?= number_format($total_pengeluaran, 0, ',', '.') ?></p>
-            <div class="mt-2 flex items-center">
-                <i class="fas fa-arrow-down text-red-500 mr-1"></i>
-                <span class="text-sm text-red-600">Bulan <?= date('F Y') ?></span>
+
+        <!-- Card 4: Pengeluaran (Bulan Ini & Total Akumulasi) -->
+        <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-red-500">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Pengeluaran</span>
+                <span class="p-2 bg-red-50 rounded-lg text-red-600">
+                    <i class="fas fa-arrow-up fa-fw"></i>
+                </span>
+            </div>
+            <p class="text-2xl font-bold text-red-600">Rp <?= number_format($total_pengeluaran, 0, ',', '.') ?></p>
+            <div class="mt-3 pt-2 border-t border-gray-100 text-xs flex justify-between text-gray-500">
+                <span>Bulan Ini (<?= date('M Y') ?>)</span>
+                <span class="font-semibold text-gray-700">Total: Rp <?= number_format($total_pengeluaran_umum ?? 0, 0, ',', '.') ?></span>
             </div>
         </div>
+
     </div>
 
     <!-- Table Container -->

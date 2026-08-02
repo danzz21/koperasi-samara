@@ -140,7 +140,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('verify/(:num)', 'AdminDashboard::verify/$1');
     $routes->get('reject/(:num)', 'AdminDashboard::reject/$1');
     
-     $routes->get('get-member-details/(:num)', 'AdminDashboard::getMemberDetails/$1');
+     $routes->get('get-anggota-detail/(:num)', 'AdminDashboard::getAnggotaDetail/$1');
+    $routes->get('get-member-details/(:num)', 'AdminDashboard::getMemberDetails/$1');
     $routes->post('delete-anggota', 'AdminDashboard::deleteAnggota');
     $routes->post('restore-anggota', 'AdminDashboard::restoreAnggota');
     

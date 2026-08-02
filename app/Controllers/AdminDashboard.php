@@ -105,7 +105,8 @@ class AdminDashboard extends BaseController
     public function searchAnggota()
     {
         $search = $this->request->getGet('q');
-        $builder = $this->anggotaModel;
+        $builder = $this->anggotaModel->select('anggota.*, users.id AS id_user, users.username AS username_user')
+            ->join('users', 'users.id = anggota.id_anggota', 'left');
 
         if ($search) {
             $builder = $builder->like('nama_lengkap', $search)
@@ -113,26 +114,10 @@ class AdminDashboard extends BaseController
         }
         $anggota = $builder->findAll(10);
 
-        $userModel = new \App\Models\UserModel();
-        $users = $userModel->findAll();
-
-        // Buat mapping email -> user id
-        $emailToUserId = [];
-        foreach ($users as $user) {
-            $emailToUserId[$user['email']] = $user['id'];
-        }
-
-        $result = array_map(function ($data) use ($emailToUserId) {
-            $user_id = null;
-
-            // Cari user_id berdasarkan email
-            if (isset($data['email']) && isset($emailToUserId[$data['email']])) {
-                $user_id = $emailToUserId[$data['email']];
-            }
-
+        $result = array_map(function ($data) {
             return [
                 'id_anggota' => $data['id_anggota'],
-                'id_user' => $user_id, // ID dari table users (kolom 'id')
+                'id_user' => $data['id_user'] ?? $data['id_anggota'],
                 'nama_lengkap' => $data['nama_lengkap'],
                 'no_ktp' => $data['no_ktp'],
                 'status' => $data['status'] ?? 'Menunggu Verifikasi',
@@ -147,6 +132,9 @@ class AdminDashboard extends BaseController
    public function index()
     {
         $db = \Config\Database::connect();
+
+        // Ambil parameter filter (Default: 'tahun')
+        $filter = $this->request->getGet('filter') ?? 'tahun';
 
         // Status sah untuk simpanan (Mencegah pending / ditolak ikut masuk)
         $validSimpananStatus = ['aktif', 'lunas', 'berhasil', 'disetujui'];
@@ -213,41 +201,41 @@ class AdminDashboard extends BaseController
 
         $sisaPokokPinjaman = max(0, $totalPokokMurniPinjam - $totalTerbayarPokokMurni);
 
-        // 4. PEMASUKAN & PENGELUARAN UMUM
-        $pemasukanUmum = $db->table('transaksi_umum')
-            ->where('jenis', 'pemasukan')
-            ->selectSum('jumlah')
-            ->get()->getRow()->jumlah ?? 0;
+        // 4. FILTER PEMASUKAN & PENGELUARAN DINAMIS (Hari, Minggu, Bulan, Tahun)
+        $builderMasuk = $db->table('transaksi_umum')->where('jenis', 'pemasukan');
+        $builderKeluar = $db->table('transaksi_umum')->where('jenis', 'pengeluaran');
 
-        $pengeluaranUmum = $db->table('transaksi_umum')
-            ->where('jenis', 'pengeluaran')
-            ->selectSum('jumlah')
-            ->get()->getRow()->jumlah ?? 0;
+        $filterLabel = 'Tahun ' . date('Y');
 
-        $pemasukanBulanIni = $db->table('transaksi_umum')
-            ->where('jenis', 'pemasukan')
-            ->where('YEAR(tanggal)', date('Y'))
-            ->where('MONTH(tanggal)', date('m'))
-            ->selectSum('jumlah')
-            ->get()->getRow()->jumlah ?? 0;
+        if ($filter === 'hari') {
+            $builderMasuk->where('DATE(tanggal)', date('Y-m-d'));
+            $builderKeluar->where('DATE(tanggal)', date('Y-m-d'));
+            $filterLabel = 'Hari Ini (' . date('d M Y') . ')';
+        } elseif ($filter === 'minggu') {
+            $builderMasuk->where('YEARWEEK(tanggal, 1) = YEARWEEK(CURDATE(), 1)');
+            $builderKeluar->where('YEARWEEK(tanggal, 1) = YEARWEEK(CURDATE(), 1)');
+            $filterLabel = 'Minggu Ini';
+        } elseif ($filter === 'bulan') {
+            $builderMasuk->where('YEAR(tanggal)', date('Y'))->where('MONTH(tanggal)', date('m'));
+            $builderKeluar->where('YEAR(tanggal)', date('Y'))->where('MONTH(tanggal)', date('m'));
+            $filterLabel = 'Bulan ' . date('F Y');
+        } else {
+            // Default: 'tahun'
+            $builderMasuk->where('YEAR(tanggal)', date('Y'));
+            $builderKeluar->where('YEAR(tanggal)', date('Y'));
+            $filterLabel = 'Tahun ' . date('Y');
+        }
 
-        $pengeluaranBulanIni = $db->table('transaksi_umum')
-            ->where('jenis', 'pengeluaran')
-            ->where('YEAR(tanggal)', date('Y'))
-            ->where('MONTH(tanggal)', date('m'))
-            ->selectSum('jumlah')
-            ->get()->getRow()->jumlah ?? 0;
+        $pemasukanFiltered = $builderMasuk->selectSum('jumlah')->get()->getRow()->jumlah ?? 0;
+        $pengeluaranFiltered = $builderKeluar->selectSum('jumlah')->get()->getRow()->jumlah ?? 0;
+
+        // Total Kumulatif Transaksi Umum
+        $pemasukanUmumTotal = $db->table('transaksi_umum')->where('jenis', 'pemasukan')->selectSum('jumlah')->get()->getRow()->jumlah ?? 0;
+        $pengeluaranUmumTotal = $db->table('transaksi_umum')->where('jenis', 'pengeluaran')->selectSum('jumlah')->get()->getRow()->jumlah ?? 0;
 
         // 5. PROFIT REALISASI & POTENSI MARGIN
-        $terbayarMurabahah = $db->table('murabahah')
-            ->whereIn('status', ['aktif', 'lunas'])
-            ->selectSum('jml_terbayar', 'total')
-            ->get()->getRow()->total ?? 0;
-
-        $terbayarMudharabah = $db->table('mudharabah')
-            ->whereIn('status', ['aktif', 'lunas'])
-            ->selectSum('jml_terbayar', 'total')
-            ->get()->getRow()->total ?? 0;
+        $terbayarMurabahah = $db->table('murabahah')->whereIn('status', ['aktif', 'lunas'])->selectSum('jml_terbayar', 'total')->get()->getRow()->total ?? 0;
+        $terbayarMudharabah = $db->table('mudharabah')->whereIn('status', ['aktif', 'lunas'])->selectSum('jml_terbayar', 'total')->get()->getRow()->total ?? 0;
 
         $totalTerbayarBerMargin = (float)$terbayarMurabahah + (float)$terbayarMudharabah;
         $realisasiMargin = $totalTerbayarBerMargin - ($totalTerbayarBerMargin / 1.10);
@@ -259,8 +247,8 @@ class AdminDashboard extends BaseController
         $potensiMargin = $totalPinjamBerMargin - ($totalPinjamBerMargin / 1.10);
 
         // 6. KAS REAL, ESTIMASI SHU, & TOTAL ASET
-        $kasReal = max(0, ($totalSimpanan + $realisasiMargin + (float)$pemasukanUmum) - ($sisaPokokPinjaman + (float)$pengeluaranUmum));
-        $shuTahunBerjalan = ($realisasiMargin + (float)$pemasukanUmum) - (float)$pengeluaranUmum;
+        $kasReal = max(0, ($totalSimpanan + $realisasiMargin + (float)$pemasukanUmumTotal) - ($sisaPokokPinjaman + (float)$pengeluaranUmumTotal));
+        $shuTahunBerjalan = ($realisasiMargin + (float)$pemasukanFiltered) - (float)$pengeluaranFiltered;
         $totalAset = $kasReal + $sisaPokokPinjaman;
 
         // 7. ESTIMASI TAGIHAN BULAN INI
@@ -288,7 +276,7 @@ class AdminDashboard extends BaseController
         $pendingPinjamanCount      = $pendingQard + $pendingMurabahah + $pendingMudharabah;
         $pendingPembayaranCount    = $db->table('pembayaran_pending')->where('status', 'pending')->countAllResults();
 
-        // 9. DATA CHART BULANAN (FILTER STATUS PENDING & DITOLAK)
+        // 9. DATA CHART BULANAN
         $simpanan = $db->query("
             SELECT bulan, SUM(total) AS total FROM (
                 SELECT MONTH(tanggal) AS bulan, SUM(jumlah) AS total FROM simpanan_pokok WHERE YEAR(tanggal) = YEAR(CURDATE()) AND status IN ('aktif', 'lunas', 'berhasil', 'disetujui') GROUP BY bulan
@@ -331,8 +319,10 @@ class AdminDashboard extends BaseController
             'tagihanBulanIni'           => $tagihanBulanIni,
             'totalAset'                 => $totalAset,
             'totalAnggota'              => $totalAnggota,
-            'pemasukanBulanIni'         => $pemasukanBulanIni,
-            'pengeluaranBulanIni'       => $pengeluaranBulanIni,
+            'pemasukanFiltered'         => $pemasukanFiltered,
+            'pengeluaranFiltered'       => $pengeluaranFiltered,
+            'filterActive'              => $filter,
+            'filterLabel'               => $filterLabel,
             'shuTahunBerjalan'          => $shuTahunBerjalan,
 
             'pendingPinjamanCount'      => $pendingPinjamanCount,
@@ -421,6 +411,7 @@ class AdminDashboard extends BaseController
         // 3. INSERT KE TABLE ANGGOTA dengan data dari form tambahan
         $anggotaData = [
             'id_anggota'          => $id,
+            'id_user'             => $id,
             'nomor_anggota'       => $nomor_anggota,
 
             // Data dari users
@@ -466,7 +457,8 @@ class AdminDashboard extends BaseController
     public function members()
     {
         $search = $this->request->getGet('search');
-        $builder = $this->anggotaModel;
+        $builder = $this->anggotaModel->select('anggota.*, users.id AS id_user')
+            ->join('users', 'users.id = anggota.id_anggota', 'left');
 
         if ($search) {
             $builder = $builder->like('nama_lengkap', $search)
@@ -476,30 +468,8 @@ class AdminDashboard extends BaseController
             ->orderBy('id_anggota', 'ASC')
             ->findAll();
 
-        // Cari relasi antara anggota dan users
-        $userModel = new \App\Models\UserModel();
-        $users = $userModel->findAll();
-
-        // Buat mapping untuk mencari user_id berdasarkan email atau data lain
-        $emailToUserId = [];
-        foreach ($users as $user) {
-            $emailToUserId[$user['email']] = $user['id']; // id dari table users
-        }
-
         foreach ($anggota as &$data) {
-            $user_id = null;
-
-            // Cara 1: Cari berdasarkan email (paling umum)
-            if (isset($data['email']) && isset($emailToUserId[$data['email']])) {
-                $user_id = $emailToUserId[$data['email']];
-            }
-
-            // Cara 2: Jika ada foreign key di table anggota
-            if (!$user_id && isset($data['id_user'])) {
-                $user_id = $data['id_user'];
-            }
-
-            $data['id_user'] = $user_id;
+            $data['id_user'] = $data['id_user'] ?? $data['id_anggota'];
         }
 
         return view('layouts/header', ['title' => 'Manajemen Anggota'])
@@ -507,44 +477,281 @@ class AdminDashboard extends BaseController
             . view('layouts/footer');
     }
 
-    public function editAnggota($id)
-    {
-        $anggota = $this->anggotaModel->find($id);
+    public function saveMember()
+{
+    try {
+        $request = $this->request;
 
-        if (!$anggota) {
-            return redirect()->to('/admin/members')->with('error', 'Data anggota tidak ditemukan');
+        // Ambil Data Input Form
+        $nama_lengkap    = trim($request->getPost('nama_lengkap') ?? '');
+        $email           = trim($request->getPost('email') ?? '');
+        $username        = trim($request->getPost('username') ?? '');
+        $password        = $request->getPost('password');
+        $no_ktp          = trim($request->getPost('no_ktp') ?? '');
+        $no_hp           = trim($request->getPost('no_hp') ?? $request->getPost('no_telp') ?? '');
+        $alamat          = trim($request->getPost('alamat') ?? '');
+        $jenis_kelamin   = $request->getPost('jenis_kelamin') ?? 'L';
+        $pekerjaan       = trim($request->getPost('pekerjaan') ?? '-');
+        $instansi        = trim($request->getPost('instansi') ?? '-');
+        
+        // Rekening Bank
+        $jenis_bank        = trim($request->getPost('jenis_bank') ?? '');
+        $no_rek            = trim($request->getPost('no_rek') ?? '');
+        $atasnama_rekening = trim($request->getPost('atasnama_rekening') ?? '');
+
+        // Simpanan Pokok Awal
+        $setoranAwalPokok  = (float)($request->getPost('simpanan_pokok_awal') ?? 0);
+
+        // Validasi Required
+        if (empty($nama_lengkap) || empty($email) || empty($username) || empty($password) || empty($no_ktp)) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Lengkapi seluruh field wajib bertanda bintang (*)'
+            ]);
         }
 
-        return view('dashboard_admin/edit_anggota', ['anggota' => $anggota]);
-    }
-
-    public function updateAnggota($id)
-    {
-        $anggota = $this->anggotaModel->find($id);
-
-        if (!$anggota) {
-            return redirect()->to('/admin/members')->with('error', 'Data anggota tidak ditemukan');
+        // Validasi Duplikat KTP
+        $existing = $this->anggotaModel->where('no_ktp', $no_ktp)->first();
+        if ($existing) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Anggota dengan No. KTP ini sudah terdaftar.'
+            ]);
         }
 
-        $namaLengkap = trim($this->request->getPost('nama_lengkap') ?? '');
-        if ($namaLengkap === '') {
-            return redirect()->back()->withInput()->with('error', 'Nama lengkap wajib diisi');
+        // Validasi Duplikat User
+        $existingUser = $this->userModel->where('username', $username)->orWhere('email', $email)->first();
+        if ($existingUser) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Username atau Email sudah terdaftar di sistem.'
+            ]);
         }
 
-        $data = [
-            'nama_lengkap' => $namaLengkap,
-            'no_ktp' => trim($this->request->getPost('no_ktp') ?? ''),
-            'status' => trim($this->request->getPost('status') ?? $anggota['status']),
-            'tanggal_daftar' => $this->request->getPost('tanggal_daftar') ?? $anggota['tanggal_daftar'],
+        // --- UPLOAD FOTO ---
+        $uploadPath = FCPATH . 'uploads/';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        $fotoDiriName   = null;
+        $fotoKtpName    = null;
+        $fotoSelfieName = null;
+
+        $fotoDiri = $request->getFile('foto_diri');
+        if ($fotoDiri && $fotoDiri->isValid() && !$fotoDiri->hasMoved()) {
+            $fotoDiriName = $fotoDiri->getRandomName();
+            $fotoDiri->move($uploadPath, $fotoDiriName);
+        }
+
+        $fotoKtp = $request->getFile('foto_ktp');
+        if ($fotoKtp && $fotoKtp->isValid() && !$fotoKtp->hasMoved()) {
+            $fotoKtpName = $fotoKtp->getRandomName();
+            $fotoKtp->move($uploadPath, $fotoKtpName);
+        }
+
+        $fotoSelfie = $request->getFile('foto_diri_ktp');
+        if ($fotoSelfie && $fotoSelfie->isValid() && !$fotoSelfie->hasMoved()) {
+            $fotoSelfieName = $fotoSelfie->getRandomName();
+            $fotoSelfie->move($uploadPath, $fotoSelfieName);
+        }
+
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        // 1. Insert ke Tabel Users (Disesuaikan dengan struktur tabel users)
+        $userData = [
+            'nama_lengkap' => $nama_lengkap,
+            'email'        => $email,
+            'username'     => $username,
+            'password'     => password_hash($password, PASSWORD_DEFAULT),
+            'role'         => 'anggota',
+            'nomor_ktp'    => $no_ktp, // SESUAI DENGAN KOLOM DIBAMBAR USERS (nomor_ktp)
+            'nomor_hp'     => $no_hp,
+            'status'       => 'verified',
         ];
 
-        if ($this->anggotaModel->update($id, $data)) {
-            return redirect()->to('/admin/dashboard_admin/members')->with('success', 'Data anggota berhasil diperbarui');
+        $this->userModel->insert($userData);
+        $userId = $this->userModel->getInsertID();
+
+        if (!$userId) {
+            $db->transRollback();
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Gagal membuat user baru. Silakan coba lagi.'
+            ]);
         }
 
-        return redirect()->back()->withInput()->with('error', 'Gagal memperbarui data anggota');
+        // 2. Insert ke Tabel Anggota (Hanya kolom yang ada di foto tabel anggota saja!)
+        $anggotaData = [
+            'id'                => $userId, // Diisi $userId agar Primary Key id tidak NULL
+            'id_anggota'        => $userId,
+            'nomor_anggota'     => 'AGT-' . date('Ymd') . '-' . sprintf('%04d', $userId),
+            'nama_lengkap'      => $nama_lengkap,
+            'no_ktp'            => $no_ktp,
+            'no_rek'            => $no_rek,
+            'atasnama_rekening' => $atasnama_rekening,
+            'foto_diri'         => $fotoDiriName,
+            'alamat'            => $alamat,
+            'email'             => $email,
+            'tanggal_daftar'    => date('Y-m-d'),
+            'status'            => 'aktif', // enum ('aktif', 'nonaktif')
+            'jenis_kelamin'     => $jenis_kelamin,
+            'pekerjaan'         => $pekerjaan,
+            'instansi'          => $instansi,
+            'foto_ktp'          => $fotoKtpName,
+            'photo'             => $fotoDiriName,
+            'jenis_bank'        => $jenis_bank,
+            'foto_diri_ktp'     => $fotoSelfieName,
+            'no_hp'             => $no_hp
+        ];
+
+        // Direct Insert ke tabel anggota
+        $inserted = $db->table('anggota')->insert($anggotaData);
+
+        if (!$inserted) {
+            $error = $db->error();
+            $db->transRollback();
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Gagal DB: ' . $error['message']
+            ]);
+        }
+
+        // 3. Simpanan Pokok (jika ada)
+        if ($setoranAwalPokok > 0) {
+            $db->table('simpanan_pokok')->insert([
+                'id_anggota' => $userId,
+                'jumlah'     => $setoranAwalPokok,
+                'tanggal'    => date('Y-m-d H:i:s'),
+                'status'     => 'aktif'
+            ]);
+        }
+
+        $db->transComplete();
+
+        return $this->response->setJSON([
+            'status'  => 'success',
+            'message' => 'Anggota baru berhasil ditambahkan!'
+        ]);
+
+    } catch (\Exception $e) {
+        log_message('error', 'Error saveMember: ' . $e->getMessage());
+        return $this->response->setJSON([
+            'status'  => 'error',
+            'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+        ]);
+    }
+}
+
+    public function getAnggotaDetail($id)
+    {
+        $anggota = $this->anggotaModel->find($id);
+        if (!$anggota) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Data tidak ditemukan']);
+        }
+        return $this->response->setJSON(['status' => 'success', 'data' => $anggota]);
     }
 
+    // Method untuk Update Data Anggota
+    public function updateAnggota($id = null)
+    {
+        try {
+            if (!$id) {
+                $id = $this->request->getPost('id_anggota');
+            }
+
+            $anggota = $this->anggotaModel->find($id);
+            if (!$anggota) {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Data anggota tidak ditemukan']);
+            }
+
+            $request = $this->request;
+
+            $namaLengkap = trim($request->getPost('nama_lengkap') ?? '');
+            if ($namaLengkap === '') {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Nama lengkap wajib diisi']);
+            }
+
+            // Lokasi penyimpanan gambar
+            $uploadPath = FCPATH . 'uploads/';
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            // Handle Re-upload Foto Diri
+            $fotoDiriName = $anggota['foto_diri'];
+            $fotoDiri = $request->getFile('foto_diri');
+            if ($fotoDiri && $fotoDiri->isValid() && !$fotoDiri->hasMoved()) {
+                $fotoDiriName = $fotoDiri->getRandomName();
+                $fotoDiri->move($uploadPath, $fotoDiriName);
+            }
+
+            // Handle Re-upload Foto KTP
+            $fotoKtpName = $anggota['foto_ktp'];
+            $fotoKtp = $request->getFile('foto_ktp');
+            if ($fotoKtp && $fotoKtp->isValid() && !$fotoKtp->hasMoved()) {
+                $fotoKtpName = $fotoKtp->getRandomName();
+                $fotoKtp->move($uploadPath, $fotoKtpName);
+            }
+
+            // Handle Re-upload Foto Diri + KTP (Selfie)
+            $fotoSelfieName = $anggota['foto_diri_ktp'] ?? null;
+            $fotoSelfie = $request->getFile('foto_diri_ktp');
+            if ($fotoSelfie && $fotoSelfie->isValid() && !$fotoSelfie->hasMoved()) {
+                $fotoSelfieName = $fotoSelfie->getRandomName();
+                $fotoSelfie->move($uploadPath, $fotoSelfieName);
+            }
+
+            // Array Data Update
+            $data = [
+                'nama_lengkap'      => $namaLengkap,
+                'no_ktp'            => trim($request->getPost('no_ktp') ?? $anggota['no_ktp']),
+                'no_hp'             => trim($request->getPost('no_hp') ?? $anggota['no_hp']),
+                'jenis_kelamin'     => $request->getPost('jenis_kelamin') ?? $anggota['jenis_kelamin'],
+                'pekerjaan'         => trim($request->getPost('pekerjaan') ?? $anggota['pekerjaan']),
+                'instansi'          => trim($request->getPost('instansi') ?? $anggota['instansi']),
+                'alamat'            => trim($request->getPost('alamat') ?? $anggota['alamat']),
+                'jenis_bank'        => trim($request->getPost('jenis_bank') ?? $anggota['jenis_bank']),
+                'no_rek'            => trim($request->getPost('no_rek') ?? $anggota['no_rek']),
+                'atasnama_rekening' => trim($request->getPost('atasnama_rekening') ?? $anggota['atasnama_rekening']),
+                'status'            => trim($request->getPost('status') ?? $anggota['status']),
+                'tanggal_daftar'    => $request->getPost('tanggal_daftar') ?? $anggota['tanggal_daftar'],
+                'foto_diri'         => $fotoDiriName,
+                'photo'             => $fotoDiriName,
+                'foto_ktp'          => $fotoKtpName,
+                'foto_diri_ktp'     => $fotoSelfieName,
+            ];
+
+            // 1. Update Tabel Anggota
+            $this->anggotaModel->update($id, $data);
+
+            // 2. Sinkronkan ke Tabel Users jika ada
+            if (!empty($anggota['email'])) {
+                $user = $this->userModel->where('email', $anggota['email'])->first();
+                if ($user) {
+                    $this->userModel->update($user['id'], [
+                        'nama_lengkap' => $namaLengkap,
+                        'no_ktp'       => $data['no_ktp'],
+                        'nomor_hp'     => $data['no_hp'],
+                    ]);
+                }
+            }
+
+            return $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Data anggota berhasil diperbarui!'
+            ]);
+
+        } catch (\Exception $e) {
+            log_message('error', 'Error updateAnggota: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
+            ]);
+        }
+    }
+    
     public function resetPassword()
     {
         // Cek jika request AJAX
@@ -817,6 +1024,8 @@ class AdminDashboard extends BaseController
             ]);
         }
     }
+
+    
     /**
      * GET DETAIL ANGGOTA UNTUK KONFIRMASI HAPUS
      */
@@ -982,106 +1191,6 @@ class AdminDashboard extends BaseController
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => 'Gagal mengubah status: ' . $e->getMessage()
-            ]);
-        }
-    }
-    public function saveMember()
-    {
-        try {
-            $request = $this->request;
-
-            // Ambil data dari form
-            $nama_lengkap = $request->getPost('nama_lengkap');
-            $email        = $request->getPost('email');
-            $username     = $request->getPost('username');
-            $password     = $request->getPost('password');
-            $no_ktp       = $request->getPost('no_ktp');
-            $no_telp      = $request->getPost('no_telp');
-            $alamat       = $request->getPost('alamat');
-
-            // Validasi required fields
-            if (empty($nama_lengkap) || empty($email) || empty($username) || empty($password)) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Semua field wajib diisi!'
-                ]);
-            }
-
-            // Validasi KTP duplikat
-            $existing = $this->anggotaModel->where('no_ktp', $no_ktp)->first();
-            if ($existing) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Anggota dengan No. KTP ini sudah terdaftar.'
-                ]);
-            }
-
-            // Validasi username/email duplikat di users
-            $existingUser = $this->userModel->where('username', $username)->orWhere('email', $email)->first();
-            if ($existingUser) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Username atau email sudah digunakan.'
-                ]);
-            }
-
-            // Handle file upload
-            $fotoDiriName = 'default.png';
-            $fotoKtpName  = 'default.png';
-
-            $fotoDiri = $request->getFile('foto_diri');
-            if ($fotoDiri && $fotoDiri->isValid() && !$fotoDiri->hasMoved()) {
-                $fotoDiriName = $fotoDiri->getRandomName();
-                $fotoDiri->move(FCPATH . 'uploads/', $fotoDiriName);
-            }
-
-            $fotoKtp = $request->getFile('foto_ktp');
-            if ($fotoKtp && $fotoKtp->isValid() && !$fotoKtp->hasMoved()) {
-                $fotoKtpName = $fotoKtp->getRandomName();
-                $fotoKtp->move(FCPATH . 'uploads/', $fotoKtpName);
-            }
-
-            // 1️⃣ Simpan ke tabel users
-            $userData = [
-                'nama_lengkap' => $nama_lengkap,
-                'email'        => $email,
-                'username'     => $username,
-                'password'     => password_hash($password, PASSWORD_DEFAULT),
-                'role'         => 'anggota',
-                'no_ktp'       => $no_ktp,
-                'nomor_hp'     => $no_telp,
-                'status'       => 'verified',
-            ];
-
-            $this->userModel->insert($userData);
-            $userId = $this->userModel->getInsertID();
-
-            // 2️⃣ Simpan ke tabel anggota
-            $anggotaData = [
-                'id_anggota'        => $userId,
-                'nomor_anggota'     => 'AGT-' . date('Ymd') . '-' . $userId,
-                'nama_lengkap'      => $nama_lengkap,
-                'no_ktp'            => $no_ktp,
-                'alamat'            => $alamat,
-                'email'             => $email,
-                'status'            => 'aktif',
-                'foto_diri'         => $fotoDiriName,
-                'foto_ktp'          => $fotoKtpName,
-                'photo'             => $fotoDiriName,
-                'tanggal_daftar'    => date('Y-m-d'),
-            ];
-
-            $this->anggotaModel->insert($anggotaData);
-
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Anggota berhasil ditambahkan!'
-            ]);
-        } catch (\Exception $e) {
-            log_message('error', 'Error saveMember: ' . $e->getMessage());
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()
             ]);
         }
     }
@@ -1885,9 +1994,7 @@ class AdminDashboard extends BaseController
 
     public function transactions()
     {
-        // Ambil data dari database
         $db = \Config\Database::connect();
-
         $bulan_ini = date('Y-m');
 
         // Total pemasukan bulan ini
@@ -1906,6 +2013,32 @@ class AdminDashboard extends BaseController
             ->get()
             ->getRowArray();
 
+        // Total akumulasi/kumulatif keseluruhan
+        $total_pemasukan_umum = $db->table('transaksi_umum')
+            ->where('jenis', 'pemasukan')
+            ->selectSum('jumlah')
+            ->get()
+            ->getRowArray();
+
+        $total_pengeluaran_umum = $db->table('transaksi_umum')
+            ->where('jenis', 'pengeluaran')
+            ->selectSum('jumlah')
+            ->get()
+            ->getRowArray();
+
+        // Perhitungan nilai nominal
+        $pemasukan_bln = $total_pemasukan['jumlah'] ?? 0;
+        $pengeluaran_bln = $total_pengeluaran['jumlah'] ?? 0;
+        
+        $pemasukan_total = $total_pemasukan_umum['jumlah'] ?? 0;
+        $pengeluaran_total = $total_pengeluaran_umum['jumlah'] ?? 0;
+
+        // Saldo Akumulasi Keseluruhan (Kas Umum)
+        $saldo_kas_total = $pemasukan_total - $pengeluaran_total;
+        
+        // Net Cashflow Bulan Ini (Surplus / Defisit)
+        $cashflow_bulan_ini = $pemasukan_bln - $pengeluaran_bln;
+
         // Riwayat transaksi
         $riwayat = $db->table('transaksi_umum')
             ->orderBy('tanggal', 'DESC')
@@ -1914,17 +2047,21 @@ class AdminDashboard extends BaseController
             ->getResultArray();
 
         $data = [
-            'title' => 'Transaksi Umum',
-            'total_pemasukan' => $total_pemasukan['jumlah'] ?? 0,
-            'total_pengeluaran' => $total_pengeluaran['jumlah'] ?? 0,
-            'riwayat' => $riwayat
+            'title'                  => 'Transaksi Umum',
+            'total_pemasukan'        => $pemasukan_bln,
+            'total_pengeluaran'      => $pengeluaran_bln,
+            'total_pemasukan_umum'   => $pemasukan_total,
+            'total_pengeluaran_umum' => $pengeluaran_total,
+            'saldo_kas_total'        => $saldo_kas_total,
+            'cashflow_bulan_ini'     => $cashflow_bulan_ini,
+            'bulan_transaksi'        => date('F Y'),
+            'riwayat'                => $riwayat
         ];
 
         return view('layouts/header', $data)
             . view('dashboard_admin/transactions')
             . view('layouts/footer');
     }
-
     // Function untuk handle save transaksi (AJAX)
     public function saveTransaksi()
     {
