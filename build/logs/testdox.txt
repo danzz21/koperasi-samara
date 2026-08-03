@@ -1,0 +1,3 @@
+Loan Status
+ [x] Normalize loan status handles empty and variant values
+

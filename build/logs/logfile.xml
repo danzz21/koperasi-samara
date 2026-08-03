@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="D:\Kumpulan Project IT\Project Web\koperasi-samara\phpunit.xml.dist" tests="1" assertions="7" errors="0" failures="0" skipped="0" time="0.177554">
+    <testsuite name="App" tests="1" assertions="7" errors="0" failures="0" skipped="0" time="0.177554">
+      <testsuite name="LoanStatusTest" file="D:\Kumpulan Project IT\Project Web\koperasi-samara\tests\unit\LoanStatusTest.php" tests="1" assertions="7" errors="0" failures="0" skipped="0" time="0.177554">
+        <testcase name="testNormalizeLoanStatusHandlesEmptyAndVariantValues" file="D:\Kumpulan Project IT\Project Web\koperasi-samara\tests\unit\LoanStatusTest.php" line="7" class="LoanStatusTest" classname="LoanStatusTest" assertions="7" time="0.177554"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

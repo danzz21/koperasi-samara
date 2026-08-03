@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -24,15 +25,15 @@ class MudharabahModel extends Model
     public function getPinjamanAktif($id_anggota)
     {
         return $this->where('id_anggota', $id_anggota)
-                    ->where('status', 'aktif')
-                    ->findAll();
+            ->where('status', 'aktif')
+            ->findAll();
     }
 
     public function getPinjamanPending($id_anggota)
     {
         return $this->where('id_anggota', $id_anggota)
-                    ->where('status', 'pending')
-                    ->findAll();
+            ->where('status', 'pending')
+            ->findAll();
     }
 
     public function updateTerbayar($id_md, $jumlah_bayar)
@@ -41,11 +42,11 @@ class MudharabahModel extends Model
         if ($pinjaman) {
             $terbayar_baru = ($pinjaman['jml_terbayar'] ?? 0) + $jumlah_bayar;
             $data = ['jml_terbayar' => $terbayar_baru];
-            
+
             if ($terbayar_baru >= $pinjaman['jml_pinjam']) {
                 $data['status'] = 'lunas';
             }
-            
+
             return $this->update($id_md, $data);
         }
         return false;
@@ -54,39 +55,39 @@ class MudharabahModel extends Model
     public function getTotalPinjamanAktif()
     {
         return $this->where('status', 'aktif')
-                    ->selectSum('jml_pinjam')
-                    ->get()
-                    ->getRow()->jml_pinjam ?? 0;
+            ->selectSum('jml_pinjam')
+            ->get()
+            ->getRow()->jml_pinjam ?? 0;
     }
-     public function getAngsuranWithAnggota()
+    public function getAngsuranWithAnggota()
     {
-        // ✅ SESUAIKAN DENGAN FIELD YANG ADA DI TABEL ANGGOTA
-        return $this->select('mudharabah.*, anggota.nama_lengkap, anggota.no_ktp, anggota.nomor_anggota')
-                    ->join('anggota', 'anggota.id_anggota = mudharabah.id_anggota')
-                    ->findAll();
+        return $this->select('mudharabah.*, anggota.nama_lengkap, anggota.nomor_anggota')
+            ->join('anggota', 'anggota.id_anggota = mudharabah.id_anggota', 'left')
+            ->whereIn('mudharabah.status', ['aktif', 'lunas']) 
+            ->findAll();
     }
 
-   public function bayarAngsuran($id_md, $jumlah_bayar)
-{
-    $pinjaman = $this->find($id_md);
-    if ($pinjaman) {
-        $jml_terbayar_baru = $pinjaman['jml_terbayar'] + $jumlah_bayar;
-        
-        // TENOR DIBAYAR bertambah 1 setiap pembayaran
-        $tenor_dibayar_baru = ($pinjaman['tenor_dibayar'] ?? 0) + 1;
-        
-        // Status lunas jika tenor_dibayar >= total tenor ATAU total terbayar >= total pinjaman
-        $status_lunas = ($tenor_dibayar_baru >= $pinjaman['jml_angsuran']) || ($jml_terbayar_baru >= $pinjaman['jml_pinjam']);
-        $status = $status_lunas ? 'lunas' : 'aktif';
+    public function bayarAngsuran($id_md, $jumlah_bayar)
+    {
+        $pinjaman = $this->find($id_md);
+        if ($pinjaman) {
+            $jml_terbayar_baru = $pinjaman['jml_terbayar'] + $jumlah_bayar;
 
-        $data = [
-            'jml_terbayar' => $jml_terbayar_baru,
-            'tenor_dibayar' => $tenor_dibayar_baru,
-            'status' => $status
-        ];
+            // TENOR DIBAYAR bertambah 1 setiap pembayaran
+            $tenor_dibayar_baru = ($pinjaman['tenor_dibayar'] ?? 0) + 1;
 
-        return $this->update($id_md, $data);
+            // Status lunas jika tenor_dibayar >= total tenor ATAU total terbayar >= total pinjaman
+            $status_lunas = ($tenor_dibayar_baru >= $pinjaman['jml_angsuran']) || ($jml_terbayar_baru >= $pinjaman['jml_pinjam']);
+            $status = $status_lunas ? 'lunas' : 'aktif';
+
+            $data = [
+                'jml_terbayar' => $jml_terbayar_baru,
+                'tenor_dibayar' => $tenor_dibayar_baru,
+                'status' => $status
+            ];
+
+            return $this->update($id_md, $data);
+        }
+        return false;
     }
-    return false;
-}
 }

@@ -1782,6 +1782,7 @@ class AdminDashboard extends BaseController
         $parsePembiayaan = function ($data, $akad) {
             return array_map(function ($item) use ($akad) {
                 $item['akad'] = $akad;
+                $item['status'] = normalizeLoanStatusValue($item['status'] ?? '');
                 $total = (float)($item['jml_pinjam'] ?? 0);
 
                 if ($akad === 'murabahah' || $akad === 'mudharabah') {
@@ -1832,7 +1833,7 @@ class AdminDashboard extends BaseController
         $tanggalLimit      = date('Y-m-d', strtotime('+3 days'));
 
         foreach ($allPembiayaan as $p) {
-            $st     = strtolower($p['status'] ?? '');
+            $st     = normalizeLoanStatusValue($p['status'] ?? '');
             $pinjam = (float)($p['jml_pinjam'] ?? 0);
             $tgl    = $p['tanggal'] ?? '9999-12-31';
 
@@ -1844,6 +1845,8 @@ class AdminDashboard extends BaseController
                 }
             } elseif ($st === 'pending') {
                 $total_menunggu++;
+            } elseif ($st === 'lunas') {
+                // lunas tidak masuk dalam hitungan aktif/pending
             }
         }
 
@@ -3314,25 +3317,25 @@ class AdminDashboard extends BaseController
             . view('dashboard_admin/detail_anggota', $data)
             . view('layouts/footer');
     }
-    public function installments()
-    {
-        // Load models langsung di method
-        $qardModel = new QardModel();
-        $murabahahModel = new MurabahahModel();
-        $mudharabahModel = new MudharabahModel();
+   public function installments()
+{
+    $qardModel = new QardModel();
+    $murabahahModel = new MurabahahModel();
+    $mudharabahModel = new MudharabahModel();
 
-        $data = [
-            'title' => 'Manajemen Angsuran',
-            'active_menu' => 'installments',
-            'qard' => $qardModel->getAngsuranWithAnggota(),
-            'murabahah' => $murabahahModel->getAngsuranWithAnggota(),
-            'mudharabah' => $mudharabahModel->getAngsuranWithAnggota()
-        ];
+    $data = [
+        'title'       => 'Manajemen Angsuran',
+        'active_menu' => 'installments',
+        // Panggil method model langsung TANPA ->where() di depan
+        'qard'       => $qardModel->getAngsuranWithAnggota(),
+        'murabahah'  => $murabahahModel->getAngsuranWithAnggota(),
+        'mudharabah' => $mudharabahModel->getAngsuranWithAnggota()
+    ];
 
-        return view('layouts/header', $data)
-            . view('dashboard_admin/installments', $data)
-            . view('layouts/footer');
-    }
+    return view('layouts/header', $data)
+        . view('dashboard_admin/installments', $data)
+        . view('layouts/footer');
+}
 
     public function bayarAngsuran()
     {

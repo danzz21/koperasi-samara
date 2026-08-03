@@ -62,7 +62,8 @@ class QardModel extends Model
       public function getAngsuranWithAnggota()
 {
     return $this->select('qard.*, anggota.nama_lengkap, anggota.nomor_anggota')
-                ->join('anggota', 'anggota.id_anggota = qard.id_anggota')
+                ->join('anggota', 'anggota.id_anggota = qard.id_anggota', 'left')
+                ->whereIn('qard.status', ['aktif', 'lunas']) 
                 ->findAll();
 }
 

@@ -300,6 +300,178 @@
       position: relative;
     }
 
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.28rem 0.6rem;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-lunas {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .badge-pending {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .badge-ditolak {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .history-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.15rem;
+    }
+
+    .history-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .history-heading-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ecfeff;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .history-heading-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .history-heading-subtitle {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 1px;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+    }
+
+    .history-item-rejected {
+      background: #fff7f7;
+      border-color: #fecaca;
+    }
+
+    .history-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient-primary);
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .history-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .history-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .history-item-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--dark);
+    }
+
+    .history-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      font-size: 11px;
+      color: var(--gray);
+      margin-bottom: 0.35rem;
+    }
+
+    .history-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .history-details {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.45;
+      display: grid;
+      gap: 2px;
+    }
+
+    .history-amount {
+      text-align: right;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    .history-nominal {
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .history-small {
+      font-size: 10px;
+      color: var(--gray);
+    }
+
+    .history-empty {
+      padding: 1rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 12px;
+      border: 1px dashed #e2e8f0;
+      border-radius: 14px;
+      background: #fafafa;
+    }
+
     .card.disabled {
       opacity: 0.75;
       pointer-events: none;
@@ -1062,65 +1234,111 @@
     </div>
   </div>
 
-  <!-- ==================== KARTU RIWAYAT & STATUS PENGAJUAN TERAKHIR ==================== -->
-  <?php if (!empty($riwayatPinjaman)): ?>
-    <div style="padding: 0 1rem; margin-bottom: 1.25rem;">
-      <div style="background: white; border-radius: var(--border-radius); padding: 1.1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f1f5f9;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
-          <span style="font-size: 13px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="history" style="width:16px; color:var(--primary);"></i> Status Pengajuan Pinjaman
-          </span>
-          <span style="font-size: 11px; color: var(--gray); font-weight: 600;">Terbaru</span>
+<!-- Kartu Riwayat Pengajuan Pinjaman -->
+<div class="card">
+    <div class="history-section">
+        <div class="history-header">
+            <div class="history-heading">
+                <div class="history-heading-icon">
+                    <i data-lucide="history" width="18" height="18"></i>
+                </div>
+                <div>
+                    <div class="history-heading-title">Riwayat Pengajuan Pinjaman</div>
+                    <div class="history-heading-subtitle">Pantau status dan nominal setiap pengajuan</div>
+                </div>
+            </div>
         </div>
 
-        <?php foreach ($riwayatPinjaman as $p): ?>
-          <?php
-          // Normalisasi string status ke huruf kecil
-          $st = strtolower(trim($p['status']));
-          $statusBadge = '';
-          $statusBoxBg = '';
+        <?php if (!empty($riwayatPinjaman)): ?>
+            <div class="history-list">
+                <?php foreach ($riwayatPinjaman as $item): ?>
+                    <?php 
+                        $akad = $item['akad'] ?? 'Pinjaman';
+                        $totalKewajiban = (float)($item['nominal'] ?? 0);
+                        $tenor = (int)($item['tenor'] ?? 1);
+                        
+                        // Bersihkan string status (hilangkan spasi & ubah ke huruf kecil)
+                        $st = strtolower(trim((string)($item['status'] ?? 'pending')));
 
-          if (in_array($st, ['pending', 'menunggu', 'waiting'])) {
-            $statusBadge = '<span style="background:#fef3c7; color:#d97706; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #fcd34d; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-clock fa-spin"></i> Menunggu ACC</span>';
-            $statusBoxBg = '#fffbeb';
-          } elseif (in_array($st, ['aktif', 'disetujui', 'approved', 'berjalan'])) {
-            $statusBadge = '<span style="background:#dcfce7; color:#15803d; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #86efac; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-check-circle"></i> Disetujui (Aktif)</span>';
-            $statusBoxBg = '#f0fdf4';
-          } elseif (in_array($st, ['lunas', 'selesai', 'paid'])) {
-            $statusBadge = '<span style="background:#e0f2fe; color:#0369a1; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #bae6fd; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-check-double"></i> Lunas</span>';
-            $statusBoxBg = '#f0f9ff';
-          } else {
-            // Hanya jika benar-benar berstatus ditolak / rejected
-            $statusBadge = '<span style="background:#fee2e2; color:#dc2626; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; border:1px solid #fca5a5; display:inline-flex; align-items:center; gap:4px;"><i class="fas fa-times-circle"></i> Ditolak</span>';
-            $statusBoxBg = '#fef2f2';
-          }
-          ?>
+                        // Pemisahan Pokok & Margin 10% (Khusus Murabahah & Mudharabah)
+                        $isMarginAkad = in_array(strtolower($akad), ['murabahah', 'mudharabah']);
+                        if ($isMarginAkad) {
+                            $pokok = round($totalKewajiban / 1.10);
+                            $margin = $totalKewajiban - $pokok;
+                        } else {
+                            $pokok = $totalKewajiban;
+                            $margin = 0;
+                        }
 
-          <div style="background: <?= $statusBoxBg ?>; border-radius: 12px; padding: 0.85rem; margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.05);">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-              <div>
-                <span style="font-size: 13px; font-weight: 800; color: var(--dark);"><?= esc($p['akad']) ?></span>
-                <div style="font-size: 11px; color: var(--gray); font-weight: 600; margin-top: 2px;">
-                  Tenor: <b><?= esc($p['tenor']) ?> Bulan</b> • Tanggal: <?= date('d M Y', strtotime($p['tanggal'])) ?>
-                </div>
-              </div>
-              <div style="text-align: right;">
-                <div style="font-size: 14px; font-weight: 800; color: var(--dark);">Rp <?= number_format($p['nominal'], 0, ',', '.') ?></div>
-                <div style="margin-top: 4px;"><?= $statusBadge ?></div>
-              </div>
+                        $cicilanPerBulan = $tenor > 0 ? round($totalKewajiban / $tenor) : $totalKewajiban;
+
+                        $normalizedStatus = normalizeLoanStatusValue($item['status'] ?? '');
+                        $st = $normalizedStatus;
+
+                        if ($st === 'lunas') {
+                            $badgeClass = 'badge-lunas';
+                            $statusLabel = 'Lunas';
+                        } elseif ($st === 'aktif') {
+                            $badgeClass = 'badge-lunas';
+                            $statusLabel = 'Pinjaman Aktif';
+                        } elseif ($st === 'ditolak') {
+                            $badgeClass = 'badge-ditolak';
+                            $statusLabel = 'Ditolak';
+                        } else {
+                            $badgeClass = 'badge-pending';
+                            $statusLabel = 'Menunggu ACC';
+                        }
+
+                        $isRejected = $st === 'ditolak';
+
+                        $tanggalLabel = !empty($item['tanggal']) ? date('d M Y', strtotime($item['tanggal'])) : '-';
+                        $alasanLabel = trim((string)($item['alasan'] ?? ''));
+                    ?>
+
+                    <div class="history-item<?= $isRejected ? ' history-item-rejected' : '' ?>">
+                        <div class="history-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+
+                        <div class="history-main">
+                            <div class="history-title-row">
+                                <div class="history-item-title">Pinjaman <?= htmlspecialchars($akad) ?></div>
+                                <span class="badge <?= $badgeClass ?>">
+                                    <?= $statusLabel ?>
+                                </span>
+                            </div>
+
+                            <div class="history-meta">
+                                <span><i class="fa-regular fa-calendar"></i><?= $tanggalLabel ?></span>
+                                <span><i class="fa-solid fa-clock"></i><?= $tenor ?> Bulan</span>
+                            </div>
+
+                            <div class="history-details">
+                                <div>Pokok: <strong>Rp <?= number_format($pokok, 0, ',', '.') ?></strong></div>
+                                <?php if ($isMarginAkad): ?>
+                                    <div>Margin (10%): <strong style="color: var(--primary-dark);">+ Rp <?= number_format($margin, 0, ',', '.') ?></strong></div>
+                                <?php endif; ?>
+                                <div>Cicilan: <strong>Rp <?= number_format($cicilanPerBulan, 0, ',', '.') ?>/bln</strong></div>
+                                <?php if ($isRejected && $alasanLabel !== ''): ?>
+                                    <div style="color: #ef4444; margin-top: 2px;">Ket: <strong><?= htmlspecialchars($alasanLabel) ?></strong></div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="history-amount">
+                            <div class="history-nominal">Rp <?= number_format($totalKewajiban, 0, ',', '.') ?></div>
+                            <div class="history-small">Total kewajiban</div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-
-            <?php if (in_array($st, ['ditolak', 'rejected']) && !empty($p['alasan'])): ?>
-              <div style="margin-top: 8px; font-size: 11px; color: #b91c1c; background: rgba(239, 68, 68, 0.08); padding: 6px 10px; border-radius: 8px;">
-                <i class="fas fa-info-circle mr-1"></i> <b>Alasan Ditolak:</b> <?= esc($p['alasan']) ?>
-              </div>
-            <?php endif; ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
+        <?php else: ?>
+            <div class="history-empty">
+                Belum ada riwayat pengajuan pinjaman.
+            </div>
+        <?php endif; ?>
     </div>
-  <?php endif; ?>
-
+</div>
   <!-- MODAL BUAT PIN -->
   <div class="modal fade" id="createPinModal" tabindex="-1" aria-labelledby="createPinModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

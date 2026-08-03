@@ -59,12 +59,12 @@ class MurabahahModel extends Model
                     ->getRow()->jml_pinjam ?? 0;
     }
     public function getAngsuranWithAnggota()
-    {
-        // ✅ SESUAIKAN DENGAN FIELD YANG ADA DI TABEL ANGGOTA
-        return $this->select('murabahah.*, anggota.nama_lengkap, anggota.no_ktp, anggota.nomor_anggota')
-                    ->join('anggota', 'anggota.id_anggota = murabahah.id_anggota')
-                    ->findAll();
-    }
+{
+    return $this->select('murabahah.*, anggota.nama_lengkap, anggota.nomor_anggota')
+                ->join('anggota', 'anggota.id_anggota = murabahah.id_anggota', 'left')
+                ->whereIn('murabahah.status', ['aktif', 'lunas']) // <- Kunci penyaringan status aktif
+                ->findAll();
+}
 
     public function bayarAngsuran($id_mr, $jumlah_bayar)
 {

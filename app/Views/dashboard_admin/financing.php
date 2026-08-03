@@ -31,8 +31,8 @@
             </div>
             <div>
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pinjaman Aktif</h3>
-                <p class="text-xl font-black text-gray-800 mt-0.5"><?= $total_aktif ?></p>
-                <p class="text-[11px] font-semibold text-emerald-600 mt-0.5">Total Rp <?= number_format($total_jumlah, 0, ',', '.') ?></p>
+                <p class="text-xl font-black text-gray-800 mt-0.5"><?= $total_aktif ?? 0 ?></p>
+                <p class="text-[11px] font-semibold text-emerald-600 mt-0.5">Total Rp <?= number_format($total_jumlah ?? 0, 0, ',', '.') ?></p>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             </div>
             <div>
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Menunggu Persetujuan</h3>
-                <p class="text-xl font-black text-gray-800 mt-0.5"><?= $total_menunggu ?></p>
+                <p class="text-xl font-black text-gray-800 mt-0.5"><?= $total_menunggu ?? 0 ?></p>
                 <p class="text-[11px] font-medium text-amber-600 mt-0.5">Pengajuan Baru</p>
             </div>
         </div>
@@ -53,7 +53,7 @@
             </div>
             <div>
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Mendekati Jatuh Tempo</h3>
-                <p class="text-xl font-black text-gray-800 mt-0.5"><?= $total_jatuh_tempo ?></p>
+                <p class="text-xl font-black text-gray-800 mt-0.5"><?= $total_jatuh_tempo ?? 0 ?></p>
                 <p class="text-[11px] font-medium text-rose-600 mt-0.5">3 Hari ke Depan</p>
             </div>
         </div>
@@ -579,7 +579,7 @@ function renderFinancingTable($data) {
     foreach ($data as $item) {
         $jsonItem = htmlspecialchars(json_encode($item), ENT_QUOTES, 'UTF-8');
         $akad   = strtolower($item['akad'] ?? 'qard');
-        $status = strtolower($item['status'] ?? 'aktif');
+        $status = normalizeLoanStatusValue($item['status'] ?? '');
 
         $totalPinjam = (float)($item['jml_pinjam'] ?? 0);
         $pokok       = (float)($item['pokok'] ?? $totalPinjam);

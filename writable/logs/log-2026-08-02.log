@@ -973,3 +973,61 @@ DEBUG - 2026-08-02 02:10:52 --> Mudharabah aktif ditemukan: 0
 DEBUG - 2026-08-02 02:10:52 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
 DEBUG - 2026-08-02 02:10:52 --> Total sisa angsuran: 0
 DEBUG - 2026-08-02 02:10:52 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:13:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:15:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:15:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:15:36 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:15:36 --> ID Anggota: 77
+DEBUG - 2026-08-02 02:15:36 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 02:15:36 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:15:36 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:15:36 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 02:15:36 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 02:15:36 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:15:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:15:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:15:50 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:15:50 --> ID Anggota: 78
+DEBUG - 2026-08-02 02:15:50 --> Qard aktif ditemukan: 0
+DEBUG - 2026-08-02 02:15:50 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:15:50 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:15:50 --> Tidak ada pembiayaan aktif, sisa angsuran = 0
+DEBUG - 2026-08-02 02:15:50 --> Total sisa angsuran: 0
+DEBUG - 2026-08-02 02:15:50 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:15:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:16:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:16:08 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:16:08 --> ID Anggota: 46
+DEBUG - 2026-08-02 02:16:08 --> Qard aktif ditemukan: 1
+DEBUG - 2026-08-02 02:16:08 --> Qard ID 45: jml_pinjam=4000000.00, jml_angsuran=10, jml_terbayar=400000.00, angsuran_per_bulan=400000, tenor_dibayar=1, sisa=9
+DEBUG - 2026-08-02 02:16:08 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:16:08 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:16:08 --> Total sisa angsuran: 9
+DEBUG - 2026-08-02 02:16:08 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:16:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:16:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:16:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:17:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:17:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:17:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:17:19 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN START ===
+DEBUG - 2026-08-02 02:17:19 --> ID Anggota: 46
+DEBUG - 2026-08-02 02:17:19 --> Qard aktif ditemukan: 1
+DEBUG - 2026-08-02 02:17:19 --> Qard ID 45: jml_pinjam=4000000.00, jml_angsuran=10, jml_terbayar=400000.00, angsuran_per_bulan=400000, tenor_dibayar=1, sisa=9
+DEBUG - 2026-08-02 02:17:19 --> Murabahah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:17:19 --> Mudharabah aktif ditemukan: 0
+DEBUG - 2026-08-02 02:17:19 --> Total sisa angsuran: 9
+DEBUG - 2026-08-02 02:17:19 --> === DETAIL ANGGOTA - HITUNG SISA ANGSURAN END ===
+DEBUG - 2026-08-02 02:18:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:18:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:18:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:18:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:18:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:18:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:18:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:19:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:19:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:19:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:20:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:20:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-08-02 02:21:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
