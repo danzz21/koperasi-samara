@@ -103,31 +103,35 @@ class AdminDashboard extends BaseController
 
     // API untuk live search anggota (tidak dipakai di input simpanan, tapi tetap ada)
     public function searchAnggota()
-    {
-        $search = $this->request->getGet('q');
-        $builder = $this->anggotaModel->select('anggota.*, users.id AS id_user, users.username AS username_user')
-            ->join('users', 'users.id = anggota.id_anggota', 'left');
+{
+    $search = $this->request->getGet('q');
 
-        if ($search) {
-            $builder = $builder->like('nama_lengkap', $search)
-                ->orLike('no_ktp', $search);
-        }
-        $anggota = $builder->findAll(10);
+    // Kunci nama tabel secara eksplisit pada select dan like agar tidak ambiguous
+    $builder = $this->anggotaModel->select('anggota.id_anggota, anggota.nama_lengkap, anggota.no_ktp, anggota.status, anggota.tanggal_daftar');
 
-        $result = array_map(function ($data) {
-            return [
-                'id_anggota' => $data['id_anggota'],
-                'id_user' => $data['id_user'] ?? $data['id_anggota'],
-                'nama_lengkap' => $data['nama_lengkap'],
-                'no_ktp' => $data['no_ktp'],
-                'status' => $data['status'] ?? 'Menunggu Verifikasi',
-                'tanggal_daftar' => isset($data['tanggal_daftar']) ? date('d M Y', strtotime($data['tanggal_daftar'])) : '-',
-                'urlDetail' => base_url('admin/detail-anggota/' . $data['id_anggota'])
-            ];
-        }, $anggota);
-
-        return $this->response->setJSON($result);
+    if (!empty($search)) {
+        $builder->groupStart()
+                ->like('anggota.nama_lengkap', $search)
+                ->orLike('anggota.nomor_anggota', $search)
+                ->orLike('anggota.no_ktp', $search)
+                ->groupEnd();
     }
+
+    $anggota = $builder->findAll(10);
+
+    $result = array_map(function ($data) {
+        return [
+            'id_anggota'     => $data['id_anggota'],
+            'nama_lengkap'   => $data['nama_lengkap'],
+            'no_ktp'         => $data['no_ktp'] ?? '',
+            'status'         => $data['status'] ?? 'Menunggu Verifikasi',
+            'tanggal_daftar' => isset($data['tanggal_daftar']) ? date('d M Y', strtotime($data['tanggal_daftar'])) : '-',
+            'urlDetail'      => base_url('admin/detail-anggota/' . $data['id_anggota'])
+        ];
+    }, $anggota);
+
+    return $this->response->setJSON($result);
+}
 
    public function index()
     {
